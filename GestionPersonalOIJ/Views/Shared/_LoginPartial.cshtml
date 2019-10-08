@@ -3,23 +3,24 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-@if (SignInManager.IsSignedIn(User))
+<!--El siguiente if esta negado, con el fin de ver el navbar con los botones que pertenecen a cerrar session, esto se debe de eliminar despues-->
+@if (!SignInManager.IsSignedIn(User))
 {
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Bienvenido @UserManager.GetUserName(User)!</a>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index">Bienvenido @UserManager.GetUserName(User)!</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+				<button type="submit" class="btn btn-link navbar-btn navbar-link">Cerrar sesi&oacute;n</button>
             </li>
         </ul>
     </form>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    </ul>
+	<ul class="nav navbar-nav navbar-right">
+		<li><a asp-area="Identity" asp-page="/Account/Register">Registarse</a></li>
+		<li><a asp-area="Identity" asp-page="/Account/Login">Iniciar sesi&oacute;n</a></li>
+	</ul>
 }

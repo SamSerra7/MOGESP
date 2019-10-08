@@ -1,9 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GestionPersonalOIJ</title>
+
+    <!--Coloca el titulo de cada pagina-->
+    <title>@ViewData["Title"] - MOGESP-OIJ</title>
+
+    <!--Coloca la imagen a la pestaña del navegador-->
+    <link href="https://sitiooij.poder-judicial.go.cr/images/placa-lg.png" rel="shortcut icon" type="image/x-icon" />
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -16,8 +22,32 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
+
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+    <!--Encabezado de imagenes-->
+    <div class="div_Encabezado">
+        <div class="container-fluid">
+            <div class="col-xs-12">
+                <!-- Images - logos arriba del navbar -->
+                <div class="navbar-header">
+                    <a class="left" href="#">
+                        <img class="logoOIJ" src="https://sitiooij.poder-judicial.go.cr/images/placa-lg.png" title="Organismo de Investigación Judicial" />
+                    </a>
+                </div>
+                
+                <div class="navbar-header navbar-right">
+                    <a href="#">
+                        <img class="logoPoderJudicial" src="https://www.poder-judicial.go.cr/servicios/img/portfolio/logopj.png" title="Poder Judicial" />
+                    </a>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Inicio de Menú Bar-->
+    <nav class="navbar navbar-inverse ">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,28 +56,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Inicio</a>
+                <!--Logo de incio-->
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true" title="Inicio"></span>
+                </a>
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="Index">
+                    <!--Inicio de dropdown Procesos de seleccion-->
+                    <li class="nav-item dropdown" id="dProSe">
+                        <a class="dropdown-toggle" id="navbarDropdown1" data-toggle="dropdown">
                             Proceso de Selecci&oacute;n <span class="caret"></span>
                         </a>
 
+                        <!-- Coloca debajo del menu Proceso Seleccion-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="1">Primer ingreso</a></li>
+                            <li><a class="dropdown-item" asp-controller="ProcesoSeleccion" asp-action="PrimerosIngresos">Primer ingreso</a></li>
                             <li><a class="dropdown-item" href="2">Ascensos</a></li>
                         </ul>
                     </li>
 
-
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="About">
-                            An&aacute;lisis y control de plazas <span class="caret"></span>
+                    <!--Inicio de dropdown Analisis y control de plazas-->
+                    <li class="nav-item dropdown" id="dAnaCon">
+                        <a class="dropdown-toggle" id="navbarDropdown2" data-toggle="dropdown">
+                            An&aacute;lisis y Control de Plazas <span class="caret"></span>
                         </a>
 
+                        <!-- Coloca debajo del menu Analisis y control de plazas-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="1">Relaci&oacute;n de puestos</a></li>
                             <li><a class="dropdown-item" href="2">Traslados</a></li>
@@ -55,12 +92,13 @@
                         </ul>
                     </li>
 
-
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="Contact">
+                    <!--Inicio de dropdown Gestion del Personal-->
+                    <li class="nav-item dropdown" id="dGesPe">
+                        <a class="dropdown-toggle" id="navbarDropdown3" data-toggle="dropdown">
                             Gesti&oacute;n del personal <span class="caret"></span>
                         </a>
 
+                        <!-- Coloca debajo del menu Gestion del Personal-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="1">Bolsas de trabajo</a></li>
                             <li><a class="dropdown-item" href="2">Control de carnet</a></li>
@@ -68,12 +106,13 @@
                         </ul>
                     </li>
 
-
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="Index">
-                            Control de flujos <span class="caret"></span>
+                    <!--Inicio de dropdown Control de Flujos-->
+                    <li class="nav-item dropdown" id="dConFlu">
+                        <a class="dropdown-toggle" id="navbarDropdown4" data-toggle="dropdown">
+                            Control de Flujos <span class="caret"></span>
                         </a>
 
+                        <!-- Coloca debajo del menu Control de Flujo-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="1">Base de elegibles</a></li>
                             <li><a class="dropdown-item" href="2">Flujos de selecci&oacute;n</a></li>
@@ -93,7 +132,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <center><p>&copy; 2019 - Módulo de Gestion del Personal</p></center>
+            <center><p>&copy; 2019 - Módulo de Gestion de Personal</p></center>
         </footer>
     </div>
 
@@ -119,5 +158,27 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+
+
+    <script>
+
+        $('#dProSe').hover(function () {
+            $('#navbarDropdown1').trigger('click')
+        })
+        $('#dAnaCon').hover(function () {
+            $('#navbarDropdown2').trigger('click')
+        })
+        $('#dGesPe').hover(function () {
+            $('#navbarDropdown3').trigger('click')
+        })
+        $('#dConFlu').hover(function () {
+            $('#navbarDropdown4').trigger('click')
+        })
+        
+    </script>
+
 </body>
+
+
 </html>
