@@ -4,6 +4,21 @@ namespace Modelo.Dominio
 {
     public class Flujo
     {
+
+
+        private int numeroFlujo;
+
+        public int NumeroFlujo
+        {
+            get { return numeroFlujo; }
+            set {
+                if (value > 0) throw new Exception("El id debe ser positivo");
+                numeroFlujo = value;
+            }
+        }
+
+
+
         private AdministracionFlujo administracionFlujo;
 
         public AdministracionFlujo AdministracionFlujo

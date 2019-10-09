@@ -1,39 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Modelo.Dominio
 {
-    public class Puesto
+    public class Consentimiento
     {
 
-        public Puesto()
+        public Consentimiento(int idConsentimiento, string nombre)
         {
-        }
-
-        public Puesto(int idPuesto, string nombre, Clase clase)
-        {
-            IdPuesto = idPuesto;
+            IdConsentimiento = idConsentimiento;
             Nombre = nombre;
-            Clase = clase;
         }
 
-        
+        public Consentimiento()
+        {
 
-        private int idPuesto;
-        public int IdPuesto
+        }
+
+
+        private int idConsentimiento;
+        public int IdConsentimiento
         {
             get
             {
-                return idPuesto;
+                return idConsentimiento;
             }
             set
             {
                 if (value > 0) throw new Exception("El id debe ser positivo");
-                idPuesto = value;
+                idConsentimiento = value;
             }
         }
+
+
         private string nombre;
+
         public string Nombre
         {
             get
@@ -47,18 +47,5 @@ namespace Modelo.Dominio
             }
         }
 
-
-        private Clase clase;
-
-        public Clase Clase
-        {
-            get { return clase; }
-            set { clase = value ?? throw new Exception("El puesto debe tener una clase"); }
-        }
-
-
-
     }
-
-   
 }

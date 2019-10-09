@@ -107,5 +107,17 @@ namespace Modelo.Dominio
         }
 
 
+        private char sexo;
+
+        public char Sexo
+        {
+            get { return sexo; }
+            set {
+                if (char.IsNumber(value) || char.IsWhiteSpace(value)) throw new Exception("El sexo no puede ser un número y es requerido");
+                sexo = value;
+            }
+        }
+
+
     }
 }
