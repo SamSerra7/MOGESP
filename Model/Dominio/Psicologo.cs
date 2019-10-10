@@ -1,4 +1,6 @@
-﻿namespace Modelo.Dominio
+﻿using System;
+
+namespace Modelo.Dominio
 {
     public class Psicologo
     {

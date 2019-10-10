@@ -4,8 +4,18 @@ using System.Text;
 
 namespace Modelo.Dominio
 {
+    /// <summary>
+    /// Clase que gestiona primer ingreso
+    /// </summary>
     public class PrimerIngreso : Persona
     {
+
+
+        public PrimerIngreso()
+        {
+
+        }
+       
         public PrimerIngreso(string cedula, string nombre, string primerApellido, string segundoApellido, List<string> correos, List<int> telefonos, string direccion) 
                                 :base(cedula, nombre, primerApellido, segundoApellido, correos, telefonos, direccion)
         {   
@@ -22,7 +32,7 @@ namespace Modelo.Dominio
         }
 
 
-        public Flujo Flujo { get; set; }
+        public int NumeroFlujo { get; set; }
 
 
         public List<EvaluacionPuesto> EvaluacionesPuestos { get; set; }

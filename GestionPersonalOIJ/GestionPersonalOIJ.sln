@@ -11,16 +11,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOGESP.UserInterface", "MOG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOGESP.Entities", "..\Model\MOGESP.Entities.csproj", "{4372E961-D678-47AD-927C-BE5B6481D79C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOGESP.DataAccess.TRAN", "..\MOGESP.DataAccess.TRAN\MOGESP.DataAccess.TRAN.csproj", "{FC0A5B5F-23A7-48A1-B78E-C644CE07FAB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOGESP.DataAccess.TRAN", "..\MOGESP.DataAccess.TRAN\MOGESP.DataAccess.TRAN.csproj", "{FC0A5B5F-23A7-48A1-B78E-C644CE07FAB0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4372E961-D678-47AD-927C-BE5B6481D79C} = {4372E961-D678-47AD-927C-BE5B6481D79C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOGESP.ServiceLayer", "..\MOGESP.ServiceLayer\MOGESP.ServiceLayer.csproj", "{EB0118D6-9F7F-44B5-A0BA-47CEA91FFDCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOGESP.ServiceLayer", "..\MOGESP.ServiceLayer\MOGESP.ServiceLayer.csproj", "{EB0118D6-9F7F-44B5-A0BA-47CEA91FFDCB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FC0A5B5F-23A7-48A1-B78E-C644CE07FAB0} = {FC0A5B5F-23A7-48A1-B78E-C644CE07FAB0}
 		{4372E961-D678-47AD-927C-BE5B6481D79C} = {4372E961-D678-47AD-927C-BE5B6481D79C}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOGESP.DataAccess.TRAN.Test", "..\MOGESP.DataAccess.TRAN.Test\MOGESP.DataAccess.TRAN.Test.csproj", "{ADA3E38F-B996-46D5-A92B-5AD395026059}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{EB0118D6-9F7F-44B5-A0BA-47CEA91FFDCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB0118D6-9F7F-44B5-A0BA-47CEA91FFDCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB0118D6-9F7F-44B5-A0BA-47CEA91FFDCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADA3E38F-B996-46D5-A92B-5AD395026059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA3E38F-B996-46D5-A92B-5AD395026059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA3E38F-B996-46D5-A92B-5AD395026059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA3E38F-B996-46D5-A92B-5AD395026059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
