@@ -36,10 +36,11 @@ namespace MOGESP.DataAccess.TRAN.Datos
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
 
-            PrimerIngreso primerIngreso = new PrimerIngreso();
+            PrimerIngreso primerIngreso;
 
             while (reader.Read())
             {
+                primerIngreso = new PrimerIngreso();
 
                 primerIngreso.Cedula = reader["TC_NumeroCedula"].ToString();
                 primerIngreso.Nombre = reader["TC_Nombre"].ToString();
