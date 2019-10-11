@@ -62,5 +62,27 @@ namespace MOGESP.DataAccess.TRAN.Datos
             insertarTel.ExecuteReader();
             sqlConnection.Close();
         }
+
+
+
+        /// <summary>
+        /// Autores: Samuel 
+        /// 10/10/19
+        /// Este método modifica un teléfono para una persona
+        /// </summary>
+        public void modificarTelefonoPorPersona(string cedula,int telefono, int telefonoMod)
+        {
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand modificarTel = new SqlCommand(@"EXEC PA_ModificarTelefono @TC_NumeroCedula = @Cedula, @TN_Telefono = @Tel, @TN_TelefonoMod = @TelMod", sqlConnection);
+
+            modificarTel.Parameters.AddWithValue("@Cedula", cedula);
+            modificarTel.Parameters.AddWithValue("@Tel", telefono);
+            modificarTel.Parameters.AddWithValue("@TelMod", telefonoMod);
+
+            sqlConnection.Open();
+            modificarTel.ExecuteReader();
+            sqlConnection.Close();
+        }
     }
 }

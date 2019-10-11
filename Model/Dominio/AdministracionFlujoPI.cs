@@ -5,6 +5,21 @@ namespace Modelo.Dominio
     public class AdministracionFlujoPI
     {
 
+        public AdministracionFlujoPI(int idAdministracionFlujoPI, HojaCitasPI hojaCitas, DateTime fechaDeLlegada, DateTime fechaSalida, DateTime fechaIngresoDev, DateTime fechaAtencionDev)
+        {
+            IdAdministracionFlujoPI = idAdministracionFlujoPI;
+            HojaCitas = hojaCitas;
+            FechaDeLlegada = fechaDeLlegada;
+            this.fechaSalida = fechaSalida;
+            this.fechaIngresoDev = fechaIngresoDev;
+            this.fechaAtencionDev = fechaAtencionDev;
+        }
+
+        public AdministracionFlujoPI()
+        {
+
+        }
+
         private int idAdministracionFlujoPI;
         public int IdAdministracionFlujoPI
         {
@@ -29,6 +44,9 @@ namespace Modelo.Dominio
 
 
         private DateTime fechaDeLlegada;
+
+        
+
         public DateTime FechaDeLlegada
         {
             get { return fechaDeLlegada; }

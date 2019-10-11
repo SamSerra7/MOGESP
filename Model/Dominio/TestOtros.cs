@@ -2,14 +2,14 @@
 
 namespace Modelo.Dominio
 {
-    public class OtrosTest
+    public class TestOtros
     {
 
-        public OtrosTest()
+        public TestOtros()
         {
         }
 
-        public OtrosTest(int id, string nombre)
+        public TestOtros(int id, string nombre)
         {
             Id = id;
             Nombre = nombre;

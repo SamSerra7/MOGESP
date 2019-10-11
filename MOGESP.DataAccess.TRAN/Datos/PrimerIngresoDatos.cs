@@ -107,5 +107,36 @@ namespace MOGESP.DataAccess.TRAN.Datos
             sqlConnection.Close();
         }
 
+
+        /// <summary>
+        /// Autores: Samuel 
+        /// 10/10/19
+        /// Este método modifica un primer ingreso.
+        /// </summary>
+        public void ModificarPrimerIngreso(PrimerIngreso primerIngreso)
+        {
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand insertarPI = new SqlCommand(@"EXEC PA_ModificarPrimerIngreso @TC_NumeroCedula = @Cedula, @TC_Nombre = @Nombre, @TC_PrimerApellido = @PrimerApellido, @TC_SegundoApellido = @SegundoApellido, 
+                                                                            @TC_Sexo = @Sexo, @TC_Direccion = @Direccion, @TC_NumeroConvocatoria = @NumeroConvocatoria, @TN_NumeroFlujo = @NumeroFlujo ", sqlConnection);
+
+
+            insertarPI.Parameters.AddWithValue("@Cedula", primerIngreso.Cedula);
+            insertarPI.Parameters.AddWithValue("@Nombre", primerIngreso.Nombre);
+            insertarPI.Parameters.AddWithValue("@PrimerApellido", primerIngreso.PrimerApellido);
+            insertarPI.Parameters.AddWithValue("@SegundoApellido", primerIngreso.SegundoApellido);
+            insertarPI.Parameters.AddWithValue("@Sexo", primerIngreso.Sexo);
+            insertarPI.Parameters.AddWithValue("@NumeroConvocatoria", primerIngreso.NumeroConvocatoria);
+            insertarPI.Parameters.AddWithValue("@NumeroFlujo", primerIngreso.NumeroFlujo);            
+
+            sqlConnection.Open();
+            insertarPI.ExecuteReader();
+            sqlConnection.Close();
+        }
+
+
+
+
     }
 }

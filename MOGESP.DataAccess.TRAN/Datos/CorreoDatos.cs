@@ -54,7 +54,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         {
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand insertarCorreo = new SqlCommand(@"EXEC PA_InsertarCorreo (@TC_NumeroCedula = @Cedula, @TC_Correo = @Correo)", sqlConnection);
+            SqlCommand insertarCorreo = new SqlCommand(@"EXEC PA_InsertarCorreo @TC_NumeroCedula = @Cedula, @TC_Correo = @Correo", sqlConnection);
 
             insertarCorreo.Parameters.AddWithValue("@Cedula", cedula);
             insertarCorreo.Parameters.AddWithValue("@Correo", correo);
@@ -64,6 +64,28 @@ namespace MOGESP.DataAccess.TRAN.Datos
             insertarCorreo.ExecuteReader();
             sqlConnection.Close();
 
+        }
+
+
+        /// <summary>
+        /// Autores: Samuel 
+        /// 10/10/19
+        /// Este método modifica un correo para una persona
+        /// </summary>
+        public void modificarCorreoPorPersona(string cedula,string correo, string correoMod)
+        {
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand modificarCorreo = new SqlCommand(@"EXEC PA_ModificarCorreo @TC_NumeroCedula = @Cedula,@TC_Correo = @Correo, @TC_CorreoModif = @CorreoModif", sqlConnection);
+
+            modificarCorreo.Parameters.AddWithValue("@Cedula", cedula);
+            modificarCorreo.Parameters.AddWithValue("@Correo", correo);
+            modificarCorreo.Parameters.AddWithValue("@CorreoModif", correoMod);
+
+
+            sqlConnection.Open();
+            modificarCorreo.ExecuteReader();
+            sqlConnection.Close();
         }
     }
 }

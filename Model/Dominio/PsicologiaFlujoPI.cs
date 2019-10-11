@@ -10,7 +10,7 @@ namespace Modelo.Dominio
         }
 
         public PsicologiaFlujoPI(int id, HojaCitasPI hojaCitas, DateTime fechaSalida, int certificadoDoneidadMental,
-                                    TestPersonalidad testPersonalidad, TestVisomotor testVisomotor, TestCompetencias testCompetencias, OtrosTest otrosTest, Consentimiento consentimiento)
+                                    TestPersonalidad testPersonalidad, TestVisomotor testVisomotor, TestCompetencias testCompetencias, TestOtros testOtros, Consentimiento consentimiento)
         {
             Id = id;
             HojaCitas = hojaCitas;
@@ -19,7 +19,7 @@ namespace Modelo.Dominio
             TestPersonalidad = testPersonalidad;
             TestVisomotor = testVisomotor;
             TestCompetencias = testCompetencias;
-            OtrosTest = otrosTest;
+            TestOtros = testOtros;
             Consentimiento = consentimiento;
         }
 
@@ -79,7 +79,7 @@ namespace Modelo.Dominio
             set;
         }
 
-        public OtrosTest OtrosTest
+        public TestOtros TestOtros
         {
             get;
             set;
