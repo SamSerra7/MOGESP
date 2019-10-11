@@ -64,5 +64,46 @@ namespace MOGESP.DataAccess.TRAN.Datos
         }
 
 
+
+        /// <summary>
+        /// Autores: Samuel 
+        /// 10/10/19
+        /// Este método ingresa un primer ingreso.
+        /// </summary>
+        public void insertarPrimerIngreso(PrimerIngreso primerIngreso)
+        {
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand insertarPI = new SqlCommand(@"EXEC PA_InsertarPrimerosIngresos ", sqlConnection);
+
+            insertarPI.Parameters.AddWithValue("@Cedula", primerIngreso.Cedula);
+            insertarPI.Parameters.AddWithValue("@Nombre", primerIngreso.Nombre);
+            insertarPI.Parameters.AddWithValue("@PrimerApellido", primerIngreso.PrimerApellido);
+            insertarPI.Parameters.AddWithValue("@SegundoApellido", primerIngreso.SegundoApellido);
+            insertarPI.Parameters.AddWithValue("@Sexo", primerIngreso.Sexo);
+            insertarPI.Parameters.AddWithValue("@NumeroConvocatoria", primerIngreso.NumeroConvocatoria);
+            insertarPI.Parameters.AddWithValue("@NumeroFlujo", primerIngreso.NumeroFlujo);
+
+            if (primerIngreso.Correos.Count != 0) { 
+                foreach (var correo in primerIngreso.Correos)
+                {
+                    correoDatos.insertarCorreoPorPersona(primerIngreso.Cedula,correo);
+                }
+            }
+
+            if (primerIngreso.Telefonos.Count != 0)
+            {
+                foreach (var telefono in primerIngreso.Telefonos)
+                {
+                    telefonoDatos.insertarTelefonoPorPersona(primerIngreso.Cedula, telefono);
+                }
+            }
+
+            sqlConnection.Open();
+            insertarPI.ExecuteReader();
+            sqlConnection.Close();
+        }
+
     }
 }

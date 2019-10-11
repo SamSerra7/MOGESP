@@ -43,6 +43,24 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return telefonos;
         }
 
+        /// <summary>
+        /// Autores: Samuel 
+        /// 10/10/19
+        /// Este método ingresa un teléfono para una persona
+        /// </summary>
+        public void insertarTelefonoPorPersona(string cedula, int telefono)
+        {
+            SqlConnection sqlConnection = conexion.conexion();
 
+            SqlCommand insertarTel = new SqlCommand(@"EXEC PA_InsertarTelefono (@TC_NumeroCedula = @Cedula, @TN_Telefono = @Tel)", sqlConnection);
+
+            insertarTel.Parameters.AddWithValue("@Cedula", cedula);
+            insertarTel.Parameters.AddWithValue("@Tel", telefono);
+
+
+            sqlConnection.Open();
+            insertarTel.ExecuteReader();
+            sqlConnection.Close();
+        }
     }
 }

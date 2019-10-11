@@ -1,4 +1,5 @@
 ﻿using Modelo.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
@@ -44,5 +45,25 @@ namespace MOGESP.DataAccess.TRAN.Datos
         }
 
 
+        /// <summary>
+        /// Autores: Samuel 
+        /// 10/10/19
+        /// Este método ingresa un correo para una persona
+        /// </summary>
+        public void insertarCorreoPorPersona(string cedula, string correo)
+        {
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand insertarCorreo = new SqlCommand(@"EXEC PA_InsertarCorreo (@TC_NumeroCedula = @Cedula, @TC_Correo = @Correo)", sqlConnection);
+
+            insertarCorreo.Parameters.AddWithValue("@Cedula", cedula);
+            insertarCorreo.Parameters.AddWithValue("@Correo", correo);
+
+
+            sqlConnection.Open();
+            insertarCorreo.ExecuteReader();
+            sqlConnection.Close();
+
+        }
     }
 }
