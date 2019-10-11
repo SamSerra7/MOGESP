@@ -75,7 +75,9 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand insertarPI = new SqlCommand(@"EXEC PA_InsertarPrimerosIngresos ", sqlConnection);
+            SqlCommand insertarPI = new SqlCommand(@"EXEC PA_InsertarPrimerosIngresos @TC_NumeroCedula = @Cedula, @TC_Nombre = @Nombre, @TC_PrimerApellido = @PrimerApellido, @TC_SegundoApellido = @SegundoApellido, 
+                                                                            @TC_Sexo = @Sexo, @TC_Direccion = @Direccion, @TC_NumeroConvocatoria = @NumeroConvocatoria, @TN_NumeroFlujo = @NumeroFlujo ", sqlConnection);
+
 
             insertarPI.Parameters.AddWithValue("@Cedula", primerIngreso.Cedula);
             insertarPI.Parameters.AddWithValue("@Nombre", primerIngreso.Nombre);
