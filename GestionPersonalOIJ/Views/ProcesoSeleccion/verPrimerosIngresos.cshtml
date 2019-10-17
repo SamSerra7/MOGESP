@@ -1,0 +1,57 @@
+﻿@model  IEnumerable<MOGESP.Entities.Dominio.PrimerIngreso>
+
+@{
+ViewData["Title"] = "verPrimerosIngresos";
+}
+
+<h2 style="text-align: center;margin: 0;">Primeros Ingresos</h2>
+
+<br/>
+
+<table id="tablaId" class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>C&eacute;dula</th>
+        <th>Título</th>
+        <th>Primer Apellido</th>
+        <th>Segundo Apellido</th>
+        <th>Sexo</th>
+        <th>Direccí&oacute;n</th>
+        <th>Correos</th>
+        <th>Tel&eacute;fonos</th>
+        <th>Numero de convocatoria</th>
+        <th>Numero de flujo</th>
+    </tr>
+
+
+    @foreach (var primerIngreso in Model)
+    {
+        <tr>
+            <td> @primerIngreso.Cedula</td>
+            <td> @primerIngreso.Nombre</td>
+            <td> @primerIngreso.PrimerApellido</td>
+            <td> @primerIngreso.SegundoApellido</td>
+            <td> @primerIngreso.Sexo</td>
+            <td> @primerIngreso.Direccion</td>
+
+            <td>
+                @foreach (var correo in primerIngreso.Correos)
+                {
+                    <p>@correo</p>
+                }
+            </td>
+
+            <td>
+                @foreach (var telefono in primerIngreso.Telefonos)
+                {
+                    <p>@telefono</p>
+                }
+            </td>
+
+            <td> @primerIngreso.NumeroConvocatoria</td>
+            <td> @primerIngreso.NumeroFlujo</td>
+        </tr>
+     }
+        
+    </table>
+<br/>
+<button type="submit" style="text-align: center;" class="btn-success" >+</button>

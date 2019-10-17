@@ -1,4 +1,4 @@
-using Modelo.Dominio;
+using MOGESP.Entities.Dominio;
 using MOGESP.DataAccess.TRAN.Datos;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -19,8 +19,7 @@ namespace Tests
         {
             PrimerIngresoDatos primerIngresoDatos = new PrimerIngresoDatos();
 
-            List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
-            primerosIngresos = primerIngresoDatos.getAllPrimerosIngresos();
+            List<PrimerIngreso> primerosIngresos = primerIngresoDatos.getAllPrimerosIngresos();
 
             Assert.IsNotNull(primerosIngresos);
 

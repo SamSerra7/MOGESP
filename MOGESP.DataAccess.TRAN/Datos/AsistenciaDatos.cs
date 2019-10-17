@@ -1,4 +1,4 @@
-﻿using Modelo.Dominio;
+﻿using MOGESP.Entities.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -47,6 +47,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
             }
 
             sqlConnection.Close();
+            sqlCommand.Dispose();
             return asistencias;
         }
 

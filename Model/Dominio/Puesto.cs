@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Dominio
+namespace MOGESP.Entities.Dominio
 {
     public class Puesto
     {

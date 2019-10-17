@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Modelo.Dominio
+namespace MOGESP.Entities.Dominio
 {
     public class TestPersonalidad
     {

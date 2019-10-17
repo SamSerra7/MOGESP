@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Modelo.Dominio
+namespace MOGESP.Entities.Dominio
 {
     public class PsicologiaFlujoPI
     {
@@ -86,7 +86,6 @@ namespace Modelo.Dominio
         }
 
 
-        private Consentimiento consentimiento;
         public Consentimiento Consentimiento
         {
             get;

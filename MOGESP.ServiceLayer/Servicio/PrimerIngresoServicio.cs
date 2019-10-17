@@ -1,0 +1,31 @@
+﻿using MOGESP.Entities.Dominio;
+using MOGESP.DataAccess.TRAN.Datos;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace MOGESP.ServiceLayer.Servicio
+{
+    /// <summary>
+    /// Clase que gestiona las reglas de negocio de los primeros ingresos
+    /// </summary>
+    public class PrimerIngresoServicio
+    {
+
+        readonly PrimerIngresoDatos primerIngresoDatos = new PrimerIngresoDatos();
+
+
+        /// <summary>
+        /// 16/10/2019
+        /// Samuel Serrano Guerra
+        /// Método que retorna todos los primeros ingresos
+        /// </summary>
+        /// <returns>IEnumerable<PrimerIngreso></returns>
+        public IEnumerable<PrimerIngreso> getAllPrimerosIngresos()
+        {
+            return primerIngresoDatos.getAllPrimerosIngresos() ?? throw new Exception("No hay registros de primer ingreso");
+        }
+
+
+    }
+}

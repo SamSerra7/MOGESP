@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MOGESP.DataAccess.TRAN.Datos
 {
-    public class ConexionDatos
+    internal class ConexionDatos
     {
 
         public SqlConnection conexion()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Dominio
+namespace MOGESP.Entities.Dominio
 {
     /// <summary>
     /// Clase que gestiona primer ingreso
@@ -16,8 +16,8 @@ namespace Modelo.Dominio
 
         }
        
-        public PrimerIngreso(string cedula, string nombre, string primerApellido, string segundoApellido, List<string> correos, List<int> telefonos, string direccion) 
-                                :base(cedula, nombre, primerApellido, segundoApellido, correos, telefonos, direccion)
+        public PrimerIngreso(string cedula, string nombre, string primerApellido, string segundoApellido, char sexo, List<string> correos, List<int> telefonos, string direccion, string numeroConvocatoria, int NumeroFlujo) 
+                                :base(cedula, nombre, primerApellido, segundoApellido, sexo, correos, telefonos, direccion)
         {   
         }
 

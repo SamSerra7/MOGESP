@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Modelo.Dominio
+namespace MOGESP.Entities.Dominio
 {
     public abstract class Persona
     {
@@ -12,12 +12,13 @@ namespace Modelo.Dominio
         }
 
 
-        protected Persona(string cedula, string nombre, string primerApellido, string segundoApellido, List<string> correos, List<int> telefonos, string direccion)
+        protected Persona(string cedula, string nombre, string primerApellido, string segundoApellido, char sexo, List<string> correos, List<int> telefonos, string direccion)
         {
             Cedula = cedula;
             Nombre = nombre;
             PrimerApellido = primerApellido;
             SegundoApellido = segundoApellido;
+            Sexo = sexo;
             Correos = correos;
             Telefonos = telefonos;
             Direccion = direccion;
