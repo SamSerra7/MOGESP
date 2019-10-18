@@ -27,5 +27,8 @@ namespace GestionPersonalOIJ.Controllers
             return View(primerosIngresos);
         }
 
+
+
+
     }
 }
