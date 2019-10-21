@@ -1,0 +1,201 @@
+﻿@model MOGESP.Entities.Dominio.PrimerIngreso
+
+
+@{
+    ViewData["Title"] = "InsertarPrimerosIngresos";
+
+
+    var primerosIngresos = (List<MOGESP.Entities.Dominio.PrimerIngreso>)ViewData["primerosIngresos"];
+
+    int cantCorreos = 1;
+    int cantTels = 1;
+
+
+}
+
+<h2>Insertar Primeros Ingresos</h2>
+<hr />
+
+
+@using (Html.BeginForm("AgregarPrimerIngreso", "ProcesoSeleccion", FormMethod.Post))
+{
+
+    <center>
+        @Html.LabelFor(m => m.NumeroFlujo)
+        @Html.TextBoxFor(m => m.NumeroFlujo)
+    </center>
+
+    <center>
+        @Html.LabelFor(m => m.NumeroConvocatoria)
+        @Html.TextBoxFor(m => m.NumeroConvocatoria)
+    </center>
+
+    <br />
+
+    @Html.LabelFor(m => m.Cedula)
+    @Html.TextBoxFor(m => m.Cedula)
+
+    <br />
+
+    @Html.LabelFor(m => m.Nombre)
+    @Html.TextBoxFor(m => m.Nombre)
+
+    <br />
+
+    @Html.LabelFor(m => m.PrimerApellido)
+    @Html.TextBoxFor(m => m.PrimerApellido)
+
+    <br />
+
+    @Html.LabelFor(m => m.SegundoApellido)
+    @Html.TextBoxFor(m => m.SegundoApellido)
+
+    <br />
+
+    @Html.LabelFor(m => m.Sexo)
+    @Html.DropDownListFor(m => m.Sexo, new List<SelectListItem>
+                   { new SelectListItem{Text="M", Value="M"},
+                     new SelectListItem{Text="F", Value="F"} }, "Seleccione su sexo")
+
+    <br />
+
+    @Html.LabelFor(m => m.Direccion)
+    @Html.TextAreaFor(m => m.Direccion)
+
+    <br />
+
+    @Html.LabelFor(m => m.Correos)
+    @for (int i = 0; i < cantCorreos; i++)
+    {
+        @Html.TextAreaFor(m => m.Correos)
+        <br />
+    }
+
+    @Html.LabelFor(m => m.Telefonos)
+    @for (int j = 0; j < cantTels; j++)
+    {
+        @Html.TextAreaFor(m => m.Telefonos)
+        <br />
+    }
+
+    <button type="submit" id="btnAgregar" class="btn-primary">
+        Agregar
+    </button>
+
+}
+
+
+<!--
+<div class="container">
+
+    <center>Número de Flujo:<input type="number" id="num_flujo" class="form-inline" /></center>
+    <center>Número de Convocatoria:<input type="text" id="num_conv" class="form-inline" /></center>
+</div>
+<div class="container">
+    Cédula:
+    <input type="text" id="cedula" required class="form-inline" />
+    <br />
+    Nombre:
+    <input type="text" id="nombre" class="form-inline" />
+    <br />
+    Primer Apellido:
+    <input type="text" id="p_apellido" class="form-inline" />
+    <br />
+    Segundo Apellido:
+    <input type="text" id="s_apellido" class="form-inline" />
+    <br />
+    Sexo:
+    <input type="text" id="sexo" maxlength="1" class="form-inline" />
+    <br />
+    Dirección:
+    <input type="text" id="direccion" class="form-inline" />
+    <br />
+
+    Correos:
+    @for (int i = 0; i < cantCorreos; i++)
+    {
+        <input type="email" id="correo_@cantCorreos" class="form-inline" />
+        <br />
+    }
+
+    Teléfonos:
+    @for (int j = 0; j < cantTels; j++)
+    {
+        <input type="tel" id="telefono_@cantTels" class="form-inline" />
+        <br />
+    }
+
+
+
+
+</div>
+-->
+
+
+<hr />
+
+<div class="table-responsive">
+    <table id="tablaId" class="table table-hover">
+        <tr>
+            <th>C&eacute;dula</th>
+            <th>Nombre</th>
+            <th>Primer Apellido</th>
+            <th>Segundo Apellido</th>
+            <th>Sexo</th>
+            <th>Direccí&oacute; n</th>
+            <th>Correos</th>
+            <th>Tel&eacute;fonos</th>
+            <th>Eliminar</th>
+        </tr>
+
+        @if (primerosIngresos != null)
+        {
+            @foreach (var primerIngreso in primerosIngresos)
+            {
+                <tr class="success">
+                    <td> @primerIngreso.Cedula</td>
+                    <td> @primerIngreso.Nombre</td>
+                    <td> @primerIngreso.PrimerApellido</td>
+                    <td> @primerIngreso.SegundoApellido</td>
+                    <td> @primerIngreso.Sexo</td>
+                    <td> @primerIngreso.Direccion</td>
+
+                    <td>
+                        @foreach (var correo in primerIngreso.Correos)
+                        {
+                            <p>@correo</p>
+                        }
+                    </td>
+
+                    <td>
+                        @foreach (var telefono in primerIngreso.Telefonos)
+                        {
+                            <p>@telefono</p>
+                        }
+                    </td>
+
+
+                    <td align="center">
+
+                        <button id="btnEliminar" type="button" class="btn-link">
+                            <a href="~/ProcesoSeleccion/Eliminar/">
+                                <span class="glyphicon glyphicon-trash" style="color: red;align-self:center;"></span>
+                            </a>
+                        </button>
+
+                    </td>
+                </tr>
+            }
+        }
+
+
+
+
+    </table>
+
+</div>
+
+
+<br />
+
+
