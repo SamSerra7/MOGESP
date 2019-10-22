@@ -22,12 +22,12 @@
 
     <center>
         @Html.LabelFor(m => m.NumeroFlujo)
-        @Html.TextBoxFor(m => m.NumeroFlujo)
+        @Html.TextBoxFor(m => m.NumeroFlujo,null , new { id = "numeroflujo" })
     </center>
 
     <center>
         @Html.LabelFor(m => m.NumeroConvocatoria)
-        @Html.TextBoxFor(m => m.NumeroConvocatoria)
+        @Html.TextBoxFor(m => m.NumeroConvocatoria ,null , new { id = "numeroconvocatoria" } )
     </center>
 
     <br />
@@ -85,53 +85,6 @@
 }
 
 
-<!--
-<div class="container">
-
-    <center>Número de Flujo:<input type="number" id="num_flujo" class="form-inline" /></center>
-    <center>Número de Convocatoria:<input type="text" id="num_conv" class="form-inline" /></center>
-</div>
-<div class="container">
-    Cédula:
-    <input type="text" id="cedula" required class="form-inline" />
-    <br />
-    Nombre:
-    <input type="text" id="nombre" class="form-inline" />
-    <br />
-    Primer Apellido:
-    <input type="text" id="p_apellido" class="form-inline" />
-    <br />
-    Segundo Apellido:
-    <input type="text" id="s_apellido" class="form-inline" />
-    <br />
-    Sexo:
-    <input type="text" id="sexo" maxlength="1" class="form-inline" />
-    <br />
-    Dirección:
-    <input type="text" id="direccion" class="form-inline" />
-    <br />
-
-    Correos:
-    @for (int i = 0; i < cantCorreos; i++)
-    {
-        <input type="email" id="correo_@cantCorreos" class="form-inline" />
-        <br />
-    }
-
-    Teléfonos:
-    @for (int j = 0; j < cantTels; j++)
-    {
-        <input type="tel" id="telefono_@cantTels" class="form-inline" />
-        <br />
-    }
-
-
-
-
-</div>
--->
-
-
 <hr />
 
 <div class="table-responsive">
@@ -142,7 +95,7 @@
             <th>Primer Apellido</th>
             <th>Segundo Apellido</th>
             <th>Sexo</th>
-            <th>Direccí&oacute; n</th>
+            <th>Direccí&oacute;n</th>
             <th>Correos</th>
             <th>Tel&eacute;fonos</th>
             <th>Eliminar</th>
@@ -177,25 +130,24 @@
 
                     <td align="center">
 
-                        <button id="btnEliminar" type="button" class="btn-link">
-                            <a href="~/ProcesoSeleccion/Eliminar/">
-                                <span class="glyphicon glyphicon-trash" style="color: red;align-self:center;"></span>
-                            </a>
-                        </button>
+                        <a href="@Url.Action("EliminarPrimerIngreso", new { cedula = primerIngreso.Cedula})">
+                            <span class="glyphicon glyphicon-trash" style="color: red;align-self:center;" />
+                        </a>
 
                     </td>
                 </tr>
             }
         }
 
-
-
-
     </table>
+
+    @using (Html.BeginForm("InsertarTodosPrimerosIngresos", "ProcesoSeleccion", FormMethod.Post))
+    {
+        <button type="submit" id="btnInsertarTodos" class="btn-primary" onclick="return confirm("¿Desea insertar todos los registros?")">
+            Insertar Todos
+        </button>
+    }
 
 </div>
 
-
 <br />
-
-

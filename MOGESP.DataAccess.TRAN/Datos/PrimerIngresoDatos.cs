@@ -84,8 +84,12 @@ namespace MOGESP.DataAccess.TRAN.Datos
             insertarPI.Parameters.AddWithValue("@PrimerApellido", primerIngreso.PrimerApellido);
             insertarPI.Parameters.AddWithValue("@SegundoApellido", primerIngreso.SegundoApellido);
             insertarPI.Parameters.AddWithValue("@Sexo", primerIngreso.Sexo);
+            insertarPI.Parameters.AddWithValue("@Direccion", primerIngreso.Direccion);
             insertarPI.Parameters.AddWithValue("@NumeroConvocatoria", primerIngreso.NumeroConvocatoria);
             insertarPI.Parameters.AddWithValue("@NumeroFlujo", primerIngreso.NumeroFlujo);
+
+            sqlConnection.Open();
+            insertarPI.ExecuteReader();
 
             if (primerIngreso.Correos.Count != 0) { 
                 foreach (var correo in primerIngreso.Correos)
@@ -102,9 +106,8 @@ namespace MOGESP.DataAccess.TRAN.Datos
                 }
             }
 
-            sqlConnection.Open();
-            insertarPI.ExecuteReader();
             sqlConnection.Close();
+            insertarPI.Dispose();
         }
 
 

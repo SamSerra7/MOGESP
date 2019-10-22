@@ -14,7 +14,7 @@ namespace GestionPersonalOIJ.Controllers
     {
 
         readonly PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
-        readonly List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
+        readonly static List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
 
         public IActionResult PrimerosIngresos()
         {
@@ -31,23 +31,26 @@ namespace GestionPersonalOIJ.Controllers
 
         public IActionResult InsertarPrimerosIngresos()
         {
-
-
-
             ViewData["primerosIngresos"] = primerosIngresos;
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult AgregarPrimerIngreso(IFormCollection formCollection)
+        public RedirectToActionResult AgregarPrimerIngreso(IFormCollection formCollection)
         {
 
-            List<string> correos = new List<string> { "dasdw2@gmail.com"};
-            List<int> tels = new List<int> { 84695712,84692531};
+            List<string> correos = new List<string>
+            {
+                formCollection["correos"]
+            };
+            List<int> tels = new List<int>
+            {
+                Convert.ToInt32(formCollection["telefonos"])
+            };
+            
 
-
-            PrimerIngreso pi = new PrimerIngreso(   
+            PrimerIngreso pi = new PrimerIngreso(
                                                     formCollection["cedula"],
                                                     formCollection["nombre"],
                                                     formCollection["primerApellido"],
@@ -56,12 +59,47 @@ namespace GestionPersonalOIJ.Controllers
                                                     correos,
                                                     tels,
                                                     formCollection["direccion"],
-                                                    formCollection["numeroConvocatoria"],
-                                                    Convert.ToInt32(formCollection["numeroFlujo"]) 
+                                                    formCollection["numeroconvocatoria"],
+                                                    Convert.ToInt32(formCollection["numeroflujo"])
                                                  );
+            pi.NumeroConvocatoria = "a113";
+            pi.NumeroFlujo = 3;
             primerosIngresos.Add(pi);
 
-            return View("InsertarPrimerosIngresos");
+            return RedirectToAction("InsertarPrimerosIngresos");
+        }
+
+
+
+        public ActionResult EliminarPrimerIngreso(string cedula)
+        {
+
+            for (int i = 0; i < primerosIngresos.Count; i++)
+            {
+                if (primerosIngresos.ElementAt(i).Cedula == cedula)
+                {
+                    primerosIngresos.RemoveAt(i);
+                    return RedirectToAction("InsertarPrimerosIngresos");
+                }
+            }
+
+            return RedirectToAction("InsertarPrimerosIngresos");
+        }
+
+
+        [HttpPost]
+        public RedirectToActionResult InsertarTodosPrimerosIngresos()
+        {
+
+            foreach (var pi in primerosIngresos)
+            {
+                primerIngresoServicio.insertarPrimerIngreso(pi);
+            }
+
+            primerosIngresos.RemoveRange(0,primerosIngresos.Count);
+
+
+            return RedirectToAction("InsertarPrimerosIngresos");
         }
 
 
