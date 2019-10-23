@@ -40,15 +40,24 @@ namespace GestionPersonalOIJ.Controllers
         public RedirectToActionResult AgregarPrimerIngreso(IFormCollection formCollection)
         {
 
-            List<string> correos = new List<string>
+            List<string> correos = new List<string>();
+            List<int> tels = new List<int>();
+
+            string[] selCorreos = formCollection["selCorreos"].ToArray();
+            string[] selTels = formCollection["selTels"].ToArray();
+
+            for (int i = 0; i < selCorreos.Length; i++)
             {
-                formCollection["correos"]
-            };
-            List<int> tels = new List<int>
+                correos.Add(selCorreos[i]);
+            }
+            for (int j = 0; j < selTels.Length; j++)
             {
-                Convert.ToInt32(formCollection["telefonos"])
-            };
-            
+                tels.Add(Convert.ToInt32(selTels[j]));
+            }
+
+
+
+
 
             PrimerIngreso pi = new PrimerIngreso(
                                                     formCollection["cedula"],
@@ -62,8 +71,7 @@ namespace GestionPersonalOIJ.Controllers
                                                     formCollection["numeroconvocatoria"],
                                                     Convert.ToInt32(formCollection["numeroflujo"])
                                                  );
-            pi.NumeroConvocatoria = "a113";
-            pi.NumeroFlujo = 3;
+            
             primerosIngresos.Add(pi);
 
             return RedirectToAction("InsertarPrimerosIngresos");
