@@ -7,81 +7,155 @@
 
     var primerosIngresos = (List<MOGESP.Entities.Dominio.PrimerIngreso>)ViewData["primerosIngresos"];
 
-    int cantCorreos = 1;
-    int cantTels = 1;
-
 
 }
+    <center>
+        <h2>Insertar Primeros Ingresos</h2>
+    </center>
 
-<h2>Insertar Primeros Ingresos</h2>
 <hr />
 
 
 @using (Html.BeginForm("AgregarPrimerIngreso", "ProcesoSeleccion", FormMethod.Post))
 {
 
-    <center>
-        @Html.LabelFor(m => m.NumeroFlujo)
-        @Html.TextBoxFor(m => m.NumeroFlujo,null , new { id = "numeroflujo" })
-    </center>
+<div class="container" style="border: 3px solid #152327;">
+    <br />
 
-    <center>
-        @Html.LabelFor(m => m.NumeroConvocatoria)
-        @Html.TextBoxFor(m => m.NumeroConvocatoria ,null , new { id = "numeroconvocatoria" } )
-    </center>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.NumeroFlujo)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.NumeroFlujo, new { Id = "numeroflujo", Class = "form-control" })</div>
+        <div class="col-sm-4"></div>
+    </div>
 
     <br />
 
-    @Html.LabelFor(m => m.Cedula)
-    @Html.TextBoxFor(m => m.Cedula)
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.NumeroConvocatoria, new { Id = "numeroconvocatoria", Class = "form-control" })</div>
+        <div class="col-sm-4"></div>
+    </div>
+
+    <hr />
+
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.Cedula)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.Cedula, new { Class = "form-control" })</div>
+        <div class="col-sm-4"></div>
+    </div>
 
     <br />
 
-    @Html.LabelFor(m => m.Nombre)
-    @Html.TextBoxFor(m => m.Nombre)
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.Nombre)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.Nombre,new { Class = "form-control" })</div>
+        <div class="col-sm-4"></div>
+    </div>
 
     <br />
 
-    @Html.LabelFor(m => m.PrimerApellido)
-    @Html.TextBoxFor(m => m.PrimerApellido)
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.PrimerApellido)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.PrimerApellido, new { Class = "form-control" })</div>
+        <div class="col-sm-4"></div>
+    </div>
 
     <br />
 
-    @Html.LabelFor(m => m.SegundoApellido)
-    @Html.TextBoxFor(m => m.SegundoApellido)
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.SegundoApellido)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.SegundoApellido, new { Class = "form-control" })</div>
+        <div class="col-sm-4"></div>
+    </div>
 
     <br />
 
-    @Html.LabelFor(m => m.Sexo)
-    @Html.DropDownListFor(m => m.Sexo, new List<SelectListItem>
-                   { new SelectListItem{Text="M", Value="M"},
-                     new SelectListItem{Text="F", Value="F"} }, "Seleccione su sexo")
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.Sexo)</div>
+        <div class="col-sm-3">
+            @Html.DropDownListFor(m => m.Sexo, new List<SelectListItem>
+                                    {new SelectListItem{Text="M", Value="M"},
+                                    new SelectListItem{Text="F", Value="F"} },
+                                    "Seleccione su sexo", new { Class = "form-control" })
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
 
     <br />
 
-    @Html.LabelFor(m => m.Direccion)
-    @Html.TextAreaFor(m => m.Direccion)
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.Direccion)</div>
+        <div class="col-sm-3">@Html.TextAreaFor(m => m.Direccion, new { Class = "form-control" })</div>
+        <div class="col-sm-4"></div>
+    </div>
 
     <br />
+    <br />
 
-    @Html.LabelFor(m => m.Correos)
-    @for (int i = 0; i < cantCorreos; i++)
-    {
-        @Html.TextAreaFor(m => m.Correos)
-        <br />
-    }
 
-    @Html.LabelFor(m => m.Telefonos)
-    @for (int j = 0; j < cantTels; j++)
-    {
-        @Html.TextAreaFor(m => m.Telefonos)
-        <br />
-    }
 
-    <button type="submit" id="btnAgregar" class="btn-primary">
-        Agregar
-    </button>
+    <!--Manejo de Correos y teléfonos textBox-Select multiple  -->
 
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.Correos)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.Correos,new {Id = "correo",  Class = "form-control" })</div>
+        <div class="col-sm-1">
+            <button type="button" id="btnAgregarCorreo" class="btn btn-warning" onclick="pasarCorreo()">
+                +
+            </button>
+        </div>
+        <div class="col-sm-3">
+
+            <select id="selCorreos" class="form-control" multiple size="3"></select>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">@Html.LabelFor(m => m.Telefonos)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.Telefonos, new {Id = "tel",  Class = "form-control" })</div>
+        <div class="col-sm-1">
+            <button type="button" id="btnAgregarTelefono" class="btn btn-warning" onclick="pasarTel()" >
+                +
+            </button>
+        </div>
+        <div class="col-sm-3">
+            <select id="selTels" class="form-control" multiple size="3"></select>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-2" align="center">
+            <button type="submit" id="btnAgregar" class="btn btn-primary">
+                Agregar
+            </button>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+
+
+    <br />
+    <br />
+
+</div>
 }
 
 
@@ -143,11 +217,43 @@
 
     @using (Html.BeginForm("InsertarTodosPrimerosIngresos", "ProcesoSeleccion", FormMethod.Post))
     {
-        <button type="submit" id="btnInsertarTodos" class="btn-primary" onclick="return confirm("¿Desea insertar todos los registros?")">
-            Insertar Todos
-        </button>
+        <center>
+            <button type="submit" id="btnInsertarTodos" class="btn-lg btn-primary" onclick="return confirm(" ¿Desea insertar todos los registros?")">
+                Insertar Todos
+            </button>
+        </center>
     }
 
 </div>
 
 <br />
+
+<script type="text/javascript">
+    
+    /*
+     
+        Pasa el correo del textfield al select
+
+     */ 
+    function pasarCorreo() {
+        let correo = document.getElementById("correo");
+        let value = correo.value;
+        let select = document.getElementById("selCorreos");
+        select.options[select.options.length] = new Option(value, value, true, true);
+        correo.value = "" ;
+    }
+
+    /*
+     
+        Pasa el teléfono del textfield al select
+
+     */ 
+    function pasarTel() {
+        let correo = document.getElementById("tel");
+        let value = correo.value;
+        let select = document.getElementById("selTels");
+        select.options[select.options.length] = new Option(value, value, true, true);
+        correo.value = "";
+    }
+
+</script>
