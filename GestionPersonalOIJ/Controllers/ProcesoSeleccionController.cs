@@ -7,6 +7,7 @@ using GestionPersonalOIJ.Models;
 using MOGESP.ServiceLayer.Servicio;
 using MOGESP.Entities.Dominio;
 using Microsoft.AspNetCore.Http;
+using MOGESP.Entities.Utilidades;
 
 namespace GestionPersonalOIJ.Controllers
 {
@@ -16,20 +17,56 @@ namespace GestionPersonalOIJ.Controllers
         readonly PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
         readonly static List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
 
-        public IActionResult PrimerosIngresos()
-        {
-            return View();
-        }
+		public IActionResult PrimerosIngresos()
+		{
+			return View();
+		}
 
-        public IActionResult VerPrimerosIngresos()
-        {
-            IEnumerable<PrimerIngreso> primerosIngresos;
-            primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
-            return View(primerosIngresos);
-        }
+		//public IActionResult VerPrimerosIngresos()
+		//{
+		//    IEnumerable<PrimerIngreso> primerosIngresos;
+		//    primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
+		//    return View(primerosIngresos);
+		//}
+
+		private readonly int _RegistrosPorPagina = 10;
+
+		private List<PrimerIngreso> _Customers;
+		private PaginadorGenerico<PrimerIngreso> _PaginadorCustomers;
+
+		public IActionResult VerPrimerosIngresos(int pagina = 1)
+		{
+			IEnumerable<PrimerIngreso> primerosIngresos;
+			primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
+			int _TotalRegistros = 0;
+			
+				
+				// Número total de registros de la tabla Customers
+				_TotalRegistros = primerosIngresos.Count();
+				// Obtenemos la 'página de registros' de la tabla Customers
+				_Customers = primerosIngresos.OrderBy(x => x.Cedula)
+												 .Skip((pagina - 1) * _RegistrosPorPagina)
+												 .Take(_RegistrosPorPagina)
+												 .ToList();
+				// Número total de páginas de la tabla Customers
+				var _TotalPaginas = (int)Math.Ceiling((double)_TotalRegistros / _RegistrosPorPagina);
+				// Instanciamos la 'Clase de paginación' y asignamos los nuevos valores
+				_PaginadorCustomers = new PaginadorGenerico<PrimerIngreso>()
+				{
+					RegistrosPorPagina = _RegistrosPorPagina,
+					TotalRegistros = _TotalRegistros,
+					TotalPaginas = _TotalPaginas,
+					PaginaActual = pagina,
+					Resultado = _Customers
+				};
+				// Enviamos a la Vista la 'Clase de paginación'
+				return View(_PaginadorCustomers);
+			
+		}
+	
 
 
-        public IActionResult InsertarPrimerosIngresos()
+		public IActionResult InsertarPrimerosIngresos()
         {
             ViewData["primerosIngresos"] = primerosIngresos;
 

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MOGESP.Entities.Dominio.PrimerIngreso>
+﻿@*model IEnumerable<MOGESP.Entities.Dominio.PrimerIngreso>*@
+@using MOGESP.Entities.Utilidades;
+@model PaginadorGenerico<MOGESP.Entities.Dominio.PrimerIngreso>
 
 @{
 	ViewData["Title"] = "verPrimerosIngresos";
@@ -24,9 +26,7 @@
 			<tr style=" background-color: #222;" class="btn-primary">
 				<th class="border-top-left"></th>
 				<th class="centrarTitulos">C&eacute;dula</th>
-				<th class="centrarTitulos">Nombre</th>
-				<th class="centrarTitulos">Primer Apellido</th>
-				<th class="centrarTitulos">Segundo Apellido</th>
+				<th class="centrarTitulos">Nombre Apellidos</th>
 				<th class="centrarTitulos">Sexo</th>
 				<th class="centrarTitulos">Direccí&oacute;n</th>
 				<th class="centrarTitulos">Correos</th>
@@ -50,22 +50,18 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
-			<td></td>
 		</tr>
 
 
-		@foreach (var primerIngreso in Model)
+		@foreach (var primerIngreso in Model.Resultado)
 		{
 			<tr>
 				<td>
-						<LinkButton ID="btnEditar" ToolTip="Editar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>
-						<LinkButton ID="btnEliminar" ToolTip="Eliminar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
+					<LinkButton ID="btnEditar" ToolTip="Editar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>
+					<LinkButton ID="btnEliminar" ToolTip="Eliminar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
 				</td>
 				<td> @primerIngreso.Cedula</td>
-				<td> @primerIngreso.Nombre</td>
-				<td> @primerIngreso.PrimerApellido</td>
-				<td> @primerIngreso.SegundoApellido</td>
+				<td> @primerIngreso.Nombre @primerIngreso.PrimerApellido @primerIngreso.SegundoApellido</td>
 				<td> @primerIngreso.Sexo</td>
 				<td> @primerIngreso.Direccion</td>
 
@@ -90,9 +86,67 @@
 
 	</table>
 </div>
-	<br />
+
+<div class="col-md-12 col-xs-12 col-sm-12">
+	@*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
+	@if (@Model.Resultado.Count() > 0)
+	{
+		<span>
+			<strong>@Model.TotalRegistros</strong> registros encontrados
+		</span>
+		<span>&nbsp;|&nbsp;</span>
+		<span>
+			Página <strong>@(Model.PaginaActual)</strong> de
+			<strong>@Model.TotalPaginas</strong>
+		</span>
+		<span>&nbsp;|&nbsp;</span>
+	}
+	else
+	{
+		<span>No hay resultados para esta búsqueda</span>
+		<span>&nbsp;|&nbsp;</span>
+	}
 
 
-	<div class="col-md-2 col-xs-2 col-sm-2 col-md-offset-11 col-xs-offset-11 col-sm-offset-11">
-		<LinkButton id="btnAgregarPrimerIngreso" class="btn btn-success plus"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </LinkButton>
-	</div>
+	@*botones de paginación*@
+		<center>
+			@if (Model.PaginaActual > 1)
+			{
+				@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = 1 },
+								new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
+				<span></span>
+				@Html.ActionLink("Anterior", "VerPrimerosIngresos", new { pagina = Model.PaginaActual - 1 },
+								new { @class = "btn btn-sm btn-default" })
+			}
+			else
+			{
+				@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = 1 },
+								new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
+				<span></span>
+				@Html.ActionLink("Anterior", "VerPrimerosIngresos", new { pagina = 1 },
+								new { @class = "btn btn-sm btn-default disabled" })
+			}
+			<span></span>
+			@if (Model.PaginaActual < Model.TotalPaginas)
+			{
+				@Html.ActionLink("Siguiente", "VerPrimerosIngresos", new { pagina = Model.PaginaActual + 1 },
+								new { @class = "btn btn-sm btn-default" })
+				<span></span>
+				@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas },
+								new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
+			}
+			else
+			{
+				@Html.ActionLink("Siguiente", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas - 1 },
+								new { @class = "btn btn-sm btn-default disabled" })
+				<span></span>
+				@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas },
+								new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
+			}
+		</center>
+
+		</div>
+<div class="col-md-offset-11 col-xs-offset-11 col-sm-offset-11">
+	<LinkButton id="btnAgregarPrimerIngreso" class="btn btn-success plus" title="Agregar nuevo primer ingreso"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </LinkButton>
+</div>
+
