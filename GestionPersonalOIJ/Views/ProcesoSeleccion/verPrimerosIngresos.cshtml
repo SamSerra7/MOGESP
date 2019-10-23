@@ -1,57 +1,98 @@
-﻿@model  IEnumerable<MOGESP.Entities.Dominio.PrimerIngreso>
+﻿@model IEnumerable<MOGESP.Entities.Dominio.PrimerIngreso>
 
 @{
-ViewData["Title"] = "verPrimerosIngresos";
+	ViewData["Title"] = "verPrimerosIngresos";
 }
 
-<h2 style="text-align: center;margin: 0;">Primeros Ingresos</h2>
+<!--Encabezado-->
+<div class="col-md-12 col-xs-12 col-sm-12">
+	<center>
+		<h2>Primeros Ingresos</h2>
+	</center>
+</div>
 
-<br/>
+<br />
+<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+	<hr />
+</div>
+<br />
 
-<table id="tablaId" class="table table-bordered table-responsive table-hover">
-    <tr>
-        <th>C&eacute;dula</th>
-        <th>Título</th>
-        <th>Primer Apellido</th>
-        <th>Segundo Apellido</th>
-        <th>Sexo</th>
-        <th>Direccí&oacute;n</th>
-        <th>Correos</th>
-        <th>Tel&eacute;fonos</th>
-        <th>Numero de convocatoria</th>
-        <th>Numero de flujo</th>
-    </tr>
+<!--Tabla verPrimeros Ingresos-->
+<div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+	<table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+		<thead style="align-content: center;">
+			<tr style=" background-color: #222;" class="btn-primary">
+				<th class="border-top-left"></th>
+				<th class="centrarTitulos">C&eacute;dula</th>
+				<th class="centrarTitulos">Nombre</th>
+				<th class="centrarTitulos">Primer Apellido</th>
+				<th class="centrarTitulos">Segundo Apellido</th>
+				<th class="centrarTitulos">Sexo</th>
+				<th class="centrarTitulos">Direccí&oacute;n</th>
+				<th class="centrarTitulos">Correos</th>
+				<th class="centrarTitulos">Tel&eacute;fonos</th>
+				<th class="centrarTitulos">Numero de convocatoria</th>
+				<th class="border-top-right centrarTitulos">Numero de flujo</th>
+
+			</tr>
+		</thead>
+		<tr style="background:#f1f1f1">
+			<td>
+				<LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search"></span> </LinkButton>
+			</td>
+			<td>
+				<input type="text" name="desc" CssClass="form-control chat-input" placeholder="filtrar por cedula">
+			</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
 
 
-    @foreach (var primerIngreso in Model)
-    {
-        <tr>
-            <td> @primerIngreso.Cedula</td>
-            <td> @primerIngreso.Nombre</td>
-            <td> @primerIngreso.PrimerApellido</td>
-            <td> @primerIngreso.SegundoApellido</td>
-            <td> @primerIngreso.Sexo</td>
-            <td> @primerIngreso.Direccion</td>
+		@foreach (var primerIngreso in Model)
+		{
+			<tr>
+				<td>
+						<LinkButton ID="btnEditar" ToolTip="Editar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>
+						<LinkButton ID="btnEliminar" ToolTip="Eliminar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
+				</td>
+				<td> @primerIngreso.Cedula</td>
+				<td> @primerIngreso.Nombre</td>
+				<td> @primerIngreso.PrimerApellido</td>
+				<td> @primerIngreso.SegundoApellido</td>
+				<td> @primerIngreso.Sexo</td>
+				<td> @primerIngreso.Direccion</td>
 
-            <td>
-                @foreach (var correo in primerIngreso.Correos)
-                {
-                    <p>@correo</p>
-                }
-            </td>
+				<td>
+					@foreach (var correo in primerIngreso.Correos)
+					{
+						<p>@correo</p>
+					}
+				</td>
 
-            <td>
-                @foreach (var telefono in primerIngreso.Telefonos)
-                {
-                    <p>@telefono</p>
-                }
-            </td>
+				<td>
+					@foreach (var telefono in primerIngreso.Telefonos)
+					{
+						<p>@telefono</p>
+					}
+				</td>
 
-            <td> @primerIngreso.NumeroConvocatoria</td>
-            <td> @primerIngreso.NumeroFlujo</td>
-        </tr>
-     }
-        
-    </table>
-<br/>
-<button type="submit" style="text-align: center;" class="btn-success" >+</button>
+				<td> @primerIngreso.NumeroConvocatoria</td>
+				<td> @primerIngreso.NumeroFlujo</td>
+			</tr>
+		}
+
+	</table>
+</div>
+	<br />
+
+
+	<div class="col-md-2 col-xs-2 col-sm-2 col-md-offset-11 col-xs-offset-11 col-sm-offset-11">
+		<LinkButton id="btnAgregarPrimerIngreso" class="btn btn-success plus"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </LinkButton>
+	</div>
