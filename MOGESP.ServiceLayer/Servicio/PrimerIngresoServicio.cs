@@ -33,5 +33,11 @@ namespace MOGESP.ServiceLayer.Servicio
             primerIngresoDatos.insertarPrimerIngreso(PI);
         }
 
+        public void modificarPrimerIngreso(PrimerIngreso PI)
+        {
+            if (PI == null) throw new Exception("No se puede ingresar datos nulos primer ingreso");
+            primerIngresoDatos.ModificarPrimerIngreso(PI);
+        }
+
     }
 }
