@@ -97,7 +97,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         /// 10/10/19
         /// Este método elimina un tipo de test
         /// </summary>
-        public void eliminarTestCompetencias(int id)
+        public void eliminarTestVisomotor(int id)
         {
             SqlConnection sqlConnection = conexion.conexion();
 
