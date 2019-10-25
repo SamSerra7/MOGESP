@@ -41,7 +41,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
             while (reader.Read())
             {
                 primerIngreso = new PrimerIngreso();
-
+			
                 primerIngreso.Cedula = reader["TC_NumeroCedula"].ToString();
                 primerIngreso.Nombre = reader["TC_Nombre"].ToString();
                 primerIngreso.PrimerApellido = reader["TC_PrimerApellido"].ToString();

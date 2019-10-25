@@ -27,7 +27,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarCorreosPorPI @NumeroCedula = @Cedula ", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarCorreosPorPI @Cedula ", sqlConnection);
 
             sqlCommand.Parameters.AddWithValue("@Cedula", cedula);
             SqlDataReader reader;

@@ -16,7 +16,7 @@ namespace MOGESP.Entities.Dominio
 
         }
        
-        public PrimerIngreso(string cedula, string nombre, string primerApellido, string segundoApellido, char sexo, List<string> correos, List<int> telefonos, string direccion, string numeroConvocatoria, int NumeroFlujo) 
+        public PrimerIngreso(string cedula, string nombre, string primerApellido, string segundoApellido, char sexo, List<string> correos, List<String> telefonos, string direccion, string numeroConvocatoria, int NumeroFlujo) 
                                 :base(cedula, nombre, primerApellido, segundoApellido, sexo, correos, telefonos, direccion)
         {   
         }
