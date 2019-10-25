@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "Primeros Ingresos";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+    <br><br>
+
+    <form>
+        <div style="float:right;">
+
+            <input type="search" id="buscarPrimerIngreso" name="buscarPrimerIngreso"
+                   placeholder="Buscar Primer Ingreso" required
+                   size="30" maxlength="50">
+            <button>Buscar</button>
+            <span class="validity"></span>
+        </div>
+    </form>
+
+    <br><br>
+    <div style="width:810px; padding:3px;">
+
+        <div class="form-group" style="width:80px; float:left;">
+
+            <h4>Nombrados:</h4> <input type="text" size="15" maxlength="30" name="txtNombrado" disabled>
+            <h4>Positivos:</h4> <input type="text" size="15" maxlength="30" name="txtPositivo" disabled>
+
+        </div>
+
+        <div class="form-group" style="width:300px; float:right;">
+
+            <h4>En Espera:</h4> <input type="text" size="15" maxlength="30" name="txtEspera" disabled>
+            <h4>Negativos:</h4> <input type="text" size="15" maxlength="30" name="txtNegativos" disabled>
+
+        </div>
+
+    </div>
+
+
+    <table class="table">
+
+        <thead>
+
+            <tr>
+
+                <th scope="col">
+                    Gesti&oacute;n Humana - Administraci&oacute;n
+                    <hr>Cantidad-Casos en Tr&aacute;mite
+                </th>
+                <th scope="col">
+                    Antecedentes
+                    <hr>Cantidad-Casos en Tr&aacute;mite
+                </th>
+                <th scope="col">
+                    Transportes
+                    <hr>Cantidad-Casos en Tr&aacute;mite
+                </th>
+                <th scope="col">
+                    M&eacute;dicas
+                    <hr>Cantidad-Casos en Tr&aacute;mite
+                </th>
+                <th scope="col">
+                    Toxolog&iacute;a
+                    <hr>Cantidad-Casos en Tr&aacute;mite
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <br><br>
+
+    <!--Tabla verPrimeros Ingresos-->
+    <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+        <table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+            <thead style="align-content: center;">
+                <tr style=" background-color: #222;" class="btn-primary">
+                    <th class="border-top-left"></th>
+                    <th class="centrarTitulos">N&deg;. Concurso</th>
+                    <th class="centrarTitulos">Ubicaci&oacute;n</th>
+                    <th class="centrarTitulos">N&deg;. C&eacute;dula</th>
+                    <th class="centrarTitulos">Nombre</th>
+                    <th class="centrarTitulos">
+                        Tr&aacute;mite
+                        <br>Administraci&oacute;n
+                    </th>
+                    <th class="centrarTitulos">
+                        Pruebas
+                        <br>Psicol&oacute;gicas-Psicom&eacute;tricas
+                    </th>
+                    <th class="centrarTitulos">
+                        Tr&aacute;mite
+                        <br>Administraci&oacute;n
+                    </th>
+                    <th class="centrarTitulos">
+                        Invest.
+                        <br>De Antecedentes
+                    </th>
+                    <th class="centrarTitulos">
+                        Tr&aacute;mite
+                        <br>Administraci&oacute;n
+                    </th>
+                    <th>Vialidad</th>
+                    <th class="centrarTitulos">
+                        Fecha Envio a GH
+                        <br>Traslado a Nueva Etapa
+                    </th>
+                    <th class="centrarTitulos">Pruebas M&eacute;dicas</th>
+                    <th class="centrarTitulos">
+                        Tr&aacute;mite
+                        <br>Administraci&oacute;n
+                    </th>
+                    <th class="centrarTitulos">Toxicolog&iacute;a</th>
+                    <th class="centrarTitulos">Condici&oacute;n</th>
+                    <th class="centrarTitulos">
+                        Instancia en que
+                        <br>Perdi&oacute; el Proceso
+                    </th>
+                    <th class="centrarTitulos">Fecha Ingreso</th>
+                    <th class="centrarTitulos">
+                        Cantidad Total
+                        <br>D&iacute;as en Tr&aacute;mite
+                    </th>
+
+
+                </tr>
+            </thead>
+            <tr style="background:#f1f1f1">
+                <td>
+                    <LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search"></span> </LinkButton>
+                </td>
+                <td>
+                    <input type="text" name="desc" CssClass="form-control chat-input" placeholder="filtrar por cedula">
+                </td>
+                <td></td><td></td>
+                <td></td><td></td>
+                <td></td><td></td>
+                <td></td><td></td>
+                <td></td><td></td>
+                <td></td><td></td> 
+                <td></td><td></td>
+                <td></td><td></td><td></td>
+            </tr>
+
+        </table>
+    </div>
+
+</body>
+
+
+</html>
+
+

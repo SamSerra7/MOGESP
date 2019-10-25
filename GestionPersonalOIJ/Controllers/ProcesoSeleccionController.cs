@@ -17,7 +17,7 @@ namespace GestionPersonalOIJ.Controllers
         readonly PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
         readonly static List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
 
-		public IActionResult PrimerosIngresos()
+		public IActionResult CuadroGeneral()
 		{
 			return View();
 		}
