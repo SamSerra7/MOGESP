@@ -19,19 +19,6 @@
 <body>
 
     <br><br>
-
-    <form>
-        <div style="float:right;">
-
-            <input type="search" id="buscarPrimerIngreso" name="buscarPrimerIngreso"
-                   placeholder="Buscar Primer Ingreso" required
-                   size="30" maxlength="50">
-            <button>Buscar</button>
-            <span class="validity"></span>
-        </div>
-    </form>
-
-    <br><br>
     <div style="width:810px; padding:3px;">
 
         <div class="form-group" style="width:80px; float:left;">
@@ -50,53 +37,100 @@
 
     </div>
 
+    <br><br><br><br><br><br><br><br><br><br>
 
-    <table class="table">
+    <!--Tabla Cuadro General-->
+    <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+        <table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+            <thead style="align-content: center;">
+                <tr style=" background-color: #222;" class="btn-primary">
 
-        <thead>
+                    <th scope="col">
+                        Gesti&oacute;n Humana - Administraci&oacute;n
+                        <hr>Cantidad-Casos en Tr&aacute;mite
+                    </th>
+                    <th scope="col">
+                        Antecedentes
+                        <hr>Cantidad-Casos en Tr&aacute;mite
+                    </th>
+                    <th scope="col">
+                        Transportes
+                        <hr>Cantidad-Casos en Tr&aacute;mite
+                    </th>
+                    <th scope="col">
+                        M&eacute;dicas
+                        <hr>Cantidad-Casos en Tr&aacute;mite
+                    </th>
+                    <th scope="col">
+                        Toxolog&iacute;a
+                        <hr>Cantidad-Casos en Tr&aacute;mite
+                    </th>
 
-            <tr>
+                </tr>
+            </thead>
 
-                <th scope="col">
-                    Gesti&oacute;n Humana - Administraci&oacute;n
-                    <hr>Cantidad-Casos en Tr&aacute;mite
-                </th>
-                <th scope="col">
-                    Antecedentes
-                    <hr>Cantidad-Casos en Tr&aacute;mite
-                </th>
-                <th scope="col">
-                    Transportes
-                    <hr>Cantidad-Casos en Tr&aacute;mite
-                </th>
-                <th scope="col">
-                    M&eacute;dicas
-                    <hr>Cantidad-Casos en Tr&aacute;mite
-                </th>
-                <th scope="col">
-                    Toxolog&iacute;a
-                    <hr>Cantidad-Casos en Tr&aacute;mite
-                </th>
+            <tbody>
 
-            </tr>
+                <tr>
 
-        </thead>
+                    <th scope="row">1</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
 
-        <tbody>
+                </tr>
 
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-            </tr>
+            </tbody>
 
-        </tbody>
+        </table>
 
-    </table>
+    </div>
 
-    <br><br>
+    <br><br><br><br><br><br><br><br>
 
-    <!--Tabla verPrimeros Ingresos-->
+    <h4>Filtros:</h4>
+
+    <br>
+
+    <div style="width:200px; float:left;">
+
+        <select class="browser-default custom-select">
+            <option selected value="0">Todos</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+    </div>
+
+    <div style="width:200px; float:left;">
+
+        <select class="browser-default custom-select">
+            <option selected value="0">Todos</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+    </div>
+
+
+    <form>
+        <div style="float:right;">
+
+            <input type="text" id="buscarNumConvocatoria" name="buscarNumConvocatoria"
+                   placeholder="Num. Convocatoria" required>
+            <input type="number" id="buscarNumFlujo" name="buscarNumFlujo"
+                   placeholder="Num. Flujo" min="1" required>
+            <button>Buscar</button>
+
+        </div>
+    </form>
+
+    <br><br><br><br>
+
+    <!--Tabla Cuadro General-->
     <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
         <table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
             <thead style="align-content: center;">
@@ -148,27 +182,35 @@
                         <br>D&iacute;as en Tr&aacute;mite
                     </th>
 
-
                 </tr>
             </thead>
+
             <tr style="background:#f1f1f1">
                 <td>
                     <LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search"></span> </LinkButton>
                 </td>
-                <td>
-                    <input type="text" name="desc" CssClass="form-control chat-input" placeholder="filtrar por cedula">
-                </td>
-                <td></td><td></td>
-                <td></td><td></td>
-                <td></td><td></td>
-                <td></td><td></td>
-                <td></td><td></td>
-                <td></td><td></td> 
-                <td></td><td></td>
-                <td></td><td></td><td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </table>
+
     </div>
 
 </body>
