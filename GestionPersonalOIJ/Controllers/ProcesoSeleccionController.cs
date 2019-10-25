@@ -78,7 +78,7 @@ namespace GestionPersonalOIJ.Controllers
         {
 
             List<string> correos = new List<string>();
-            List<int> tels = new List<int>();
+            List<String> tels = new List<String>();
 
             string[] selCorreos = formCollection["selCorreos"].ToArray();
             string[] selTels = formCollection["selTels"].ToArray();
@@ -89,7 +89,7 @@ namespace GestionPersonalOIJ.Controllers
             }
             for (int j = 0; j < selTels.Length; j++)
             {
-                tels.Add(Convert.ToInt32(selTels[j]));
+                tels.Add(selTels[j]);
             }
 
 

@@ -20,14 +20,14 @@ namespace MOGESP.DataAccess.TRAN.Datos
         /// Este método retorna una lista con todos los teléfonos de un primer ingreso específicco
         /// </summary>
         /// <returns>List<int></returns>
-        public List<int> CosultarTelefonosPorPrimerIngreso(string cedula)
+        public List<String> CosultarTelefonosPorPrimerIngreso(string cedula)
         {
 
-            List<int> telefonos = new List<int>();
+            List<String> telefonos = new List<String>();
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarTelefonosPorPI @NumeroCedula = @Cedula ", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarTelefonosPorPI @Cedula ", sqlConnection);
 
             sqlCommand.Parameters.AddWithValue("@Cedula", cedula);
             SqlDataReader reader;
@@ -36,7 +36,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             while (reader.Read())
             {
-                telefonos.Add(Convert.ToInt32(reader["TN_Telefono"].ToString()));
+                telefonos.Add(reader["TC_Telefono"].ToString());
             }
 
             sqlConnection.Close();
@@ -48,7 +48,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         /// 10/10/19
         /// Este método ingresa un teléfono para una persona
         /// </summary>
-        public void insertarTelefonoPorPersona(string cedula, int telefono)
+        public void insertarTelefonoPorPersona(string cedula, String telefono)
         {
             SqlConnection sqlConnection = conexion.conexion();
 

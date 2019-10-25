@@ -12,7 +12,7 @@ namespace MOGESP.Entities.Dominio
         }
 
 
-        protected Persona(string cedula, string nombre, string primerApellido, string segundoApellido, char sexo, List<string> correos, List<int> telefonos, string direccion)
+        protected Persona(string cedula, string nombre, string primerApellido, string segundoApellido, char sexo, List<string> correos, List<String> telefonos, string direccion)
         {
             Cedula = cedula;
             Nombre = nombre;
@@ -85,9 +85,9 @@ namespace MOGESP.Entities.Dominio
             set { correos = value ?? throw new Exception("Al menos un correo es requerido"); }
         }
 
-        private List<int> telefonos;
+        private List<String> telefonos;
 
-        public List<int> Telefonos
+        public List<String> Telefonos
         {
             get { return telefonos; }
             set { telefonos = value ?? throw new Exception("Al menos un teléfono es requerido"); }
