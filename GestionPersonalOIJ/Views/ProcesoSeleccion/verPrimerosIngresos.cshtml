@@ -7,10 +7,10 @@
 }
 
 <!--Encabezado-->
-<div class="col-md-12 col-xs-12 col-sm-12" >
-    <center>
-        <h2>Primeros Ingresos</h2>
-    </center>
+<div class="col-md-12 col-xs-12 col-sm-12">
+	<center>
+		<h2>Primeros Ingresos</h2>
+	</center>
 </div>
 
 <br />
@@ -39,10 +39,15 @@
 		</thead>
 		<tr style="background:#f1f1f1">
 			<td>
-				<LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search"></span> </LinkButton>
+				@*<LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search " onclick = "javascript:optieneCedulaABuscar();"></span> </LinkButton>*@
+
+				@Html.ActionLink("", "VerPrimerosIngresos", new {pagina = 1, buscar = "10000001" },
+		new { @class = "btn glyphicon glyphicon-search", @onclick = "optieneCedulaABuscar();", @title = "Buscar" })
 			</td>
 			<td>
-				<input type="text" name="desc" CssClass="form-control chat-input" placeholder="filtrar por cedula">
+				@Html.TextBox("txtValue", null, new { placeholder = "Filtrar por cedula" , id= "txtBuscar" })
+
+				@*<input type="text" name="buscar" id="txtBuscar" CssClass="form-control chat-input" placeholder="filtrar por cedula">*@
 			</td>
 			<td></td>
 			<td></td>
@@ -58,8 +63,13 @@
 		{
 			<tr>
 				<td>
-					<LinkButton ID="btnEditar" ToolTip="Editar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>
-					<LinkButton ID="btnEliminar" ToolTip="Eliminar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
+					@Html.ActionLink("", "VerPrimerosIngresos", new { cedula = primerIngreso.Cedula },
+								new { @class = "btn glyphicon glyphicon-pencil", @title = "Editar" })
+
+					@Html.ActionLink("", "VerPrimerosIngresos", new { cedula = primerIngreso.Cedula },
+								new { @class = "btn glyphicon glyphicon-trash", @title = "Eliminar" })
+					@*<LinkButton ID="btnEditar" ToolTip="Editar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>*@
+					@*<LinkButton ID="btnEliminar" ToolTip="Eliminar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-trash"></span></LinkButton>*@
 				</td>
 				<td> @primerIngreso.Cedula</td>
 				<td> @primerIngreso.Nombre @primerIngreso.PrimerApellido @primerIngreso.SegundoApellido</td>
@@ -111,44 +121,54 @@
 
 
 	@*botones de paginación*@
-		<center>
-			@if (Model.PaginaActual > 1)
-			{
-				@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = 1 },
-								new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
-				<span></span>
-				@Html.ActionLink("Anterior", "VerPrimerosIngresos", new { pagina = Model.PaginaActual - 1 },
-								new { @class = "btn btn-sm btn-default" })
-			}
-			else
-			{
-				@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = 1 },
-								new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
-				<span></span>
-				@Html.ActionLink("Anterior", "VerPrimerosIngresos", new { pagina = 1 },
-								new { @class = "btn btn-sm btn-default disabled" })
-			}
+	<center>
+		@if (Model.PaginaActual > 1)
+		{
+			@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
 			<span></span>
-			@if (Model.PaginaActual < Model.TotalPaginas)
-			{
-				@Html.ActionLink("Siguiente", "VerPrimerosIngresos", new { pagina = Model.PaginaActual + 1 },
-								new { @class = "btn btn-sm btn-default" })
-				<span></span>
-				@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas },
-								new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
-			}
-			else
-			{
-				@Html.ActionLink("Siguiente", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas - 1 },
-								new { @class = "btn btn-sm btn-default disabled" })
-				<span></span>
-				@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas },
-								new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
-			}
-		</center>
+			@Html.ActionLink("Anterior", "VerPrimerosIngresos", new { pagina = Model.PaginaActual - 1 },
+							new { @class = "btn btn-sm btn-default" })
+		}
+		else
+		{
+			@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
+			<span></span>
+			@Html.ActionLink("Anterior", "VerPrimerosIngresos", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-default disabled" })
+		}
+		<span></span>
+		@if (Model.PaginaActual < Model.TotalPaginas)
+		{
+			@Html.ActionLink("Siguiente", "VerPrimerosIngresos", new { pagina = Model.PaginaActual + 1 },
+							new { @class = "btn btn-sm btn-default" })
+			<span></span>
+			@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas },
+							new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
+		}
+		else
+		{
+			@Html.ActionLink("Siguiente", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas - 1 },
+							new { @class = "btn btn-sm btn-default disabled" })
+			<span></span>
+			@Html.ActionLink("", "VerPrimerosIngresos", new { pagina = Model.TotalPaginas },
+							new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
+		}
+	</center>
 
-		</div>
+</div>
 <div class="col-md-offset-11 col-xs-offset-11 col-sm-offset-11">
 	<LinkButton id="btnAgregarPrimerIngreso" class="btn btn-success plus" title="Agregar nuevo primer ingreso"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </LinkButton>
 </div>
+
+@*Optiene el valor ingresado campo de texto para buscar, *@
+<script>
+
+        function optieneCedulaABuscar() {
+			
+			document.write("<form name='cart_quantity' id='cart_quantity' method='post' action='https://localhost:44338/ProcesoSeleccion/VerPrimerosIngresos?pagina=1&buscar*=txt" & amp; action = buy_now & amp;
+            @*document.getElementById("GFG").innerHTML = txt;*@
+	}
+</script>
 

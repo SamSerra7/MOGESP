@@ -16,51 +16,58 @@ namespace GestionPersonalOIJ.Controllers
 
         readonly PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
         readonly static List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
+		private readonly int registrosPorPagina = 10;
+		private List<PrimerIngreso> primerosIngresosLista;
+		private PaginadorGenerico<PrimerIngreso> paginador;
 
 		public IActionResult CuadroGeneral()
 		{
 			return View();
 		}
 
-		//public IActionResult VerPrimerosIngresos()
-		//{
-		//    IEnumerable<PrimerIngreso> primerosIngresos;
-		//    primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
-		//    return View(primerosIngresos);
-		//}
 
-		private readonly int _RegistrosPorPagina = 10;
-
-		private List<PrimerIngreso> _Customers;
-		private PaginadorGenerico<PrimerIngreso> _PaginadorCustomers;
-
-		public IActionResult VerPrimerosIngresos(int pagina = 1)
+		/// <summary>
+		/// Jesús Torres
+		/// 26/soct/2019
+		/// Efecto: Cotroller de primeros ingresos, ajusta la paginación que siempre se vean solo 10 reistros
+		/// Requiere: 
+		/// Modifica: 
+		/// Devuelve: -
+		/// </summary>
+		public IActionResult VerPrimerosIngresos(int pagina = 1, String  buscar = "")
 		{
 			IEnumerable<PrimerIngreso> primerosIngresos;
 			primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
-			int _TotalRegistros = 0;
-			
-				
-				// Número total de registros de la tabla Customers
-				_TotalRegistros = primerosIngresos.Count();
-				// Obtenemos la 'página de registros' de la tabla Customers
-				_Customers = primerosIngresos.OrderBy(x => x.Cedula)
-												 .Skip((pagina - 1) * _RegistrosPorPagina)
-												 .Take(_RegistrosPorPagina)
+			int totalRegistros = 0;
+
+			// Obtenemos la 'página de registros' de la tabla 
+			primerosIngresosLista = primerosIngresos.OrderBy(x => x.Cedula)
+												 .Where(x => x.Cedula.ToUpper().Contains(buscar))
+												 .Skip((pagina - 1) * registrosPorPagina)
+												 .Take(registrosPorPagina)
 												 .ToList();
-				// Número total de páginas de la tabla Customers
-				var _TotalPaginas = (int)Math.Ceiling((double)_TotalRegistros / _RegistrosPorPagina);
+			// Número total de registros de la tabla
+			if(buscar != ""){
+				totalRegistros = primerosIngresosLista.Count();
+			}
+			else
+			{
+				totalRegistros = primerosIngresos.Count();
+			}
+
+			// Número total de páginas de la tabla 
+			var _TotalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
 				// Instanciamos la 'Clase de paginación' y asignamos los nuevos valores
-				_PaginadorCustomers = new PaginadorGenerico<PrimerIngreso>()
+				paginador = new PaginadorGenerico<PrimerIngreso>()
 				{
-					RegistrosPorPagina = _RegistrosPorPagina,
-					TotalRegistros = _TotalRegistros,
+					RegistrosPorPagina = registrosPorPagina,
+					TotalRegistros = totalRegistros,
 					TotalPaginas = _TotalPaginas,
 					PaginaActual = pagina,
-					Resultado = _Customers
+					Resultado = primerosIngresosLista
 				};
 				// Enviamos a la Vista la 'Clase de paginación'
-				return View(_PaginadorCustomers);
+				return View(paginador);
 			
 		}
 	
