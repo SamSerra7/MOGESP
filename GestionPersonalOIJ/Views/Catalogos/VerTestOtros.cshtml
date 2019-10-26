@@ -1,0 +1,109 @@
+﻿
+@using MOGESP.Entities.Utilidades;
+@model PaginadorGenerico<MOGESP.Entities.Dominio.TestOtros>
+
+@{
+    ViewData["Title"] = "Catalogos Otros Tests";
+}
+
+<!--Tabla Resumen de días-->
+<div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center;">
+    <table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+        <thead style="align-content: center;">
+            <tr style=" background-color: #222;" class="btn-primary">
+                <th class="border-top-left"></th>
+                <th class="centrarTitulos">
+                    Nombre
+                </th>
+
+            </tr>
+        </thead>
+        <tr style="background:#f1f1f1">
+
+            <td>
+                <LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search"></span> </LinkButton>
+            </td>
+            <td>
+                <input type="search" name="buscarNombre" CssClass="form-control chat-input" placeholder="Nombre">
+            </td>
+
+        </tr>
+
+
+        @foreach (var testOtros in Model.Resultado)
+        {
+            <tr>
+                <td>
+                    <LinkButton ID="btnEditar" ToolTip="Editar"><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>
+                    <LinkButton ID="btnEliminar" ToolTip="Eliminar"><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
+                </td>
+                <td> @testOtros.Nombre</td>
+
+            </tr>
+        }
+
+
+    </table>
+
+</div>
+
+<div class="col-md-12 col-xs-12 col-sm-12">
+    @*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
+    @if (@Model.Resultado.Count() > 0)
+    {
+        <span>
+            <strong>@Model.TotalRegistros</strong> registros encontrados
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            Página <strong>@(Model.PaginaActual)</strong> de
+            <strong>@Model.TotalPaginas</strong>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+    }
+    else
+    {
+        <span>No hay resultados para esta búsqueda</span>
+        <span>&nbsp;|&nbsp;</span>
+    }
+
+
+    @*botones de paginación*@
+    <center>
+        @if (Model.PaginaActual > 1)
+        {
+            @Html.ActionLink("", "VerTestOtros", new { pagina = 1 },
+                            new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
+            <span></span>
+            @Html.ActionLink("Anterior", "VerTestOtros", new { pagina = Model.PaginaActual - 1 },
+                            new { @class = "btn btn-sm btn-default" })
+        }
+        else
+        {
+            @Html.ActionLink("", "VerTestOtros", new { pagina = 1 },
+                            new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
+            <span></span>
+            @Html.ActionLink("Anterior", "VerTestOtros", new { pagina = 1 },
+                            new { @class = "btn btn-sm btn-default disabled" })
+        }
+        <span></span>
+        @if (Model.PaginaActual < Model.TotalPaginas)
+        {
+            @Html.ActionLink("Siguiente", "VerTestOtros", new { pagina = Model.PaginaActual + 1 },
+                            new { @class = "btn btn-sm btn-default" })
+            <span></span>
+            @Html.ActionLink("", "VerTestOtros", new { pagina = Model.TotalPaginas },
+                            new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
+        }
+        else
+        {
+            @Html.ActionLink("Siguiente", "VerTestOtros", new { pagina = Model.TotalPaginas - 1 },
+                            new { @class = "btn btn-sm btn-default disabled" })
+            <span></span>
+            @Html.ActionLink("", "VerTestOtros", new { pagina = Model.TotalPaginas },
+                            new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
+        }
+    </center>
+
+</div>
+

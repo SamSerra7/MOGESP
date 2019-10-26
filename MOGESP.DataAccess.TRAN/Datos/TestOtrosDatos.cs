@@ -27,7 +27,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarTestOtros ", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsTestOtros ", sqlConnection);
 
             SqlDataReader reader;
             sqlConnection.Open();

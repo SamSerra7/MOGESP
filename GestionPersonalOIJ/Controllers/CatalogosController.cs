@@ -19,12 +19,6 @@ namespace GestionPersonalOIJ.Controllers
 			return View();
 		}
 
-        public IActionResult CatalogoTestOtros()
-        {
-            return View();
-        }
-
-
         readonly TestOtrosServicio testOtrosServicio = new TestOtrosServicio();
         //readonly static List<TestOtros> primerosIngresos = new List<TestOtros>();
 
@@ -60,8 +54,9 @@ namespace GestionPersonalOIJ.Controllers
             };
             // Enviamos a la Vista la 'Clase de paginación'
             return View(_PaginadorCustomers);
-
         }
+
+
 
         //public IActionResult VerPrimerosIngresos()
         //{
