@@ -28,7 +28,7 @@
 				<th class="centrarTitulos">C&eacute;dula</th>
 				<th class="centrarTitulos">Nombre Apellidos</th>
 				<th class="centrarTitulos">Sexo</th>
-				<th class="centrarTitulos">Direccí&oacute;n</th>
+				<th class="centrarTitulos">Direcci&oacute;n</th>
 				<th class="centrarTitulos">Correos</th>
 				<th class="centrarTitulos">Tel&eacute;fonos</th>
 				<th class="centrarTitulos">Numero de convocatoria</th>
@@ -37,27 +37,27 @@
 
 			</tr>
 		</thead>
-		<tr style="background:#f1f1f1">
-			<td>
-				<LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search " onclick = "obtenerValor()"></span> </LinkButton>
+		<form method="get" action=@Url.Action("verPrimerosIngresos", "ProcesoSeleccion" )>
+				<tr style="background:#f1f1f1">
 
-				@*Html.ActionLink("", "VerPrimerosIngresos", new {pagina = 1, buscar = "10000001" },
-		new { @class = "btn glyphicon glyphicon-search", @onclick = "obtenerValor()", @title = "Buscar" })*@
-			</td>
-			<td>
-
-				<input type="text" name="buscar" id="txtBuscar" CssClass="form-control chat-input" placeholder="filtrar por cedula">
-
-			</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-
+					<td>
+						<button class="btn glyphicon glyphicon-search" type="submit"></button>
+					</td>
+					<td>
+						@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
+					   @class = "form-control",
+					   @AutoPostBack = "true"
+				   })
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+		</form>
 
 		@foreach (var primerIngreso in Model.Resultado)
 		{
@@ -165,11 +165,11 @@
 @*Optiene el valor ingresado campo de texto para buscar, *@
 <script language="javascript">
 
-    function obtenerValor(){
-        var valor = document.getElementById("txtBuscar").value//obtener valor del input
+	function obtenerValor() {
+		var valor = document.getElementById("txtBuscar").value//obtener valor del input
 
-        location.href="verPrimerosIngresos?pagina=1&buscar="+ valor;
-}
+		location.href = "verPrimerosIngresos?pagina=1&buscar=" + valor;
+	}
 
 
 </script>

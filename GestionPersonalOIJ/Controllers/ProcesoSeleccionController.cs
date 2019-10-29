@@ -44,25 +44,29 @@ namespace GestionPersonalOIJ.Controllers
 			primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
 			int totalRegistros = 0;
 
-            if (buscar == null)
-            {
-                buscar = "";
-            }
-
+			// FILTRO DE BÚSQUEDA
+				// Filtramos el resultado por el 'texto de búqueda'
+				if (!string.IsNullOrEmpty(buscar))
+				{
+					foreach (var item in buscar.Split(new char[] { ' ' },
+							 StringSplitOptions.RemoveEmptyEntries))
+					{
+					primerosIngresos = primerosIngresos.Where(x => x.Cedula.Contains(item) ||
+													  x.Nombre.Contains(item) ||
+													  x.PrimerApellido.Contains(item) ||
+													  x.SegundoApellido.Contains(item))
+													  .ToList();
+					}
+				}
+			
 			// Obtenemos la 'página de registros' de la tabla 
 			primerosIngresosLista = primerosIngresos.OrderBy(x => x.Cedula)
-												 .Where(x => x.Cedula.Contains(buscar))
 												 .Skip((pagina - 1) * registrosPorPagina)
 												 .Take(registrosPorPagina)
 												 .ToList();
-			// Número total de registros de la tabla
-			if(buscar != ""){
-				totalRegistros = primerosIngresosLista.Count();
-			}
-			else
-			{
-				totalRegistros = primerosIngresos.Count();
-			}
+			// Número total de registros de la tabla		
+			totalRegistros = primerosIngresos.Count();
+			
 
 			// Número total de páginas de la tabla 
 			var _TotalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
