@@ -44,9 +44,14 @@ namespace GestionPersonalOIJ.Controllers
 			primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
 			int totalRegistros = 0;
 
+            if (buscar == null)
+            {
+                buscar = "";
+            }
+
 			// Obtenemos la 'página de registros' de la tabla 
 			primerosIngresosLista = primerosIngresos.OrderBy(x => x.Cedula)
-												 .Where(x => x.Cedula.ToUpper().Contains(buscar))
+												 .Where(x => x.Cedula.Contains(buscar))
 												 .Skip((pagina - 1) * registrosPorPagina)
 												 .Take(registrosPorPagina)
 												 .ToList();

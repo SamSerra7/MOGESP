@@ -39,15 +39,15 @@
 		</thead>
 		<tr style="background:#f1f1f1">
 			<td>
-				@*<LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search " onclick = "javascript:optieneCedulaABuscar();"></span> </LinkButton>*@
+				<LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search " onclick = "obtenerValor()"></span> </LinkButton>
 
-				@Html.ActionLink("", "VerPrimerosIngresos", new {pagina = 1, buscar = "10000001" },
-		new { @class = "btn glyphicon glyphicon-search", @onclick = "optieneCedulaABuscar();", @title = "Buscar" })
+				@*Html.ActionLink("", "VerPrimerosIngresos", new {pagina = 1, buscar = "10000001" },
+		new { @class = "btn glyphicon glyphicon-search", @onclick = "obtenerValor()", @title = "Buscar" })*@
 			</td>
 			<td>
-				@Html.TextBox("txtValue", null, new { placeholder = "Filtrar por cedula" , id= "txtBuscar" })
 
-				@*<input type="text" name="buscar" id="txtBuscar" CssClass="form-control chat-input" placeholder="filtrar por cedula">*@
+				<input type="text" name="buscar" id="txtBuscar" CssClass="form-control chat-input" placeholder="filtrar por cedula">
+
 			</td>
 			<td></td>
 			<td></td>
@@ -163,12 +163,14 @@
 </div>
 
 @*Optiene el valor ingresado campo de texto para buscar, *@
-<script>
+<script language="javascript">
 
-        function optieneCedulaABuscar() {
-			
-			document.write("<form name='cart_quantity' id='cart_quantity' method='post' action='https://localhost:44338/ProcesoSeleccion/VerPrimerosIngresos?pagina=1&buscar*=txt" & amp; action = buy_now & amp;
-            @*document.getElementById("GFG").innerHTML = txt;*@
-	}
+    function obtenerValor(){
+        var valor = document.getElementById("txtBuscar").value//obtener valor del input
+
+        location.href="verPrimerosIngresos?pagina=1&buscar="+ valor;
+}
+
+
 </script>
 
