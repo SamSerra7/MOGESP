@@ -20,6 +20,12 @@ namespace GestionPersonalOIJ.Controllers
 		private List<PrimerIngreso> primerosIngresosLista;
 		private PaginadorGenerico<PrimerIngreso> paginador;
 
+        private static bool clear = false ;
+
+        readonly static List<string> todosCorreos = new List<string>();
+        readonly static List<string> todosTels = new List<string>();
+
+
         private static string[] correos = new string[5];
         private static string[] tels = new string[5];
 
@@ -44,25 +50,29 @@ namespace GestionPersonalOIJ.Controllers
 			primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
 			int totalRegistros = 0;
 
-            if (buscar == null)
-            {
-                buscar = "";
-            }
-
+			// FILTRO DE BÚSQUEDA
+				// Filtramos el resultado por el 'texto de búqueda'
+				if (!string.IsNullOrEmpty(buscar))
+				{
+					foreach (var item in buscar.Split(new char[] { ' ' },
+							 StringSplitOptions.RemoveEmptyEntries))
+					{
+					primerosIngresos = primerosIngresos.Where(x => x.Cedula.Contains(item) ||
+													  x.Nombre.Contains(item) ||
+													  x.PrimerApellido.Contains(item) ||
+													  x.SegundoApellido.Contains(item))
+													  .ToList();
+					}
+				}
+			
 			// Obtenemos la 'página de registros' de la tabla 
 			primerosIngresosLista = primerosIngresos.OrderBy(x => x.Cedula)
-												 .Where(x => x.Cedula.Contains(buscar))
 												 .Skip((pagina - 1) * registrosPorPagina)
 												 .Take(registrosPorPagina)
 												 .ToList();
-			// Número total de registros de la tabla
-			if(buscar != ""){
-				totalRegistros = primerosIngresosLista.Count();
-			}
-			else
-			{
-				totalRegistros = primerosIngresos.Count();
-			}
+			// Número total de registros de la tabla		
+			totalRegistros = primerosIngresos.Count();
+			
 
 			// Número total de páginas de la tabla 
 			var _TotalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
@@ -79,33 +89,67 @@ namespace GestionPersonalOIJ.Controllers
 				return View(paginador);
 			
 		}
-	
 
 
-		public IActionResult InsertarPrimerosIngresos()
+
+        public IActionResult InsertarPrimerosIngresos()
         {
+
+            if (clear)
+            {
+                eliminaBuffer();
+                clear = false;
+            }
+
             ViewData["primerosIngresos"] = primerosIngresos;
+
+            ViewData["correos"] = todosCorreos;
+            ViewData["tels"] = todosTels;
+
+
 
             return View();
         }
+        
+        [HttpPost]
+        public ActionResult AgregarCorreo(IFormCollection formCollection)
+        {
+
+            todosCorreos.Add(formCollection["correo"]);
+
+            return View("InsertarPrimerosIngresos");
+        }
+
+
+        [HttpPost]
+        public ActionResult AgregarTel(IFormCollection formCollection)
+        {
+
+            todosTels.Add(formCollection["tel"]);
+
+            return View("InsertarPrimerosIngresos");
+        }
+
 
         [HttpPost]
         public RedirectToActionResult AgregarPrimerIngreso(IFormCollection formCollection)
         {
 
-            List<string> todosCorreos = new List<string>();
-            List<string> todosTels = new List<string>();
+            ViewData["correos"] = todosCorreos;
+            ViewData["tels"] = todosTels;
+
+            List<string> correos = new List<string>();
+            List<string> tels = new List<string>();
 
 
-
-            foreach (var item in formCollection["correos"])
+            foreach (var c in todosCorreos)
             {
-                todosCorreos.Add(item);
+                correos.Add(c);
             }
 
-            foreach (var item in formCollection["telefonos"])
+            foreach (var t in todosTels)
             {
-                todosTels.Add(item);
+                tels.Add(t);
             }
 
             PrimerIngreso pi = new PrimerIngreso(
@@ -114,23 +158,26 @@ namespace GestionPersonalOIJ.Controllers
                                                     formCollection["primerApellido"],
                                                     formCollection["segundoapellido"],
                                                     Convert.ToChar(formCollection["sexo"]),
-                                                    todosCorreos,
-                                                    todosTels,
+                                                    correos,
+                                                    tels,
                                                     formCollection["direccion"],
-                                                    formCollection["numeroconvocatoria"],
-                                                    Convert.ToInt32(formCollection["numeroflujo"])
+                                                    formCollection["numeroConvocatoria"],
+                                                    Convert.ToInt32(formCollection["numeroFlujo"])
                                                  );
-            
+
             primerosIngresos.Add(pi);
 
-
-            
-
+            clear = true;
 
             return RedirectToAction("InsertarPrimerosIngresos");
         }
 
+        private void eliminaBuffer()
+        {
+            todosCorreos.Clear();
+            todosTels.Clear();
 
+        }
 
         public ActionResult EliminarPrimerIngreso(string cedula)
         {
