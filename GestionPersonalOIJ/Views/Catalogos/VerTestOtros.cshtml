@@ -6,9 +6,30 @@
     ViewData["Title"] = "Catalogos Otros Tests";
 }
 
+<form>
+
+    <center>
+
+        <div>
+            <label>Nombre: </label>
+            <input type="text" name="Nombre" id="Nombre" required />
+        </div>
+        <br />
+        <div>
+            <button type="submit" id="submit">Enviar</button>
+        </div>
+
+    </center>
+
+</form>
+
+<br>
+<br>
+<br>
+
 <!--Tabla Resumen de días-->
 <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center;">
-    <table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+    <table id="TestOtros" class="table table-bordered table-responsive table-hover">
         <thead style="align-content: center;">
             <tr style=" background-color: #222;" class="btn-primary">
                 <th class="border-top-left"></th>
@@ -35,9 +56,9 @@
             <tr>
                 <td>
                     <LinkButton ID="btnEditar" ToolTip="Editar"><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>
-                    <LinkButton ID="btnEliminar" ToolTip="Eliminar"><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
+                    <LinkButton ID="btnEliminar" ToolTip="Eliminar" onclick="onDelete(this)"><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
                 </td>
-                <td> @testOtros.Nombre</td>
+                <td id="nombreTest"> @testOtros.Nombre</td>
 
             </tr>
         }
@@ -46,6 +67,8 @@
     </table>
 
 </div>
+
+<div id="result"></div>
 
 <div class="col-md-12 col-xs-12 col-sm-12">
     @*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
@@ -107,3 +130,15 @@
 
 </div>
 
+<script>
+
+
+    function onDelete() {
+        if (confirm('Are you sure to delete this record ?')) {
+            var variable = document.getElementsByTagName("td")[3].innerHTML;
+            alert(variable);
+
+        }
+    }   
+
+</script>
