@@ -54,7 +54,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         {
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand insertarCorreo = new SqlCommand(@"EXEC PA_InsertarCorreo @TC_NumeroCedula = @Cedula, @TC_Correo = @Correo", sqlConnection);
+            SqlCommand insertarCorreo = new SqlCommand(@"EXEC PA_InsertarCorreoPI @TC_NumeroCedula = @Cedula, @TC_Correo = @Correo", sqlConnection);
 
             insertarCorreo.Parameters.AddWithValue("@Cedula", cedula);
             insertarCorreo.Parameters.AddWithValue("@Correo", correo);
