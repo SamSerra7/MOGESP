@@ -57,13 +57,20 @@ namespace GestionPersonalOIJ.Controllers
         }
 
 
+        [HttpPost]
+        public RedirectToActionResult AgregarTestOtros(String nombreTestOtros="")
+        {
 
-        //public IActionResult VerPrimerosIngresos()
-        //{
-        //    IEnumerable<PrimerIngreso> primerosIngresos;
-        //    primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
-        //    return View(primerosIngresos);
-        //}
+            if (!string.IsNullOrEmpty(nombreTestOtros)) { 
+                testOtrosServicio.insertarTestOtros(nombreTestOtros);
+            }
+
+            return RedirectToAction("VerTestOtros");
+
+        }
+
+
+
 
     }
 }

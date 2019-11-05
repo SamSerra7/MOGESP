@@ -6,17 +6,17 @@
     ViewData["Title"] = "Catalogos Otros Tests";
 }
 
-<form>
+<form id="formSubmit">
 
     <center>
 
         <div>
             <label>Nombre: </label>
-            <input type="text" name="Nombre" id="Nombre" required />
+            <input type="text" name="Nombre" id="txtNombre" required />
         </div>
         <br />
         <div>
-            <button type="submit" id="submit">Enviar</button>
+            <button type="button" id="submitEnviar">Enviar</button>
         </div>
 
     </center>
@@ -34,6 +34,9 @@
             <tr style=" background-color: #222;" class="btn-primary">
                 <th class="border-top-left"></th>
                 <th class="centrarTitulos">
+                    Identificador
+                </th>
+                <th class="centrarTitulos">
                     Nombre
                 </th>
 
@@ -45,6 +48,8 @@
                 <LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search"></span> </LinkButton>
             </td>
             <td>
+            </td>
+            <td>
                 <input type="search" name="buscarNombre" CssClass="form-control chat-input" placeholder="Nombre">
             </td>
 
@@ -53,14 +58,16 @@
 
         @foreach (var testOtros in Model.Resultado)
         {
-            <tr>
-                <td>
-                    <LinkButton ID="btnEditar" ToolTip="Editar"><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>
-                    <LinkButton ID="btnEliminar" ToolTip="Eliminar" onclick="onDelete(this)"><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
-                </td>
-                <td id="nombreTest"> @testOtros.Nombre</td>
+    <tr>
+        <td>
+            <LinkButton ID="btnEditar" ToolTip="Editar" onclick="editarNombreTest()"><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>
+            <LinkButton ID="btnEliminar" ToolTip="Eliminar" onclick="eliminarNombreTest()"><span class="btn glyphicon glyphicon-trash"></span></LinkButton>
+        </td>
+        <td id="nombreTest"> @testOtros.Id</td>
 
-            </tr>
+        <td id="nombreTest"> @testOtros.Nombre</td>
+
+    </tr>
         }
 
 
@@ -130,15 +137,59 @@
 
 </div>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <script>
 
+    var nombreEditar = "";
+    var idEditar = "";
+    var editar = 0;
 
-    function onDelete() {
+    function editarNombreTest() {
+
+        $("table tr").click(function () {
+                idEditar = $(this).find("td:nth-child(2)").text();
+                nombreEditar = $(this).find("td:last-child").text();
+                $("#txtNombre").val(nombreEditar);
+                editar = 1;
+            });
+            
+        
+    }
+
+    
+    function eliminarNombreTest() {
+
         if (confirm('Are you sure to delete this record ?')) {
-            var variable = document.getElementsByTagName("td")[3].innerHTML;
-            alert(variable);
 
+            console.log(idEditar);
         }
-    }   
+    }
+
+    $('#submitEnviar').click(function () {
+        var x = $('#txtNombre').val();
+        if (editar==1) {
+            alert(x + " editar SI");
+            editar = 0;
+        }
+        else{
+            $.ajax({
+         type: "POST",
+         url: "CatalogosController/AgregarTestOtros", // the method we are calling
+         contentType: "application/json; charset=utf-8",
+         data: {nombre:},
+         dataType: "json",
+         success: function (result) {
+             alert('Yay! It worked!');
+             // Or if you are returning something
+             alert('I returned... ' + result.WhateverIsReturning);                    
+         },
+         error: function (result) {
+             alert('Oh no :(');
+         }
+     });
+        }
+    });
 
 </script>
