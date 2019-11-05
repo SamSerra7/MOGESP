@@ -63,7 +63,7 @@
 				</a>
 			</div>
 
-			<div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
                     <!--Inicio de dropdown Procesos de seleccion-->
@@ -72,11 +72,26 @@
                             Proceso de Selecci&oacute;n <span class="caret"></span>
                         </a>
 
+
                         <!-- Coloca debajo del menu Proceso Seleccion-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                             <li><a class="dropdown-item" asp-controller="ProcesoSeleccion" asp-action="CuadroGeneral">Cuadro General</a></li>
+
                             <li><a class="dropdown-item" href="2">Ascensos</a></li>
+
+                            <li class="nav-item dropdown" id="dropdownPrimerosIngresos">
+                                <a class="dropdown-toggle dropright" id="navbarDropdownPrimerosIngresos" data-toggle="dropdown">
+                                    Primeros Ingresos
+                                </a>
+                                <ul class="dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="ProcesoSeleccion" asp-action="verPrimerosIngresos">Consultar</a></li>
+                                    <li><a class="dropdown-item" asp-controller="ProcesoSeleccion" asp-action="InsertarPrimerosIngresos">Ingresar</a></li>
+                                </ul>
+                            </li>
                         </ul>
+
+                    
                     </li>
 
                     <!--Inicio de dropdown Analisis y control de plazas-->
@@ -133,8 +148,8 @@
                     </li>
 
                 </ul>
-				<partial name="_LoginPartial" />
-			</div>
+                <partial name="_LoginPartial" />
+            </div>
 		</div>
 	</nav>
 
@@ -182,6 +197,9 @@
 
 		$('#dropdownSeleccion').hover(function () {
 			$('#navbarDropdownSeleccion').trigger('click')
+        })
+        $('#dropdownPrimerosIngresos').hover(function () {
+			$('#navbarDropdownPrimerosIngresos').trigger('click')
 		})
 		$('#dropdownAnalisis').hover(function () {
 			$('#navbarDropdownAnalisis').trigger('click')
