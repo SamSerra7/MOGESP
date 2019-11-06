@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MOGESP.ServiceLayer.Servicio;
+
 
 namespace MOGESP.API.Controllers.ProcesoSeleccion.CuadroGeneral
 {
    
     public class CuadroGeneralController : Controller
     {
+        readonly CuadroGeneralServicio cuadroGeneralServicio = new CuadroGeneralServicio();
         // GET api/values
         //[HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -18,10 +21,17 @@ namespace MOGESP.API.Controllers.ProcesoSeleccion.CuadroGeneral
 
         // GET api/values/5
         //?idGroup=2
-        [HttpGet("api/cuadrogeneral/numeroFlujos/{idConvocatoria}")]
-        public ActionResult<IEnumerable<int>> GetNumeroFlujos(int idConvocatoria)
+        [HttpPost("api/cuadroGeneral/{idConvocatoria}")]
+        public IEnumerable<int> GetNumeroFlujos(int idConvocatoria)
         {
-            return new int[] { 1, 2, idConvocatoria };
+
+            string path = Request.Path.Value;
+            int startIndex = path.Length - "/api/cuadroGeneral/".Length;
+            string idString = path.Substring("/api/cuadroGeneral/".Length, startIndex);
+            //int id = System.Convert.ToInt32(idString);
+
+            IEnumerable<int> flujos = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(idString);
+            return flujos;
         }
 
         // POST api/values

@@ -45,24 +45,24 @@
 
                         if (this.value != "") {
                             selectFlujos.empty();
-                            var url = "/ProcesoSeleccion/CuadroGeneral/GetFlujosCuadroGeneral/" + this.value;
-                            
-                            $.get(url, null, function (data) {
-                                console.log("HOLA")
+                            var url = "http://localhost:55439/api/cuadroGeneral/" + this.value;
+                            console.log("HOLA1")
+                            $.post(url, null, function (data) {
+                                console.log("HOLA2")
                                 if (data.length === 0) {
                                     alert("La convocatoria seleccionada no tiene flujos");
                                 } else {
                                     var size = 0;
                                     for (key in data) {
                                         if (data.hasOwnProperty(key)) {
-                                            /*
+                                            
                                             $(
-                                                '<option value="'+data+'">'+
-                                                     data+
+                                                '<option value="' + data[size]+'">'+
+                                                data[size]+
                                                 '</option>'
                                             )
                                                 .appendTo(selectFlujos);
-                                            size = size + 1;*/
+                                            size = size + 1;
                                             
                                         }
 

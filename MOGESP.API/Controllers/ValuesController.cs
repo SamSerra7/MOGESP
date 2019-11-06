@@ -6,22 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MOGESP.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CuadroGeneralController : ControllerBase
+    
+    public class ValuesController : Controller
     {
         // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [HttpGet("api/values")]
+        public ActionResult<IEnumerable<String>> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpGet("api/values/numerosflujos/{idConvocatoria}")]
+        public ActionResult<IEnumerable<int>> GetNumFlujos(int idConvocatoria)
         {
-            return "value";
+            return new int[] { 1, 2, idConvocatoria };
         }
 
         // POST api/values
