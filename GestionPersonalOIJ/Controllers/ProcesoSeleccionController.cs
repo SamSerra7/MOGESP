@@ -206,6 +206,11 @@ namespace GestionPersonalOIJ.Controllers
             return RedirectToAction("InsertarPrimerosIngresos");
         }
 
+        public ActionResult verPrimerIngresoEspecifico()
+        {
+            return View();
+
+        }
 
         [HttpPost]
         public RedirectToActionResult InsertarTodosPrimerosIngresos()
