@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<String>
 @{
     ViewData["Title"] = "Primeros Ingresos";
 }
@@ -8,8 +8,8 @@
 
 <head>
 
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
 
@@ -21,6 +21,63 @@
     <br><br>
     <div style="width:810px; padding:3px;">
 
+        <div style="float:right;">
+            <select class="browser-default custom-select" id="buscarNumConvocatoria">
+                <option></option>
+                @foreach (var convocatoria in Model)
+                {
+                    <option value="@convocatoria">
+                        @convocatoria
+                    </option>
+                }
+            </select>
+            
+            <select class="browser-default custom-select" id="buscarNumFlujo"></select>
+                <button id="btn_BuscarFLCV">Buscar</button>
+                <script>
+                    var btn_BuscarFLCV = $("#btn_BuscarFLCV");
+                    var selectFlujos = $("#buscarNumFlujo");
+                    $("#btn_BuscarFLCV").click(function () {
+                        //console.log("It works")
+
+                    });
+                    $("#buscarNumConvocatoria").on('change', function () {
+
+                        if (this.value != "") {
+                            selectFlujos.empty();
+                            var url = "http://localhost:55439/api/cuadroGeneral/" + this.value;
+                            console.log("HOLA1")
+                            $.post(url, null, function (data) {
+                                console.log("HOLA2")
+                                if (data.length === 0) {
+                                    alert("La convocatoria seleccionada no tiene flujos");
+                                } else {
+                                    var size = 0;
+                                    for (key in data) {
+                                        if (data.hasOwnProperty(key)) {
+                                            
+                                            $(
+                                                '<option value="' + data[size]+'">'+
+                                                data[size]+
+                                                '</option>'
+                                            )
+                                                .appendTo(selectFlujos);
+                                            size = size + 1;
+                                            
+                                        }
+
+
+                                    }
+                                }
+                            //console.log("It works " + this.value)
+                            });
+                        }
+                    
+                    });
+
+                </script>
+</div>
+        <br><br><br><br>
         <div class="form-group" style="width:80px; float:left;">
 
             <h4>Nombrados:</h4> <input type="text" size="15" maxlength="30" name="txtNombrado" disabled>
@@ -116,17 +173,7 @@
     </div>
 
 
-    <form>
-        <div style="float:right;">
 
-            <input type="text" id="buscarNumConvocatoria" name="buscarNumConvocatoria"
-                   placeholder="Num. Convocatoria" required>
-            <input type="number" id="buscarNumFlujo" name="buscarNumFlujo"
-                   placeholder="Num. Flujo" min="1" required>
-            <button>Buscar</button>
-
-        </div>
-    </form>
 
     <br><br><br><br>
 

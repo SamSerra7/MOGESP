@@ -1,0 +1,232 @@
+﻿
+
+@{
+    ViewData["Title"] = "Ver Primer Ingreso";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employment Verification Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+    <style>
+
+        html, body {
+            min-height: 100%;
+        }
+
+        body, div, #FormModificar, input, label {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 13px;
+            color: #000000;
+            line-height: 22px;
+        }
+
+        /*Titulo Negro*/
+        legend {
+            color: #fff;
+            background-color: #000000;
+            padding: 3px 5px;
+            font-size: 20px;
+        }
+
+        /*Caja que contiene el formulario*/
+        .CajaFormulario {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: inherit;
+            padding: 20px;
+        }
+        /*Form*/
+        #FormModificar {
+            width: 100%;
+            padding: 20px;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0 0 20px 0 #000000;
+        }
+
+        input {
+            margin-bottom: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input {
+            width: calc(50% - 180px);
+            padding: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 7px 0;
+            background: transparent;
+        }
+
+        .btn-block {
+            float:left;
+            margin-top: 10px;
+            text-align: center;
+            margin: 10px 10px 10px;
+        }
+
+        button {
+            width: 150px;
+            padding: 20px;
+            border: none;
+            border-radius: 5px;
+            background: #ff6a00;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background: #de803d;
+            }
+
+    </style>
+
+</head>
+<body>
+
+
+    <div class="CajaFormulario">
+
+        <form id="FormModificar" action="/">
+
+            <fieldset>
+                <legend>Pruebas Gesti&oacute;n Humana</legend>
+
+                <h4>Administraci&oacute;n</h4>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <i class="fas fa-calendar-alt"></i>
+                        <label>Fecha de Ingreso: </label>
+                        <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Cantidad de D&iacute;as: </label>
+                        <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" required />
+                    </div>
+
+                </div>
+                <br><br><br>
+                <hr> </hr>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label>N&deg;. Concurso: </label>
+                        <input class="form-control" id="NumConcurso" type="text" name="NumConcurso" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Ubicaci&oacute;n: </label>
+                        <input class="form-control" id="ubicacion" type="text" name="ubicacion" required />
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <i class="fas fa-calendar-alt"></i>
+                        <label>Fecha de Ingreso: </label>
+                        <input id="fechaIngreso2" class="form-control" type="date" name="fechaIngreso2" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Oficio de Ingreso: </label>
+                        <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>D&iacute;as a la fecha: </label>
+                        <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <i class="fas fa-calendar-alt"></i>
+                        <label>Fecha Traslado Psicologo Administraci&oacute;n: </label>
+                        <input id="fechaTrasladoPsicologia" class="form-control" type="date" name="fechaTrasladoPsicologia" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Oficio: </label>
+                        <input id="oficio" class="form-control" type="text" name="oficio" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <i class="fas fa-calendar-alt"></i>
+                        <label>Fecha Devoluci&oacute;n a GH. Por parte de Administraci&oacute;n: </label>
+                        <input id="fechaDevulucionAdmi" class="form-control" type="date" name="fechaDevulucionAdmi" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Cantidad de D&iacute;as en Psicolog&iacute;a - Administraci&oacute;n: </label>
+                        <input id="diasPsicologiaAdmi" class="form-control" type="number" min="0" name="diasPsicologiaAdmi" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <i class="fas fa-calendar-alt"></i>
+                        <label>Fecha L&iacute;mite s&eacute;gun plazo establecido: </label>
+                        <input id="fechaLimite" class="form-control" type="date" name="fechaLimite" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>D&iacute;as a la Fecha: </label>
+                        <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Cantidad de D&iacute;as en tr&aacute;mite en GH, despu&eacute;s de devuelto: </label>
+                        <input id="fechaPsicologia" class="form-control" type="number" min="0" name="fechaPsicologia" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <i class="fas fa-calendar-alt"></i>
+                        <label>Fecha Salida: </label>
+                        <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>D&iacute;as totales en tr&aacute;mite: </label>
+                        <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Oficio Respuesta: </label>
+                        <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Estado: </label>
+                        <select name="estado">
+                            <option value="value1">Positivo</option>
+                            <option value="value2" selected>Negativo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br><br>
+                <div class="btn-block">
+                    <button type="submit" href="/">Editar</button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
