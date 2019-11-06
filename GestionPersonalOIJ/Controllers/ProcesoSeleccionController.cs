@@ -15,6 +15,7 @@ namespace GestionPersonalOIJ.Controllers
     {
 
         readonly PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
+        readonly CuadroGeneralServicio cuadroGeneralServicio = new CuadroGeneralServicio();
         readonly static List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
 		private readonly int registrosPorPagina = 10;
 		private List<PrimerIngreso> primerosIngresosLista;
@@ -32,19 +33,30 @@ namespace GestionPersonalOIJ.Controllers
 
         public IActionResult CuadroGeneral()
 		{
-			return View();
+            IEnumerable<String> numerosConvocatoria;
+            numerosConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
+            return View(numerosConvocatoria);
 		}
+        public IEnumerable<int> GetFlujosCuadroGeneral()
+        {
+            string path = Request.Path.Value;
+            int startIndex = path.Length - "/ProcesoSeleccion/CuadroGeneral/GetFlujosCuadroGeneral/".Length;
+            string idString = path.Substring("/ProcesoSeleccion/CuadroGeneral/GetFlujosCuadroGeneral/".Length, startIndex);
+            //int id = System.Convert.ToInt32(idString);
 
+            IEnumerable<int> flujos = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(idString);
+            return flujos;
+        }
 
-		/// <summary>
-		/// Jesús Torres
-		/// 26/soct/2019
-		/// Efecto: Cotroller de primeros ingresos, ajusta la paginación que siempre se vean solo 10 reistros
-		/// Requiere: 
-		/// Modifica: 
-		/// Devuelve: -
-		/// </summary>
-		public IActionResult VerPrimerosIngresos(int pagina = 1, String  buscar = "")
+        /// <summary>
+        /// Jesús Torres
+        /// 26/soct/2019
+        /// Efecto: Cotroller de primeros ingresos, ajusta la paginación que siempre se vean solo 10 reistros
+        /// Requiere: 
+        /// Modifica: 
+        /// Devuelve: -
+        /// </summary>
+        public IActionResult VerPrimerosIngresos(int pagina = 1, String  buscar = "")
 		{
 			IEnumerable<PrimerIngreso> primerosIngresos;
 			primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29102.190
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOGESP.UserInterface", "MOGESP.UserInterface.csproj", "{EA33018C-4063-4FAE-A849-62C067478BF3}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOGESP.ServiceLayer", "..\M
 		{4372E961-D678-47AD-927C-BE5B6481D79C} = {4372E961-D678-47AD-927C-BE5B6481D79C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOGESP.DataAccess.TRAN.Test", "..\MOGESP.DataAccess.TRAN.Test\MOGESP.DataAccess.TRAN.Test.csproj", "{ADA3E38F-B996-46D5-A92B-5AD395026059}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOGESP.DataAccess.TRAN.Test", "..\MOGESP.DataAccess.TRAN.Test\MOGESP.DataAccess.TRAN.Test.csproj", "{ADA3E38F-B996-46D5-A92B-5AD395026059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOGESP.API", "..\MOGESP.API\MOGESP.API.csproj", "{C24E68D9-626F-484D-B84E-DF36B5DB26FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{ADA3E38F-B996-46D5-A92B-5AD395026059}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADA3E38F-B996-46D5-A92B-5AD395026059}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADA3E38F-B996-46D5-A92B-5AD395026059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C24E68D9-626F-484D-B84E-DF36B5DB26FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24E68D9-626F-484D-B84E-DF36B5DB26FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24E68D9-626F-484D-B84E-DF36B5DB26FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24E68D9-626F-484D-B84E-DF36B5DB26FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
