@@ -57,10 +57,11 @@ namespace GestionPersonalOIJ.Controllers
 					foreach (var item in buscar.Split(new char[] { ' ' },
 							 StringSplitOptions.RemoveEmptyEntries))
 					{
-					primerosIngresos = primerosIngresos.Where(x => x.Cedula.Contains(item) ||
-													  x.Nombre.Contains(item) ||
-													  x.PrimerApellido.Contains(item) ||
-													  x.SegundoApellido.Contains(item))
+					primerosIngresos = primerosIngresos.Where(x => x.Cedula.ToUpper().Contains(item) ||
+													  x.Nombre.ToUpper().Contains(item.ToUpper()) ||
+													  x.PrimerApellido.ToUpper().Contains(item.ToUpper()) ||
+													  x.SegundoApellido.ToUpper().Contains(item.ToUpper()) ||
+													  x.NumeroConvocatoria.ToUpper().Contains(item.ToUpper()))
 													  .ToList();
 					}
 				}
@@ -179,23 +180,25 @@ namespace GestionPersonalOIJ.Controllers
 
         }
 
-        public ActionResult EliminarPrimerIngreso(string cedula)
-        {
+		public ActionResult EliminarPrimerIngreso(string cedula)
+		{
 
-            for (int i = 0; i < primerosIngresos.Count; i++)
-            {
-                if (primerosIngresos.ElementAt(i).Cedula == cedula)
-                {
-                    primerosIngresos.RemoveAt(i);
-                    return RedirectToAction("InsertarPrimerosIngresos");
-                }
-            }
+			for (int i = 0; i < primerosIngresos.Count; i++)
+			{
+				if (primerosIngresos.ElementAt(i).Cedula == cedula)
+				{
+					primerosIngresos.RemoveAt(i);
+					return RedirectToAction("InsertarPrimerosIngresos");
+				}
+			}
 
-            return RedirectToAction("InsertarPrimerosIngresos");
-        }
+			return RedirectToAction("InsertarPrimerosIngresos");
+		}
 
 
-        [HttpPost]
+
+
+		[HttpPost]
         public RedirectToActionResult InsertarTodosPrimerosIngresos()
         {
 

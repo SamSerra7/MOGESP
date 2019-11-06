@@ -1,0 +1,83 @@
+﻿
+@{
+	ViewData["Title"] = "AgregarConcurso";
+}
+
+<!--Encabezado-->
+<div class="col-md-12 col-xs-12 col-sm-12">
+	<center>
+		<h2>Agregar Concurso</h2>
+	</center>
+</div>
+
+<br />
+<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+	<hr />
+</div>
+<br />
+
+
+
+
+	<h4>Funcionario</h4>
+	<form method="get" action=@Url.Action("AgregarConcurso", "Ascensos" )>
+		<div style="float:left">
+			<label>C&eacute;dula/Nombre</label>
+
+			@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
+			   @class = "form-control",
+			   @AutoPostBack = "true"
+		   })
+
+			<button class="btn glyphicon glyphicon-search" type="submit"></button>
+		</div>
+		
+			
+		
+	</form>
+
+
+<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+	<hr />
+</div>
+<br />
+
+
+
+
+<!--Tabla Persona Ascenso-->
+<div class="table-responsive col-md-4 col-xs-4 col-sm-4" style="text-align: center; overflow-y: auto;">
+	<table id="tablaDatosPersonales" class="table table-responsive">
+		<thead style="align-content: center;">
+			<tr>
+				<th class="centrarTitulos border-top-left">C&eacute;dula</th>
+				<th class="centrarTitulos border-top-right">Nombre Apellidos</th>
+			</tr>
+		</thead>
+
+		<tr>
+
+			<td> 333</td>
+			<td> Juan</td>
+
+		</tr>
+
+
+	</table>
+</div>
+
+<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+	<hr />
+</div>
+<br />
+
+<div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+	<h4>Concurso</h4>
+	<label>Nombre Puesto</label>
+	@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
+@class = "form-control",
+@AutoPostBack = "true"
+})
+	<label>Fecha</label>
+	<input type="date" class="form-control" id="start" name="trip-start">
+</div>
