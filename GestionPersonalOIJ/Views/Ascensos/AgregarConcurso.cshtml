@@ -4,80 +4,96 @@
 }
 
 <!--Encabezado-->
-<div class="col-md-12 col-xs-12 col-sm-12">
+<div>
 	<center>
 		<h2>Agregar Concurso</h2>
 	</center>
+
+	<br />
+	<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+		<hr />
+	</div>
+	<br />
+	<br />
 </div>
 
-<br />
-<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-	<hr />
-</div>
-<br />
 
 
 
+<form method="get" action=@Url.Action("AgregarConcurso", "Ascensos" )>
 
-	<h4>Funcionario</h4>
-	<form method="get" action=@Url.Action("AgregarConcurso", "Ascensos" )>
-		<div style="float:left">
-			<label>C&eacute;dula/Nombre</label>
-
-			@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
-			   @class = "form-control",
-			   @AutoPostBack = "true"
-		   })
-
-			<button class="btn glyphicon glyphicon-search" type="submit"></button>
+	<div class="row container" style="border: 3px solid #152327;">
+		<h4>Funcionario</h4>
+		<label>C&eacute;dula/Nombre</label>
+		<div class="row">
+			<div class="col-md-4">
+				@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
+				   @class = "form-control",
+				   @AutoPostBack = "true"
+			   })
+			</div>
+			<div class="col-md-3 ">
+				<button class="btn glyphicon glyphicon-search" type="submit"></button>
+			</div>
 		</div>
-		
-			
-		
-	</form>
 
+		<br />
 
+		<div class="row">
+			<!--Tabla Persona Ascenso-->
+			<div class="table-responsive col-md-4 col-md-offset-4" style="text-align: center; overflow-y: auto;">
+				<table id="tablaDatosPersonales" class="table table-responsive">
+					<thead style="align-content: center;">
+						<tr>
+							<th class="centrarTitulos ">C&eacute;dula</th>
+							<th class="centrarTitulos ">Nombre Apellidos</th>
+							<th class="centrarTitulos "></th>
+						</tr>
+					</thead>
+
+					<tr>
+
+						<td> 333</td>
+						<td> Juan</td>
+						<td>
+							@Html.ActionLink("", "AgregarConcurso", new { buscar = "" },
+													new { @class = "btn glyphicon glyphicon-search", @title = "Ver cursos" })
+						</td>
+
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</form>
+
+<br />
 <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
 	<hr />
 </div>
 <br />
 
-
-
-
-<!--Tabla Persona Ascenso-->
-<div class="table-responsive col-md-4 col-xs-4 col-sm-4" style="text-align: center; overflow-y: auto;">
-	<table id="tablaDatosPersonales" class="table table-responsive">
-		<thead style="align-content: center;">
-			<tr>
-				<th class="centrarTitulos border-top-left">C&eacute;dula</th>
-				<th class="centrarTitulos border-top-right">Nombre Apellidos</th>
-			</tr>
-		</thead>
-
-		<tr>
-
-			<td> 333</td>
-			<td> Juan</td>
-
-		</tr>
-
-
-	</table>
-</div>
-
-<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-	<hr />
-</div>
-<br />
-
-<div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+<div class="row container" style="border: 3px solid #152327;">
 	<h4>Concurso</h4>
-	<label>Nombre Puesto</label>
-	@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
-@class = "form-control",
-@AutoPostBack = "true"
-})
-	<label>Fecha</label>
-	<input type="date" class="form-control" id="start" name="trip-start">
+	<div class="col-md-3">
+		<label>Nombre Puesto</label>
+		@Html.TextBox("buscar", null, new {
+	@class = "form-control",
+	@AutoPostBack = "true"
+	})
+		<label>Fecha</label>
+		<input type="date" class="form-control" id="start" name="trip-start">
+		<br />
+	</div>
+
+	<div class="col-md-3 col-md-offset-10">
+		<div class="row">
+			@Html.ActionLink("Cancelar", "AgregarConcurso", new { buscar = "" },
+																	new { @class = "btn btn-secondary" })
+			@Html.ActionLink("Aceptar", "AgregarConcurso", new { buscar = "" },
+													new { @class = "btn btn-success" })
+		</div>
+		<br />
+	</div>
+
 </div>
