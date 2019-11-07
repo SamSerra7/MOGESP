@@ -24,7 +24,7 @@ namespace MOGESP.UserInterface.Controllers
             return View();
         }
 
-
+        [HttpGet]
         public ActionResult VerFuncionarios(int pagina = 1, String buscar = "")
         {
 
