@@ -8,7 +8,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
     /// <summary>
     /// Clase que administra los funcionarios
     /// </summary>
-    public class FuncionariosDatos
+    public class FuncionarioDatos
     {
         //variable conexion
         private ConexionDatos conexion = new ConexionDatos();
@@ -30,87 +30,30 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarFuncionarios", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand(@"PA_ListarTablaFuncionarios", sqlConnection);
 
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
 
-            PrimerIngreso primerIngreso;
+            Funcionario funcionario;
 
             while (reader.Read())
             {
-                primerIngreso = new PrimerIngreso();
-			
-                primerIngreso.Cedula = reader["TC_NumeroCedula"].ToString();
-                primerIngreso.Nombre = reader["TC_Nombre"].ToString();
-                primerIngreso.PrimerApellido = reader["TC_PrimerApellido"].ToString();
-                primerIngreso.SegundoApellido = reader["TC_SegundoApellido"].ToString();
-                primerIngreso.Sexo = Convert.ToChar(reader["TC_Sexo"].ToString());
-                primerIngreso.Direccion = reader["TC_Direccion"].ToString();
-                primerIngreso.NumeroConvocatoria = reader["TC_NumeroConvocatoria"].ToString();
-                primerIngreso.NumeroFlujo = Convert.ToInt32(reader["TN_NumeroFlujo"].ToString());
+                funcionario = new Funcionario();
 
-                primerIngreso.Correos = correoDatos.CosultarCorreosPorPrimerIngreso(primerIngreso.Cedula);
-                primerIngreso.Telefonos = telefonoDatos.CosultarTelefonosPorPrimerIngreso(primerIngreso.Cedula);
+                funcionario.Cedula = reader["TC_NumeroCedula"].ToString();
+                funcionario.Nombre = reader["TC_Nombre"].ToString();
+                funcionario.PrimerApellido = reader["TC_PrimerApellido"].ToString();
+                funcionario.SegundoApellido = reader["TC_SegundoApellido"].ToString();
 
-
-                primerosIngresos.Add(primerIngreso);
+                funcionarios.Add(funcionario);
             }
 
             sqlConnection.Close();
 
-            return primerosIngresos;
+            return funcionarios;
         }
-
-
-
-        /// <summary>
-        /// Autores: Samuel 
-        /// 10/10/19
-        /// Este método ingresa un primer ingreso.
-        /// </summary>
-        public void InsertarFuncionario(PrimerIngreso primerIngreso)
-        {
-
-            SqlConnection sqlConnection = conexion.conexion();
-
-            SqlCommand insertarPI = new SqlCommand(@"EXEC PA_InsertarPrimerosIngresos @NumeroConvocatoria, @NumeroFlujo, @Cedula, @Nombre, 
-                                                        @PrimerApellido, @SegundoApellido, @Direccion, @Sexo", sqlConnection);
-
-
-            insertarPI.Parameters.AddWithValue("@Cedula", primerIngreso.Cedula);
-            insertarPI.Parameters.AddWithValue("@Nombre", primerIngreso.Nombre);
-            insertarPI.Parameters.AddWithValue("@PrimerApellido", primerIngreso.PrimerApellido);
-            insertarPI.Parameters.AddWithValue("@SegundoApellido", primerIngreso.SegundoApellido);
-            insertarPI.Parameters.AddWithValue("@Sexo", primerIngreso.Sexo);
-            insertarPI.Parameters.AddWithValue("@Direccion", primerIngreso.Direccion);
-            insertarPI.Parameters.AddWithValue("@NumeroConvocatoria", primerIngreso.NumeroConvocatoria);
-            insertarPI.Parameters.AddWithValue("@NumeroFlujo", primerIngreso.NumeroFlujo);
-
-            sqlConnection.Open();
-            insertarPI.ExecuteReader();
-
-            if (primerIngreso.Correos.Count != 0) { 
-                foreach (var correo in primerIngreso.Correos)
-                {
-                    correoDatos.insertarCorreoPorPersona(primerIngreso.Cedula,correo);
-                }
-            }
-
-            if (primerIngreso.Telefonos.Count != 0)
-            {
-                foreach (var telefono in primerIngreso.Telefonos)
-                {
-                    telefonoDatos.insertarTelefonoPorPersona(primerIngreso.Cedula, telefono);
-                }
-            }
-
-            sqlConnection.Close();
-            insertarPI.Dispose();
-        }
-
-
 
 
     }

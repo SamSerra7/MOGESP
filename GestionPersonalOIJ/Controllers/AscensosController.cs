@@ -14,17 +14,21 @@ namespace MOGESP.UserInterface.Controllers
     {
 
         readonly FuncionarioServicio funcioniarioServicio = new FuncionarioServicio();
-        private readonly int registrosPorPagina = 10;
-        private List<Funcionario> funcionarios = new List<Funcionario>();
+        private readonly int registrosPorPagina = 4;
+        private IEnumerable<Funcionario> funcionarios;
         private PaginadorGenerico<Funcionario> paginador;
 
 
+        public IActionResult AgregarConcurso()
+        {
+            return View();
+        }
 
 
         public ActionResult VerFuncionarios(int pagina = 1, String buscar = "")
         {
 
-            IEnumerable<Funcionario> funcionarios = primerIngresoServicio.ListarFuncionarios();
+            funcionarios = funcioniarioServicio.ListarFuncionarios();
             int totalRegistros = 0;
 
             // FILTRO DE BÚSQUEDA
@@ -35,9 +39,7 @@ namespace MOGESP.UserInterface.Controllers
                          StringSplitOptions.RemoveEmptyEntries))
                 {
                     funcionarios = funcionarios.Where(x => x.Cedula.Contains(item) ||
-                                                      x.Nombre.Contains(item) ||
-                                                      x.PrimerApellido.Contains(item) ||
-                                                      x.SegundoApellido.Contains(item))
+                                                      x.Nombre.Contains(item))
                                                       .ToList();
                 }
             }

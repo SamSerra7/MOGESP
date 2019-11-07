@@ -1,8 +1,170 @@
-﻿
+﻿@using MOGESP.Entities.Utilidades;
+@model PaginadorGenerico<MOGESP.Entities.Dominio.Funcionario>
 
 @{
     ViewData["Title"] = "VerFuncionarios";
 }
 
-<h2>Funcionarios</h2>
+<!--Encabezado-->
+<div>
+    <center>
+        <h2>Agregar Concurso</h2>
+    </center>
 
+    <br />
+    <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+        <hr />
+    </div>
+    <br />
+    <br />
+</div>
+
+
+
+
+<form method="get" action=@Url.Action("VerFuncionarios", "Ascensos" )>
+
+    <div class="row container" style="border: 3px solid #152327;">
+        <center><h4>Funcionario</h4></center>
+        <label>C&eacute;dula/Nombre</label>
+        <div class="row">
+            <div class="col-md-4">
+                @Html.TextBox("buscar", null, new
+                {
+                    @placeholder = "Filtrar",
+                   @class = "form-control",
+                   @AutoPostBack = "true"
+               })
+            </div>
+            <div class="col-md-3 ">
+                <button class="btn glyphicon glyphicon-search" type="submit"></button>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <!--Tabla Persona Ascenso-->
+            <div class="table-responsive col-md-4 col-md-offset-4" style="text-align: center; overflow-y: auto;">
+                <table id="tablaDatosPersonales" class="table table-responsive">
+                    <thead style="align-content: center;">
+                        <tr>
+                            <th class="centrarTitulos ">C&eacute;dula</th>
+                            <th class="centrarTitulos ">Nombre Apellidos</th>
+                            <th class="centrarTitulos "></th>
+                        </tr>
+                    </thead>
+
+
+                    @foreach (var funcionario in Model.Resultado)
+                    {
+                        <tr>
+                            <td> @funcionario.Cedula</td>
+                            <td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
+                            <td>
+                                @Html.ActionLink("", "VerFuncionarios", new { buscar = "" },
+                                                         new { @class = "btn glyphicon glyphicon-search", @title = "Ver Funcionario" })
+                            </td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            @*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
+            @if (@Model.Resultado.Count() > 0)
+            {
+                <span>
+                    <strong>@Model.TotalRegistros</strong> registros encontrados
+                </span>
+                <span>&nbsp;|&nbsp;</span>
+                <span>
+                    Página <strong>@(Model.PaginaActual)</strong> de
+                    <strong>@Model.TotalPaginas</strong>
+                </span>
+                <span>&nbsp;|&nbsp;</span>
+            }
+            else
+            {
+                <span>No hay resultados para esta búsqueda</span>
+                <span>&nbsp;|&nbsp;</span>
+            }
+
+
+            @*botones de paginación*@
+            <center>
+                @if (Model.PaginaActual > 1)
+                {
+                    @Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
+                                    new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
+                    <span></span>
+                    @Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = Model.PaginaActual - 1 },
+                                    new { @class = "btn btn-sm btn-default" })
+                }
+                else
+                {
+                    @Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
+                                    new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
+                    <span></span>
+                    @Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = 1 },
+                                    new { @class = "btn btn-sm btn-default disabled" })
+                }
+                <span></span>
+                @if (Model.PaginaActual < Model.TotalPaginas)
+                {
+                    @Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.PaginaActual + 1 },
+                                    new { @class = "btn btn-sm btn-default" })
+                    <span></span>
+                    @Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
+                                    new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
+                }
+                else
+                {
+                    @Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.TotalPaginas - 1 },
+                                    new { @class = "btn btn-sm btn-default disabled" })
+                    <span></span>
+                    @Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
+                                    new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
+                }
+            </center>
+
+            <br />
+        </div>
+    </div>
+</form>
+
+<br />
+<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+    <hr />
+</div>
+<br />
+
+
+<div class="row container" style="border: 3px solid #152327;">
+    <h4>Concurso</h4>
+    <div class="col-md-3">
+        <label>Nombre Puesto</label>
+        @Html.TextBox("buscar", null, new
+        {
+    @class = "form-control",
+    @AutoPostBack = "true"
+    })
+        <label>Fecha</label>
+        <input type="date" class="form-control" id="start" name="trip-start">
+        <br />
+    </div>
+
+    <div class="col-md-3 col-md-offset-10">
+        <div class="row">
+            @Html.ActionLink("Cancelar", "AgregarConcurso", new { buscar = "" },
+                                                                    new { @class = "btn btn-secondary" })
+            @Html.ActionLink("Aceptar", "AgregarConcurso", new { buscar = "" },
+                                                    new { @class = "btn btn-success" })
+        </div>
+        <br />
+    </div>
+
+</div>
