@@ -13,12 +13,26 @@
 	</center>
 </div>
 
-<br />
-<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-	<hr />
+	<br />
+	<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+		<hr />
+	</div>
+	<br />
+
+
+@*CÓDIGO PARA EL FILTRO DE BÚSQUEDA*@
+<div class="text-right form-inline">
+	<form method="get" action=@Url.Action("verPrimerosIngresos", "ProcesoSeleccion" )>
+		<div class="form-group">
+			@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
+			   @class = "form-control",
+			   @AutoPostBack = "true"
+		   })
+		</div>
+		<button class="btn glyphicon glyphicon-search" type="submit"></button>
+	</form>
 </div>
 <br />
-
 <!--Tabla verPrimeros Ingresos-->
 <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
 	<table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
@@ -37,39 +51,28 @@
 
 			</tr>
 		</thead>
-		<form method="get" action=@Url.Action("verPrimerosIngresos", "ProcesoSeleccion" )>
-				<tr style="background:#f1f1f1">
 
-					<td>
-						<button class="btn glyphicon glyphicon-search" type="submit"></button>
-					</td>
-					<td>
-						@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
-					   @class = "form-control",
-					   @AutoPostBack = "true"
-				   })
-					</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-		</form>
+		<tr style="background:#f1f1f1">
+
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
 
 		@foreach (var primerIngreso in Model.Resultado)
 		{
 			<tr>
 				<td>
-					@Html.ActionLink("", "VerPrimerosIngresos", new { cedula = primerIngreso.Cedula },
-								new { @class = "btn glyphicon glyphicon-pencil", @title = "Editar" })
+					@Html.ActionLink("", "verPrimerosIngresosEspecifico", new { cedula = primerIngreso.Cedula },
+								new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
 
-					@Html.ActionLink("", "VerPrimerosIngresos", new { cedula = primerIngreso.Cedula },
-								new { @class = "btn glyphicon glyphicon-trash", @title = "Eliminar" })
-					@*<LinkButton ID="btnEditar" ToolTip="Editar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-pencil"></span></LinkButton>*@
-					@*<LinkButton ID="btnEliminar" ToolTip="Eliminar" CommandArgument='@primerIngreso.Cedula'><span class="btn glyphicon glyphicon-trash"></span></LinkButton>*@
 				</td>
 				<td> @primerIngreso.Cedula</td>
 				<td> @primerIngreso.Nombre @primerIngreso.PrimerApellido @primerIngreso.SegundoApellido</td>
@@ -159,8 +162,8 @@
 
 </div>
 <div class="col-md-offset-11 col-xs-offset-11 col-sm-offset-11">
-    <a class="btn btn-success plus" asp-controller="ProcesoSeleccion" asp-action="InsertarPrimerosIngresos"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
-    
+	<a class="btn btn-success plus" asp-controller="ProcesoSeleccion" asp-action="InsertarPrimerosIngresos"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
+
 </div>
 
 @*Optiene el valor ingresado campo de texto para buscar, *@

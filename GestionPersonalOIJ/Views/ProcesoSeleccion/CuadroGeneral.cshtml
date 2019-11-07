@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<String>
 @{
     ViewData["Title"] = "Primeros Ingresos";
 }
@@ -8,8 +8,8 @@
 
 <head>
 
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
 
@@ -19,23 +19,93 @@
 <body>
 
     <br><br>
-    <div style="width:810px; padding:3px;">
+        <div style="width:810px; padding:3px;">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <center>
+                    <h2>Cuadro General</h2>
+                </center>
+            </div>
+            <br />
+            <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                <hr />
+            </div>
+            <br />
+            <div>
+                <h6>No.Convocatoria</h6>
+                <select class="browser-default custom-select" id="buscarNumConvocatoria">
+                    <option></option>
+                    @foreach (var convocatoria in Model)
+                    {
+                        <option value="@convocatoria">
+                            @convocatoria
+                        </option>
+                    }
+                </select>
+                <h6>No.Flujo</h6>
+                <select class="browser-default custom-select" id="buscarNumFlujo"></select>
+                <button id="btn_BuscarFLCV">Buscar</button>
+                <script>
+                    var btn_BuscarFLCV = $("#btn_BuscarFLCV");
+                    var selectFlujos = $("#buscarNumFlujo");
+                    $("#btn_BuscarFLCV").click(function () {
+                        //console.log("It works")
 
-        <div class="form-group" style="width:80px; float:left;">
+                    });
+                    $("#buscarNumConvocatoria").on('change', function () {
+                        selectFlujos.empty();
+                        if (this.value != "") {
+                            var url = "http://localhost:55439/api/cuadroGeneral/" + this.value;
 
-            <h4>Nombrados:</h4> <input type="text" size="15" maxlength="30" name="txtNombrado" disabled>
-            <h4>Positivos:</h4> <input type="text" size="15" maxlength="30" name="txtPositivo" disabled>
+                            $.post(url, null, function (data) {
+
+                                if (data.length === 0) {
+                                    alert("La convocatoria seleccionada no tiene flujos");
+                                } else {
+                                    var size = 0;
+                                    for (key in data) {
+                                        if (data.hasOwnProperty(key)) {
+
+                                            $(
+                                                '<option value="' + data[size] + '">' +
+                                                data[size] +
+                                                '</option>'
+                                            )
+                                                .appendTo(selectFlujos);
+                                            size = size + 1;
+
+                                        }
+
+
+                                    }
+                                    $(
+                                        '<option value="0">Todos</option>'
+                                    )
+                                        .appendTo(selectFlujos);
+                                }
+                                //console.log("It works " + this.value)
+                            });
+                        }
+
+                    });
+
+                </script>
+            </div>
+            <br><br><br><br>
+            <div class="form-group" style="width:80px; float:left;">
+
+                <h4>Nombrados:</h4> <input type="text" size="15" maxlength="30" name="txtNombrado" disabled>
+                <h4>Positivos:</h4> <input type="text" size="15" maxlength="30" name="txtPositivo" disabled>
+
+            </div>
+
+            <div class="form-group" style="width:300px; float:right;">
+
+                <h4>En Espera:</h4> <input type="text" size="15" maxlength="30" name="txtEspera" disabled>
+                <h4>Negativos:</h4> <input type="text" size="15" maxlength="30" name="txtNegativos" disabled>
+
+            </div>
 
         </div>
-
-        <div class="form-group" style="width:300px; float:right;">
-
-            <h4>En Espera:</h4> <input type="text" size="15" maxlength="30" name="txtEspera" disabled>
-            <h4>Negativos:</h4> <input type="text" size="15" maxlength="30" name="txtNegativos" disabled>
-
-        </div>
-
-    </div>
 
     <br><br><br><br><br><br><br><br><br><br>
 
@@ -116,17 +186,7 @@
     </div>
 
 
-    <form>
-        <div style="float:right;">
 
-            <input type="text" id="buscarNumConvocatoria" name="buscarNumConvocatoria"
-                   placeholder="Num. Convocatoria" required>
-            <input type="number" id="buscarNumFlujo" name="buscarNumFlujo"
-                   placeholder="Num. Flujo" min="1" required>
-            <button>Buscar</button>
-
-        </div>
-    </form>
 
     <br><br><br><br>
 
@@ -140,6 +200,10 @@
                     <th class="centrarTitulos">Ubicaci&oacute;n</th>
                     <th class="centrarTitulos">N&deg;. C&eacute;dula</th>
                     <th class="centrarTitulos">Nombre</th>
+                    <th class="centrarTitulos">INVESTIGADOR 1</th>
+                    <th class="centrarTitulos">CUSTODIO DE DETENIDOS</th>
+                    <th class="centrarTitulos">AGENTE DE PROTECCION 1</th>
+                    <th class="centrarTitulos">INVESTIGADOR DE LOCALIZACION Y PRES</th>
                     <th class="centrarTitulos">
                         Tr&aacute;mite
                         <br>Administraci&oacute;n
