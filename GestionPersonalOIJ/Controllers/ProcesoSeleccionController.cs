@@ -17,18 +17,17 @@ namespace GestionPersonalOIJ.Controllers
         readonly PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
         readonly CuadroGeneralServicio cuadroGeneralServicio = new CuadroGeneralServicio();
         readonly static List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
-		private readonly int registrosPorPagina = 10;
-		private List<PrimerIngreso> primerosIngresosLista;
-		private PaginadorGenerico<PrimerIngreso> paginador;
+        private readonly int registrosPorPagina = 10;
+        private List<PrimerIngreso> primerosIngresosLista;
+        private PaginadorGenerico<PrimerIngreso> paginador;
 
-        private static bool clear = false ;
+        private static bool clear = false;
 
         readonly static List<string> todosCorreos = new List<string>();
         readonly static List<string> todosTels = new List<string>();
+        private static int numeroFlujo = 1;
+        private static string numeroConvocatoria = "OIJ-";
 
-
-        private static string[] correos = new string[5];
-        private static string[] tels = new string[5];
 
 
         public IActionResult CuadroGeneral()
@@ -118,29 +117,33 @@ namespace GestionPersonalOIJ.Controllers
 
             ViewData["correos"] = todosCorreos;
             ViewData["tels"] = todosTels;
-
+            ViewData["numeroConvocatoria"] = numeroConvocatoria;
+            ViewData["numFlujo"] = numeroFlujo;
 
 
             return View();
         }
         
         [HttpPost]
-        public ActionResult AgregarCorreo(IFormCollection formCollection)
+        public RedirectToActionResult AgregarCorreo(IFormCollection formCollection)
         {
 
             todosCorreos.Add(formCollection["correo"]);
 
-            return View("InsertarPrimerosIngresos");
+            numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
+            numeroFlujo = Convert.ToInt32(formCollection["numeroFlujo"]);
+
+            return RedirectToActionPermanent("InsertarPrimerosIngresos");
         }
 
 
         [HttpPost]
-        public ActionResult AgregarTel(IFormCollection formCollection)
+        public RedirectToActionResult AgregarTel(IFormCollection formCollection)
         {
 
             todosTels.Add(formCollection["tel"]);
 
-            return View("InsertarPrimerosIngresos");
+            return RedirectToActionPermanent("InsertarPrimerosIngresos");
         }
 
 
@@ -174,8 +177,8 @@ namespace GestionPersonalOIJ.Controllers
                                                     correos,
                                                     tels,
                                                     formCollection["direccion"],
-                                                    formCollection["numeroConvocatoria"],
-                                                    Convert.ToInt32(formCollection["numeroFlujo"])
+                                                    numeroConvocatoria,
+                                                    numeroFlujo
                                                  );
 
             primerosIngresos.Add(pi);
