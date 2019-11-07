@@ -1,0 +1,88 @@
+﻿
+@{
+	ViewData["Title"] = "Funcionario y Participacion en Puestos";
+}
+
+<!--Encabezado-->
+<div>
+	<center>
+		<h2>Funcionario y Participacion en Puestos</h2>
+	</center>
+	<br />
+	<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+		<hr />
+	</div>
+	<br />
+</div>
+
+
+
+<div class="row">
+	<h4>Datos Personales</h4>
+	<div class="col-md-1 col-md-offset-1">
+		<label>N&uacute;mero de C&eacute;dula</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>3333</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>Nombre</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>Juan</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>Direcci&oacute;n</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>150 metros</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>Telefonos</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>8888-8888</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>Correos</label>
+	</div>
+	<div class="col-md-1 col-md-offset-1">
+		<label>elCorreo@correo.com</label>
+	</div>
+
+</div>
+
+<br />
+
+<div class="row">
+	<h4>Participacion de Concursos</h4>
+	<!--Tabla Paricipacion en concursos-->
+	<div class="table-responsive col-md-4 col-md-offset-4" style="text-align: center; overflow-y: auto;">
+		<table id="tablaDatosPersonales" class="table table-responsive">
+			<thead style="align-content: center;">
+				<tr>
+					<th class="centrarTitulos ">Puesto</th>
+					<th class="centrarTitulos ">Resultado Obtenido</th>
+					<th class="centrarTitulos ">Fecha</th>
+					<th class="centrarTitulos "></th>
+				</tr>
+			</thead>
+
+			<tr>
+
+				<td> Jefe</td>
+				<td> Positivo</td>
+				<td>
+					15/06/2017
+				</td>
+				<td>
+					@Html.ActionLink("", "FuncionarioYParticipacionEnPuestos", new { editar = "" },
+											new { @class = "btn glyphicon glyphicon-pencil", @title = "Editar" })
+							</td>
+
+			</tr>
+		</table>
+	</div>
+
+</div>
+

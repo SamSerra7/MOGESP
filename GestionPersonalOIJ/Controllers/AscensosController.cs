@@ -12,5 +12,10 @@ namespace MOGESP.UserInterface.Controllers
         {
             return View();
         }
+
+		public IActionResult FuncionarioYParticipacionEnPuestos()
+		{
+			return View();
+		}
     }
 }
