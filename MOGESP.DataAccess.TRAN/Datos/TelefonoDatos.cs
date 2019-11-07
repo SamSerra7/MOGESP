@@ -52,7 +52,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         {
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand insertarTel = new SqlCommand(@"EXEC PA_InsertarTelefono @TC_NumeroCedula = @Cedula, @TN_Telefono = @Tel", sqlConnection);
+            SqlCommand insertarTel = new SqlCommand(@"EXEC PA_InsertarTelefonoPI @Cedula, @Tel", sqlConnection);
 
             insertarTel.Parameters.AddWithValue("@Cedula", cedula);
             insertarTel.Parameters.AddWithValue("@Tel", telefono);
@@ -75,7 +75,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         {
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand modificarTel = new SqlCommand(@"EXEC PA_ModificarTelefono @TC_NumeroCedula = @Cedula, @TN_Telefono = @Tel, @TN_TelefonoMod = @TelMod", sqlConnection);
+            SqlCommand modificarTel = new SqlCommand(@"EXEC PA_ModificarTelefono@Cedula,@Tel, @TelMod", sqlConnection);
 
             modificarTel.Parameters.AddWithValue("@Cedula", cedula);
             modificarTel.Parameters.AddWithValue("@Tel", telefono);

@@ -11,6 +11,11 @@
 
     List<string> tels = (List<string>)ViewData["tels"];
 
+    string numConv = (string)ViewData["numeroConvocatoria"];
+
+
+    int numFlujo = (int)ViewData["numFlujo"];
+
 }
 <center>
     <h2>Insertar Primeros Ingresos</h2>
@@ -20,17 +25,38 @@
 
 <div class="container" style="border: 3px solid #152327;">
 
+    
+    <br />
+
 
 
     @using (Html.BeginForm("AgregarCorreo", "ProcesoSeleccion", FormMethod.Post))
     {
 
         <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
+            <div class="col-sm-3"><input type="text" id="numeroConvocatoria" name="numeroConvocatoria" class="form-control" value="@numConv" required/></div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2">@Html.LabelFor(m => m.NumeroFlujo)</div>
+            <div class="col-sm-3"><input type="number" id="numeroFlujo" name="numeroFlujo" class="form-control" value="@numFlujo" required/></div>
+        </div>
+
+
+        <hr />
+
+
+        <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-2">@Html.LabelFor(m => m.Correos)</div>
-            <div class="col-sm-3"><input type="text" class="form-control" id="correo" name="correo"></div>
+            <div class="col-sm-3"><input type="email" class="form-control" id="correo" name="correo"></div>
             <div class="col-sm-1">
-                <button type="submit" id="btnAgregarCorreo" class="btn btn-warning" >
+                <button type="submit" id="btnAgregarCorreo" class="btn btn-warning">
                     +
                 </button>
             </div>
@@ -59,7 +85,7 @@
             <div class="col-sm-2">@Html.LabelFor(m => m.Telefonos)</div>
             <div class="col-sm-3"><input type="text" class="form-control" id="tel" name="tel"></div>
             <div class="col-sm-1">
-                <button type="submit" id="btnAgregarTelefono" class="btn btn-warning" >
+                <button type="submit" id="btnAgregarTelefono" class="btn btn-warning">
                     +
                 </button>
             </div>
@@ -82,37 +108,15 @@
     }
 
 
-
     @using (Html.BeginForm("AgregarPrimerIngreso", "ProcesoSeleccion", FormMethod.Post))
     {
-
-
-        <br />
-
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
-            <div class="col-sm-3">@Html.TextBoxFor(m => m.NumeroConvocatoria, new { Id = "numeroConvocatoria", Class = "form-control" })</div>
-        </div>
-
-        <br />
-
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.NumeroFlujo)</div>
-            <div class="col-sm-3">@Html.TextBoxFor(m => m.NumeroFlujo, new { Id = "numeroFlujo", Class = "form-control" })</div>
-        </div>
-
-
-        <hr />
-
 
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-2">@Html.LabelFor(m => m.Cedula)</div>
-            <div class="col-sm-3">@Html.TextBoxFor(m => m.Cedula, new { Class = "form-control" })</div>
+            <div class="col-sm-3">@Html.TextBoxFor(m => m.Cedula, new { Class = "form-control", Required = "true" })</div>
             <div class="col-sm-2">@Html.LabelFor(m => m.Nombre)</div>
-            <div class="col-sm-3">@Html.TextBoxFor(m => m.Nombre, new { Class = "form-control" })</div>
+            <div class="col-sm-3">@Html.TextBoxFor(m => m.Nombre, new { Class = "form-control" , Required = "true" })</div>
         </div>
 
         <br />
@@ -136,18 +140,13 @@
                 @Html.DropDownListFor(m => m.Sexo, new List<SelectListItem>
                                         {new SelectListItem{Text="M", Value="M"},
                                         new SelectListItem{Text="F", Value="F"} },
-                                        "Seleccione su sexo", new { Class = "form-control" })
+                                     "Seleccione su sexo", new { Class = "form-control" })
             </div>
         </div>
 
 
         <br />
         <br />
-
-
-
-        <!--Manejo de Correos y teléfonos textBox-Select multiple  -->
-
 
 
         <center>
