@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Model\MOGESP.Entities.csproj" />
     <ProjectReference Include="..\MOGESP.ServiceLayer\MOGESP.ServiceLayer.csproj" />
   </ItemGroup>
 
