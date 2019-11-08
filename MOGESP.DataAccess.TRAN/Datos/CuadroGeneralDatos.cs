@@ -149,6 +149,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
             PrimerIngreso primerIngreso = new PrimerIngreso();
             CuadroGeneral cuadroGeneral = new CuadroGeneral();
             List<Puesto> puestos = new List<Puesto>();
+           
             while (reader.Read())
             {
                 cuadroGeneral.NumeroConvocatoria = reader["TC_NumeroConvocatoria"].ToString();
@@ -213,7 +214,8 @@ namespace MOGESP.DataAccess.TRAN.Datos
                 puestos = traePuestosDeUnPrimerIngreso(cuadroGeneral.NumeroCedula);
 
                 cuadroGeneral.PuestosAplica = puestos;
-
+                //SE DEBE GENERAR UN CRITERIO PARA GENERAR LA CONDICION
+                cuadroGeneral.Condicion = "N/A";
                 listaCuadroGeneral.Add(cuadroGeneral);
                 cuadroGeneral = new CuadroGeneral();
                 puestos = new List<Puesto>();

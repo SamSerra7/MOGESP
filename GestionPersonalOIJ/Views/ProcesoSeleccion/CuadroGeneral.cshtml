@@ -19,99 +19,57 @@
 <body>
 
     <br><br>
-        <div style="width:810px; padding:3px;">
-            <div class="col-md-12 col-xs-12 col-sm-12">
-                <center>
-                    <h2>Cuadro General</h2>
-                </center>
-            </div>
-            <br />
-            <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-                <hr />
-            </div>
-            <br />
-            <div>
-                <h6>No.Convocatoria</h6>
-                <select class="browser-default custom-select" id="buscarNumConvocatoria">
-                    <option></option>
-                    @foreach (var convocatoria in Model)
-                    {
-                        <option value="@convocatoria">
-                            @convocatoria
-                        </option>
-                    }
-                </select>
-                <h6>No.Flujo</h6>
-                <select class="browser-default custom-select" id="buscarNumFlujo"></select>
-                <button id="btn_BuscarFLCV">Buscar</button>
-                <script>
-                    var btn_BuscarFLCV = $("#btn_BuscarFLCV");
-                    var selectFlujos = $("#buscarNumFlujo");
-                    $("#btn_BuscarFLCV").click(function () {
-                        //console.log("It works")
-
-                    });
-                    $("#buscarNumConvocatoria").on('change', function () {
-                        selectFlujos.empty();
-                        if (this.value != "") {
-                            var url = "http://localhost:55439/api/cuadroGeneral/" + this.value;
-
-                            $.post(url, null, function (data) {
-
-                                if (data.length === 0) {
-                                    alert("La convocatoria seleccionada no tiene flujos");
-                                } else {
-                                    var size = 0;
-                                    for (key in data) {
-                                        if (data.hasOwnProperty(key)) {
-
-                                            $(
-                                                '<option value="' + data[size] + '">' +
-                                                data[size] +
-                                                '</option>'
-                                            )
-                                                .appendTo(selectFlujos);
-                                            size = size + 1;
-
-                                        }
-
-
-                                    }
-                                    $(
-                                        '<option value="0">Todos</option>'
-                                    )
-                                        .appendTo(selectFlujos);
-                                }
-                                //console.log("It works " + this.value)
-                            });
-                        }
-
-                    });
-
-                </script>
-            </div>
-            <br><br><br><br>
-            <div class="form-group" style="width:80px; float:left;">
-
-                <h4>Nombrados:</h4> <input type="text" size="15" maxlength="30" name="txtNombrado" disabled>
-                <h4>Positivos:</h4> <input type="text" size="15" maxlength="30" name="txtPositivo" disabled>
-
-            </div>
-
-            <div class="form-group" style="width:300px; float:right;">
-
-                <h4>En Espera:</h4> <input type="text" size="15" maxlength="30" name="txtEspera" disabled>
-                <h4>Negativos:</h4> <input type="text" size="15" maxlength="30" name="txtNegativos" disabled>
-
-            </div>
+    <div style="width:810px; padding:3px;">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <center>
+                <h2>Cuadro General</h2>
+            </center>
+        </div>
+        <br />
+        <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+            <hr />
+        </div>
+        <br />
+        <div>
+            <h6>No.Convocatoria</h6>
+            <select class="browser-default custom-select" id="buscarNumConvocatoria">
+                <option value="AA">Todas</option>
+                @foreach (var convocatoria in Model)
+                {
+                    <option value="@convocatoria">
+                        @convocatoria
+                    </option>
+                }
+            </select>
+            <h6>No.Flujo</h6>
+            <select class="browser-default custom-select" id="buscarNumFlujo">
+                <option value="0">Todos</option>
+            </select>
+            <button id="btn_BuscarFLCV">Buscar</button>
 
         </div>
+        <br><br><br><br>
+        <div class="form-group" style="width:80px; float:left;">
+
+            <h4>Nombrados:</h4> <input type="text" size="15" maxlength="30" name="txtNombrado" disabled>
+            <h4>Positivos:</h4> <input type="text" size="15" maxlength="30" name="txtPositivo" disabled>
+
+        </div>
+
+        <div class="form-group" style="width:300px; float:right;">
+
+            <h4>En Espera:</h4> <input type="text" size="15" maxlength="30" name="txtEspera" disabled>
+            <h4>Negativos:</h4> <input type="text" size="15" maxlength="30" name="txtNegativos" disabled>
+
+        </div>
+
+    </div>
 
     <br><br><br><br><br><br><br><br><br><br>
 
     <!--Tabla Resumen de días-->
     <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
-        <table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+        <table id="tablaDeps" class="table table-bordered table-responsive table-hover">
             <thead style="align-content: center;">
                 <tr style=" background-color: #222;" class="btn-primary">
 
@@ -250,9 +208,6 @@
             </thead>
 
             <tr style="background:#f1f1f1">
-                <td>
-                    <LinkButton ID="btnFiltrar"><span aria-hidden="true" class="btn glyphicon glyphicon-search"></span> </LinkButton>
-                </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -276,7 +231,116 @@
         </table>
 
     </div>
+    <script>
+        var btn_BuscarFLCV = $("#btn_BuscarFLCV");
+        var selectFlujos = $("#buscarNumFlujo");
+        var selectConvocatoria = $("#buscarNumConvocatoria");
+        var tablaPrimerosIngresos = $("#tablaPrimerosIngresos");
+        //$(document).ready(function () {
+        //btn_BuscarFLCV.prop("disabled", true);
 
+        //});
+        
+        var nombrePI = "";
+        $("#btn_BuscarFLCV").click(function () {
+
+            tablaPrimerosIngresos.find("tr:gt(0)").remove(); 
+            var url2 = "http://localhost:55439/api/cuadroGeneral/listaPI/" + selectConvocatoria.val() + "/" + selectFlujos.val();
+            console.log(url2);
+            $.post(url2, null, function (data) {
+                console.log(data)
+                if (data.length === 0) {
+                    alert("El cuadro general seleccionado esta vacio");
+                } else {
+                    
+
+                    for (key in data) {
+                        if (data.hasOwnProperty(key)) {
+                            nombrePI = "" + data[key].nombrePI + " " + data[key].primerApellido + " " + data[key].segundoApellido;
+                            console.log(key)
+                            console.log(data[key].numeroCedula)
+                            $(
+                                '<tr style="background:#f1f1f1" id="tupla'+key+'">' + '</tr>'
+                            )
+                            .appendTo(tablaPrimerosIngresos);
+                            $(
+                                
+                                '<td>' + data[key].numeroConvocatoria+ '</td>' +
+                                '<td>' + data[key].numeroFlujo+ '</td>' +
+                                '<td>' + data[key].numeroCedula+ '</td>' +
+                                '<td>' + nombrePI+ '</td>' +
+                                '<td>' + data[key].cantidadDiasAdminPruebasGH+ '</td>' +
+                                '<td>' + data[key].cantidadDiasPruebasGH+ '</td>' +
+                                '<td>' + data[key].cantidadDiasAdminAntecedentes+ '</td>' +
+                                '<td>' + data[key].cantidadDiasAntecedentes+ '</td>' +
+                                '<td>' + data[key].cantidadDiasAdminVialidad+ '</td>' +
+                                '<td>' + data[key].cantidadDiasVialidad+ '</td>' +
+                                '<td>' + data[key].fechaEnvioGHTraslado+ '</td>' +
+                                '<td>' + data[key].cantidadDiasAdminPruebasMedicas+ '</td>' +
+                                '<td>' + data[key].cantidadDiasPruebasMedicas+ '</td>' +
+                                '<td>' + data[key].cantidadDiasAdminToxicologia+ '</td>' +
+                                '<td>' + data[key].cantidadDiasToxicologia+ '</td>' +
+                                '<td>' + data[key].condicion+ '</td>' +
+                                '<td>' + data[key].fechaIngreso+ '</td>' +
+                                '<td>' + data[key].cantidadDiasTotalesTramite+ '</td>' 
+
+                                
+                            )
+                                .appendTo("#tupla" + key);
+                            
+
+                            
+                            
+                        }
+
+
+                    }
+                    
+                    //btn_BuscarFLCV.prop("disabled", false);
+                }
+                //console.log("It works " + this.value)
+            });
+
+        });
+        $("#buscarNumConvocatoria").on('change', function () {
+            selectFlujos.empty();
+            if (this.value != "") {
+                var url = "http://localhost:55439/api/cuadroGeneral/" + this.value;
+
+                $.post(url, null, function (data) {
+
+                    if (data.length === 0) {
+                        alert("La convocatoria seleccionada no tiene flujos");
+                    } else {
+                        var size = 0;
+                        for (key in data) {
+                            if (data.hasOwnProperty(key)) {
+
+                                $(
+                                    '<option value="' + data[size] + '">' +
+                                    data[size] +
+                                    '</option>'
+                                )
+                                    .appendTo(selectFlujos);
+                                size = size + 1;
+
+                            }
+
+
+                        }
+                        $(
+                            '<option value="0">Todos</option>'
+                        )
+                            .appendTo(selectFlujos);
+                        //btn_BuscarFLCV.prop("disabled", false);
+                    }
+                    //console.log("It works " + this.value)
+                });
+            }
+
+        });
+
+    </script>
 </body>
 
 
