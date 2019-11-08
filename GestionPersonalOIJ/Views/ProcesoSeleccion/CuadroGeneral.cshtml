@@ -242,12 +242,17 @@
         //});
         
         var nombrePI = "";
+        var investigador1 = "N/A";
+        var agenteDeProteccion = "N/A";
+        var custodioDeDetenidos = "N/A";
+        var agenteDeLocalizacion = "N/A";
         $("#btn_BuscarFLCV").click(function () {
 
             tablaPrimerosIngresos.find("tr:gt(0)").remove(); 
             var url2 = "http://localhost:55439/api/cuadroGeneral/listaPI/" + selectConvocatoria.val() + "/" + selectFlujos.val();
             console.log(url2);
-            $.post(url2, null, function (data) {
+            
+            //$.post(url2, null, function (data) {
                 console.log(data)
                 if (data.length === 0) {
                     alert("El cuadro general seleccionado esta vacio");
@@ -257,8 +262,12 @@
                     for (key in data) {
                         if (data.hasOwnProperty(key)) {
                             nombrePI = "" + data[key].nombrePI + " " + data[key].primerApellido + " " + data[key].segundoApellido;
-                            console.log(key)
-                            console.log(data[key].numeroCedula)
+                            for (idPuesto in data[key].puestosAplica) {
+                                /*if (data[key].puestosAplica.idPuesto == 1111) {
+
+                                }*/
+                                console.log(idPuesto)
+                            }
                             $(
                                 '<tr style="background:#f1f1f1" id="tupla'+key+'">' + '</tr>'
                             )
@@ -299,7 +308,7 @@
                     //btn_BuscarFLCV.prop("disabled", false);
                 }
                 //console.log("It works " + this.value)
-            });
+            //});
 
         });
         $("#buscarNumConvocatoria").on('change', function () {
