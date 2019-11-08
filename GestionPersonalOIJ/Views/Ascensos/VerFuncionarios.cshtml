@@ -21,10 +21,11 @@
 
 
 
+<div class="row container" style="border: 3px solid #152327;">
 
-<form method="get" action=@Url.Action("VerFuncionarios", "Ascensos" )>
+    <form method="get" action=@Url.Action("VerFuncionarios", "Ascensos" )>
 
-    <div class="row container" style="border: 3px solid #152327;">
+
         <center><h4>Funcionario</h4></center>
         <label>C&eacute;dula/Nombre</label>
         <div class="row">
@@ -41,101 +42,102 @@
             </div>
         </div>
 
-        <br />
+    </form>
 
-        <div class="row">
-            <!--Tabla Persona Ascenso-->
-            <div class="table-responsive col-md-4 col-md-offset-4" style="text-align: center; overflow-y: auto;">
-                <table id="tablaDatosPersonales" class="table table-responsive">
-                    <thead style="align-content: center;">
-                        <tr>
-                            <th class="centrarTitulos ">C&eacute;dula</th>
-                            <th class="centrarTitulos ">Nombre Apellidos</th>
-                            <th class="centrarTitulos "></th>
-                        </tr>
-                    </thead>
+    <br />
+
+    <div class="row">
+        <!--Tabla Persona Ascenso-->
+        <div class="table-responsive col-md-4 col-md-offset-4" style="text-align: center; overflow-y: auto;">
+            <table id="tablaDatosPersonales" class="table table-responsive">
+                <thead style="align-content: center;">
+                    <tr>
+                        <th class="centrarTitulos ">C&eacute;dula</th>
+                        <th class="centrarTitulos ">Nombre Apellidos</th>
+                        <th class="centrarTitulos "></th>
+                    </tr>
+                </thead>
 
 
-                    @foreach (var funcionario in Model.Resultado)
-                    {
-                        <tr>
-                            <td> @funcionario.Cedula</td>
-                            <td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
-                            <td>
-                                @Html.ActionLink("", "VerFuncionarios", new { buscar = "" },
-                                                         new { @class = "btn glyphicon glyphicon-search", @title = "Ver Funcionario" })
-                            </td>
+                @foreach (var funcionario in Model.Resultado)
+                {
+                    <tr>
+                        <td> @funcionario.Cedula</td>
+                        <td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
+                        <td>
+                            @Html.ActionLink("", "VerFuncionarios", new { buscar = "" },
+                                                     new { @class = "btn glyphicon glyphicon-search", @title = "Ver Funcionario" })
+                        </td>
 
-                        </tr>
-                    }
-                </table>
-            </div>
-
+                    </tr>
+                }
+            </table>
         </div>
+    </div>
 
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            @*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
-            @if (@Model.Resultado.Count() > 0)
+    <div class="col-md-12 col-xs-12 col-sm-12">
+        @*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
+        @if (@Model.Resultado.Count() > 0)
+        {
+            <span>
+                <strong>@Model.TotalRegistros</strong> registros encontrados
+            </span>
+            <span>&nbsp;|&nbsp;</span>
+            <span>
+                Página <strong>@(Model.PaginaActual)</strong> de
+                <strong>@Model.TotalPaginas</strong>
+            </span>
+            <span>&nbsp;|&nbsp;</span>
+        }
+        else
+        {
+            <span>No hay resultados para esta búsqueda</span>
+            <span>&nbsp;|&nbsp;</span>
+        }
+
+
+        @*botones de paginación*@
+        <center>
+            @if (Model.PaginaActual > 1)
             {
-                <span>
-                    <strong>@Model.TotalRegistros</strong> registros encontrados
-                </span>
-                <span>&nbsp;|&nbsp;</span>
-                <span>
-                    Página <strong>@(Model.PaginaActual)</strong> de
-                    <strong>@Model.TotalPaginas</strong>
-                </span>
-                <span>&nbsp;|&nbsp;</span>
+                @Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
+                                new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
+                <span></span>
+                @Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = Model.PaginaActual - 1 },
+                                new { @class = "btn btn-sm btn-default" })
             }
             else
             {
-                <span>No hay resultados para esta búsqueda</span>
-                <span>&nbsp;|&nbsp;</span>
-            }
-
-
-            @*botones de paginación*@
-            <center>
-                @if (Model.PaginaActual > 1)
-                {
-                    @Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
-                                    new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
-                    <span></span>
-                    @Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = Model.PaginaActual - 1 },
-                                    new { @class = "btn btn-sm btn-default" })
-                }
-                else
-                {
-                    @Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
-                                    new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
-                    <span></span>
-                    @Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = 1 },
-                                    new { @class = "btn btn-sm btn-default disabled" })
-                }
+                @Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
+                                new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
                 <span></span>
-                @if (Model.PaginaActual < Model.TotalPaginas)
-                {
-                    @Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.PaginaActual + 1 },
-                                    new { @class = "btn btn-sm btn-default" })
-                    <span></span>
-                    @Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
-                                    new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
-                }
-                else
-                {
-                    @Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.TotalPaginas - 1 },
-                                    new { @class = "btn btn-sm btn-default disabled" })
-                    <span></span>
-                    @Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
-                                    new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
-                }
-            </center>
+                @Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = 1 },
+                                new { @class = "btn btn-sm btn-default disabled" })
+            }
+            <span></span>
+            @if (Model.PaginaActual < Model.TotalPaginas)
+            {
+                @Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.PaginaActual + 1 },
+                                new { @class = "btn btn-sm btn-default" })
+                <span></span>
+                @Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
+                                new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
+            }
+            else
+            {
+                @Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.TotalPaginas - 1 },
+                                new { @class = "btn btn-sm btn-default disabled" })
+                <span></span>
+                @Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
+                                new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
+            }
+        </center>
 
-            <br />
-        </div>
+        <br />
     </div>
-</form>
 
+
+</div>
 <br />
 <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
     <hr />
