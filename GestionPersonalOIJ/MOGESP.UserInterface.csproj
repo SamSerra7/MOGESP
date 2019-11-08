@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\ProcesoSeleccion\ModificarPrimerIngreso.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\ProcesoSeleccion\PrimerosIngresos.html" />
   </ItemGroup>
 
