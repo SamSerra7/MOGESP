@@ -8,10 +8,15 @@ namespace MOGESP.UserInterface.Controllers
 {
     public class AscensosController : Controller
     {
-        public IActionResult AgregarConcurso()
-        {
-            return View();
-        }
+
+
+
+
+
+
+
+
+
 
 		public IActionResult FuncionarioYParticipacionEnPuestos()
 		{
