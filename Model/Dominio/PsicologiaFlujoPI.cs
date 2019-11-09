@@ -43,7 +43,9 @@ namespace MOGESP.Entities.Dominio
         public HojaCitasPI HojaCitas
         {
             get { return hojaCitas; }
-            set { hojaCitas = value ?? throw new Exception("Debe tener una hoja de citas asociada"); }
+            set { hojaCitas = value ?? throw new Exception("Debe tener una hoja de citas asociada");
+                hojaCitas = value;
+            }
         }
 
 

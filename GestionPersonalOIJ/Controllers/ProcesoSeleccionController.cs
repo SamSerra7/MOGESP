@@ -36,16 +36,6 @@ namespace GestionPersonalOIJ.Controllers
             numerosConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
             return View(numerosConvocatoria);
 		}
-        public IEnumerable<int> GetFlujosCuadroGeneral()
-        {
-            string path = Request.Path.Value;
-            int startIndex = path.Length - "/ProcesoSeleccion/CuadroGeneral/GetFlujosCuadroGeneral/".Length;
-            string idString = path.Substring("/ProcesoSeleccion/CuadroGeneral/GetFlujosCuadroGeneral/".Length, startIndex);
-            //int id = System.Convert.ToInt32(idString);
-
-            IEnumerable<int> flujos = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(idString);
-            return flujos;
-        }
 
         /// <summary>
         /// Jesús Torres
@@ -215,6 +205,8 @@ namespace GestionPersonalOIJ.Controllers
             return View();
 
         }
+
+
 
 
 

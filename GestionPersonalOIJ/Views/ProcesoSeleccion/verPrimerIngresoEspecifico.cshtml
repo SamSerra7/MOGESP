@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
     <style>
 
@@ -72,7 +72,7 @@
         }
 
         .btn-block {
-            float:left;
+            float: left;
             margin-top: 10px;
             text-align: center;
             margin: 10px 10px 10px;
@@ -80,7 +80,7 @@
 
         button {
             width: 150px;
-            padding: 20px;
+            padding: 10px;
             border: none;
             border-radius: 5px;
             background: #ff6a00;
@@ -93,140 +93,727 @@
                 background: #de803d;
             }
 
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+            .tabs #labelTab {
+                order: 1;
+                display: block;
+                padding: 1rem 2rem;
+                color: #fff;
+                cursor: pointer;
+                background: #000000;
+                font-weight: bold;
+                transition: background ease 0.2s;
+            }
+
+                .tabs #labelTab:hover {
+                    background: #fff;
+                    color: #000000;
+                }
+
+            .tabs .tab {
+                order: 99;
+                flex-grow: 1;
+                width: 100%;
+                display: none;
+                padding: 1rem;
+                background: #fff;
+            }
+
+            .tabs input[type="radio"] {
+                display: none;
+            }
+
+                .tabs input[type="radio"]:checked + label {
+                    background: #fff;
+                }
+
+                    .tabs input[type="radio"]:checked + label + .tab {
+                        display: block;
+                    }
     </style>
 
 </head>
 <body>
 
+    <h2 align="center">Primer Ingreso</h2>
+    <br>
+    <h4><i class="far fa-address-card"></i> Informaci&oacute;n Personal</h4>
 
-    <div class="CajaFormulario">
+    <div class="form-row">
+        <div class="col-md-6">
+            <label>C&eacute;dula: </label>
+            <input class="form-control" id="cedulaInfo" type="text" name="cedulaInfo" disabled="disabled" />
+        </div>
+        <div class="col-md-6">
+            <label>Nombre: </label>
+            <input class="form-control" id="nombreInfo" type="text" name="nombreInfo" disabled="disabled" />
+        </div>
 
-        <form id="FormModificar" action="/">
-
-            <fieldset>
-                <legend>Pruebas Gesti&oacute;n Humana</legend>
-
-                <h4>Administraci&oacute;n</h4>
-
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <i class="fas fa-calendar-alt"></i>
-                        <label>Fecha de Ingreso: </label>
-                        <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" required />
-                    </div>
-                    <div class="col-md-6">
-                        <label>Cantidad de D&iacute;as: </label>
-                        <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" required />
-                    </div>
-
-                </div>
-                <br><br><br>
-                <hr> </hr>
-
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <label>N&deg;. Concurso: </label>
-                        <input class="form-control" id="NumConcurso" type="text" name="NumConcurso" required />
-                    </div>
-                    <div class="col-md-6">
-                        <label>Ubicaci&oacute;n: </label>
-                        <input class="form-control" id="ubicacion" type="text" name="ubicacion" required />
-                    </div>
-                </div>
-
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <i class="fas fa-calendar-alt"></i>
-                        <label>Fecha de Ingreso: </label>
-                        <input id="fechaIngreso2" class="form-control" type="date" name="fechaIngreso2" required />
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Oficio de Ingreso: </label>
-                        <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" required />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label>D&iacute;as a la fecha: </label>
-                        <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" required />
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <i class="fas fa-calendar-alt"></i>
-                        <label>Fecha Traslado Psicologo Administraci&oacute;n: </label>
-                        <input id="fechaTrasladoPsicologia" class="form-control" type="date" name="fechaTrasladoPsicologia" required />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label>Oficio: </label>
-                        <input id="oficio" class="form-control" type="text" name="oficio" required />
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <i class="fas fa-calendar-alt"></i>
-                        <label>Fecha Devoluci&oacute;n a GH. Por parte de Administraci&oacute;n: </label>
-                        <input id="fechaDevulucionAdmi" class="form-control" type="date" name="fechaDevulucionAdmi" required />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label>Cantidad de D&iacute;as en Psicolog&iacute;a - Administraci&oacute;n: </label>
-                        <input id="diasPsicologiaAdmi" class="form-control" type="number" min="0" name="diasPsicologiaAdmi" required />
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <i class="fas fa-calendar-alt"></i>
-                        <label>Fecha L&iacute;mite s&eacute;gun plazo establecido: </label>
-                        <input id="fechaLimite" class="form-control" type="date" name="fechaLimite" required />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label>D&iacute;as a la Fecha: </label>
-                        <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" required />
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Cantidad de D&iacute;as en tr&aacute;mite en GH, despu&eacute;s de devuelto: </label>
-                        <input id="fechaPsicologia" class="form-control" type="number" min="0" name="fechaPsicologia" required />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <i class="fas fa-calendar-alt"></i>
-                        <label>Fecha Salida: </label>
-                        <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" required />
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>D&iacute;as totales en tr&aacute;mite: </label>
-                        <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" required />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label>Oficio Respuesta: </label>
-                        <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" required />
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Estado: </label>
-                        <select name="estado">
-                            <option value="value1">Positivo</option>
-                            <option value="value2" selected>Negativo</option>
-                        </select>
-                    </div>
-                </div>
-
-                <br><br>
-                <div class="btn-block">
-                    <button type="submit" href="/">Editar</button>
-                </div>
-
-            </fieldset>
-        </form>
     </div>
+    <br><br><br>
+    <hr> </hr>
+
+
+    <div class="tabs">
+
+        <!--Primer tab-->
+        <input type="radio" name="tab" id="tabPruebasGH" checked="checked">
+        <label for="tabPruebasGH" id="labelTab">Pruebas Gesti&oacute;n Humana</label>
+
+        <div class="tab">
+
+            <div class="CajaFormulario" id="PruebasGH">
+
+                <form id="FormModificar">
+
+                    <fieldset>
+                        <legend>Pruebas Gesti&oacute;n Humana</legend>
+
+                        <h4>Administraci&oacute;n</h4>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso: </label>
+                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Cantidad de D&iacute;as: </label>
+                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                            </div>
+
+                        </div>
+                        <br><br><br>
+                        <hr> </hr>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label>N&deg;. Concurso: </label>
+                                <input class="form-control" id="NumConcurso" type="text" name="NumConcurso" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Ubicaci&oacute;n: </label>
+                                <input class="form-control" id="ubicacion" type="text" name="ubicacion" disabled="disabled" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso: </label>
+                                <input id="fechaIngreso2" class="form-control" type="date" name="fechaIngreso2" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio de Ingreso: </label>
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as a la fecha: </label>
+                                <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha Traslado Psicologo Administraci&oacute;n: </label>
+                                <input id="fechaTrasladoPsicologia" class="form-control" type="date" name="fechaTrasladoPsicologia" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio: </label>
+                                <input id="oficio" class="form-control" type="text" name="oficio" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha Devoluci&oacute;n a GH. Por parte de Administraci&oacute;n: </label>
+                                <input id="fechaDevulucionAdmi" class="form-control" type="date" name="fechaDevulucionAdmi" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Cantidad de D&iacute;as en Psicolog&iacute;a - Administraci&oacute;n: </label>
+                                <input id="diasPsicologiaAdmi" class="form-control" type="number" min="0" name="diasPsicologiaAdmi" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha L&iacute;mite s&eacute;gun plazo establecido: </label>
+                                <input id="fechaLimite" class="form-control" type="date" name="fechaLimite" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as a la Fecha: </label>
+                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Cantidad de D&iacute;as en tr&aacute;mite en GH, despu&eacute;s de devuelto: </label>
+                                <input id="fechaPsicologia" class="form-control" type="number" min="0" name="fechaPsicologia" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha Salida: </label>
+                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as totales en tr&aacute;mite: </label>
+                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio Respuesta: </label>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Estado: </label>
+                                <select id="selectEstado" name="selectEstado" disabled="disabled">
+                                    <option value="value1">Positivo</option>
+                                    <option value="value2" selected>Negativo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style=" float: left; ">
+                            <br><br><br>
+                            <button type="button" class="btn btn-success" id="btnAceptar" name="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancelar" name="btnCancelar" style=" visibility:hidden"><i class="far fa-window-close"></i> Cancelar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <br>
+            <div class="btn-block">
+                <button id="btnEditar" name="btnEditar"><i class="fas fa-edit"></i> Editar</button>
+            </div>
+
+        </div>
+
+        <!--Segundo tab-->
+        <input type="radio" name="tab" id="tabInvestigacionAnte">
+        <label for="tabInvestigacionAnte" id="labelTab">Investigaci&oacute;n de Antecedentes</label>
+        <div class="tab">
+            <div class="CajaFormulario" id="InvestigacionAnte">
+
+                <form id="FormModificar">
+
+                    <fieldset>
+                        <legend>Investigaci&oacute;n de Antecedentes</legend>
+
+                        <h4>Administraci&oacute;n</h4>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso: </label>
+                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Cantidad de D&iacute;as: </label>
+                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                            </div>
+
+                        </div>
+                        <br><br><br>
+                        <hr> </hr>
+
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso: </label>
+                                <input id="fechaIngreso2" class="form-control" type="date" name="fechaIngreso2" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio de Ingreso: </label>
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Resultado: </label>
+                                <input id="fechaResultado" class="form-control" type="date" name="fechaResultado" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Zona de Trabajo: </label>
+                                <input id="zonaTrabajo" class="form-control" type="text" name="zonaTrabajo" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as a la fecha: </label>
+                                <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha Salida: </label>
+                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as en Tr&aacute;mite: </label>
+                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio Respuesta: </label>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label>Estado: </label>
+                                <select id="selectEstado" name="selectEstado" disabled="disabled">
+                                    <option value="value1">Positivo</option>
+                                    <option value="value2" selected>Negativo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style=" float: left; ">
+                            <br><br><br>
+                            <button type="button" class="btn btn-success" id="btnAceptar2" name="btnAceptar2" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancelar2" name="btnCancelar2" style=" visibility:hidden"><i class="far fa-window-close"></i> Cancelar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <br>
+            <div class="btn-block">
+                <button id="btnEditar2" name="btnEditar2"><i class="fas fa-edit"></i> Editar</button>
+            </div>
+
+        </div>
+
+
+        <!--Tercer tab-->
+        <input type="radio" name="tab" id="tabVialidad">
+        <label for="tabVialidad" id="labelTab">Vialidad</label>
+        <div class="tab">
+            <div class="CajaFormulario" id="Vialidad">
+
+                <form id="FormModificar">
+
+                    <fieldset>
+                        <legend>Vialidad</legend>
+
+                        <h4>Administraci&oacute;n</h4>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso: </label>
+                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Cantidad de D&iacute;as: </label>
+                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                            </div>
+
+                        </div>
+                        <br><br><br>
+                        <hr> </hr>
+
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso Transporte: </label>
+                                <input id="fechaIngresoTrans" class="form-control" type="date" name="fechaIngresoTrans" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio de Ingreso: </label>
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Cita: </label>
+                                <input id="fechaCita" class="form-control" type="date" name="fechaCita" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as Para Cita: </label>
+                                <input id="diasCita" class="form-control" type="number" min="0" name="diasCita" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha Salida: </label>
+                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as en Tr&aacute;mite: </label>
+                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio Respuesta: </label>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Estado: </label>
+                                <select id="selectEstado" name="selectEstado" disabled="disabled">
+                                    <option value="value1">Positivo</option>
+                                    <option value="value2" selected>Negativo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style=" float: left; ">
+                            <br><br><br>
+                            <button type="button" class="btn btn-success" id="btnAceptar3" name="btnAceptar3" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancelar3" name="btnCancelar3" style=" visibility:hidden"><i class="far fa-window-close"></i> Cancelar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <br>
+            <div class="btn-block">
+                <button id="btnEditar3" name="btnEditar3"><i class="fas fa-edit"></i> Editar</button>
+            </div>
+        </div>
+
+
+        <!--Cuarto tab-->
+        <input type="radio" name="tab" id="tabPruebasMedica">
+        <label for="tabPruebasMedica" id="labelTab">Pruebas M&eacute;dicas</label>
+        <div class="tab">
+            <div class="CajaFormulario" id="PruebasMedica">
+
+                <form id="FormModificar">
+
+                    <fieldset>
+                        <legend>Pruebas M&eacute;dicas</legend>
+
+                        <h4>Administraci&oacute;n</h4>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso: </label>
+                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Cantidad de D&iacute;as: </label>
+                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                            </div>
+
+                        </div>
+                        <br><br><br>
+                        <hr> </hr>
+
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso: </label>
+                                <input id="fechaIngreso" class="form-control" type="date" name="fechaIngreso" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Env&iacute;o a PM por GH: </label>
+                                <input id="fechaEnvioPM" class="form-control" type="date" name="fechaEnvioPM" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio Ingreso: </label>
+                                <input id="diasCita" class="form-control" type="text" name="diasCita" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Cita PM / Resultado: </label>
+                                <input id="fechaCitaPM" class="form-control" type="date" name="fechaCitaPM" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as a la Fecha: </label>
+                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha Salida: </label>
+                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as en Tr&aacute;mite: </label>
+                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio Respuesta: </label>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div style=" float: right; ">
+                            <br><br><br>
+                            <button type="button" class="btn btn-success" id="btnAceptar4" name="btnAceptar4" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancelar4" name="btnCancelar4" style=" visibility:hidden"><i class="far fa-window-close"></i> Cancelar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <br>
+            <div class="btn-block">
+                <button id="btnEditar4" name="btnEditar4"><i class="fas fa-edit"></i> Editar</button>
+            </div>
+        </div>
+
+
+        <!--Quinto tab-->
+        <input type="radio" name="tab" id="tabToxicologia">
+        <label for="tabToxicologia" id="labelTab">Departamento de Toxicolog&iacute;a</label>
+        <div class="tab">
+            <div class="CajaFormulario" id="Toxicologia">
+
+                <form id="FormModificar">
+
+                    <fieldset>
+                        <legend>Departamento de Toxicolog&iacute;a</legend>
+
+                        <h4>Administraci&oacute;n</h4>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Ingreso: </label>
+                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Cantidad de D&iacute;as: </label>
+                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                            </div>
+
+                        </div>
+                        <br><br><br>
+                        <hr> </hr>
+
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha Cita: </label>
+                                <input id="fechaCita" class="form-control" type="date" name="fechaCita" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as Para Cita: </label>
+                                <input id="diasCita" class="form-control" type="number" min="0" name="diasCita" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Dias a la Fecha: </label>
+                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Salida: </label>
+                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>D&iacute;as en Tr&aacute;mite: </label>
+                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Oficio Respuesta: </label>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <label>Fecha de Estado: </label>
+                                <input id="fechaEstado" class="form-control" type="date" name="fechaEstado" disabled="disabled" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Cantidad de D&iacute;as: </label>
+                                <input id="cantidadDias" class="form-control" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                            </div>
+                        </div>
+
+                        <div style=" float: right; ">
+                            <br><br><br>
+                            <button type="button" class="btn btn-success" id="btnAceptar5" name="btnAceptar5" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancelar5" name="btnCancelar5" style=" visibility:hidden"><i class="far fa-window-close"></i> Cancelar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <br>
+            <div class="btn-block">
+                <button id="btnEditar5" name="btnEditar5"><i class="fas fa-edit"></i> Editar</button>
+            </div>
+        </div>
+
+    </div>
+
+
 </body>
+
+
 </html>
+
+<script type="text/javascript">
+
+
+    $(function () {
+        $("#btnEditar").click(function () {
+
+            $("#PruebasGH").find('input, button, select').prop("disabled", false);
+            $("#PruebasGH").find('input, button, select').css("visibility", "visible");
+
+            $('#btnEditar').hide();
+            alert("click");
+
+        });
+    });
+    $(function () {
+        $("#btnCancelar").click(function () {
+
+            $("#PruebasGH").find('input, select').prop("disabled", true);
+            $("#PruebasGH").find('button').css("visibility", "hidden");
+
+            $('#btnEditar').show();
+            alert("click");
+
+        });
+    });
+
+
+    $(function () {
+        $("#btnEditar2").click(function () {
+
+            $("#InvestigacionAnte").find('input, button, select').prop("disabled", false);
+            $("#InvestigacionAnte").find('input, button, select').css("visibility", "visible");
+
+            $('#btnEditar2').hide();
+            alert("click");
+
+        });
+    });
+    $(function () {
+        $("#btnCancelar2").click(function () {
+
+            $("#InvestigacionAnte").find('input, select').prop("disabled", true);
+            $("#InvestigacionAnte").find('button').css("visibility", "hidden");
+
+            $('#btnEditar2').show();
+            alert("click");
+
+        });
+    });
+
+
+    $(function () {
+        $("#btnEditar3").click(function () {
+
+            $("#Vialidad").find('input, button, select').prop("disabled", false);
+            $("#Vialidad").find('input, button, select').css("visibility", "visible");
+
+            $('#btnEditar3').hide();
+            alert("click");
+
+        });
+    });
+    $(function () {
+        $("#btnCancelar3").click(function () {
+
+            $("#Vialidad").find('input, select').prop("disabled", true);
+            $("#Vialidad").find('button').css("visibility", "hidden");
+
+            $('#btnEditar3').show();
+            alert("click");
+
+        });
+    });
+
+
+    $(function () {
+        $("#btnEditar4").click(function () {
+
+            $("#PruebasMedica").find('input, button, select').prop("disabled", false);
+            $("#PruebasMedica").find('input, button, select').css("visibility", "visible");
+
+            $('#btnEditar4').hide();
+            alert("click");
+
+        });
+    });
+    $(function () {
+        $("#btnCancelar4").click(function () {
+
+            $("#PruebasMedica").find('input, select').prop("disabled", true);
+            $("#PruebasMedica").find('button').css("visibility", "hidden");
+
+            $('#btnEditar4').show();
+            alert("click");
+
+        });
+    });
+
+
+    $(function () {
+        $("#btnEditar5").click(function () {
+
+            $("#Toxicologia").find('input, button, select').prop("disabled", false);
+            $("#Toxicologia").find('input, button, select').css("visibility", "visible");
+
+            $('#btnEditar5').hide();
+            alert("click");
+
+        });
+    });
+    $(function () {
+        $("#btnCancelar5").click(function () {
+
+            $("#Toxicologia").find('input, select').prop("disabled", true);
+            $("#Toxicologia").find('button').css("visibility", "hidden");
+
+            $('#btnEditar5').show();
+            alert("click");
+
+        });
+    });
+
+</script>

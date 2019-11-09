@@ -11,11 +11,10 @@ namespace MOGESP.Entities.Dominio
         {
         }
 
-        public Puesto(int idPuesto, string nombre, Clase clase)
+        public Puesto(int idPuesto, string nombrePuesto)
         {
             IdPuesto = idPuesto;
-            Nombre = nombre;
-            Clase = clase;
+            Nombre = nombrePuesto;
         }
 
         
@@ -29,7 +28,7 @@ namespace MOGESP.Entities.Dominio
             }
             set
             {
-                if (value > 0) throw new Exception("El id debe ser positivo");
+                if (value < 0) throw new Exception("El id debe ser positivo");
                 idPuesto = value;
             }
         }
@@ -46,17 +45,7 @@ namespace MOGESP.Entities.Dominio
                 nombre = value;
             }
         }
-
-
-        private Clase clase;
-
-        public Clase Clase
-        {
-            get { return clase; }
-            set { clase = value ?? throw new Exception("El puesto debe tener una clase"); }
-        }
-
-
+        
 
     }
 
