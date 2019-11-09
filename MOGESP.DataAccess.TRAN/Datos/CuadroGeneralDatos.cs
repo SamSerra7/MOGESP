@@ -214,8 +214,12 @@ namespace MOGESP.DataAccess.TRAN.Datos
                 puestos = traePuestosDeUnPrimerIngreso(cuadroGeneral.NumeroCedula);
 
                 cuadroGeneral.PuestosAplica = puestos;
-                //SE DEBE GENERAR UN CRITERIO PARA GENERAR LA CONDICION
-                cuadroGeneral.Condicion = "N/A";
+
+                cuadroGeneral.CantidadDiasTotalesTramite = cuadroGeneral.CantidadDiasAdminAntecedentes + cuadroGeneral.CantidadDiasAdminPruebasGH 
+                    + cuadroGeneral.CantidadDiasAdminPruebasMedicas
+                    + cuadroGeneral.CantidadDiasAdminToxicologia + cuadroGeneral.CantidadDiasAdminVialidad + cuadroGeneral.CantidadDiasAntecedentes + cuadroGeneral.CantidadDiasPruebasGH 
+                    + cuadroGeneral.CantidadDiasVialidad
+                    + cuadroGeneral.CantidadDiasToxicologia + cuadroGeneral.CantidadDiasPruebasMedicas;
                 listaCuadroGeneral.Add(cuadroGeneral);
                 cuadroGeneral = new CuadroGeneral();
                 puestos = new List<Puesto>();

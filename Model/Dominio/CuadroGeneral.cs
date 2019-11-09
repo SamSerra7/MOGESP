@@ -22,6 +22,16 @@ namespace MOGESP.Entities.Dominio
             Condicion = condicion;
         }
         //, ,string , string ,string ,string 
+        private string instanciaPerdioProceso = "N/A";
+        public string InstanciaPerdioProceso
+        {
+            get { return instanciaPerdioProceso; }
+            set
+            {
+                if (value == null || value.Trim().Equals("")) throw new Exception("El campo de instanciaPerdioProceso es requerido");
+                instanciaPerdioProceso = value;
+            }
+        }
         private string numeroConvocatoria;
         public string NumeroConvocatoria
         {
@@ -202,7 +212,7 @@ namespace MOGESP.Entities.Dominio
                 cantidadDiasToxicologia = value;
             }
         }
-        private String condicion;
+        private String condicion = "N/A";
         public String Condicion
         {
             get { return condicion; }

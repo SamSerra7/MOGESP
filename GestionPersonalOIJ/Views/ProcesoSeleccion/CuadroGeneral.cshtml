@@ -182,10 +182,14 @@
                         Tr&aacute;mite
                         <br>Administraci&oacute;n
                     </th>
-                    <th>Vialidad</th>
+                    <th class="centrarTitulos">Vialidad</th>
                     <th class="centrarTitulos">
                         Fecha Envio a GH
                         <br>Traslado a Nueva Etapa
+                    </th>
+                    <th class="centrarTitulos">
+                        Tr&aacute;mite
+                        <br>Administraci&oacute;n
                     </th>
                     <th class="centrarTitulos">Pruebas M&eacute;dicas</th>
                     <th class="centrarTitulos">
@@ -193,11 +197,12 @@
                         <br>Administraci&oacute;n
                     </th>
                     <th class="centrarTitulos">Toxicolog&iacute;a</th>
-                    <th class="centrarTitulos">Condici&oacute;n</th>
                     <th class="centrarTitulos">
                         Instancia en que
                         <br>Perdi&oacute; el Proceso
                     </th>
+                    <th class="centrarTitulos">Condici&oacute;n</th>
+
                     <th class="centrarTitulos">Fecha Ingreso</th>
                     <th class="centrarTitulos">
                         Cantidad Total
@@ -247,12 +252,12 @@
         var custodioDeDetenidos = "N/A";
         var agenteDeLocalizacion = "N/A";
         $("#btn_BuscarFLCV").click(function () {
-
+            
             tablaPrimerosIngresos.find("tr:gt(0)").remove(); 
             var url2 = "http://localhost:55439/api/cuadroGeneral/listaPI/" + selectConvocatoria.val() + "/" + selectFlujos.val();
             console.log(url2);
             
-            //$.post(url2, null, function (data) {
+            $.post(url2, null, function (data) {
                 console.log(data)
                 if (data.length === 0) {
                     alert("El cuadro general seleccionado esta vacio");
@@ -260,24 +265,41 @@
                     
 
                     for (key in data) {
+                        investigador1 = "N/A";
+                        agenteDeProteccion = "N/A";
+                        custodioDeDetenidos = "N/A";
+                        agenteDeLocalizacion = "N/A";
                         if (data.hasOwnProperty(key)) {
                             nombrePI = "" + data[key].nombrePI + " " + data[key].primerApellido + " " + data[key].segundoApellido;
-                            for (idPuesto in data[key].puestosAplica) {
-                                /*if (data[key].puestosAplica.idPuesto == 1111) {
+                            for (puestoKey in data[key].puestosAplica) {
+                                if (data[key].puestosAplica[puestoKey].idPuesto == 1111) {
+                                    investigador1 = "" + data[key].puestosAplica[puestoKey].nombre;
 
-                                }*/
-                                console.log(idPuesto)
+                                } else if (data[key].puestosAplica[puestoKey].idPuesto == 2222) {
+                                    agenteDeProteccion = "" + data[key].puestosAplica[puestoKey].nombre;
+
+                                } else if (data[key].puestosAplica[puestoKey].idPuesto == 3333) {
+                                    custodioDeDetenidos = "" + data[key].puestosAplica[puestoKey].nombre;
+                                } else if (data[key].puestosAplica[puestoKey].idPuesto == 4444) {
+
+                                    agenteDeLocalizacion = "" + data[key].puestosAplica[puestoKey].nombre;
+                                }
+                                //console.log(data[key].puestosAplica[puestoKey].idPuesto)
                             }
                             $(
                                 '<tr style="background:#f1f1f1" id="tupla'+key+'">' + '</tr>'
                             )
                             .appendTo(tablaPrimerosIngresos);
                             $(
-                                
+                                '<td></td>'+
                                 '<td>' + data[key].numeroConvocatoria+ '</td>' +
                                 '<td>' + data[key].numeroFlujo+ '</td>' +
                                 '<td>' + data[key].numeroCedula+ '</td>' +
-                                '<td>' + nombrePI+ '</td>' +
+                                '<td>' + nombrePI + '</td>' +
+                                '<td>' + investigador1 + '</td>' +
+                                '<td>' + agenteDeProteccion + '</td>' +
+                                '<td>' + custodioDeDetenidos + '</td>' +
+                                '<td>' + agenteDeLocalizacion + '</td>' +
                                 '<td>' + data[key].cantidadDiasAdminPruebasGH+ '</td>' +
                                 '<td>' + data[key].cantidadDiasPruebasGH+ '</td>' +
                                 '<td>' + data[key].cantidadDiasAdminAntecedentes+ '</td>' +
@@ -288,7 +310,8 @@
                                 '<td>' + data[key].cantidadDiasAdminPruebasMedicas+ '</td>' +
                                 '<td>' + data[key].cantidadDiasPruebasMedicas+ '</td>' +
                                 '<td>' + data[key].cantidadDiasAdminToxicologia+ '</td>' +
-                                '<td>' + data[key].cantidadDiasToxicologia+ '</td>' +
+                                '<td>' + data[key].cantidadDiasToxicologia + '</td>' +
+                                '<td>' + data[key].instanciaPerdioProceso + '</td>' +
                                 '<td>' + data[key].condicion+ '</td>' +
                                 '<td>' + data[key].fechaIngreso+ '</td>' +
                                 '<td>' + data[key].cantidadDiasTotalesTramite+ '</td>' 
@@ -308,7 +331,7 @@
                     //btn_BuscarFLCV.prop("disabled", false);
                 }
                 //console.log("It works " + this.value)
-            //});
+            });
 
         });
         $("#buscarNumConvocatoria").on('change', function () {
