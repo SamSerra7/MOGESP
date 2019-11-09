@@ -1,0 +1,164 @@
+﻿
+@{
+	ViewData["Title"] = "Funcionario y Participacion en Puestos";
+}
+
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<!--Encabezado-->
+<div>
+	<center>
+		<h2>Funcionario y Participacion en Puestos</h2>
+	</center>
+	<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+		<hr />
+	</div>
+	<br />
+</div>
+
+
+
+<div class="row">
+	<h4>Datos Personales</h4>
+	<div class="col-md-2 col-md-offset-1">
+		<label>N&uacute;mero de C&eacute;dula</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>3333</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>Nombre</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>Juan</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>Direcci&oacute;n</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>150 metros</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>Telefonos</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>8888-8888</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>Correos</label>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+		<label>elCorreo@correo.com</label>
+	</div>
+
+</div>
+
+<br />
+
+<div class="row">
+	<h4>Participacion de Concursos</h4>
+	<!--Tabla Paricipacion en concursos-->
+	<div class="table-responsive col-md-4 col-md-offset-4" style="text-align: center; overflow-y: auto;">
+		<table id="tablaDatosPersonales" class="table table-responsive">
+			<thead style="align-content: center;">
+				<tr>
+					<th class="centrarTitulos ">Puesto</th>
+					<th class="centrarTitulos ">Resultado Obtenido</th>
+					<th class="centrarTitulos ">Fecha</th>
+					<th class="centrarTitulos "></th>
+				</tr>
+			</thead>
+
+			<tr>
+
+				<td> Jefe</td>
+				<td> Positivo</td>
+				<td>
+					15/06/2017
+				</td>
+				<td>
+					@Html.ActionLink("", "FuncionarioYParticipacionEnPuestos", new { editar = "" },
+											new { @class = "btn glyphicon glyphicon-pencil", @title = "Editar" })
+				</td>
+
+			</tr>
+		</table>
+	</div>
+
+</div>
+
+<div class="row container" id="AgregaConcurso" style="border: 3px solid #152327;">
+	<h4>Agregar Concurso</h4>
+	<div class="col-md-3 col-md-offset-2">
+		<label>Nombre Puesto</label>
+		@Html.TextBox("buscar", null, new {
+	@class = "form-control",
+	@AutoPostBack = "true",
+	@disabled = "disabled",
+	@name = "NombrePuestos"
+	})
+		<br />
+	</div>
+
+	<div class="col-md-3 col-md-offset-2">
+		<label>Resultado Optenido</label>
+		@Html.TextBox("resultado", null, new {
+	@class = "form-control",
+	@AutoPostBack = "true",
+	@disabled = "disabled",
+	@name = "Resultado"
+	})
+		<br />
+	</div>
+
+	<div class="col-md-3 col-md-offset-2">
+		<label>Fecha</label>
+		@Html.TextBox("resultado", null, new {
+	   @class = "form-control",
+	   @AutoPostBack = "true",
+	   @type = "date",
+	   @name = "fechaCita",
+	   @disabled = "disabled",
+	   @style = "visibility:hidden"
+   })
+		@*<input id="fechaCita" class="form-control" type="date" name="fechaCita" disabled="disabled" />*@
+		<br />
+	</div>
+
+	<div class="col-md-3 col-md-offset-10">
+		<div class="row">
+			@Html.ActionLink("Cancelar", "AgregarConcurso", new { buscar = "" },
+																	new { @class = "btn btn-secondary" })
+			@Html.ActionLink("Aceptar", "AgregarConcurso", new { buscar = "" },
+													new { @class = "btn btn-success" })
+		</div>
+		<br />
+	</div>
+
+
+</div>
+
+<div class="btn-block">
+	<button id="btnEditar" name="btnEditar"><i class="fas fa-edit"></i> Editar</button>
+</div>
+
+
+<script type="text/javascript">
+
+
+	$(function () {
+		$("#btnEditar").click(function () {
+			alert("click");
+
+			$("#AgregaConcurso").find('input, button, select').prop("disabled", false);
+			$("#AgregaConcurso").find('input, button, select').css("visibility", "visible");
+			$('#btnEditar').hide();
+
+		});
+	});
+
+</script>
