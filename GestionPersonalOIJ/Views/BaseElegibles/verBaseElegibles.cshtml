@@ -1,15 +1,62 @@
-﻿
+﻿@*model IEnumerable<MOGESP.Entities.Dominio.PrimerIngreso>*@
+@using MOGESP.Entities.Utilidades;
+
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Base Elegibles";
 }
 
-<!DOCTYPE html>
+<!--Encabezado-->
+<div class="col-md-12 col-xs-12 col-sm-12">
+    <center>
+        <h2>Primeros Ingresos</h2>
+    </center>
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>verBaseElegibles</title>
-</head>
-<body>
-</body>
-</html>
+<br />
+<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+    <hr />
+</div>
+<br />
+
+
+@*CÓDIGO PARA EL FILTRO DE BÚSQUEDA*@
+<div class="text-right form-inline">
+    <form method="get">
+        <div class="form-group" align="center">
+            @Html.TextBox("buscar", null, new
+            {
+                @placeholder = "Filtrar",
+               @class = "form-control",
+               @AutoPostBack = "true"
+           })
+        </div>
+        <button class="btn glyphicon glyphicon-search" type="submit"></button>
+    </form>
+</div>
+<br />
+<!--Tabla verPrimeros Ingresos-->
+<div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+    <table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+        <thead style="align-content: center;">
+            <tr style=" background-color: #222;" class="btn-primary">
+                <th class="border-top-left"></th>
+                <th class="centrarTitulos">C&eacute;dula</th>
+                <th class="centrarTitulos">Nombre - Apellidos</th>
+                <th class="centrarTitulos">Puesto</th>
+                <th class="border-top-right centrarTitulos">Numero de flujo</th>
+
+
+            </tr>
+        </thead>
+
+        <tr style="background:#f1f1f1">
+
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+</table>
+</div>
