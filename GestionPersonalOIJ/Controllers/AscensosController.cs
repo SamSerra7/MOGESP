@@ -12,19 +12,18 @@ namespace MOGESP.UserInterface.Controllers
 {
     public class AscensosController : Controller
     {
-
         readonly FuncionarioServicio funcioniarioServicio = new FuncionarioServicio();
         private readonly int registrosPorPagina = 4;
         private IEnumerable<Funcionario> funcionarios;
         private PaginadorGenerico<Funcionario> paginador;
 
 
-        public IActionResult AgregarConcurso()
-        {
-            return View();
-        }
+		public IActionResult AgregarConcurso()
+		{
+			return View();
+		}
 
-        [HttpGet]
+		[HttpGet]
         public ActionResult VerFuncionarios(int pagina = 1, String buscar = "")
         {
 
@@ -68,6 +67,11 @@ namespace MOGESP.UserInterface.Controllers
             return View(paginador);
         }
 
+		//Controller Funcionario y Participaconen Puestos
+		public IActionResult FuncionarioYParticipacionEnPuestos()
+		{
+			return View();
+		}
 
-    }
+	}
 }

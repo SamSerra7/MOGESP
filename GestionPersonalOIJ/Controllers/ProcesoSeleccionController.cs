@@ -208,6 +208,8 @@ namespace GestionPersonalOIJ.Controllers
 
 
 
+
+
 		[HttpPost]
         public RedirectToActionResult InsertarTodosPrimerosIngresos()
         {
