@@ -12,8 +12,11 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-
+    
 
 
 </head>
@@ -211,89 +214,75 @@
 
 
     <!--Tabla Cuadro General-->
-    <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
-        <table id="tablaPrimerosIngresos" class="table table-striped table-bordered">
-            <thead style="align-content: center;">
-                <tr style=" background-color: #222;" class="btn-primary">
-                    <th class="centrarTitulos">N&deg;. Concurso</th>
-                    <th class="centrarTitulos">Ubicaci&oacute;n</th>
-                    <th class="centrarTitulos">N&deg;. C&eacute;dula</th>
-                    <th class="centrarTitulos">Nombre</th>
-                    <th class="centrarTitulos">Puestos</th>
-                    <th class="centrarTitulos">
-                        Tr&aacute;mite
-                        <br>Administraci&oacute;n
-                    </th>
-                    <th class="centrarTitulos">
-                        Pruebas
-                        <br>Psicol&oacute;gicas-Psicom&eacute;tricas
-                    </th>
-                    <th class="centrarTitulos">
-                        Tr&aacute;mite
-                        <br>Administraci&oacute;n
-                    </th>
-                    <th class="centrarTitulos">
-                        Invest.
-                        <br>De Antecedentes
-                    </th>
-                    <th class="centrarTitulos">
-                        Tr&aacute;mite
-                        <br>Administraci&oacute;n
-                    </th>
-                    <th class="centrarTitulos">Vialidad</th>
-                    <th class="centrarTitulos">
-                        Fecha Envio a GH
-                        <br>Traslado a Nueva Etapa
-                    </th>
-                    <th class="centrarTitulos">
-                        Tr&aacute;mite
-                        <br>Administraci&oacute;n
-                    </th>
-                    <th class="centrarTitulos">Pruebas M&eacute;dicas</th>
-                    <th class="centrarTitulos">
-                        Tr&aacute;mite
-                        <br>Administraci&oacute;n
-                    </th>
-                    <th class="centrarTitulos">Toxicolog&iacute;a</th>
-                    <th class="centrarTitulos">
-                        Instancia en que
-                        <br>Perdi&oacute; el Proceso
-                    </th>
-                    <th class="centrarTitulos">Condici&oacute;n</th>
+                <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+                    <table id="tablaPrimerosIngresos" class="table table-striped table-bordered">
+                        <thead style="align-content: center;">
+                            <tr style=" background-color: #222;" class="btn-primary">
+                                <th class="centrarTitulos">N&deg;. Concurso</th>
+                                <th class="centrarTitulos">Ubicaci&oacute;n</th>
+                                <th class="centrarTitulos">N&deg;. C&eacute;dula</th>
+                                <th class="centrarTitulos">Nombre</th>
+                                <th class="centrarTitulos">Puestos</th>
+                                <th class="centrarTitulos">
+                                    Tr&aacute;mite
+                                    <br>Administraci&oacute;n
+                                </th>
+                                <th class="centrarTitulos">
+                                    Pruebas
+                                    <br>Psicol&oacute;gicas-Psicom&eacute;tricas
+                                </th>
+                                <th class="centrarTitulos">
+                                    Tr&aacute;mite
+                                    <br>Administraci&oacute;n
+                                </th>
+                                <th class="centrarTitulos">
+                                    Invest.
+                                    <br>De Antecedentes
+                                </th>
+                                <th class="centrarTitulos">
+                                    Tr&aacute;mite
+                                    <br>Administraci&oacute;n
+                                </th>
+                                <th class="centrarTitulos">Vialidad</th>
+                                <th class="centrarTitulos">
+                                    Fecha Envio a GH
+                                    <br>Traslado a Nueva Etapa
+                                </th>
+                                <th class="centrarTitulos">
+                                    Tr&aacute;mite
+                                    <br>Administraci&oacute;n
+                                </th>
+                                <th class="centrarTitulos">Pruebas M&eacute;dicas</th>
+                                <th class="centrarTitulos">
+                                    Tr&aacute;mite
+                                    <br>Administraci&oacute;n
+                                </th>
+                                <th class="centrarTitulos">Toxicolog&iacute;a</th>
+                                <th class="centrarTitulos">
+                                    Instancia en que
+                                    <br>Perdi&oacute; el Proceso
+                                </th>
+                                <th class="centrarTitulos">Condici&oacute;n</th>
 
-                    <th class="centrarTitulos">Fecha Ingreso</th>
-                    <th class="centrarTitulos">
-                        Cantidad Total
-                        <br>D&iacute;as en Tr&aacute;mite
-                    </th>
+                                <th class="centrarTitulos">Fecha Ingreso</th>
+                                <th class="centrarTitulos">
+                                    Cantidad Total
+                                    <br>D&iacute;as en Tr&aacute;mite
+                                </th>
 
-                </tr>
-            </thead>
+                            </tr>
+                        </thead>
 
-            <tr style="background:#f1f1f1">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+                        <tr style="background:#f1f1f1"></tr>
 
-        </table>
-
-    </div>
+                    </table>
+                    <div>
+                        <button id="previousBtn" type="button" class="btn btn-dark">&laquo; Previous</button>
+                        <label id="paginationLabel"></label>
+                        <button id="nextBtn" type="button" class="btn btn-light">Next &raquo</button>
+                    </div>
+                    
+                </div>
 
 
 </body>
@@ -304,17 +293,51 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
 <script>
-    
-
-</script>
-<script>
     var btn_BuscarFLCV = $("#btn_BuscarFLCV");
     var selectFlujos = $("#buscarNumFlujo");
     var selectConvocatoria = $("#buscarNumConvocatoria");
     var tablaPrimerosIngresos = $("#tablaPrimerosIngresos");
+    var paginationLabel = $("#paginationLabel");
+    var btnPrevious = $('#previousBtn');
+    var btnNext = $('#nextBtn');
+    var contentPaginationLbl = "";
+    var actualPage = 0;
+    var totalPages = 0;
 
     var nombrePI = "";
     var puestos = "N/A";
+    $('#previousBtn').click(function () {
+        
+        contentPaginationLbl = paginationLabel.html();
+        actualPage = parseInt(contentPaginationLbl[0]);
+        totalPages = parseInt(contentPaginationLbl[2]);
+        if (actualPage != 1) {
+            if (actualPage == 2) {
+                btnPrevious.hide();
+            }
+            if (actualPage == totalPages) {
+                btnNext.show();
+            }
+            actualPage = actualPage - 1;
+            paginationLabel.text(actualPage + "/" + totalPages);
+        }
+        
+    });
+    $('#nextBtn').click(function () {
+        
+        contentPaginationLbl = paginationLabel.html();
+        actualPage = parseInt(contentPaginationLbl[0]);
+        totalPages = parseInt(contentPaginationLbl[2]);
+        
+        if (actualPage == 1) {
+            btnPrevious.show();
+        }
+        if (totalPages - actualPage == 1) {
+            btnNext.hide();
+        }
+        actualPage = actualPage + 1;
+        paginationLabel.text(actualPage + "/" + totalPages);
+    });
     function hideDefaultColumns() {
         for (var i = 6; i < 20; i++) {
 
@@ -322,23 +345,25 @@
                 $("#ck" + i).prop('checked', true);
                 $('th:nth-child(' + i + ')').hide();
                 $('td:nth-child(' + i + ')').hide();
-                console.log("m" + i);
+                
             }
         }
     }
     $(document).ready(function () {
 
         hideDefaultColumns();
-
+        btnNext.hide();
+        btnPrevious.hide();
+        paginationLabel.hide();
     });
     $('label.checkbox-inline').click(function () {
         var headColumn = $('th:nth-child(' + $(this).children().val() + ')');
         var column = $('td:nth-child(' + $(this).children().val() + ')');
 
-       
+
 
         // Toggle the visibility
-       
+
 
         if (column.css('display') == 'none') {
             headColumn.show();
@@ -348,11 +373,69 @@
             column.hide();
         }
 
-        
-        
+
+
         //var result = ;
         //console.log(result)
     });
+    function displayTable(data) {
+        totalPages = Math.ceil(data.length / 10);
+        if (totalPages > 1) {
+            btnNext.show();
+            btnPrevious.show();
+            paginationLabel.text(1 + "/" + totalPages);
+            paginationLabel.show();
+        }
+        
+        for (key in data) {
+            puestos = "";
+            if (data.hasOwnProperty(key)) {
+                nombrePI = "" + data[key].nombrePI + " " + data[key].primerApellido + " " + data[key].segundoApellido;
+                for (puestoKey in data[key].puestosAplica) {
+
+                    puestos = puestos + data[key].puestosAplica[puestoKey].nombre + ", ";
+
+
+                    //console.log(data[key].puestosAplica[puestoKey].idPuesto)
+                }
+                $(
+                    '<tr style="background:#f1f1f1" id="tupla' + key + '">' + '</tr>'
+                )
+                    .appendTo(tablaPrimerosIngresos);
+                $(
+                    '<td>' + data[key].numeroConvocatoria + '</td>' +
+                    '<td>' + data[key].numeroFlujo + '</td>' +
+                    '<td>' + data[key].numeroCedula + '</td>' +
+                    '<td>' + nombrePI + '</td>' +
+                    '<td>' + puestos + '</td>' +
+                    '<td>' + data[key].cantidadDiasAdminPruebasGH + '</td>' +
+                    '<td>' + data[key].cantidadDiasPruebasGH + '</td>' +
+                    '<td>' + data[key].cantidadDiasAdminAntecedentes + '</td>' +
+                    '<td>' + data[key].cantidadDiasAntecedentes + '</td>' +
+                    '<td>' + data[key].cantidadDiasAdminVialidad + '</td>' +
+                    '<td>' + data[key].cantidadDiasVialidad + '</td>' +
+                    '<td>' + data[key].fechaEnvioGHTraslado + '</td>' +
+                    '<td>' + data[key].cantidadDiasAdminPruebasMedicas + '</td>' +
+                    '<td>' + data[key].cantidadDiasPruebasMedicas + '</td>' +
+                    '<td>' + data[key].cantidadDiasAdminToxicologia + '</td>' +
+                    '<td>' + data[key].cantidadDiasToxicologia + '</td>' +
+                    '<td>' + data[key].instanciaPerdioProceso + '</td>' +
+                    '<td>' + data[key].condicion + '</td>' +
+                    '<td>' + data[key].fechaIngreso + '</td>' +
+                    '<td>' + data[key].cantidadDiasTotalesTramite + '</td>'
+
+
+                )
+                    .appendTo("#tupla" + key);
+
+
+
+
+            }
+
+
+        }
+    }
     $("#btn_BuscarFLCV").click(function () {
 
         tablaPrimerosIngresos.find("tr:gt(0)").remove();
@@ -364,55 +447,7 @@
                 alert("El cuadro general seleccionado esta vacio");
             } else {
 
-
-                for (key in data) {
-                    puestos = "";
-                    if (data.hasOwnProperty(key)) {
-                        nombrePI = "" + data[key].nombrePI + " " + data[key].primerApellido + " " + data[key].segundoApellido;
-                        for (puestoKey in data[key].puestosAplica) {
-
-                            puestos = puestos + data[key].puestosAplica[puestoKey].nombre + ", ";
-
-
-                            //console.log(data[key].puestosAplica[puestoKey].idPuesto)
-                        }
-                        $(
-                            '<tr style="background:#f1f1f1" id="tupla' + key + '">' + '</tr>'
-                        )
-                            .appendTo(tablaPrimerosIngresos);
-                        $(
-                            '<td>' + data[key].numeroConvocatoria + '</td>' +
-                            '<td>' + data[key].numeroFlujo + '</td>' +
-                            '<td>' + data[key].numeroCedula + '</td>' +
-                            '<td>' + nombrePI + '</td>' +
-                            '<td>' + puestos + '</td>' +
-                            '<td>' + data[key].cantidadDiasAdminPruebasGH + '</td>' +
-                            '<td>' + data[key].cantidadDiasPruebasGH + '</td>' +
-                            '<td>' + data[key].cantidadDiasAdminAntecedentes + '</td>' +
-                            '<td>' + data[key].cantidadDiasAntecedentes + '</td>' +
-                            '<td>' + data[key].cantidadDiasAdminVialidad + '</td>' +
-                            '<td>' + data[key].cantidadDiasVialidad + '</td>' +
-                            '<td>' + data[key].fechaEnvioGHTraslado + '</td>' +
-                            '<td>' + data[key].cantidadDiasAdminPruebasMedicas + '</td>' +
-                            '<td>' + data[key].cantidadDiasPruebasMedicas + '</td>' +
-                            '<td>' + data[key].cantidadDiasAdminToxicologia + '</td>' +
-                            '<td>' + data[key].cantidadDiasToxicologia + '</td>' +
-                            '<td>' + data[key].instanciaPerdioProceso + '</td>' +
-                            '<td>' + data[key].condicion + '</td>' +
-                            '<td>' + data[key].fechaIngreso + '</td>' +
-                            '<td>' + data[key].cantidadDiasTotalesTramite + '</td>'
-
-
-                        )
-                            .appendTo("#tupla" + key);
-
-
-
-
-                    }
-
-
-                }
+                displayTable(data);
                 hideDefaultColumns();
                 //btn_BuscarFLCV.prop("disabled", false);
             }
