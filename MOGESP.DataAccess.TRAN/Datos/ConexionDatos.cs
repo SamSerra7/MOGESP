@@ -12,7 +12,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         {
             //String conexion = "Server=163.178.173.148;Database=MOGESPProd;User id=estudiantesrp;Password=estudiantesrp;";//paraiso
             //String conexion = "Server=DESKTOP-QI4QP2A\\SQLEXPRESS;Database=MOGESP;User id=usrMOGESP;Password=usrMOGESP;"; //Manfred local
-            String conexion = "Server=163.178.107.130;Database=MOGESP;User id=laboratorios;Password=Saucr.118P;";//Turrialba
+            String conexion = "Server=163.178.107.130;Database=MOGESP;User id=laboratorios;Password=Saucr.118";//Turrialba
             return new SqlConnection(conexion);
         }
 
