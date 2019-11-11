@@ -11,7 +11,7 @@ namespace MOGESP.Entities.Dominio
         {
         }
 
-        public DepartamentoAntecedentes(string numeroCedula, DateTime fechaIngresoAdministracion, int cantidadDiasAdministracion, DateTime fechaIngreso, string oficioIngreso, DateTime fechaResultado, int zonaTrabajo, int diasALaFecha, DateTime fechaSalida, int cantidadDiasTotalesTramite, string oficioRespuesta, int estadoResultHojaEnvioGH)
+        public DepartamentoAntecedentes(string numeroCedula, DateTime fechaIngresoAdministracion, int cantidadDiasAdministracion, DateTime fechaIngreso, string oficioIngreso, DateTime fechaResultado, int zonaTrabajo, int diasALaFecha, DateTime fechaSalida, int cantidadDiasTotalesTramite, string oficioRespuesta, string estadoResultHojaEnvioGH)
         {
             NumeroCedula = numeroCedula ?? throw new ArgumentNullException(nameof(numeroCedula));
             FechaIngresoAdministracion = fechaIngresoAdministracion;
@@ -146,14 +146,13 @@ namespace MOGESP.Entities.Dominio
             }
         }
 
-        private int estadoResultHojaEnvioGH;
-        public int EstadoResultHojaEnvioGH
+        private string estadoResultHojaEnvioGH;
+        public string EstadoResultHojaEnvioGH
         {
             get { return estadoResultHojaEnvioGH; }
             set
             {
-                if (value < 0) throw new Exception("El campo de estadoResultHojaEnvioGH es requerido");
-                estadoResultHojaEnvioGH = value;
+                estadoResultHojaEnvioGH = value ?? throw new Exception("El campo de estadoResultHojaEnvioGH es requerido");
             }
         }
 
