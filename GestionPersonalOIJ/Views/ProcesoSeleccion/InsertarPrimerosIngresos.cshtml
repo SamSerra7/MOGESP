@@ -25,166 +25,189 @@
 
 <div class="container" style="border: 3px solid #152327;">
 
-    
-    <br />
-
-
-
-    @using (Html.BeginForm("AgregarCorreo", "ProcesoSeleccion", FormMethod.Post))
-    {
-
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
-        <div class="col-sm-3"><input type="text" id="numeroConvocatoria" name="numeroConvocatoria" class="form-control" value="@numConv" required /></div>
-        <div class="col-sm-3">
-            <select id="selNumConv" class="form-control" size="3">
-                @if (ViewBag.NConvocatoria != null)
-                {
-                    @foreach (var nc in ViewBag.NConvocatoria)
-                    {
-                        <option value="@nc" onclick="pasarNC()" >@nc</option>
-                    }
-                }
-            </select>
-        </div>
-    </div>
 
     <br />
 
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-2">@Html.LabelFor(m => m.NumeroFlujo)</div>
-        <div class="col-sm-3"><input type="number" id="numeroFlujo" name="numeroFlujo" class="form-control" value="@numFlujo" required /></div>
-        <div class="col-sm-3">
-            <select id="selNumFlujo" class="form-control" size="3">
-                @if (ViewBag.NFlujo != null)
-                {
-                    @foreach (var nc in ViewBag.NFlujo)
-                    {
-                        <option value="@nc" onclick="pasarNF()">@nc</option>
-                    }
-                }
-            </select>
-        </div>
-    </div>
 
+        @using (Html.BeginForm("AgregarNumFlujo", "ProcesoSeleccion", FormMethod.Post,new { Id = "agregarNF" }))
+        {
 
-    <hr />
-
-
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2">@Html.LabelFor(m => m.Correos)</div>
-        <div class="col-sm-3"><input type="email" class="form-control" id="correo" name="correo"></div>
-        <div class="col-sm-1">
-            <button type="submit" id="btnAgregarCorreo" class="btn btn-warning">
-                +
-            </button>
-        </div>
-        <div class="col-sm-3">
-            <select id="selCorreos" class="form-control" multiple size="3">
-                @if (correos != null)
-                {
-                    @foreach (var correo in correos)
-                    {
-                        <option value="@correo">@correo</option>
-                    }
-                }
-            </select>
-        </div>
-    </div>
-
-    <br />
-    <br />
-    }
-
-
-    @using (Html.BeginForm("AgregarTel", "ProcesoSeleccion", FormMethod.Post))
-    {
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.Telefonos)</div>
-            <div class="col-sm-3"><input type="text" class="form-control" id="tel" name="tel"></div>
-            <div class="col-sm-1">
-                <button type="submit" id="btnAgregarTelefono" class="btn btn-warning">
-                    +
-                </button>
-            </div>
-            <div class="col-sm-3">
-                <select id="selTels" class="form-control" multiple size="3">
-                    @if (tels != null)
-                    {
-                        @foreach (var tel in tels)
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
+                <div class="col-sm-3"><input type="text" id="numeroConvocatoria" name="numeroConvocatoria" class="form-control" value="@numConv" required /></div>
+                <div class="col-sm-3">
+                    <select id="selNumConv" class="form-control" size="3">
+                        @if (ViewBag.NConvocatoria != null)
                         {
-                            <option value="@tel">@tel</option>
+                            @foreach (var nc in ViewBag.NConvocatoria)
+                        {
+                                <option value="@nc" onclick="pasarNC()">@nc</option>
                         }
-                    }
-                </select>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <br /><br />
-
-
-    }
+            <br />
+        }
 
 
-    @using (Html.BeginForm("AgregarPrimerIngreso", "ProcesoSeleccion", FormMethod.Post))
-    {
+        @using (Html.BeginForm("AgregarCorreo", "ProcesoSeleccion", FormMethod.Post))
+        {
 
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.Cedula)</div>
-            <div class="col-sm-3">@Html.TextBoxFor(m => m.Cedula, new { Class = "form-control", Required = "true" })</div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.Nombre)</div>
-            <div class="col-sm-3">@Html.TextBoxFor(m => m.Nombre, new { Class = "form-control", Required = "true" })</div>
-        </div>
-
-        <br />
-
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.PrimerApellido)</div>
-            <div class="col-sm-3">@Html.TextBoxFor(m => m.PrimerApellido, new { Class = "form-control" })</div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.SegundoApellido)</div>
-            <div class="col-sm-3">@Html.TextBoxFor(m => m.SegundoApellido, new { Class = "form-control" })</div>
-        </div>
-
-        <br />
-
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.Direccion)</div>
-            <div class="col-sm-3">@Html.TextAreaFor(m => m.Direccion, new { Class = "form-control" })</div>
-            <div class="col-sm-2">@Html.LabelFor(m => m.Sexo)</div>
-            <div class="col-sm-3">
-                @Html.DropDownListFor(m => m.Sexo, new List<SelectListItem>
-                                        {new SelectListItem{Text="M", Value="M"},
-                                        new SelectListItem{Text="F", Value="F"} },
-                                     "Seleccione su sexo", new { Class = "form-control" })
+            @*<div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
+                <div class="col-sm-3"><input type="text" id="numeroConvocatoria" name="numeroConvocatoria" class="form-control" value="@numConv" required /></div>
+                <div class="col-sm-3">
+                    <select id="selNumConv" class="form-control" size="3">
+                        @if (ViewBag.NConvocatoria != null)
+                        {
+                            @foreach (var nc in ViewBag.NConvocatoria)
+                            {
+                                <option value="@nc" onclick="pasarNC()">@nc</option>
+                            }
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
+
+            <br />*@
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.NumeroFlujo)</div>
+                <div class="col-sm-3"><input type="number" id="numeroFlujo" name="numeroFlujo" class="form-control" value="@numFlujo" required /></div>
+                <div class="col-sm-3">
+                    <select id="selNumFlujo" class="form-control" size="3">
+                        @if (ViewBag.NFlujo != null)
+                        {
+                            @foreach (var nc in ViewBag.NFlujo)
+                            {
+                                <option value="@nc" onclick="pasarNF()">@nc</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
 
 
-        <br />
-        <br />
+            <hr />
 
 
-        <center>
-            <button type="submit" id="btnAgregar" class="btn btn-primary">
-                Agregar
-            </button>
-        </center>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.Correos)</div>
+                <div class="col-sm-3"><input type="email" class="form-control" id="correo" name="correo"></div>
+                <div class="col-sm-1">
+                    <button type="submit" id="btnAgregarCorreo" class="btn btn-warning">
+                        +
+                    </button>
+                </div>
+                <div class="col-sm-3">
+                    <select id="selCorreos" class="form-control" multiple size="3">
+                        @if (correos != null)
+                        {
+                            @foreach (var correo in correos)
+                            {
+                                <option value="@correo">@correo</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
 
-        <br /><br />
+            <br />
+            <br />
+        }
 
 
-    }
+        @using (Html.BeginForm("AgregarTel", "ProcesoSeleccion", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.Telefonos)</div>
+                <div class="col-sm-3"><input type="text" class="form-control" id="tel" name="tel"></div>
+                <div class="col-sm-1">
+                    <button type="submit" id="btnAgregarTelefono" class="btn btn-warning">
+                        +
+                    </button>
+                </div>
+                <div class="col-sm-3">
+                    <select id="selTels" class="form-control" multiple size="3">
+                        @if (tels != null)
+                        {
+                            @foreach (var tel in tels)
+                            {
+                                <option value="@tel">@tel</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <br /><br />
+
+
+        }
+
+
+        @using (Html.BeginForm("AgregarPrimerIngreso", "ProcesoSeleccion", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.Cedula)</div>
+                <div class="col-sm-3">@Html.TextBoxFor(m => m.Cedula, new { Class = "form-control", Required = "true" })</div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.Nombre)</div>
+                <div class="col-sm-3">@Html.TextBoxFor(m => m.Nombre, new { Class = "form-control", Required = "true" })</div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.PrimerApellido)</div>
+                <div class="col-sm-3">@Html.TextBoxFor(m => m.PrimerApellido, new { Class = "form-control" })</div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.SegundoApellido)</div>
+                <div class="col-sm-3">@Html.TextBoxFor(m => m.SegundoApellido, new { Class = "form-control" })</div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.Direccion)</div>
+                <div class="col-sm-3">@Html.TextAreaFor(m => m.Direccion, new { Class = "form-control" })</div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.Sexo)</div>
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(m => m.Sexo, new List<SelectListItem>
+                                            {new SelectListItem{Text="M", Value="M"},
+                                            new SelectListItem{Text="F", Value="F"} },
+                                         "Seleccione su sexo", new { Class = "form-control" })
+                </div>
+            </div>
+
+
+            <br />
+            <br />
+
+
+            <center>
+                <button type="submit" id="btnAgregar" class="btn btn-primary">
+                    Agregar
+                </button>
+            </center>
+
+            <br /><br />
+
+
+        }
 
 
 
-</div>
+    </div>
 <hr />
 
 <div class="table-responsive">
@@ -260,7 +283,10 @@
         var selNC = document.getElementById('selNumConv');
         var txtNC = document.getElementById('numeroConvocatoria');
         txtNC.value = selNC.value;
-        window.location.reload();
+
+
+        var post = document.getElementById('agregarNF');
+        post.submit();
     }
 
     function pasarNF() {

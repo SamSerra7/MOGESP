@@ -27,7 +27,7 @@ namespace GestionPersonalOIJ.Controllers
         readonly static List<string> todosTels = new List<string>();
         private static int numeroFlujo = 1;
         private static string numeroConvocatoria = "OIJ-";
-
+        private static List<int> flujosPorConvocatoria = new List<int>();
 
 
         public IActionResult CuadroGeneral()
@@ -112,19 +112,35 @@ namespace GestionPersonalOIJ.Controllers
 
 
             ViewBag.NConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
-            if(ViewBag.NConvocatoria != null)
-            ViewBag.NFlujo = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(Convert.ToString(ViewBag.NConvocatoria));
+            ViewBag.NFlujo = flujosPorConvocatoria;
 
             return View();
         }
+
+
+        [HttpPost]
+        public RedirectToActionResult AgregarNumFlujo(IFormCollection formCollection)
+        {
+
+            numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
+
+            if (!string.IsNullOrEmpty(numeroConvocatoria))
+                flujosPorConvocatoria = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(numeroConvocatoria);
+
+
+            return RedirectToActionPermanent("InsertarPrimerosIngresos");
+        }
         
+
+
+
+
         [HttpPost]
         public RedirectToActionResult AgregarCorreo(IFormCollection formCollection)
         {
 
             todosCorreos.Add(formCollection["correo"]);
 
-            numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
             numeroFlujo = Convert.ToInt32(formCollection["numeroFlujo"]);
 
             return RedirectToActionPermanent("InsertarPrimerosIngresos");
