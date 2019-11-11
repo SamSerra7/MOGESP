@@ -111,6 +111,10 @@ namespace GestionPersonalOIJ.Controllers
             ViewData["numFlujo"] = numeroFlujo;
 
 
+            ViewBag.NConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
+            if(ViewBag.NConvocatoria != null)
+            ViewBag.NFlujo = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(Convert.ToString(ViewBag.NConvocatoria));
+
             return View();
         }
         
