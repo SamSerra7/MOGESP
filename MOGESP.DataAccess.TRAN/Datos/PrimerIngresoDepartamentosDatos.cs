@@ -89,8 +89,45 @@ namespace MOGESP.DataAccess.TRAN.Datos
         }
 
 
+        public DepartamentoVialidad getDepartamentoVialidad(string cedula)
+        {
+
+            DepartamentoVialidad departamentoVialidad = new DepartamentoVialidad();
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"PA_Seleccionar_TMOGESP_Vialidad @numeroDeCedula ", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                departamentoVialidad.NumeroCedula = cedula;
+                departamentoVialidad.FechaIngresoAdministracion = Convert.ToDateTime(reader["TF_FechaIngresoAdministracion"]);
+                departamentoVialidad.CantidadDiasAdministracion = Convert.ToInt32(reader["TN_CantidadDiasAdm"]);
+                departamentoVialidad.FechaIngresoTransportes = Convert.ToDateTime(reader["TF_FechaIngresoTransportes"]);
+                departamentoVialidad.OficioIngreso = reader["TC_OficioIngreso"].ToString();
+                departamentoVialidad.DiasParaCita = Convert.ToInt32(reader["TN_DiasParaCita"]);
+                departamentoVialidad.FechaCita = Convert.ToDateTime(reader["TF_FechaFechaCita"]);
+                departamentoVialidad.FechaSalida = Convert.ToDateTime(reader["TF_FechaSalida"]);
+                departamentoVialidad.CantidadDiasTotalesTramite = Convert.ToInt32(reader["TN_CantidadDiasTotalesTramite"]);
+                departamentoVialidad.OficioRespuesta = reader["TC_OficioRespuesta"].ToString();
+                departamentoVialidad.EstadoResultHojaEnvioGH = reader["TC_Nombre"].ToString();
+            }
+
+            sqlConnection.Close();
+
+
+            return departamentoVialidad;
+        }
+
+
 
     }
+
 
 
 }

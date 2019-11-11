@@ -11,7 +11,7 @@ namespace MOGESP.Entities.Dominio
         {
         }
 
-        public DepartamentoVialidad(string numeroCedula, DateTime fechaIngresoAdministracion, int cantidadDiasAdministracion, DateTime fechaIngresoTransportes, string oficioIngreso, DateTime fechaCita, int diasParaCita, DateTime fechaSalida, int cantidadDiasTotalesTramite, string oficioRespuesta, int estadoResultHojaEnvioGH)
+        public DepartamentoVialidad(string numeroCedula, DateTime fechaIngresoAdministracion, int cantidadDiasAdministracion, DateTime fechaIngresoTransportes, string oficioIngreso, DateTime fechaCita, int diasParaCita, DateTime fechaSalida, int cantidadDiasTotalesTramite, string oficioRespuesta, string estadoResultHojaEnvioGH)
         {
             NumeroCedula = numeroCedula ?? throw new ArgumentNullException(nameof(numeroCedula));
             FechaIngresoAdministracion = fechaIngresoAdministracion;
@@ -134,8 +134,8 @@ namespace MOGESP.Entities.Dominio
             }
         }
 
-        private int estadoResultHojaEnvioGH;
-        public int EstadoResultHojaEnvioGH
+        private string estadoResultHojaEnvioGH;
+        public string EstadoResultHojaEnvioGH
         {
             get { return estadoResultHojaEnvioGH; }
             set
