@@ -140,7 +140,7 @@ namespace MOGESP.Entities.Dominio
             get { return estadoResultHojaEnvioGH; }
             set
             {
-                if (value < 0) throw new Exception("El campo de estadoResultHojaEnvioGH es requerido");
+                if (string.IsNullOrEmpty(value)) throw new Exception("El campo de estadoResultHojaEnvioGH es requerido");
                 estadoResultHojaEnvioGH = value;
             }
         }
