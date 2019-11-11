@@ -52,7 +52,46 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return departamentoPruebasGH;
         }
 
-        
+        public DepartamentoAntecedentes getDepartamentoAntecedentes(string cedula)
+        {
+
+            DepartamentoAntecedentes departamentoAntecedentes = new DepartamentoAntecedentes();
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"PA_Seleccionar_TMOGESP_Antecedentes @numeroDeCedula ", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                departamentoAntecedentes.NumeroCedula = cedula;
+                departamentoAntecedentes.FechaIngresoAdministracion = Convert.ToDateTime(reader["TF_FechaIngresoAdministracion"]);
+                departamentoAntecedentes.CantidadDiasAdministracion = Convert.ToInt32(reader["TN_CantidadDiasAdm"]);
+                departamentoAntecedentes.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"]);
+                departamentoAntecedentes.OficioIngreso = reader["TC_OficioIngreso"].ToString();
+                departamentoAntecedentes.DiasALaFecha = Convert.ToInt32(reader["TN_DiasALaFecha"]);
+                departamentoAntecedentes.FechaResultado = Convert.ToDateTime(reader["TF_FechaFechaResultado"]);
+                departamentoAntecedentes.ZonaTrabajo = Convert.ToInt32(reader["TN_ZonaDeTrabajo"]);
+                departamentoAntecedentes.FechaSalida = Convert.ToDateTime(reader["TF_FechaSalida"]);
+                departamentoAntecedentes.CantidadDiasTotalesTramite = Convert.ToInt32(reader["TN_CantidadDiasTotalesTramite"]);
+                departamentoAntecedentes.OficioRespuesta = reader["TC_OficioRespuesta"].ToString();
+                departamentoAntecedentes.EstadoResultHojaEnvioGH = reader["TC_Nombre"].ToString();
+            }
+
+            sqlConnection.Close();
+
+
+            return departamentoAntecedentes;
+        }
+
+
 
     }
+
+
 }
+
