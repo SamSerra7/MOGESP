@@ -11,7 +11,7 @@ namespace MOGESP.Entities.Dominio
         {
         }
 
-        public DepartamentoPruebasGH(string numeroCedula, DateTime fechaIngresoAdministracion, int cantidadDiasAdministracion, DateTime fechaIngreso, string oficioIngreso, int diasALaFecha, DateTime fechaTrasladoPsicologosAdmin, string numOficio, DateTime fechaDevolucionGHDeAdmin, int cantidadDiasPsicologiaAdmin, DateTime fechaLimiteSegunPlazo, int diasALaFechaDeFechaLimiteSegunPlazo, int diasTramiteGHDespuesDevuelto, DateTime fechaSalida, int cantidadDiasTotalesTramite, string oficioRespuesta, int estadoResultHojaEnvioGH)
+        public DepartamentoPruebasGH(string numeroCedula, DateTime fechaIngresoAdministracion, int cantidadDiasAdministracion, DateTime fechaIngreso, string oficioIngreso, int diasALaFecha, DateTime fechaTrasladoPsicologosAdmin, string numOficio, DateTime fechaDevolucionGHDeAdmin, int cantidadDiasPsicologiaAdmin, DateTime fechaLimiteSegunPlazo, int diasALaFechaDeFechaLimiteSegunPlazo, int diasTramiteGHDespuesDevuelto, DateTime fechaSalida, int cantidadDiasTotalesTramite, string oficioRespuesta, string estadoResultHojaEnvioGH)
         {
             NumeroCedula = numeroCedula ?? throw new ArgumentNullException(nameof(numeroCedula));
             FechaIngresoAdministracion = fechaIngresoAdministracion;
@@ -73,6 +73,16 @@ namespace MOGESP.Entities.Dominio
             {
                 if (value == null) throw new Exception("El campo de fechaIngreso es requerido");
                 fechaIngreso = value;
+            }
+        }
+
+        private string ubicacion;
+        public string Ubicacion
+        {
+            get { return ubicacion; }
+            set
+            {
+                ubicacion = value ?? throw new Exception("El campo de ubicacion es requerido");
             }
         }
 
@@ -205,14 +215,13 @@ namespace MOGESP.Entities.Dominio
             }
         }
 
-        private int estadoResultHojaEnvioGH;
-        public int EstadoResultHojaEnvioGH
+        private string estadoResultHojaEnvioGH;
+        public string EstadoResultHojaEnvioGH
         {
             get { return estadoResultHojaEnvioGH; }
             set
             {
-                if (value < 0) throw new Exception("El campo de estadoResultHojaEnvioGH es requerido");
-                estadoResultHojaEnvioGH = value;
+                estadoResultHojaEnvioGH = value ?? throw new Exception("El campo de estadoResultHojaEnvioGH es requerido");
             }
         }
 
