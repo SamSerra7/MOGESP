@@ -158,6 +158,43 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             return departamentoPruebasMedicas;
         }
+
+        public DepartamentoToxicologia getDepartamentoToxicologia(string cedulaPI)
+        {
+
+            DepartamentoToxicologia departamentoToxicologia = new DepartamentoToxicologia();
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_PruebasMedicas @numeroDeCedula ", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                departamentoToxicologia.NumeroCedula = cedulaPI;
+                departamentoToxicologia.FechaIngresoAdministracion = Convert.ToDateTime(reader["TF_FechaIngresoAdministracion"]);
+                departamentoToxicologia.CantidadDiasAdministracion = Convert.ToInt32(reader["TN_CantidadDiasAdm"]);
+                departamentoToxicologia.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"]);
+                departamentoToxicologia.OficioIngreso = reader["TC_OficioIngreso"].ToString();
+                departamentoToxicologia.FechaCita = Convert.ToDateTime(reader["TF_FechaCita"]);
+                departamentoToxicologia.DiasAlaFecha = Convert.ToInt32(reader["TN_DiasALaFecha"]);
+                departamentoToxicologia.DiasParaCita = Convert.ToInt32(reader["TN_DiasParaCita"]);
+                departamentoToxicologia.FechaSalida = Convert.ToDateTime(reader["TF_FechaSalida"]);
+                departamentoToxicologia.CantidadDiasTotalesTramite = Convert.ToInt32(reader["TN_CantidadDiasTotalesTramite"]);
+                departamentoToxicologia.OficioRespuesta = reader["TC_OficioRespuesta"].ToString();
+                departamentoToxicologia.FechaEstado = Convert.ToDateTime(reader["TF_FechaEstado"]);
+                departamentoToxicologia.FechaEstadoCantDias = Convert.ToInt32(reader["TN_FechaEstadoCantDias"]);
+            }
+
+            sqlConnection.Close();
+
+
+            return departamentoToxicologia;
+        }
     }
 
 
