@@ -11,7 +11,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         //variable conexion
         private ConexionDatos conexion = new ConexionDatos();
 
-        public DepartamentoPruebasGH getDepartamentoPruebasGH(string cedula)
+        public DepartamentoPruebasGH getDepartamentoPruebasGH(string cedulaPI)
         {
 
             DepartamentoPruebasGH departamentoPruebasGH = new DepartamentoPruebasGH();
@@ -19,7 +19,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
             SqlConnection sqlConnection = conexion.conexion();
 
             SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_PruebasGH @numeroDeCedula ", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
@@ -27,7 +27,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             while (reader.Read())
             {
-                departamentoPruebasGH.NumeroCedula = cedula;
+                departamentoPruebasGH.NumeroCedula = cedulaPI;
                 departamentoPruebasGH.FechaIngresoAdministracion = Convert.ToDateTime(reader["TF_FechaIngresoAdministracion"]);
                 departamentoPruebasGH.CantidadDiasAdministracion = Convert.ToInt32(reader["TN_CantidadDiasAdm"]);
                 departamentoPruebasGH.Ubicacion = reader["TC_Ubicacion"].ToString();
@@ -52,15 +52,15 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return departamentoPruebasGH;
         }
 
-        public DepartamentoAntecedentes getDepartamentoAntecedentes(string cedula)
+        public DepartamentoAntecedentes getDepartamentoAntecedentes(string cedulaPI)
         {
 
             DepartamentoAntecedentes departamentoAntecedentes = new DepartamentoAntecedentes();
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"PA_Seleccionar_TMOGESP_Antecedentes @numeroDeCedula ", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_Antecedentes @numeroDeCedula ", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
@@ -68,7 +68,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             while (reader.Read())
             {
-                departamentoAntecedentes.NumeroCedula = cedula;
+                departamentoAntecedentes.NumeroCedula = cedulaPI;
                 departamentoAntecedentes.FechaIngresoAdministracion = Convert.ToDateTime(reader["TF_FechaIngresoAdministracion"]);
                 departamentoAntecedentes.CantidadDiasAdministracion = Convert.ToInt32(reader["TN_CantidadDiasAdm"]);
                 departamentoAntecedentes.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"]);
@@ -89,15 +89,15 @@ namespace MOGESP.DataAccess.TRAN.Datos
         }
 
 
-        public DepartamentoVialidad getDepartamentoVialidad(string cedula)
+        public DepartamentoVialidad getDepartamentoVialidad(string cedulaPI)
         {
 
             DepartamentoVialidad departamentoVialidad = new DepartamentoVialidad();
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"PA_Seleccionar_TMOGESP_Vialidad @numeroDeCedula ", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_Vialidad @numeroDeCedula ", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
@@ -105,7 +105,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             while (reader.Read())
             {
-                departamentoVialidad.NumeroCedula = cedula;
+                departamentoVialidad.NumeroCedula = cedulaPI;
                 departamentoVialidad.FechaIngresoAdministracion = Convert.ToDateTime(reader["TF_FechaIngresoAdministracion"]);
                 departamentoVialidad.CantidadDiasAdministracion = Convert.ToInt32(reader["TN_CantidadDiasAdm"]);
                 departamentoVialidad.FechaIngresoTransportes = Convert.ToDateTime(reader["TF_FechaIngresoTransportes"]);
@@ -124,8 +124,40 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return departamentoVialidad;
         }
 
+        public DepartamentoPruebasMedicas getDepartamentoPruebasMedicas(string cedulaPI)
+        {
+
+            DepartamentoPruebasMedicas departamentoPruebasMedicas = new DepartamentoPruebasMedicas();
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_PruebasMedicas @numeroDeCedula ", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
 
 
+            while (reader.Read())
+            {
+                departamentoPruebasMedicas.NumeroCedula = cedulaPI;
+                departamentoPruebasMedicas.FechaIngresoAdministracion = Convert.ToDateTime(reader["TF_FechaIngresoAdministracion"]);
+                departamentoPruebasMedicas.CantidadDiasAdministracion = Convert.ToInt32(reader["TN_CantidadDiasAdm"]);
+                departamentoPruebasMedicas.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"]);
+                departamentoPruebasMedicas.OficioIngreso = reader["TC_OficioIngreso"].ToString();
+                departamentoPruebasMedicas.FechaResultadoOCitaPM = Convert.ToDateTime(reader["TF_FechaResultadoOCitaPM"]);
+                departamentoPruebasMedicas.DiasAlaFecha = Convert.ToInt32(reader["TN_DiasALaFecha"]);
+                departamentoPruebasMedicas.FechaEnvioAPMdeGH = Convert.ToDateTime(reader["TF_FechaEnvioAPMdeGH"]);
+                departamentoPruebasMedicas.FechaSalida = Convert.ToDateTime(reader["TF_FechaSalida"]);
+                departamentoPruebasMedicas.CantidadDiasTotalesTramite = Convert.ToInt32(reader["TN_CantidadDiasTotalesTramite"]);
+                departamentoPruebasMedicas.OficioRespuesta = reader["TC_OficioRespuesta"].ToString();
+            }
+
+            sqlConnection.Close();
+
+
+            return departamentoPruebasMedicas;
+        }
     }
 
 
