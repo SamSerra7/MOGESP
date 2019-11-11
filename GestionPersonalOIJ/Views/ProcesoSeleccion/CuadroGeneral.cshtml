@@ -22,38 +22,40 @@
 <body>
 
     <br><br>
-    <div style="width:810px; padding:3px;">
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <center>
-                <h2>Cuadro General</h2>
-            </center>
-        </div>
-        <br />
-        <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-            <hr />
-        </div>
-        <br />
-        <div>
-            <h6>No.Convocatoria</h6>
-            <select class="browser-default custom-select" id="buscarNumConvocatoria">
-                <option value="AA">Todas</option>
-                @foreach (var convocatoria in Model)
-                {
-                    <option value="@convocatoria">
-                        @convocatoria
-                    </option>
-                }
-            </select>
-            <h6>No.Flujo</h6>
-            <select class="browser-default custom-select" id="buscarNumFlujo">
-                <option value="0">Todos</option>
-            </select>
-            <button id="btn_BuscarFLCV">Buscar</button>
+        <div class="container">
+            <div style="width:810px; padding:3px;">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <center>
+                        <h2>Cuadro General</h2>
+                    </center>
+                </div>
+                <br />
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                    <hr />
+                </div>
+                <br />
+                <div>
+                    <h6>No.Convocatoria</h6>
+                    <select class="browser-default custom-select" id="buscarNumConvocatoria">
+                        <option value="AA">Todas</option>
+                        @foreach (var convocatoria in Model)
+                        {
+                            <option value="@convocatoria">
+                                @convocatoria
+                            </option>
+                        }
+                    </select>
+                    <h6>No.Flujo</h6>
+                    <select class="browser-default custom-select" id="buscarNumFlujo">
+                        <option value="0">Todos</option>
+                    </select>
+                    <button id="btn_BuscarFLCV">Buscar</button>
 
-        </div>
-        <br><br>
+                </div>
+                <br><br>
 
-    </div>
+            </div>
+        </div>
     <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
         <table id="tablaDeps" class="table table-bordered table-responsive table-hover">
             <thead style="align-content: center;">
@@ -63,7 +65,7 @@
                         Nombrados
                     </th>
                     <th scope="col">
-                        Positivos
+                        Positivos en espera
                     </th>
                     <th scope="col">
                         En Espera
@@ -140,34 +142,34 @@
 
     </div>
 
-    <br><br><br><br><br><br><br><br>
+    <br><br>
+        <div class="container">
+            <h4>Filtros:</h4>
 
-    <h4>Filtros:</h4>
+            <br>
 
-    <br>
+            <div style="width:200px; float:left;">
 
-    <div style="width:200px; float:left;">
+                <select class="browser-default custom-select">
+                    <option selected value="0">Todos</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
 
-        <select class="browser-default custom-select">
-            <option selected value="0">Todos</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+            </div>
 
-    </div>
+            <div style="width:200px; float:left;">
 
-    <div style="width:200px; float:left;">
+                <select class="browser-default custom-select">
+                    <option selected value="0">Todos</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
 
-        <select class="browser-default custom-select">
-            <option selected value="0">Todos</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-
-    </div>
-
+            </div>
+        </div>
 
     <br><br>
     <div class="container">
@@ -229,9 +231,11 @@
         </label>
 
     </div>
-    <br><br><br><br>
+    <br><br>
 
-
+    <div class="container">
+        <button class="btn btn-success" id="exportExcel">Exportar Excel</button>
+    </div>
 
     <!--Tabla Cuadro General-->
     <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
@@ -320,6 +324,8 @@
     var paginationLabel = $("#paginationLabel");
     var btnPrevious = $('#previousBtn');
     var btnNext = $('#nextBtn');
+    var btnExportExcel = $("#exportExcel");
+
     var contentPaginationLbl = "";
     var actualPage = 0;
     var totalPages = 0;
@@ -327,6 +333,9 @@
 
     var nombrePI = "";
     var puestos = "N/A";
+    $("#exportExcel").click(function () {
+        exportTableToExcel("tablaPrimerosIngresos",'CuadroGeneralPI');
+    });
     $('#previousBtn').click(function () {
         
         contentPaginationLbl = paginationLabel.html();
@@ -378,6 +387,7 @@
         btnNext.hide();
         btnPrevious.hide();
         paginationLabel.hide();
+        btnExportExcel.hide();
     });
     $('label.checkbox-inline').click(function () {
         var headColumn = $('th:nth-child(' + $(this).children().val() + ')');
@@ -453,6 +463,7 @@
 
 
         }
+        btnExportExcel.show();
         hideDefaultColumns();
     }
     $("#btn_BuscarFLCV").click(function () {
@@ -536,5 +547,34 @@
         }
 
     });
+    function exportTableToExcel(tableID, filename) {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
 </script>
