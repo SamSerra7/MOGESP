@@ -105,19 +105,20 @@ namespace MOGESP.DataAccess.TRAN.Datos
             reader = sqlCommand.ExecuteReader();
 
             Puesto puesto;
-            int idPuesto;
             int idClasePuesto;
             String nombreClasePuesto;
+            String condicion;
 
 
             while (reader.Read())
             {
 
-                idPuesto = Convert.ToInt32(reader["TN_IdPuesto"]);
+                
                 idClasePuesto = Convert.ToInt32(reader["TN_IdClasePuesto"]);
                 nombreClasePuesto = reader["TC_NombreClasePuesto"].ToString();
+                condicion = reader["Condicion"].ToString();
 
-                puesto = new Puesto(idClasePuesto, nombreClasePuesto);
+                puesto = new Puesto(idClasePuesto, nombreClasePuesto, condicion);
                 puestos.Add(puesto);
             }
 
@@ -209,8 +210,9 @@ namespace MOGESP.DataAccess.TRAN.Datos
                 else
                     cuadroGeneral.CantidadDiasToxicologia = Convert.ToInt32((reader["txDiasT"]));
 
+                cuadroGeneral.Condicion = reader["Condicion"].ToString();
+                cuadroGeneral.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"]);
 
-                
                 puestos = traePuestosDeUnPrimerIngreso(cuadroGeneral.NumeroCedula);
 
                 cuadroGeneral.PuestosAplica = puestos;
