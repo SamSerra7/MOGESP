@@ -25,78 +25,103 @@
 
 <div class="container" style="border: 3px solid #152327;">
 
-    
+
     <br />
 
+
+    @using (Html.BeginForm("AgregarNumFlujo", "ProcesoSeleccion", FormMethod.Post, new { Id = "agregarNF" }))
+    {
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
+            <div class="col-sm-3"><input type="text" id="numeroConvocatoria" name="numeroConvocatoria" class="form-control" value="@numConv"  onchange="setnum()" required /></div>
+            <div class="col-sm-3">
+                <select id="selNumConv" class="form-control" size="3">
+                    @if (ViewBag.NConvocatoria != null)
+                    {
+                        @foreach (var nc in ViewBag.NConvocatoria)
+                        {
+                            <option value="@nc" onclick="pasarNC()">@nc</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <br />
+    }
 
 
     @using (Html.BeginForm("AgregarCorreo", "ProcesoSeleccion", FormMethod.Post))
     {
 
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
-        <div class="col-sm-3"><input type="text" id="numeroConvocatoria" name="numeroConvocatoria" class="form-control" value="@numConv" required /></div>
-        <div class="col-sm-3">
-            <select id="selNumConv" class="form-control" size="3">
-                @if (ViewBag.NConvocatoria != null)
-                {
-                    @foreach (var nc in ViewBag.NConvocatoria)
+        <input type="hidden" id="numeroConvocatoria1" name="numeroConvocatoria1" hidden/>
+
+        @*<div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-2">@Html.LabelFor(m => m.NumeroConvocatoria)</div>
+                <div class="col-sm-3"><input type="text" id="numeroConvocatoria" name="numeroConvocatoria" class="form-control" value="@numConv" required /></div>
+                <div class="col-sm-3">
+                    <select id="selNumConv" class="form-control" size="3">
+                        @if (ViewBag.NConvocatoria != null)
+                        {
+                            @foreach (var nc in ViewBag.NConvocatoria)
+                            {
+                                <option value="@nc" onclick="pasarNC()">@nc</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <br />*@
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2">@Html.LabelFor(m => m.NumeroFlujo)</div>
+            <div class="col-sm-3"><input type="number" id="numeroFlujo" name="numeroFlujo" class="form-control" value="@numFlujo" required /></div>
+            <div class="col-sm-3">
+                <select id="selNumFlujo" class="form-control" size="3">
+                    @if (ViewBag.NFlujo != null)
                     {
-                        <option value="@nc" onclick="pasarNC()" >@nc</option>
+                        @foreach (var nc in ViewBag.NFlujo)
+                        {
+                            <option value="@nc" onclick="pasarNF()">@nc</option>
+                        }
                     }
-                }
-            </select>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <br />
 
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-2">@Html.LabelFor(m => m.NumeroFlujo)</div>
-        <div class="col-sm-3"><input type="number" id="numeroFlujo" name="numeroFlujo" class="form-control" value="@numFlujo" required /></div>
-        <div class="col-sm-3">
-            <select id="selNumFlujo" class="form-control" size="3">
-                @if (ViewBag.NFlujo != null)
-                {
-                    @foreach (var nc in ViewBag.NFlujo)
+        <hr />
+
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">@Html.LabelFor(m => m.Correos)</div>
+            <div class="col-sm-3"><input type="email" class="form-control" id="correo" name="correo"></div>
+            <div class="col-sm-1">
+                <button type="submit" id="btnAgregarCorreo" class="btn btn-warning">
+                    +
+                </button>
+            </div>
+            <div class="col-sm-3">
+                <select id="selCorreos" class="form-control" multiple size="3">
+                    @if (correos != null)
                     {
-                        <option value="@nc" onclick="pasarNF()">@nc</option>
+                        @foreach (var correo in correos)
+                        {
+                            <option value="@correo">@correo</option>
+                        }
                     }
-                }
-            </select>
+                </select>
+            </div>
         </div>
-    </div>
 
-
-    <hr />
-
-
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2">@Html.LabelFor(m => m.Correos)</div>
-        <div class="col-sm-3"><input type="email" class="form-control" id="correo" name="correo"></div>
-        <div class="col-sm-1">
-            <button type="submit" id="btnAgregarCorreo" class="btn btn-warning">
-                +
-            </button>
-        </div>
-        <div class="col-sm-3">
-            <select id="selCorreos" class="form-control" multiple size="3">
-                @if (correos != null)
-                {
-                    @foreach (var correo in correos)
-                    {
-                        <option value="@correo">@correo</option>
-                    }
-                }
-            </select>
-        </div>
-    </div>
-
-    <br />
-    <br />
+        <br />
+        <br />
     }
 
 
@@ -260,12 +285,19 @@
         var selNC = document.getElementById('selNumConv');
         var txtNC = document.getElementById('numeroConvocatoria');
         txtNC.value = selNC.value;
-        window.location.reload();
+
+
+        var post = document.getElementById('agregarNF');
+        post.submit();
     }
 
     function pasarNF() {
         var selNC = document.getElementById('selNumFlujo');
         var txtNC = document.getElementById('numeroFlujo');
         txtNC.value = selNC.value;
+    }
+
+    function setnum() {
+        var txtNC = document.getElementById('numeroConvocatoria1').value = document.getElementById('numeroConvocatoria').value;
     }
 </script>
