@@ -166,7 +166,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_PruebasMedicas @numeroDeCedula ", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_Toxicologia @numeroDeCedula ", sqlConnection);
             sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
             SqlDataReader reader;
             sqlConnection.Open();
@@ -195,6 +195,39 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             return departamentoToxicologia;
         }
+
+        public PrimerIngresoDepartamentos getPrimerIngresoDepartamentos(string nombrePI="",string cedulaPI="")
+        {
+
+            PrimerIngresoDepartamentos primerIngresoDepartamentos = new PrimerIngresoDepartamentos();
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_PruebasMedicas @numeroDeCedula ", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                primerIngresoDepartamentos.NumeroCedula = cedulaPI;
+                primerIngresoDepartamentos.NombrePI = nombrePI;
+                primerIngresoDepartamentos.DepartamentoPruebasGH = getDepartamentoPruebasGH(cedulaPI);
+                primerIngresoDepartamentos.DepartamentoAntecedentes = getDepartamentoAntecedentes(cedulaPI);
+                primerIngresoDepartamentos.DepartamentoVialidad = getDepartamentoVialidad(cedulaPI);
+                primerIngresoDepartamentos.DepartamentoPruebasMedicas = getDepartamentoPruebasMedicas(cedulaPI);
+                primerIngresoDepartamentos.DepartamentoToxicologia = getDepartamentoToxicologia(cedulaPI);
+            }
+
+            sqlConnection.Close();
+
+
+            return primerIngresoDepartamentos;
+        }
+
+
     }
 
 

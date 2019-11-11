@@ -12,13 +12,13 @@ namespace MOGESP.Entities.Dominio
             
         }
 
-        public PrimerIngresoDepartamentos(string numeroCedula, string nombrePI, string primerApellido, string segundoApellido, DepartamentoPruebasGH departamentoPruebas, DepartamentoAntecedentes departamentoAntecedentes, DepartamentoPruebasMedicas departamentoPruebasMedicas, DepartamentoVialidad departamentoVialidad, DepartamentoToxicologia departamentoToxicologia)
+        public PrimerIngresoDepartamentos(string numeroCedula, string nombrePI, string primerApellido, string segundoApellido, DepartamentoPruebasGH departamentoPruebasGH, DepartamentoAntecedentes departamentoAntecedentes, DepartamentoPruebasMedicas departamentoPruebasMedicas, DepartamentoVialidad departamentoVialidad, DepartamentoToxicologia departamentoToxicologia)
         {
             NumeroCedula = numeroCedula ?? throw new ArgumentNullException(nameof(numeroCedula));
             NombrePI = nombrePI ?? throw new ArgumentNullException(nameof(nombrePI));
             PrimerApellido = primerApellido ?? throw new ArgumentNullException(nameof(primerApellido));
             SegundoApellido = segundoApellido ?? throw new ArgumentNullException(nameof(segundoApellido));
-            DepartamentoPruebas = departamentoPruebas ?? throw new ArgumentNullException(nameof(departamentoPruebas));
+            DepartamentoPruebasGH = departamentoPruebasGH ?? throw new ArgumentNullException(nameof(departamentoPruebasGH));
             DepartamentoAntecedentes = departamentoAntecedentes ?? throw new ArgumentNullException(nameof(departamentoAntecedentes));
             DepartamentoPruebasMedicas = departamentoPruebasMedicas ?? throw new ArgumentNullException(nameof(departamentoPruebasMedicas));
             DepartamentoVialidad = departamentoVialidad ?? throw new ArgumentNullException(nameof(departamentoVialidad));
@@ -70,14 +70,14 @@ namespace MOGESP.Entities.Dominio
         }
 
         /*Informacion Tabla PruebasGH*/
-        private DepartamentoPruebasGH departamentoPruebas;
-        public DepartamentoPruebasGH DepartamentoPruebas
+        private DepartamentoPruebasGH departamentoPruebasGH;
+        public DepartamentoPruebasGH DepartamentoPruebasGH
         {
-            get { return departamentoPruebas; }
+            get { return departamentoPruebasGH; }
             set
             {
                 if (value == null) throw new Exception("El campo de departamentoPruebas es requerido");
-                departamentoPruebas = value;
+                departamentoPruebasGH = value;
             }
         }
 
