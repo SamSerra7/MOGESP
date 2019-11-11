@@ -124,8 +124,7 @@ namespace GestionPersonalOIJ.Controllers
 
             numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
 
-            if (!string.IsNullOrEmpty(numeroConvocatoria))
-                flujosPorConvocatoria = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(numeroConvocatoria);
+            flujosPorConvocatoria = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(numeroConvocatoria);
 
 
             return RedirectToActionPermanent("InsertarPrimerosIngresos");
@@ -141,7 +140,7 @@ namespace GestionPersonalOIJ.Controllers
 
             todosCorreos.Add(formCollection["correo"]);
 
-            numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
+            numeroConvocatoria = formCollection["numeroConvocatoria1"].ToString();
             numeroFlujo = Convert.ToInt32(formCollection["numeroFlujo"]);
 
             return RedirectToActionPermanent("InsertarPrimerosIngresos");
