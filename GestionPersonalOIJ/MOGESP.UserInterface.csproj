@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Views\GestionPersonal\" />
-    <Folder Include="Views\ControlFlujos\" />
   </ItemGroup>
 
   <ItemGroup>

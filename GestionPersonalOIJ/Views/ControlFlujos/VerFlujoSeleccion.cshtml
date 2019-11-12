@@ -1,0 +1,45 @@
+﻿@using System.Data
+@model DataSet
+
+@{
+    ViewData["Title"] = "VerFlujoSeleccion";
+}
+
+<h2>Flujo Selecci&oacute;n</h2>
+
+<table class="table table-bordered" >
+    <tr>
+        <th>C&eacute;dula</th>
+        <th>Nombre</th>
+        <th>Asistencia</th>
+        <th>Investigador(a) 1</th>
+        <th>Custodio(a) de detenidos(as)</th>
+        <th>Agente de protecci&oacute;n 1</th>
+        <th>Investigador(a) de LOC y PRES</th>
+        <th>Observaciones</th>
+        <th>Fecha ingreso Inf. resultado (DEV.)</th>
+        <th>Fecha respuesta devoluci&oacute;n</th>
+        <th>Test Aprovados</th>
+    </tr>
+    @foreach (DataRow row in Model.Tables[0].Rows)
+    {
+        <tr>
+            <td>@row["Cedula"]</td>
+            <td>@row["Nombre"] @row["PrimerApellido"] @row["SegundoApellido"]</td>
+            <td>@row["Asistencia"]</td>
+            <td>@row["resultInvestigador1"]</td>
+            <td>@row["resultCustodioDetenidos"]</td>
+            <td>@row["resultAgentePotec1"]</td>
+            <td>@row["resultInvestigadorLOCPRES"]</td>
+            <td>@row["Observaciones"]</td>
+            <td>@row["fechaIngresoDev"]</td>
+            <td>@row["fechaAtencionDev"]</td>
+            <td>
+                @foreach (string test in Model.Tables[0].Rows)
+                {
+                    @test <br/>
+                }
+            </td>
+        </tr>
+    }
+</table>
