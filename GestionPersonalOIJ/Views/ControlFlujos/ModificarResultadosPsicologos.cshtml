@@ -25,7 +25,7 @@
                                 {
                                     @foreach (var t_personalidad in ViewBag.TestPersonalidad)
                                     {
-                                        <option value="@t_personalidad ">@t_personalidad </option>
+                                        <option value="@t_personalidad.Nombre">@t_personalidad.Nombre </option>
                                     }
                                 }
                             </select>
@@ -43,7 +43,7 @@
                                 {
                                     @foreach (var t_competencia in ViewBag.TestCompetencias)
                                     {
-                                        <option value="@t_competencia ">@t_competencia </option>
+                                        <option value="@t_competencia.Nombre">@t_competencia.Nombre </option>
                                     }
                                 }
                             </select>
@@ -61,7 +61,7 @@
                                 {
                                     @foreach (var t_otros in ViewBag.TestOtros)
                                     {
-                                        <option value="@t_otros ">@t_otros </option>
+                                        <option value="@t_otros.Nombre">@t_otros.Nombre </option>
                                     }
                                 }
                             </select>
@@ -82,7 +82,7 @@
                         <div class="row align-self-center"><label>Información del personal</label></div>
                         <div class="row">
                             <div class="col-sm-1">
-                                <label>Numero Cédula:</label>
+                                <label>Cédula:</label>
                             </div>
                             <div class="col-sm-2">
                                 <input type="text" id="ced" class="form-control" />
