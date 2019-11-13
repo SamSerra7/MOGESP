@@ -15,12 +15,19 @@ namespace MOGESP.UserInterface.Controllers
 
         //variables
         private PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
+        private TestPersonalidadServicio testPersonalidadServicio = new TestPersonalidadServicio();
+        private TestCompetenciasServicio testCompetenciasServicio = new TestCompetenciasServicio();
+        private TestOtrosServicio testOtrosServicio = new TestOtrosServicio();
+        private TestVisomotorServicio testVisomotorServicio = new TestVisomotorServicio();
 
 
 
         public ActionResult ModificarResultadosPsicologos()
         {
-            
+
+            ViewBag.TestPersonalidad = testPersonalidadServicio.consultarTestPersonalidad();
+            ViewBag.TestCompetencias = testCompetenciasServicio.consultarTestCompetencias();
+            ViewBag.TestOtros = testOtrosServicio.consultarTestOtros();
 
             return View(primerIngresoServicio.getAllPrimerosIngresos());
         }

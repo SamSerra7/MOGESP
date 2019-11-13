@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MOGESP.ServiceLayer.Servicio
 {
-    class TestCompetenciasServicio
+    public class TestCompetenciasServicio
     {
         readonly TestCompetenciasDatos testCompetenciasDatos = new TestCompetenciasDatos();
 
