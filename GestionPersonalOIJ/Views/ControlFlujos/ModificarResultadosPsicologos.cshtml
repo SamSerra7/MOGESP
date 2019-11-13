@@ -1,0 +1,121 @@
+﻿@model IEnumerable<MOGESP.Entities.Dominio.PrimerIngreso>
+
+@{
+    ViewData["Title"] = "ModificarResultadosPsicologos";
+}
+
+<h2>Modificar Resultados Psicologos</h2>
+
+
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col-sm-7">
+
+            @using (Html.BeginForm("AgregarTestsRealizados", "ControlFlujos", FormMethod.Post, new { Id = "agregarNF" }))
+            {
+                <div class="container">
+
+                    <div class="row">
+                        <label> Psicopatología / Personalidad: </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <select id="selNumConv" class="form-control">
+                                @if (ViewBag.TestPersonalidad != null)
+                                {
+                                    @foreach (var t_personalidad in ViewBag.TestPersonalidad)
+                                    {
+                                        <option value="@t_personalidad.Nombre">@t_personalidad.Nombre </option>
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label> Competencias: </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <select id="selNumConv" class="form-control">
+                                @if (ViewBag.TestCompetencias != null)
+                                {
+                                    @foreach (var t_competencia in ViewBag.TestCompetencias)
+                                    {
+                                        <option value="@t_competencia.Nombre">@t_competencia.Nombre </option>
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label> Otros: </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <select id="selNumConv" class="form-control">
+                                @if (ViewBag.TestOtros != null)
+                                {
+                                    @foreach (var t_otros in ViewBag.TestOtros)
+                                    {
+                                        <option value="@t_otros.Nombre">@t_otros.Nombre </option>
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+             }
+
+                </div>
+                <div class="col-sm-2 table-bordered">
+
+                    <div class="container ">
+                        <div class="row align-self-center"><label>Información del personal</label></div>
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label>Cédula:</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" id="ced" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label>Nombre:</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" id="nombre" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label>Sexo:</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" id="sexo" class="form-control" />
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <input type="submit" id="buscar" class="btn btn-info" value="Buscar" />
+                            </div>
+                        </div>
+
+                        <br />
+                    </div>
+
+                </div>
+            </div>
+</div>

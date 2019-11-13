@@ -24,7 +24,7 @@ namespace MOGESP.Entities.Dominio
             }
             set
             {
-                if (value > 0) throw new Exception("El id debe ser positivo");
+                if (value < 0) throw new Exception("El id debe ser positivo");
                 id = value;
             }
         }
