@@ -57,7 +57,7 @@
             </div>
         </div>
     <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
-        <table id="tablaDeps" class="table table-bordered table-responsive table-hover">
+        <table id="estadoTabla" class="table table-bordered table-responsive table-hover">
             <thead style="align-content: center;">
                 <tr style=" background-color: #222;" class="btn-primary">
 
@@ -80,7 +80,7 @@
             <tbody>
 
                 <tr>
-                    <td>1</td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -95,52 +95,24 @@
     <br><br>
 
     <!--Tabla Resumen de días-->
-    <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
-        <table id="tablaDeps" class="table table-bordered table-responsive table-hover">
-            <thead style="align-content: center;">
-                <tr style=" background-color: #222;" class="btn-primary">
+        <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+            <table id="tablaDeps" class="table table-striped table-bordered">
+                <thead style="align-content: center;">
+                    <tr style=" background-color: #222;" class="btn-primary">
+                        <th class="centrarTitulos">Gesti&oacute;n Humana - Administraci&oacute;n</th>
+                        <th class="centrarTitulos">Antecedentes</th>
+                        <th class="centrarTitulos">Transportes</th>
+                        <th class="centrarTitulos">Pruebas M&eacute;dicas</th>
+                        <th class="centrarTitulos">Toxolog&iacute;a</th>
 
-                    <th scope="col">
-                        Gesti&oacute;n Humana - Administraci&oacute;n
-                        <hr>Cantidad-Casos en Tr&aacute;mite
-                    </th>
-                    <th scope="col">
-                        Antecedentes
-                        <hr>Cantidad-Casos en Tr&aacute;mite
-                    </th>
-                    <th scope="col">
-                        Transportes
-                        <hr>Cantidad-Casos en Tr&aacute;mite
-                    </th>
-                    <th scope="col">
-                        M&eacute;dicas
-                        <hr>Cantidad-Casos en Tr&aacute;mite
-                    </th>
-                    <th scope="col">
-                        Toxolog&iacute;a
-                        <hr>Cantidad-Casos en Tr&aacute;mite
-                    </th>
+                    </tr>
+                </thead>
 
-                </tr>
-            </thead>
+                <tr style="background:#f1f1f1"></tr>
 
-            <tbody>
+            </table>
 
-                <tr>
-
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
+        </div>
 
     <br><br>
         <div class="container">
@@ -150,25 +122,28 @@
 
             <div style="width:200px; float:left;">
 
-                <select class="browser-default custom-select">
+                <select id="estadoSelectF" class="browser-default custom-select">
                     <option selected value="0">Todos</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1">Nombrados</option>
+                    <option value="2">Positivos</option>
+                    <option value="3">En espera</option>
+                    <option value="3">Negativos</option>
                 </select>
 
             </div>
 
             <div style="width:200px; float:left;">
 
-                <select class="browser-default custom-select">
+                <select id="puestoSelectF" class="browser-default custom-select">
                     <option selected value="0">Todos</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1">Investigador 1</option>
+                    <option value="2">Agente de protecci&oacute;n</option>
+                    <option value="3">Custodio de Detenidos</option>
+                    <option value="3">Agente de localizaci&oacute;n</option>
                 </select>
 
             </div>
+            <button class="btn btn-success" id="aplicarFiltros">Aplicar</button>
         </div>
 
     <br><br>
@@ -333,6 +308,9 @@
     var selectFlujos = $("#buscarNumFlujo");
     var selectConvocatoria = $("#buscarNumConvocatoria");
     var tablaPrimerosIngresos = $("#tablaPrimerosIngresos");
+    var tablaDeps = $("#tablaDeps");
+    var estadoTabla = $("#estadoTabla");
+
     var paginationLabel = $("#paginationLabel");
     var btnPrevious = $('#previousBtn');
     var btnNext = $('#nextBtn');
@@ -391,8 +369,8 @@
 
             if (i != 21) {
                 $("#ck" + i).prop('checked', true);
-                $('th:nth-child(' + i + ')').hide();
-                $('td:nth-child(' + i + ')').hide();
+                $('#tablaPrimerosIngresos th:nth-child(' + i + ')').hide();
+                $('#tablaPrimerosIngresos td:nth-child(' + i + ')').hide();
                 
             }
         }
@@ -425,8 +403,10 @@
        
     });
     function displayTable(data, range1, range2) {
+        console.log(data);
         tablaPrimerosIngresos.find("tr:gt(0)").remove();
-        
+        tablaDeps.find("tr:gt(0)").remove();
+        estadoTabla.find("tr:gt(0)").remove();
         if (range1 > range2) {
             var temp = range2;
             range2 = range1;
@@ -434,23 +414,23 @@
         }
         for (var key = range1; key < range2; key++) {
             puestos = "";
-            if (data.hasOwnProperty(key)) {
-                nombrePI = "" + data[key].nombrePI + " " + data[key].primerApellido + " " + data[key].segundoApellido;
+            if (data.listaCuadroGeneral.hasOwnProperty(key)) {
+                nombrePI = "" + data.listaCuadroGeneral[key].nombrePI + " " + data.listaCuadroGeneral[key].primerApellido + " " + data.listaCuadroGeneral[key].segundoApellido;
                 investigador1 = "N/A";
                 agenteDeProteccion = "N/A";
                 custodioDeDetenidos = "N/A";
                 agenteDeLocalizacion = "N/A";
-                for (puestoKey in data[key].puestosAplica) {
+                for (puestoKey in data.listaCuadroGeneral[key].puestosAplica) {
                     
-                    puestos = puestos + data[key].puestosAplica[puestoKey].nombre + ", ";
-                    if (data[key].puestosAplica[puestoKey].nombre == "Investigador 1") {
-                        investigador1 = data[key].puestosAplica[puestoKey].condicion
-                    } else if (data[key].puestosAplica[puestoKey].nombre == "Agente de Proteccion") {
-                        agenteDeProteccion = data[key].puestosAplica[puestoKey].condicion
-                    } else if (data[key].puestosAplica[puestoKey].nombre == "Custodio de detenidos") {
-                        custodioDeDetenidos = data[key].puestosAplica[puestoKey].condicion
-                    } else if (data[key].puestosAplica[puestoKey].nombre == "Agente de localizacion") {
-                        agenteDeLocalizacion = data[key].puestosAplica[puestoKey].condicion
+                    puestos = puestos + data.listaCuadroGeneral[key].puestosAplica[puestoKey].nombre + ", ";
+                    if (data.listaCuadroGeneral[key].puestosAplica[puestoKey].nombre == "Investigador 1") {
+                        investigador1 = data.listaCuadroGeneral[key].puestosAplica[puestoKey].condicion
+                    } else if (data.listaCuadroGeneral[key].puestosAplica[puestoKey].nombre == "Agente de Proteccion") {
+                        agenteDeProteccion = data.listaCuadroGeneral[key].puestosAplica[puestoKey].condicion
+                    } else if (data.listaCuadroGeneral[key].puestosAplica[puestoKey].nombre == "Custodio de detenidos") {
+                        custodioDeDetenidos = data.listaCuadroGeneral[key].puestosAplica[puestoKey].condicion
+                    } else if (data.listaCuadroGeneral[key].puestosAplica[puestoKey].nombre == "Agente de localizacion") {
+                        agenteDeLocalizacion = data.listaCuadroGeneral[key].puestosAplica[puestoKey].condicion
                     }
 
                     //console.log(data[key].puestosAplica[puestoKey].idPuesto)
@@ -460,41 +440,57 @@
                 )
                     .appendTo(tablaPrimerosIngresos);
                 $(
-                    '<td>' + data[key].numeroConvocatoria + '</td>' +
-                    '<td>' + data[key].numeroFlujo + '</td>' +
-                    '<td>' + data[key].numeroCedula + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].numeroConvocatoria + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].numeroFlujo + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].numeroCedula + '</td>' +
                     '<td>' + nombrePI + '</td>' +
                     '<td>' + investigador1 + '</td>' +
                     '<td>' + agenteDeProteccion + '</td>' +
                     '<td>' + custodioDeDetenidos + '</td>' +
                     '<td>' + agenteDeLocalizacion + '</td>' +
-                    '<td>' + data[key].cantidadDiasAdminPruebasGH + '</td>' +
-                    '<td>' + data[key].cantidadDiasPruebasGH + '</td>' +
-                    '<td>' + data[key].cantidadDiasAdminAntecedentes + '</td>' +
-                    '<td>' + data[key].cantidadDiasAntecedentes + '</td>' +
-                    '<td>' + data[key].cantidadDiasAdminVialidad + '</td>' +
-                    '<td>' + data[key].cantidadDiasVialidad + '</td>' +
-                    '<td>' + data[key].fechaEnvioGHTraslado + '</td>' +
-                    '<td>' + data[key].cantidadDiasAdminPruebasMedicas + '</td>' +
-                    '<td>' + data[key].cantidadDiasPruebasMedicas + '</td>' +
-                    '<td>' + data[key].cantidadDiasAdminToxicologia + '</td>' +
-                    '<td>' + data[key].cantidadDiasToxicologia + '</td>' +
-                    '<td>' + data[key].instanciaPerdioProceso + '</td>' +
-                    '<td>' + data[key].condicion + '</td>' +
-                    '<td>' + data[key].fechaIngreso + '</td>' +
-                    '<td>' + data[key].cantidadDiasTotalesTramite + '</td>'
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasAdminPruebasGH + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasPruebasGH + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasAdminAntecedentes + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasAntecedentes + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasAdminVialidad + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasVialidad + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].fechaEnvioGHTraslado + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasAdminPruebasMedicas + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasPruebasMedicas + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasAdminToxicologia + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasToxicologia + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].instanciaPerdioProceso + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].condicion + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].fechaIngreso + '</td>' +
+                    '<td>' + data.listaCuadroGeneral[key].cantidadDiasTotalesTramite + '</td>'
 
 
                 )
                     .appendTo("#tupla" + key);
-
-
-
+                
 
             }
 
 
         }
+        $('<tr style="background:#f1f1f1" id="tuplaDeps">' + '</tr>').appendTo(tablaDeps);
+        $(
+            '<td>' + data.cantidadPruebasGH + '</td>' +
+            '<td>' + data.cantidadAntecedentes + '</td>' +
+            '<td>' + data.cantidadVialidad + '</td>' +
+            '<td>' + data.cantidadPruebasMedicas + '</td>' +
+            '<td>' + data.cantidadToxicologia + '</td>'
+        )
+            .appendTo("#tuplaDeps");
+        $('<tr style="background:#f1f1f1" id="tuplaEst">' + '</tr>').appendTo(estadoTabla);
+        $(
+            '<td>' + data.cantidadNombrados + '</td>' +
+            '<td>' + data.cantidadPositivosEnEspera + '</td>' +
+            '<td>' + data.cantidadPendientes + '</td>' +
+            '<td>' + data.cantidadNegativos + '</td>'
+        )
+            .appendTo("#tuplaEst");
+
         btnExportExcel.show();
         hideDefaultColumns();
     }
@@ -507,10 +503,10 @@
 
         $.post(url2, null, function (data) {
             dataP = data;
-            if (data.length === 0) {
+            if (data.listaCuadroGeneral.length === 0) {
                 alert("El cuadro general seleccionado esta vacio");
             } else {
-                totalPages = Math.ceil(data.length / 10);
+                totalPages = Math.ceil(data.listaCuadroGeneral.length / 10);
                 if (totalPages > 1) {
                     btnNext.show();
                     btnPrevious.show();
@@ -518,7 +514,7 @@
                     paginationLabel.show();
                     displayTable(data, 0, 10);
                 } else {
-                    displayTable(data, 0, data.length);
+                    displayTable(data, 0, data.listaCuadroGeneral.length);
                     paginationLabel.text(1 + "/" + 1);
                     paginationLabel.hide();
                     btnNext.hide();
@@ -547,12 +543,12 @@
 
                 $.post(url, null, function (data) {
 
-                    if (data.length === 0) {
+                    if (data.listaCuadroGeneral.length === 0) {
                         alert("La convocatoria seleccionada no tiene flujos");
                     } else {
                         var size = 0;
-                        for (key in data) {
-                            if (data.hasOwnProperty(key)) {
+                        for (key in data.listaCuadroGeneral) {
+                            if (data.listaCuadroGeneral.hasOwnProperty(key)) {
 
                                 $(
                                     '<option value="' + data[size] + '">' +
