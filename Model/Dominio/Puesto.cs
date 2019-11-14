@@ -11,10 +11,11 @@ namespace MOGESP.Entities.Dominio
         {
         }
 
-        public Puesto(int idPuesto, string nombrePuesto)
+        public Puesto(int idPuesto, string nombrePuesto, string condicion)
         {
             IdPuesto = idPuesto;
             Nombre = nombrePuesto;
+            Condicion = condicion;
         }
 
         
@@ -45,7 +46,19 @@ namespace MOGESP.Entities.Dominio
                 nombre = value;
             }
         }
-        
+        private string condicion;
+        public string Condicion
+        {
+            get
+            {
+                return condicion;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) throw new Exception("La condicion es requerido");
+                condicion = value;
+            }
+        }
 
     }
 
