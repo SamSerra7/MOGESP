@@ -127,7 +127,7 @@
                     <option value="1">Nombrados</option>
                     <option value="2">Positivos</option>
                     <option value="3">En espera</option>
-                    <option value="3">Negativos</option>
+                    <option value="4">Negativos</option>
                 </select>
 
             </div>
@@ -139,7 +139,7 @@
                     <option value="1">Investigador 1</option>
                     <option value="2">Agente de protecci&oacute;n</option>
                     <option value="3">Custodio de Detenidos</option>
-                    <option value="3">Agente de localizaci&oacute;n</option>
+                    <option value="4">Agente de localizaci&oacute;n</option>
                 </select>
 
             </div>
@@ -316,6 +316,9 @@
     var btnNext = $('#nextBtn');
     var btnExportExcel = $("#exportExcel");
 
+    var estadoSelectF = $("#estadoSelectF");
+    var puestoSelectF = $("#puestoSelectF");
+
     var contentPaginationLbl = "";
     var actualPage = 0;
     var totalPages = 0;
@@ -327,8 +330,20 @@
     var agenteDeProteccion = "N/A";
     var custodioDeDetenidos = "N/A";
     var agenteDeLocalizacion = "N/A";
+
+    var estadoVal;
+    var puestoVal;
     $("#exportExcel").click(function () {
         exportTableToExcel("tablaPrimerosIngresos",'CuadroGeneralPI');
+    });
+    $("#aplicarFiltros").click(function () {
+        estadoVal = estadoSelectF.val();
+        puestoVal = puestoSelectF.val();
+
+        
+        //applyFilters(dataP, 0, dataP.listaCuadroGeneral.length, estadoVal, puestoVal);
+        
+        
     });
     $('#previousBtn').click(function () {
         
@@ -402,8 +417,8 @@
 
        
     });
+    
     function displayTable(data, range1, range2) {
-        console.log(data);
         tablaPrimerosIngresos.find("tr:gt(0)").remove();
         tablaDeps.find("tr:gt(0)").remove();
         estadoTabla.find("tr:gt(0)").remove();
