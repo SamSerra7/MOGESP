@@ -1,4 +1,4 @@
-﻿
+﻿@model MOGESP.Entities.Dominio.PrimerIngresoDepartamentos 
 
 @{
     ViewData["Title"] = "Ver Primer Ingreso";
@@ -145,18 +145,21 @@
     <h4><i class="far fa-address-card"></i> Informaci&oacute;n Personal</h4>
 
     <div class="form-row">
-        <div class="col-md-6">
-            <label>C&eacute;dula: </label>
-            <input class="form-control" id="cedulaInfo" type="text" name="cedulaInfo" disabled="disabled" />
-        </div>
+       
+            
+            
+            <div class="col-md-6">
+                <label>C&eacute;dula: </label>
+                <input class="form-control" id="cedulaInfo" type="text" name="cedulaInfo" disabled="disabled" value="@Model.NumeroCedula"/>
+            </div>
         <div class="col-md-6">
             <label>Nombre: </label>
-            <input class="form-control" id="nombreInfo" type="text" name="nombreInfo" disabled="disabled" />
+            <input class="form-control" id="nombreInfo" type="text" name="nombreInfo" disabled="disabled" value="@Model.NombrePI"/>
         </div>
-
+            
     </div>
     <br><br><br>
-    <hr> </hr>
+    <hr/> 
 
 
     <div class="tabs">
@@ -178,27 +181,28 @@
 
                         <div class="form-row">
                             <div class="col-md-6">
+
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngreso1" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngresoAdministracion"/>
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
-                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasAdministracion"/>
                             </div>
 
                         </div>
                         <br><br><br>
-                        <hr> </hr>
-
+                        <hr/> 
+                       
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label>N&deg;. Concurso: </label>
-                                <input class="form-control" id="NumConcurso" type="text" name="NumConcurso" disabled="disabled" />
+                                <input class="form-control" id="NumConcurso" type="text" name="NumConcurso" disabled="disabled" value="@Model.NumeroCedula"/>
                             </div>
                             <div class="col-md-6">
                                 <label>Ubicaci&oacute;n: </label>
-                                <input class="form-control" id="ubicacion" type="text" name="ubicacion" disabled="disabled" />
+                                <input class="form-control" id="ubicacion" type="text" name="ubicacion" disabled="disabled" value="@Model.DepartamentoPruebasGH.Ubicacion"/>
                             </div>
                         </div>
 
@@ -207,58 +211,58 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso2" class="form-control" type="date" name="fechaIngreso2" disabled="disabled" />
+                                <input id="fechaIngreso2" class="form-control"type="datetime" name="fechaIngreso2" disabled="disabled"  value="@Model.DepartamentoPruebasGH.FechaIngreso"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
-                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" />
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoPruebasGH.OficioIngreso"/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as a la fecha: </label>
-                                <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" />
+                                <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasAlaFecha"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Traslado Psicologo Administraci&oacute;n: </label>
-                                <input id="fechaTrasladoPsicologia" class="form-control" type="date" name="fechaTrasladoPsicologia" disabled="disabled" />
+                                <input id="fechaTrasladoPsicologia" class="form-control" type="datetime" name="fechaTrasladoPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaTrasladoPsicologosAdmin"/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Oficio: </label>
-                                <input id="oficio" class="form-control" type="text" name="oficio" disabled="disabled" />
+                                <input id="oficio" class="form-control" type="text" name="oficio" disabled="disabled" value="@Model.DepartamentoPruebasGH.Oficio"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Devoluci&oacute;n a GH. Por parte de Administraci&oacute;n: </label>
-                                <input id="fechaDevulucionAdmi" class="form-control" type="date" name="fechaDevulucionAdmi" disabled="disabled" />
+                                <input id="fechaDevulucionAdmi" class="form-control" type="datetime" name="fechaDevulucionAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaDevolucionGHDeAdmin"/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Cantidad de D&iacute;as en Psicolog&iacute;a - Administraci&oacute;n: </label>
-                                <input id="diasPsicologiaAdmi" class="form-control" type="number" min="0" name="diasPsicologiaAdmi" disabled="disabled" />
+                                <input id="diasPsicologiaAdmi" class="form-control" type="number" min="0" name="diasPsicologiaAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasPsicologiaAdmin"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha L&iacute;mite s&eacute;gun plazo establecido: </label>
-                                <input id="fechaLimite" class="form-control" type="date" name="fechaLimite" disabled="disabled" />
+                                <input id="fechaLimite" class="form-control" type="datetime" name="fechaLimite" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaLimiteSegunPlazo"/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as a la Fecha: </label>
-                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" />
+                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasAlaFecha"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Cantidad de D&iacute;as en tr&aacute;mite en GH, despu&eacute;s de devuelto: </label>
-                                <input id="fechaPsicologia" class="form-control" type="number" min="0" name="fechaPsicologia" disabled="disabled" />
+                                <input id="fechaPsicologia" class="form-control" type="number" min="0" name="fechaPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasTramiteGHDespuesDevuelto"/>
                             </div>
                         </div>
 
@@ -266,25 +270,30 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaSalida"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as totales en tr&aacute;mite: </label>
-                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" />
+                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasTotalesTramite"/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Respuesta: </label>
-                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" />
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoPruebasGH.OficioRespuesta"/>
                             </div>
                             <div class="col-md-6 mb-3">
+
                                 <label>Estado: </label>
+                                
                                 <select id="selectEstado" name="selectEstado" disabled="disabled">
-                                    <option value="value1">Positivo</option>
-                                    <option value="value2" selected>Negativo</option>
+                                    @foreach (var listaEstados in Model.DepartamentoPruebasGH.EstadoLista)
+                                    {
+                                        <option value="@listaEstados">@listaEstados</option>
+                                    }
                                 </select>
+                                
                             </div>
                         </div>
 
@@ -321,7 +330,7 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngreso1" disabled="disabled" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
@@ -330,14 +339,13 @@
 
                         </div>
                         <br><br><br>
-                        <hr> </hr>
-
+                        <hr/>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso2" class="form-control" type="date" name="fechaIngreso2" disabled="disabled" />
+                                <input id="fechaIngreso2" class="form-control" type="datetime" name="fechaIngreso2" disabled="disabled" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
@@ -349,7 +357,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Resultado: </label>
-                                <input id="fechaResultado" class="form-control" type="date" name="fechaResultado" disabled="disabled" />
+                                <input id="fechaResultado" class="form-control" type="datetime" name="fechaResultado" disabled="disabled" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Zona de Trabajo: </label>
@@ -365,7 +373,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" />
                             </div>
                         </div>
 
@@ -424,7 +432,7 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngreso1" disabled="disabled" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
@@ -433,14 +441,14 @@
 
                         </div>
                         <br><br><br>
-                        <hr> </hr>
+                        <hr/>
 
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso Transporte: </label>
-                                <input id="fechaIngresoTrans" class="form-control" type="date" name="fechaIngresoTrans" disabled="disabled" />
+                                <input id="fechaIngresoTrans" class="form-control" type="datetime" name="fechaIngresoTrans" disabled="disabled" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
@@ -452,7 +460,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Cita: </label>
-                                <input id="fechaCita" class="form-control" type="date" name="fechaCita" disabled="disabled" />
+                                <input id="fechaCita" class="form-control" type="datetime" name="fechaCita" disabled="disabled" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as Para Cita: </label>
@@ -464,7 +472,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                                <input id="fechaSalida" class="form-control"type="datetime" name="fechaSalida" disabled="disabled" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as en Tr&aacute;mite: </label>
@@ -519,7 +527,7 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngreso1" disabled="disabled" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
@@ -528,19 +536,19 @@
 
                         </div>
                         <br><br><br>
-                        <hr> </hr>
+                        <hr/> 
 
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso" class="form-control" type="date" name="fechaIngreso" disabled="disabled" />
+                                <input id="fechaIngreso" class="form-control" type="datetime" name="fechaIngreso" disabled="disabled" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Env&iacute;o a PM por GH: </label>
-                                <input id="fechaEnvioPM" class="form-control" type="date" name="fechaEnvioPM" disabled="disabled" />
+                                <input id="fechaEnvioPM" class="form-control" type="datetime" name="fechaEnvioPM" disabled="disabled" />
                             </div>
                         </div>
 
@@ -552,7 +560,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Cita PM / Resultado: </label>
-                                <input id="fechaCitaPM" class="form-control" type="date" name="fechaCitaPM" disabled="disabled" />
+                                <input id="fechaCitaPM" class="form-control" type="datetime" name="fechaCitaPM" disabled="disabled" />
                             </div>
                         </div>
 
@@ -564,7 +572,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" />
                             </div>
                         </div>
 
@@ -612,7 +620,7 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso1" type="date" name="fechaIngreso1" disabled="disabled" />
+                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngreso1" disabled="disabled" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
@@ -621,14 +629,14 @@
 
                         </div>
                         <br><br><br>
-                        <hr> </hr>
+                        <hr/>
 
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Cita: </label>
-                                <input id="fechaCita" class="form-control" type="date" name="fechaCita" disabled="disabled" />
+                                <input id="fechaCita" class="form-control" type="datetime" name="fechaCita" disabled="disabled" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as Para Cita: </label>
@@ -644,7 +652,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="date" name="fechaSalida" disabled="disabled" />
+                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" />
                             </div>
                         </div>
 
@@ -663,7 +671,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Estado: </label>
-                                <input id="fechaEstado" class="form-control" type="date" name="fechaEstado" disabled="disabled" />
+                                <input id="fechaEstado" class="form-control" type="datetime" name="fechaEstado" disabled="disabled" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Cantidad de D&iacute;as: </label>

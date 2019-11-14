@@ -16,6 +16,7 @@ namespace GestionPersonalOIJ.Controllers
 
         readonly PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
         readonly CuadroGeneralServicio cuadroGeneralServicio = new CuadroGeneralServicio();
+        readonly PIDepartamentosServicio pIDepartamentosServicio = new PIDepartamentosServicio();
         readonly static List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
         private readonly int registrosPorPagina = 10;
         private List<PrimerIngreso> primerosIngresosLista;
@@ -200,9 +201,11 @@ namespace GestionPersonalOIJ.Controllers
 			return RedirectToAction("InsertarPrimerosIngresos");
 		}
 
-        public ActionResult verPrimerIngresoEspecifico()
+        public ActionResult verPrimerIngresoEspecifico(string nombrePI, string cedulaPI)
         {
-            return View();
+            PrimerIngresoDepartamentos primerIngresoDepartamentos = new PrimerIngresoDepartamentos();
+            primerIngresoDepartamentos = pIDepartamentosServicio.getPrimerIngresoDepartamentos(nombrePI,cedulaPI);
+            return View(primerIngresoDepartamentos);
 
         }
 
