@@ -16,6 +16,7 @@ namespace GestionPersonalOIJ.Controllers
 
         readonly PrimerIngresoServicio primerIngresoServicio = new PrimerIngresoServicio();
         readonly CuadroGeneralServicio cuadroGeneralServicio = new CuadroGeneralServicio();
+        readonly PIDepartamentosServicio pIDepartamentosServicio = new PIDepartamentosServicio();
         readonly static List<PrimerIngreso> primerosIngresos = new List<PrimerIngreso>();
         private readonly int registrosPorPagina = 10;
         private List<PrimerIngreso> primerosIngresosLista;
@@ -27,15 +28,15 @@ namespace GestionPersonalOIJ.Controllers
         readonly static List<string> todosTels = new List<string>();
         private static int numeroFlujo = 1;
         private static string numeroConvocatoria = "OIJ-";
-
+        private static List<int> flujosPorConvocatoria = new List<int>();
 
 
         public IActionResult CuadroGeneral()
-		{
+        {
             IEnumerable<String> numerosConvocatoria;
             numerosConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
             return View(numerosConvocatoria);
-		}
+        }
 
         /// <summary>
         /// Jesús Torres
@@ -45,52 +46,52 @@ namespace GestionPersonalOIJ.Controllers
         /// Modifica: 
         /// Devuelve: -
         /// </summary>
-        public IActionResult VerPrimerosIngresos(int pagina = 1, String  buscar = "")
-		{
-			IEnumerable<PrimerIngreso> primerosIngresos;
-			primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
-			int totalRegistros = 0;
+        public IActionResult VerPrimerosIngresos(int pagina = 1, String buscar = "")
+        {
+            IEnumerable<PrimerIngreso> primerosIngresos;
+            primerosIngresos = primerIngresoServicio.getAllPrimerosIngresos();
+            int totalRegistros = 0;
 
-			// FILTRO DE BÚSQUEDA
-				// Filtramos el resultado por el 'texto de búqueda'
-				if (!string.IsNullOrEmpty(buscar))
-				{
-					foreach (var item in buscar.Split(new char[] { ' ' },
-							 StringSplitOptions.RemoveEmptyEntries))
-					{
-					primerosIngresos = primerosIngresos.Where(x => x.Cedula.ToUpper().Contains(item) ||
-													  x.Nombre.ToUpper().Contains(item.ToUpper()) ||
-													  x.PrimerApellido.ToUpper().Contains(item.ToUpper()) ||
-													  x.SegundoApellido.ToUpper().Contains(item.ToUpper()) ||
-													  x.NumeroConvocatoria.ToUpper().Contains(item.ToUpper()))
-													  .ToList();
-					}
-				}
-			
-			// Obtenemos la 'página de registros' de la tabla 
-			primerosIngresosLista = primerosIngresos.OrderBy(x => x.Cedula)
-												 .Skip((pagina - 1) * registrosPorPagina)
-												 .Take(registrosPorPagina)
-												 .ToList();
-			// Número total de registros de la tabla		
-			totalRegistros = primerosIngresos.Count();
-			
+            // FILTRO DE BÚSQUEDA
+            // Filtramos el resultado por el 'texto de búqueda'
+            if (!string.IsNullOrEmpty(buscar))
+            {
+                foreach (var item in buscar.Split(new char[] { ' ' },
+                         StringSplitOptions.RemoveEmptyEntries))
+                {
+                    primerosIngresos = primerosIngresos.Where(x => x.Cedula.ToUpper().Contains(item) ||
+                                                      x.Nombre.ToUpper().Contains(item.ToUpper()) ||
+                                                      x.PrimerApellido.ToUpper().Contains(item.ToUpper()) ||
+                                                      x.SegundoApellido.ToUpper().Contains(item.ToUpper()) ||
+                                                      x.NumeroConvocatoria.ToUpper().Contains(item.ToUpper()))
+                                                      .ToList();
+                }
+            }
 
-			// Número total de páginas de la tabla 
-			var _TotalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
-				// Instanciamos la 'Clase de paginación' y asignamos los nuevos valores
-				paginador = new PaginadorGenerico<PrimerIngreso>()
-				{
-					RegistrosPorPagina = registrosPorPagina,
-					TotalRegistros = totalRegistros,
-					TotalPaginas = _TotalPaginas,
-					PaginaActual = pagina,
-					Resultado = primerosIngresosLista
-				};
-				// Enviamos a la Vista la 'Clase de paginación'
-				return View(paginador);
-			
-		}
+            // Obtenemos la 'página de registros' de la tabla 
+            primerosIngresosLista = primerosIngresos.OrderBy(x => x.Cedula)
+                                                 .Skip((pagina - 1) * registrosPorPagina)
+                                                 .Take(registrosPorPagina)
+                                                 .ToList();
+            // Número total de registros de la tabla		
+            totalRegistros = primerosIngresos.Count();
+
+
+            // Número total de páginas de la tabla 
+            var _TotalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
+            // Instanciamos la 'Clase de paginación' y asignamos los nuevos valores
+            paginador = new PaginadorGenerico<PrimerIngreso>()
+            {
+                RegistrosPorPagina = registrosPorPagina,
+                TotalRegistros = totalRegistros,
+                TotalPaginas = _TotalPaginas,
+                PaginaActual = pagina,
+                Resultado = primerosIngresosLista
+            };
+            // Enviamos a la Vista la 'Clase de paginación'
+            return View(paginador);
+
+        }
 
 
 
@@ -111,16 +112,36 @@ namespace GestionPersonalOIJ.Controllers
             ViewData["numFlujo"] = numeroFlujo;
 
 
+            ViewBag.NConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
+            ViewBag.NFlujo = flujosPorConvocatoria;
+
             return View();
         }
-        
+
+
+        [HttpPost]
+        public RedirectToActionResult AgregarNumFlujo(IFormCollection formCollection)
+        {
+
+            numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
+
+            flujosPorConvocatoria = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(numeroConvocatoria);
+
+
+            return RedirectToActionPermanent("InsertarPrimerosIngresos");
+        }
+
+
+
+
+
         [HttpPost]
         public RedirectToActionResult AgregarCorreo(IFormCollection formCollection)
         {
 
             todosCorreos.Add(formCollection["correo"]);
 
-            numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
+            numeroConvocatoria = formCollection["numeroConvocatoria1"].ToString();
             numeroFlujo = Convert.ToInt32(formCollection["numeroFlujo"]);
 
             return RedirectToActionPermanent("InsertarPrimerosIngresos");
@@ -200,9 +221,11 @@ namespace GestionPersonalOIJ.Controllers
 			return RedirectToAction("InsertarPrimerosIngresos");
 		}
 
-        public ActionResult verPrimerIngresoEspecifico()
+        public ActionResult verPrimerIngresoEspecifico(string nombrePI, string cedulaPI)
         {
-            return View();
+            PrimerIngresoDepartamentos primerIngresoDepartamentos = new PrimerIngresoDepartamentos();
+            primerIngresoDepartamentos = pIDepartamentosServicio.getPrimerIngresoDepartamentos(nombrePI,cedulaPI);
+            return View(primerIngresoDepartamentos);
 
         }
 

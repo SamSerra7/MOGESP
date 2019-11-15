@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MOGESP.ServiceLayer.Servicio;
 using MOGESP.Entities.Dominio;
+using MOGESP.Entities.Utilidades;
 
 
 namespace MOGESP.API.Controllers.ProcesoSeleccion.CuadroGeneralC
@@ -29,10 +30,10 @@ namespace MOGESP.API.Controllers.ProcesoSeleccion.CuadroGeneralC
             return flujos;
         }
         [HttpPost("api/cuadroGeneral/listaPI/{idConvocatoria}/{idFlujo}")]
-        public List<CuadroGeneral> GetCuadroGeneral(string idConvocatoria, int idFlujo)
+        public ContenedorCuadrogeneral GetCuadroGeneral(string idConvocatoria, int idFlujo)
         {
-            
-            List<CuadroGeneral> cuadroGeneral = cuadroGeneralServicio.traeCuadroGeneral(idConvocatoria, idFlujo);
+
+            ContenedorCuadrogeneral cuadroGeneral = cuadroGeneralServicio.traeCuadroGeneral(idConvocatoria, idFlujo);
             return cuadroGeneral;
         }
         // POST api/values

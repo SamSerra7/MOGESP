@@ -11,10 +11,11 @@ namespace MOGESP.Entities.Dominio
         {
         }
 
-        public Puesto(int idPuesto, string nombrePuesto)
+        public Puesto(int idPuesto, string nombrePuesto, string condicion)
         {
             IdPuesto = idPuesto;
             Nombre = nombrePuesto;
+            Condicion = condicion;
         }
 
         
