@@ -70,18 +70,22 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
                 departamentoPruebasGH.FechaIngresoAdministracion = (reader["TF_FechaIngresoAdministracion"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaIngresoAdministracion"]) : default;
                 departamentoPruebasGH.CantidadDiasAdministracion = (reader["TN_CantidadDiasAdm"] != DBNull.Value) ? Convert.ToInt32(reader["TN_CantidadDiasAdm"]) : 0;
-                departamentoPruebasGH.Ubicacion = reader["TC_Ubicacion"].ToString() ?? "";
+                departamentoPruebasGH.Ubicacion = reader["TC_Ubicacion"].ToString() ?? " ";
                 departamentoPruebasGH.FechaIngreso = (reader["TF_FechaIngreso"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaIngreso"]) : default;
-                departamentoPruebasGH.OficioIngreso = reader["TC_OficioIngreso"].ToString() ?? "";
+                departamentoPruebasGH.OficioIngreso = reader["TC_OficioIngreso"].ToString() ?? " ";
+                departamentoPruebasGH.Oficio = reader["TC_Oficio"].ToString() ?? " ";
                 departamentoPruebasGH.DiasAlaFecha = (reader["TN_DiasALaFecha"] != DBNull.Value) ? Convert.ToInt32(reader["TN_DiasALaFecha"]) : 0;
-                departamentoPruebasGH.FechaTrasladoPsicologosAdmin = (reader["TF_FechaTrasladoPsicologosAdm"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaTrasladoPsicologosAdm"]) : default; 
+                departamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo = (reader["TN_DiasALaFechaDeFechaLimiteSegunPlazo"] != DBNull.Value) ? Convert.ToInt32(reader["TN_DiasALaFechaDeFechaLimiteSegunPlazo"]) : 0;
+                departamentoPruebasGH.FechaTrasladoPsicologosAdmin = (reader["TF_FechaTrasladoPsicologosAdm"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaTrasladoPsicologosAdm"]) : default;
+                departamentoPruebasGH.FechaDevolucionGHDeAdmin = (reader["TF_FechaDevolucionGHDeAdm"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaDevolucionGHDeAdm"]) : default;
                 departamentoPruebasGH.CantidadDiasPsicologiaAdmin = (reader["TN_CantidadDiasPsicologiaAdm"] != DBNull.Value) ? Convert.ToInt32(reader["TN_CantidadDiasPsicologiaAdm"]) : 0; 
                 departamentoPruebasGH.FechaLimiteSegunPlazo = (reader["TF_FechaLimiteSegunPlazo"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaLimiteSegunPlazo"]) : default;
                 departamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo = (reader["TN_DiasALaFechaDeFechaLimiteSegunPlazo"] != DBNull.Value) ? Convert.ToInt32(reader["TN_DiasALaFechaDeFechaLimiteSegunPlazo"]) : 0;
                 departamentoPruebasGH.DiasTramiteGHDespuesDevuelto = (reader["TN_DiasTramiteGHDespuesDevuelto"] != DBNull.Value) ? Convert.ToInt32(reader["TN_DiasTramiteGHDespuesDevuelto"]) : 0;
                 departamentoPruebasGH.FechaSalida = (reader["TF_FechaSalida"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaSalida"]) : default;
                 departamentoPruebasGH.CantidadDiasTotalesTramite = (reader["TN_CantidadDiasTotalesTramite"] != DBNull.Value) ? Convert.ToInt32(reader["TN_CantidadDiasTotalesTramite"]) : 0;
-                departamentoPruebasGH.OficioRespuesta = reader["TC_OficioRespuesta"].ToString() ?? "";
+                departamentoPruebasGH.OficioRespuesta = reader["TC_OficioRespuesta"].ToString() ?? " ";
+                departamentoPruebasGH.EstadoResultHojaEnvioGH = reader["TC_Nombre"].ToString() ?? " ";
 
             }
 
@@ -187,8 +191,6 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             sqlConnection.Close();
 
-            departamentoPruebasMedicas.EstadoLista = ordenarListaEstado(getListaEstado(), departamentoPruebasMedicas.EstadoResultHojaEnvioGH);
-
             return departamentoPruebasMedicas;
         }
 
@@ -221,8 +223,6 @@ namespace MOGESP.DataAccess.TRAN.Datos
             }
 
             sqlConnection.Close();
-
-            departamentoToxicologia.EstadoLista = ordenarListaEstado(getListaEstado(), departamentoToxicologia.EstadoResultHojaEnvioGH);
 
             return departamentoToxicologia;
         }

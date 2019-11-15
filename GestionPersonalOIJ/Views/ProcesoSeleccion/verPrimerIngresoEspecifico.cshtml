@@ -238,7 +238,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
-                                <label>Fecha Devoluci&oacute;n a GH. Por parte de Administraci&oacute;n: </label>
+                                <label>Fecha Devoluci&oacute;n a GH. por parte de Administraci&oacute;n: </label>
                                 <input id="fechaDevulucionAdmi" class="form-control" type="datetime" name="fechaDevulucionAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaDevolucionGHDeAdmin"/>
                             </div>
                         </div>
@@ -257,8 +257,8 @@
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <label>D&iacute;as a la Fecha: </label>
-                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasAlaFecha"/>
+                                <label>D&iacute;as a la Fecha de L&iacute;mite s&eacute;gun plazo establecido: </label>
+                                <input id="diasAFechaSegundoPlazo" class="form-control" type="number" min="0" name="diasAFechaSegundoPlazo" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Cantidad de D&iacute;as en tr&aacute;mite en GH, despu&eacute;s de devuelto: </label>
@@ -300,7 +300,7 @@
                         <div style=" float: left; ">
                             <br><br><br>
                             <button type="button" class="btn btn-success" id="btnAceptar" name="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
-                            <button type="button" class="btn btn-danger" id="btnCancelar" name="btnCancelar" style=" visibility:hidden"><i class="far fa-window-close"></i> Cancelar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancelar" name="btnCancelar" style=" visibility:hidden" onclick="location.reload()"><i class="far fa-window-close"></i> Cancelar</button>
                         </div>
                     </fieldset>
                 </form>
@@ -716,7 +716,7 @@
 
         });
     });
-    $(function () {
+    /*$(function () {
         $("#btnCancelar").click(function () {
 
             $("#PruebasGH").find('input, select').prop("disabled", true);
@@ -726,7 +726,7 @@
             alert("click");
 
         });
-    });
+    });*/
 
 
     $(function () {
