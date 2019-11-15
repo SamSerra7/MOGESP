@@ -46,21 +46,23 @@ namespace MOGESP.Entities.Dominio
                 nombre = value;
             }
         }
-        private string condicion;
-        public string Condicion
-        {
-            get
-            {
-                return condicion;
-            }
-            set
-            {
-                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) throw new Exception("La condicion es requerido");
-                condicion = value;
-            }
-        }
 
-    }
+		private string condicion;
+		public string Condicion
+		{
+			get
+			{
+				return condicion;
+			}
+			set
+			{
+				if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) throw new Exception("La condicion es requerida");
+				condicion = value;
+			}
+		}
+
+
+	}
 
    
 }
