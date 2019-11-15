@@ -13,8 +13,7 @@ namespace MOGESP.Entities.Dominio
             get { return ubicacion; }
             set
             {
-                if (string.IsNullOrEmpty(value)) throw new Exception("El campo de ubicacion es requerido");
-                ubicacion = value;
+                ubicacion = value ?? throw new Exception("El campo de numOficio es requerido"); 
             }
         }
 
