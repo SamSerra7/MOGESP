@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MOGESP.Entities.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
@@ -15,29 +16,37 @@ namespace MOGESP.DataAccess.TRAN.Datos
 		//variable conexion
 		private ConexionDatos conexion = new ConexionDatos();
 
-
 		/// <summary>
-		/// Autor: Jesus Torres
+		/// Jesús Torres
 		/// 24/oct/2019
-		/// Este método retorna una lista con todos los Puestos
+		/// Efecto: Este método retorna una lista con todos los Puestos
+		/// Requiere: La cedula a consultar y la condicion de los puestos que se desean consultar
+		/// Modifica: 
+		/// <returns>IEnumerable<PrimerIngresoElegibles></returns>
 		/// </summary>
-		/// <returns>List<string></returns>
-		public List<string> cosultarPuestos()
+		public IEnumerable<Puesto> CosultarPuestos(string cedula, int condicionPuesto)
 		{
 
-			List<string> puestos = new List<string>();
+			List<Puesto> puestos = new List<Puesto>();
 
 			SqlConnection sqlConnection = conexion.conexion();
 
-			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarPuesto ", sqlConnection);
-
+			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_PrimerIngresoPuestoAplicaCed @Cedula, @condicion", sqlConnection);
+			sqlCommand.Parameters.AddWithValue("@Cedula", cedula);
+			sqlCommand.Parameters.AddWithValue("@condicion", condicionPuesto);
 			SqlDataReader reader;
 			sqlConnection.Open();
 			reader = sqlCommand.ExecuteReader();
 
+			Puesto puesto; 
+
 			while (reader.Read())
 			{
-				puestos.Add(reader["TC_NombreClasePuesto"].ToString());
+				puesto =  new Puesto();
+				puesto.Nombre = reader["TC_NombreClasePuesto"].ToString();
+				puesto.IdPuesto = Convert.ToInt32(reader["TN_IdPuesto"].ToString());
+				puesto.Condicion = reader["Condicion"].ToString();
+				puestos.Add(puesto);
 			}
 
 			sqlConnection.Close();

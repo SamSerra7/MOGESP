@@ -1,62 +1,184 @@
 ﻿@*model IEnumerable<MOGESP.Entities.Dominio.PrimerIngreso>*@
 @using MOGESP.Entities.Utilidades;
+@model PaginadorGenerico<MOGESP.Entities.Dominio.PrimerIngresoElegible>
 
 
 @{
-    ViewData["Title"] = "Base Elegibles";
+	ViewData["Title"] = "Base Elegibles";
 }
 
 <!--Encabezado-->
 <div class="col-md-12 col-xs-12 col-sm-12">
-    <center>
-        <h2>Primeros Ingresos</h2>
-    </center>
+	<center>
+		<h2>Base de Elegibles</h2>
+	</center>
 </div>
 
 <br />
 <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-    <hr />
+	<hr />
 </div>
 <br />
 
 
 @*CÓDIGO PARA EL FILTRO DE BÚSQUEDA*@
 <div class="text-right form-inline">
-    <form method="get">
-        <div class="form-group" align="center">
-            @Html.TextBox("buscar", null, new
-            {
-                @placeholder = "Filtrar",
-               @class = "form-control",
-               @AutoPostBack = "true"
-           })
-        </div>
-        <button class="btn glyphicon glyphicon-search" type="submit"></button>
-    </form>
+	<form method="get">
+
+		<div class="form-group" align="center">
+			@Html.TextBox("buscar", null, new
+			{
+				@placeholder = "Filtrar",
+			   @class = "form-control",
+			   @AutoPostBack = "true"
+		   })
+		</div>
+		<button class="btn glyphicon glyphicon-search" type="submit"></button>
+	</form>
 </div>
 <br />
 <!--Tabla verPrimeros Ingresos-->
 <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
-    <table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
-        <thead style="align-content: center;">
-            <tr style=" background-color: #222;" class="btn-primary">
-                <th class="border-top-left"></th>
-                <th class="centrarTitulos">C&eacute;dula</th>
-                <th class="centrarTitulos">Nombre - Apellidos</th>
-                <th class="centrarTitulos">Puesto</th>
-                <th class="border-top-right centrarTitulos">Numero de flujo</th>
+	<table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+		<thead style="align-content: center;">
+			<tr style=" background-color: #222;" class="btn-primary">
+				<th class="border-top-left"></th>
+				<th class="centrarTitulos">C&eacute;dula</th>
+				<th class="centrarTitulos">Nombre Apellidos</th>
+				<th class="centrarTitulos">Puestos elegible</th>
+				<th class="centrarTitulos">Condici&oacute;n</th>
+				<th class="centrarTitulos">Fecha de ingreso</th>
+				<th class="centrarTitulos">Correos</th>
+				<th class="centrarTitulos">Tel&eacute;fonos</th>
+				<th class="centrarTitulos">Direcci&oacute;n</th>
+				<th class="border-top-right centrarTitulos">Sexo</th>
 
 
-            </tr>
-        </thead>
+			</tr>
+		</thead>
 
-        <tr style="background:#f1f1f1">
+		<tr style="background:#f1f1f1">
 
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-</table>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+		@foreach (var primerosIngresosElegibles in Model.Resultado)
+		{
+			<tr>
+				<td>
+					@Html.ActionLink("", "verBaseElegibles", new { cedula = primerosIngresosElegibles.Cedula },
+								new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
+
+				</td>
+				<td> @primerosIngresosElegibles.Cedula</td>
+				<td>
+					@primerosIngresosElegibles.Nombre @primerosIngresosElegibles.PrimerApellido @primerosIngresosElegibles.SegundoApellido
+				</td>
+				<td colspan="2">
+					@foreach (var puesto in primerosIngresosElegibles.PuestosElegibles)
+					{
+						<p>@puesto.Nombre / @puesto.Condicion</p>
+					}
+				</td>
+
+
+
+				<td> @primerosIngresosElegibles.FechaIngreso</td>
+
+				<td>
+					@foreach (var correo in primerosIngresosElegibles.Correos)
+					{
+						<p>@correo</p>
+					}
+				</td>
+
+				<td>
+					@foreach (var telefono in primerosIngresosElegibles.Telefonos)
+					{
+						<p>@telefono</p>
+					}
+				</td>
+
+				<td> @primerosIngresosElegibles.Direccion</td>
+				<td> @primerosIngresosElegibles.Sexo</td>
+			</tr>
+		}
+	</table>
 </div>
+
+
+<div class="col-md-12 col-xs-12 col-sm-12">
+	@*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
+	@if (@Model.Resultado.Count() > 0)
+	{
+		<span>
+			<strong>@Model.TotalRegistros</strong> registros encontrados
+		</span>
+		<span>&nbsp;|&nbsp;</span>
+		<span>
+			Página <strong>@(Model.PaginaActual)</strong> de
+			<strong>@Model.TotalPaginas</strong>
+		</span>
+		<span>&nbsp;|&nbsp;</span>
+	}
+	else
+	{
+		<span>No hay resultados para esta búsqueda</span>
+		<span>&nbsp;|&nbsp;</span>
+	}
+
+
+	@*botones de paginación*@
+	<center>
+		@if (Model.PaginaActual > 1)
+		{
+			@Html.ActionLink("", "verBaseElegibles", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
+			<span></span>
+			@Html.ActionLink("Anterior", "verBaseElegibles", new { pagina = Model.PaginaActual - 1 },
+							new { @class = "btn btn-sm btn-default" })
+		}
+		else
+		{
+			@Html.ActionLink("", "verBaseElegibles", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
+			<span></span>
+			@Html.ActionLink("Anterior", "verBaseElegibles", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-default disabled" })
+		}
+		<span></span>
+		@if (Model.PaginaActual < Model.TotalPaginas)
+		{
+			@Html.ActionLink("Siguiente", "verBaseElegibles", new { pagina = Model.PaginaActual + 1 },
+							new { @class = "btn btn-sm btn-default" })
+			<span></span>
+			@Html.ActionLink("", "verBaseElegibles", new { pagina = Model.TotalPaginas },
+							new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
+		}
+		else
+		{
+			@Html.ActionLink("Siguiente", "verBaseElegibles", new { pagina = Model.TotalPaginas - 1 },
+							new { @class = "btn btn-sm btn-default disabled" })
+			<span></span>
+			@Html.ActionLink("", "verBaseElegibles", new { pagina = Model.TotalPaginas },
+							new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
+		}
+	</center>
+
+</div>
+
+<br />
+<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+	<br />
+</div>
+<br />
+
