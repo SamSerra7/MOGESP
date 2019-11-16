@@ -9,6 +9,7 @@ using MOGESP.Entities.Dominio;
 using MOGESP.Entities.Utilidades;
 using System.Data;
 using System.Data.SqlClient;
+using javax.jws;
 
 namespace MOGESP.UserInterface.Controllers
 {
@@ -54,7 +55,17 @@ namespace MOGESP.UserInterface.Controllers
         }
 
 
+        public ActionResult GetVerHojaCitas()
+        {
+            DataSet ds = new DataSet();
 
+            SqlDataAdapter sda = hojaCitasPiServicio.getHojaCitasPI();
+
+            sda.Fill(ds);
+
+            return Json(ds);
+        }
+        
 
     }
 }

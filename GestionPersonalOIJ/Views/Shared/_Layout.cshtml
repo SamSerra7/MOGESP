@@ -11,11 +11,12 @@
     <!--Coloca la imagen a la pestaña del navegador-->
     <link href="https://sitiooij.poder-judicial.go.cr/images/placa-lg.png" rel="shortcut icon" type="image/x-icon" />
 
-	<environment include="Development">
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-		<link rel="stylesheet" href="~/css/site.css" />
-		<link rel="stylesheet" href="~/css/Estilos_MOGEST.css" />
-	</environment>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/Estilos_MOGEST.css" />
+        <link rel="stylesheet" href="~/css/jquery.dataTables.css">
+    </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -168,53 +169,57 @@
 		<center><p style="color:white;background-color:black;">&copy; 2019 - Módulo de Gestion de Personal</p></center>
 	</footer>
 
-	<environment include="Development">
-		<script src="~/lib/jquery/dist/jquery.js"></script>
-		<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-		<script src="~/js/site.js" asp-append-version="true"></script>
-	</environment>
-	<environment exclude="Development">
-		<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-				asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-				asp-fallback-test="window.jQuery"
-				crossorigin="anonymous"
-				integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-		</script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-				asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-				asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-				crossorigin="anonymous"
-				integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-		</script>
-		<script src="~/js/site.min.js" asp-append-version="true"></script>
-	</environment>
+    <environment include="Development">
+
+        <script src="~/js/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/dataTables.dataTables.js"></script>
+
+    </environment>
+    <environment exclude="Development">
+
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
 
 	@RenderSection("Scripts", required: false)
 
 
 
-	<script>
+    <script>
 
-		$('#dropdownSeleccion').hover(function () {
-			$('#navbarDropdownSeleccion').trigger('click')
-        })
+        $('#dropdownSeleccion').hover(function () {
+            $('#navbarDropdownSeleccion').trigger('click')
+        });
         $('#dropdownPrimerosIngresos').hover(function () {
-			$('#navbarDropdownPrimerosIngresos').trigger('click')
-		})
-		$('#dropdownAnalisis').hover(function () {
-			$('#navbarDropdownAnalisis').trigger('click')
-		})
-		$('#dropdownGestion').hover(function () {
-			$('#navbarDropdownGestion').trigger('click')
-		})
-		$('#dropdownControlFlujo').hover(function () {
-			$('#navbarDropdownControlFlujo').trigger('click')
-        })
+            $('#navbarDropdownPrimerosIngresos').trigger('click')
+        });
+        $('#dropdownAnalisis').hover(function () {
+            $('#navbarDropdownAnalisis').trigger('click')
+        });
+        $('#dropdownGestion').hover(function () {
+            $('#navbarDropdownGestion').trigger('click')
+        });
+        $('#dropdownControlFlujo').hover(function () {
+            $('#navbarDropdownControlFlujo').trigger('click')
+        });
         $('#dropdownCatalogos').hover(function () {
             $('#navbarDropdownCatalogos').trigger('click')
-        })
-        
-	</script>
+        });
+
+    </script>
 
 </body>
 
