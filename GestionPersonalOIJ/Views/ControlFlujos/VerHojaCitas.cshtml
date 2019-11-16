@@ -1,0 +1,29 @@
+﻿@using System.Data
+@model DataSet
+
+@{
+    ViewData["Title"] = "HojaCitas";
+}
+
+<h2>Hoja de Citas</h2>
+
+<table class="table table-hover"  cellpadding="0" cellspacing="0">
+    <tr>
+        <th>Primer Ingreso</th>
+        <th>Psicologo(a)</th>
+        <th>Fecha Cita</th>
+        <th>Correo</th>
+        <th>Asistencia</th>
+    </tr>
+    @foreach (DataRow row in Model.Tables[0].Rows)
+    {
+        <tr>
+            <td>@row["TN_IdPrimerIngreso"]</td>
+            <td>@row["TC_NombrePsicologo"]</td>
+            <td>@row["TF_FechaCita"]</td>
+            <td>@row["TN_IdCorreoCita"]</td>
+            <td>@row["TN_IdAsistencia"]</td>
+
+        </tr>
+    }
+</table>

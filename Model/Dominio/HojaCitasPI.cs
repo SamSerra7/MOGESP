@@ -4,6 +4,10 @@ namespace MOGESP.Entities.Dominio
 {
     public class HojaCitasPI
     {
+
+
+
+
         private int id;
         public int Id
         {
@@ -42,6 +46,24 @@ namespace MOGESP.Entities.Dominio
             set { correoCitas = value ?? throw new Exception("La información de correo es requerida"); }
         }
 
+        private DateTime fechaCita;
+
+        public HojaCitasPI(int id, Asistencia asistencia, Psicologo psicologo, CorreoCitas correoCitas, DateTime fechaCita)
+        {
+            Id = id;
+            Asistencia = asistencia;
+            Psicologo = psicologo;
+            CorreoCitas = correoCitas;
+            FechaCita = fechaCita;
+        }
+
+        public DateTime FechaCita
+        {
+            get { return fechaCita; }
+            set {
+                if(DateTime.Now < value) throw new Exception("La fecha no es válida");
+                fechaCita = value; }
+        }
 
 
     }

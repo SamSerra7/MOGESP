@@ -49,11 +49,46 @@
                     <select class="browser-default custom-select" id="buscarNumFlujo">
                         <option value="0">Todos</option>
                     </select>
-                    <button id="btn_BuscarFLCV">Buscar</button>
+                    
 
+
+                    <br><br>
+
+                    <h4>Filtros:</h4>
+
+                    <br>
+
+                    <div style="width:200px; float:left;">
+                        <h6>Condicion de puesto</h6>
+                        <select id="estadoSelectF" class="browser-default custom-select">
+                            <option selected value="0">Todos</option>
+                            <option value="1">Nombrados</option>
+                            <option value="2">Positivos</option>
+                            <option value="3">En espera</option>
+                            <option value="4">Negativos</option>
+                        </select>
+
+                    </div>
+
+                    <div style="width:200px; float:left;">
+                        <h6>Puestos</h6>
+                        <select id="puestoSelectF" class="browser-default custom-select">
+                            <option selected value="0">Todos</option>
+                            <option value="1">Investigador 1</option>
+                            <option value="2">Agente de protecci&oacute;n</option>
+                            <option value="3">Custodio de Detenidos</option>
+                            <option value="4">Agente de localizaci&oacute;n</option>
+                        </select>
+
+                    </div>
+
+
+
+
+                    <br><br><br><br>
                 </div>
+                <button class="btn btn-success" id="aplicarFiltros">Aplicar</button>
                 <br><br>
-
             </div>
         </div>
     <div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
@@ -114,37 +149,7 @@
 
         </div>
 
-    <br><br>
-        <div class="container">
-            <h4>Filtros:</h4>
-
-            <br>
-
-            <div style="width:200px; float:left;">
-
-                <select id="estadoSelectF" class="browser-default custom-select">
-                    <option selected value="0">Todos</option>
-                    <option value="1">Nombrados</option>
-                    <option value="2">Positivos</option>
-                    <option value="3">En espera</option>
-                    <option value="4">Negativos</option>
-                </select>
-
-            </div>
-
-            <div style="width:200px; float:left;">
-
-                <select id="puestoSelectF" class="browser-default custom-select">
-                    <option selected value="0">Todos</option>
-                    <option value="1">Investigador 1</option>
-                    <option value="2">Agente de protecci&oacute;n</option>
-                    <option value="3">Custodio de Detenidos</option>
-                    <option value="4">Agente de localizaci&oacute;n</option>
-                </select>
-
-            </div>
-            <button class="btn btn-success" id="aplicarFiltros">Aplicar</button>
-        </div>
+    
 
     <br><br>
         <div class="container">
@@ -339,7 +344,20 @@
     $("#aplicarFiltros").click(function () {
         estadoVal = estadoSelectF.val();
         puestoVal = puestoSelectF.val();
-
+        if (estadoVal == 0 & puestoVal == 0) {
+            var url2 = "http://localhost:55439/api/cuadroGeneral/listaPI/" + selectConvocatoria.val() + "/" + selectFlujos.val();
+            metodoPostMuestraDatos(url2);
+        } else if (estadoVal < 0 || puestoVal < 0) {
+            alert("El cuadro general seleccionado esta vacio");
+        } else if (estadoVal > 4 || puestoVal > 4) {
+            alert("El cuadro general seleccionado esta vacio");
+        } else {
+            
+            var url2 = "http://localhost:55439/api/cuadroGeneral/listaPIFiltrado/" + selectConvocatoria.val() + "/" + selectFlujos.val() +
+                "/" + estadoVal + "/" + puestoVal;
+            
+            metodoPostMuestraDatos(url2);
+        }
         
         //applyFilters(dataP, 0, dataP.listaCuadroGeneral.length, estadoVal, puestoVal);
         
@@ -399,8 +417,8 @@
         btnExportExcel.hide();
     });
     $('label.checkbox-inline').click(function () {
-        var headColumn = $('th:nth-child(' + $(this).children().val() + ')');
-        var column = $('td:nth-child(' + $(this).children().val() + ')');
+        var headColumn = $('#tablaPrimerosIngresos th:nth-child(' + $(this).children().val() + ')');
+        var column = $('#tablaPrimerosIngresos td:nth-child(' + $(this).children().val() + ')');
 
 
 
@@ -509,13 +527,7 @@
         btnExportExcel.show();
         hideDefaultColumns();
     }
-    $("#btn_BuscarFLCV").click(function () {
-        //var dataP;
-        
-        
-        var url2 = "http://localhost:55439/api/cuadroGeneral/listaPI/" + selectConvocatoria.val() + "/" + selectFlujos.val();
-
-
+    function metodoPostMuestraDatos(url2) {
         $.post(url2, null, function (data) {
             dataP = data;
             if (data.listaCuadroGeneral.length === 0) {
@@ -535,14 +547,14 @@
                     btnNext.hide();
                     btnPrevious.hide();
                 }
-                
-                
+
+
                 //btn_BuscarFLCV.prop("disabled", false);
             }
             //console.log("It works " + this.value)
         });
-
-    });
+    }
+    
     $("#buscarNumConvocatoria").on('change', function () {
         selectFlujos.empty();
 
