@@ -14,8 +14,9 @@ namespace MOGESP.ServiceLayer.Servicio
     {
 
         readonly CuadroGeneralDatos cuadroGeneralDatos = new CuadroGeneralDatos();
-
-
+        private string[] puestos = new string[4] {"Investigador 1", "Agente de Proteccion", "Custodio de detenidos", "Agente de localizacion" };
+        private string[] estados = new string[4] { "Nombrado", "Positivo", "Pendiente", "Negativo" };
+        //
         /// <summary>
         /// 16/10/2019
         /// Samuel Serrano Guerra
@@ -46,7 +47,11 @@ namespace MOGESP.ServiceLayer.Servicio
         public ContenedorCuadrogeneral traeCuadroGeneral(String numeroConvovatoria, int numeroFlujo)
         {
             List<CuadroGeneral> cuadroGeneral = cuadroGeneralDatos.traeCuadroGeneral(numeroConvovatoria, numeroFlujo);
-
+            return traeCuadroGeneralContenedor(cuadroGeneral);
+        }
+        
+        private ContenedorCuadrogeneral traeCuadroGeneralContenedor(List<CuadroGeneral> cuadroGeneral)
+        {
             int cantidadPruebasGH = 0;
             int cantidadAntecedentes = 0;
             int cantidadVialidad = 0;
@@ -108,5 +113,79 @@ namespace MOGESP.ServiceLayer.Servicio
                 , cantidadNegativos, cantidadPendientes, cantidadNombrados);
             return contenedor;
         }
-     }
+        
+        public ContenedorCuadrogeneral traeCuadroGeneralFiltrado(String numeroConvovatoria, int numeroFlujo, int filtroEstado, int filtroPuesto)
+        {
+            ContenedorCuadrogeneral contenedorSinFiltrar = traeCuadroGeneral(numeroConvovatoria, numeroFlujo);
+
+            ContenedorCuadrogeneral contenedorFiltrado = new ContenedorCuadrogeneral();
+            if (filtroEstado == 0 & filtroPuesto > 0)
+            {
+                contenedorFiltrado = traeCuadroGeneralFiltradoPorPuesto(contenedorSinFiltrar, filtroPuesto);
+            }else if (filtroEstado > 0 & filtroPuesto == 0)
+            {
+                contenedorFiltrado = traeCuadroGeneralFiltradoPorCondicion(contenedorSinFiltrar, filtroEstado);
+            }else if (filtroEstado > 0 & filtroPuesto > 0)
+            {
+                contenedorFiltrado = traeCuadroGeneralFiltradoPorPuestoYCondicion(contenedorSinFiltrar, filtroPuesto, filtroEstado);
+            }
+
+            return contenedorFiltrado;
+        }
+
+        private ContenedorCuadrogeneral traeCuadroGeneralFiltradoPorPuesto(ContenedorCuadrogeneral contenedorSinFiltrar, int filtroPuesto)
+        {
+            List<CuadroGeneral> listaCuadroGeneralFiltrado = new List<CuadroGeneral>();
+            foreach (CuadroGeneral tupla in contenedorSinFiltrar.ListaCuadroGeneral)
+            {
+                foreach (Puesto puesto in tupla.PuestosAplica)
+                {
+                    if (puesto.Nombre.Equals(puestos[filtroPuesto-1]))
+                    {
+                        listaCuadroGeneralFiltrado.Add(tupla);
+                        break;
+                    }
+                }
+
+            }
+            return traeCuadroGeneralContenedor(listaCuadroGeneralFiltrado);
+        }
+        private ContenedorCuadrogeneral traeCuadroGeneralFiltradoPorCondicion(ContenedorCuadrogeneral contenedorSinFiltrar, int filtroEstado)
+        {
+            List<CuadroGeneral> listaCuadroGeneralFiltrado = new List<CuadroGeneral>();
+            foreach (CuadroGeneral tupla in contenedorSinFiltrar.ListaCuadroGeneral)
+            {
+                foreach (Puesto puesto in tupla.PuestosAplica)
+                {
+                    if (puesto.Condicion.Equals(estados[filtroEstado - 1]))
+                    {
+                        listaCuadroGeneralFiltrado.Add(tupla);
+                        break;
+                    }
+                }
+
+
+            }
+            return traeCuadroGeneralContenedor(listaCuadroGeneralFiltrado);
+        }
+        private ContenedorCuadrogeneral traeCuadroGeneralFiltradoPorPuestoYCondicion(ContenedorCuadrogeneral contenedorSinFiltrar, int filtroPuesto, int filtroEstado)
+        {
+            ContenedorCuadrogeneral contenedorFiltradoPorPuesto = traeCuadroGeneralFiltradoPorPuesto(contenedorSinFiltrar, filtroPuesto);
+            List<CuadroGeneral> listaCuadroGeneralFiltrado = new List<CuadroGeneral>();
+            foreach (CuadroGeneral tupla in contenedorSinFiltrar.ListaCuadroGeneral)
+            {
+                foreach (Puesto puesto in tupla.PuestosAplica)
+                {
+                    if (puesto.Condicion.Equals(estados[filtroEstado-1]) & puesto.Nombre.Equals(puestos[filtroPuesto-1]))
+                    {
+                        listaCuadroGeneralFiltrado.Add(tupla);
+                        break;
+                    }
+                }
+
+            }
+            return traeCuadroGeneralContenedor(listaCuadroGeneralFiltrado);
+        }
+
+    }
 }
