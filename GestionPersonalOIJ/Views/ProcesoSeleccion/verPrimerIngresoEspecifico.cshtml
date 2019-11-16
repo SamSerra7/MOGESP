@@ -307,7 +307,7 @@
 
             <br>
             <div class="btn-block">
-                <button id="btnEditar" name="btnEditar"><i class="fas fa-edit"></i> Editar</button>
+                <button id="btnEditarGH" name="btnEditarGH"><i class="fas fa-edit"></i> Editar</button>
             </div>
 
         </div>
@@ -410,7 +410,7 @@
 
             <br>
             <div class="btn-block">
-                <button id="btnEditar2" name="btnEditar2"><i class="fas fa-edit"></i> Editar</button>
+                <button id="btnEditarInveAnte" name="btnEditarInveAnte"><i class="fas fa-edit"></i> Editar</button>
             </div>
 
         </div>
@@ -508,7 +508,7 @@
 
             <br>
             <div class="btn-block">
-                <button id="btnEditar3" name="btnEditar3"><i class="fas fa-edit"></i> Editar</button>
+                <button id="btnEditarVialidad" name="btnEditarVialidad"><i class="fas fa-edit"></i> Editar</button>
             </div>
         </div>
 
@@ -601,7 +601,7 @@
 
             <br>
             <div class="btn-block">
-                <button id="btnEditar4" name="btnEditar4"><i class="fas fa-edit"></i> Editar</button>
+                <button id="btnEditarPMedica" name="btnEditarPMedica"><i class="fas fa-edit"></i> Editar</button>
             </div>
         </div>
 
@@ -704,7 +704,7 @@
 
             <br>
             <div class="btn-block">
-                <button id="btnEditar5" name="btnEditar5"><i class="fas fa-edit"></i> Editar</button>
+                <button id="btnEditarToxicologia" name="btnEditarToxicologia"><i class="fas fa-edit"></i> Editar</button>
             </div>
         </div>
 
@@ -720,61 +720,56 @@
 
 
     $(function () {
-        $("#btnEditar").click(function () {
+        $("#btnEditarGH").click(function () {
 
             $("#PruebasGH").find('input, button, select').prop("disabled", false);
             $("#PruebasGH").find('input, button, select').css("visibility", "visible");
 
-            $('#btnEditar').hide();
-            alert("click");
+            $('#btnEditarGH').hide();
 
         });
     });
 
     $(function () {
-        $("#btnEditar2").click(function () {
+        $("#btnEditarInveAnte").click(function () {
 
             $("#InvestigacionAnte").find('input, button, select').prop("disabled", false);
             $("#InvestigacionAnte").find('input, button, select').css("visibility", "visible");
 
-            $('#btnEditar2').hide();
-            alert("click");
+            $('#btnEditarInveAnte').hide();
 
         });
     });
 
     $(function () {
-        $("#btnEditar3").click(function () {
+        $("#btnEditarVialidad").click(function () {
 
             $("#Vialidad").find('input, button, select').prop("disabled", false);
             $("#Vialidad").find('input, button, select').css("visibility", "visible");
 
-            $('#btnEditar3').hide();
-            alert("click");
+            $('#btnEditarVialidad').hide();
 
         });
     });
 
     $(function () {
-        $("#btnEditar4").click(function () {
+        $("#btnEditarPMedica").click(function () {
 
             $("#PruebasMedica").find('input, button, select').prop("disabled", false);
             $("#PruebasMedica").find('input, button, select').css("visibility", "visible");
 
-            $('#btnEditar4').hide();
-            alert("click");
+            $('#btnEditarPMedica').hide();
 
         });
     });
 
     $(function () {
-        $("#btnEditar5").click(function () {
+        $("#btnEditarToxicologia").click(function () {
 
             $("#Toxicologia").find('input, button, select').prop("disabled", false);
             $("#Toxicologia").find('input, button, select').css("visibility", "visible");
 
-            $('#btnEditar5').hide();
-            alert("click");
+            $('#btnEditarToxicologia').hide();
 
         });
     });
