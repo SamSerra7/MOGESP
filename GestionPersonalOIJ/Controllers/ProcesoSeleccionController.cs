@@ -221,10 +221,10 @@ namespace GestionPersonalOIJ.Controllers
 			return RedirectToAction("InsertarPrimerosIngresos");
 		}
 
-        public ActionResult verPrimerIngresoEspecifico(string nombrePI, string cedulaPI)
+        public ActionResult verPrimerIngresoEspecifico(string nombrePI, string primerApellidoPI, string segundoApellidoPI, string cedulaPI)
         {
             PrimerIngresoDepartamentos primerIngresoDepartamentos = new PrimerIngresoDepartamentos();
-            primerIngresoDepartamentos = pIDepartamentosServicio.getPrimerIngresoDepartamentos(nombrePI,cedulaPI);
+            primerIngresoDepartamentos = pIDepartamentosServicio.getPrimerIngresoDepartamentos(nombrePI, primerApellidoPI, segundoApellidoPI, cedulaPI);
             return View(primerIngresoDepartamentos);
 
         }

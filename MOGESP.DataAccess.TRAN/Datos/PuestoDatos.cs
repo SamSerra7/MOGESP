@@ -31,7 +31,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
 			SqlConnection sqlConnection = conexion.conexion();
 
-			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_PrimerIngresoPuestoAplicaCed @Cedula, @condicion", sqlConnection);
+			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_PrimerIngresoPuestoAplicaPorCondicion @Cedula, @condicion", sqlConnection);
 			sqlCommand.Parameters.AddWithValue("@Cedula", cedula);
 			sqlCommand.Parameters.AddWithValue("@condicion", condicionPuesto);
 			SqlDataReader reader;
