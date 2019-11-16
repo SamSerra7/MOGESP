@@ -570,12 +570,12 @@
 
                 $.post(url, null, function (data) {
 
-                    if (data.listaCuadroGeneral.length === 0) {
+                    if (data.length === 0) {
                         alert("La convocatoria seleccionada no tiene flujos");
                     } else {
                         var size = 0;
-                        for (key in data.listaCuadroGeneral) {
-                            if (data.listaCuadroGeneral.hasOwnProperty(key)) {
+                        for (key in data) {
+                            if (data.hasOwnProperty(key)) {
 
                                 $(
                                     '<option value="' + data[size] + '">' +
