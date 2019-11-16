@@ -13,9 +13,9 @@ namespace MOGESP.ServiceLayer.Servicio
     {
         readonly PrimerIngresoDepartamentosDatos primerIngresoDepartamentosDatos = new PrimerIngresoDepartamentosDatos();
 
-        public PrimerIngresoDepartamentos getPrimerIngresoDepartamentos(string nombrePI, string cedulaPI)
+        public PrimerIngresoDepartamentos getPrimerIngresoDepartamentos(string nombrePI, string primerApellidoPI, string segundoApellidoPI, string cedulaPI)
         {
-            return primerIngresoDepartamentosDatos.getPrimerIngresoDepartamentos(nombrePI,cedulaPI);
+            return primerIngresoDepartamentosDatos.getPrimerIngresoDepartamentos(nombrePI, primerApellidoPI, segundoApellidoPI, cedulaPI);
         }
 
         public void actualizarPruebasGH(DepartamentoPruebasGH departamentoPruebasGH, string cedulaPI)
