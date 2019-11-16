@@ -7,6 +7,17 @@ namespace MOGESP.Entities.Dominio
     public class DepartamentoPruebasGH : Departamento
     {
 
+
+        private string numConcurso;
+        public string NumConcurso
+        {
+            get { return numConcurso; }
+            set
+            {
+                numConcurso = value ?? throw new Exception("El campo de numConcurso es requerido");
+            }
+        }
+
         private string ubicacion;
         public string Ubicacion
         {

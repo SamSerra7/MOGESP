@@ -167,7 +167,6 @@
         <!--Primer tab-->
         <input type="radio" name="tab" id="tabPruebasGH" checked="checked">
         <label for="tabPruebasGH" id="labelTab">Pruebas Gesti&oacute;n Humana</label>
-
         <div class="tab">
 
             <div class="CajaFormulario" id="PruebasGH">
@@ -184,11 +183,11 @@
 
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngreso1" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngresoAdministracion"/>
+                                <input class="form-control" id="fechaIngreso" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngresoAdministracion"/>
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
-                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasAdministracion"/>
+                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasAdministracion"/>
                             </div>
 
                         </div>
@@ -198,7 +197,7 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label>N&deg;. Concurso: </label>
-                                <input class="form-control" id="NumConcurso" type="text" name="NumConcurso" disabled="disabled" value="@Model.NumeroCedula"/>
+                                <input class="form-control" id="NumConcurso" type="text" name="numConcurso" disabled="disabled" value="@Model.DepartamentoPruebasGH.NumConcurso"/>
                             </div>
                             <div class="col-md-6">
                                 <label>Ubicaci&oacute;n: </label>
@@ -211,7 +210,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso2" class="form-control"type="datetime" name="fechaIngreso2" disabled="disabled"  value="@Model.DepartamentoPruebasGH.FechaIngreso"/>
+                                <input id="fechaIngreso2" class="form-control"type="datetime" name="fechaIngreso" disabled="disabled"  value="@Model.DepartamentoPruebasGH.FechaIngreso"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
@@ -262,7 +261,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Cantidad de D&iacute;as en tr&aacute;mite en GH, despu&eacute;s de devuelto: </label>
-                                <input id="fechaPsicologia" class="form-control" type="number" min="0" name="fechaPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasTramiteGHDespuesDevuelto"/>
+                                <input id="fechaPsicologia" class="form-control" type="number" min="0" name="cantidadFechaPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasTramiteGHDespuesDevuelto"/>
                             </div>
                         </div>
 
@@ -299,7 +298,7 @@
 
                         <div style=" float: left; ">
                             <br><br><br>
-                            <button type="button" class="btn btn-success" id="btnAceptar" name="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="submit" class="btn btn-success" id="btnAceptar" name="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
                             <button type="button" class="btn btn-danger" id="btnCancelar" name="btnCancelar" style=" visibility:hidden" onclick="location.reload()"><i class="far fa-window-close"></i> Cancelar</button>
                         </div>
                     </fieldset>
@@ -330,11 +329,11 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngreso1" disabled="disabled" />
+                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaIngresoAdministracion" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
-                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoAntecedentes.CantidadDiasAdministracion"/>
                             </div>
 
                         </div>
@@ -345,11 +344,11 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso2" class="form-control" type="datetime" name="fechaIngreso2" disabled="disabled" />
+                                <input id="fechaIngreso2" class="form-control" type="datetime" name="fechaIngreso2" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaIngreso"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
-                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" />
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoAntecedentes.OficioIngreso"/>
                             </div>
                         </div>
 
@@ -357,34 +356,34 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Resultado: </label>
-                                <input id="fechaResultado" class="form-control" type="datetime" name="fechaResultado" disabled="disabled" />
+                                <input id="fechaResultado" class="form-control" type="datetime" name="fechaResultado" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaResultado"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Zona de Trabajo: </label>
-                                <input id="zonaTrabajo" class="form-control" type="text" name="zonaTrabajo" disabled="disabled" />
+                                <input id="zonaTrabajo" class="form-control" type="text" name="zonaTrabajo" disabled="disabled" value="@Model.DepartamentoAntecedentes.ZonaTrabajo"/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as a la fecha: </label>
-                                <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" />
+                                <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoAntecedentes.DiasAlaFecha"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" />
+                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaSalida"/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as en Tr&aacute;mite: </label>
-                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" />
+                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" value="@Model.DepartamentoAntecedentes.CantidadDiasTotalesTramite"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Respuesta: </label>
-                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" />
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoAntecedentes.OficioRespuesta"/>
                             </div>
                         </div>
 
@@ -392,16 +391,18 @@
                             <div class="col-md-4 mb-3">
                                 <label>Estado: </label>
                                 <select id="selectEstado" name="selectEstado" disabled="disabled">
-                                    <option value="value1">Positivo</option>
-                                    <option value="value2" selected>Negativo</option>
+                                    @foreach (var listaEstados in Model.DepartamentoAntecedentes.EstadoLista)
+                                    {
+                                        <option value="@listaEstados">@listaEstados</option>
+                                    }
                                 </select>
                             </div>
                         </div>
 
                         <div style=" float: left; ">
                             <br><br><br>
-                            <button type="button" class="btn btn-success" id="btnAceptar2" name="btnAceptar2" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
-                            <button type="button" class="btn btn-danger" id="btnCancelar2" name="btnCancelar2" style=" visibility:hidden"><i class="far fa-window-close"></i> Cancelar</button>
+                            <button type="submit" class="btn btn-success" id="btnAceptar2" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancelar2" style=" visibility:hidden" onclick="location.reload()"><i class="far fa-window-close"></i> Cancelar</button>
                         </div>
                     </fieldset>
                 </form>
@@ -432,11 +433,11 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso1" type="datetime" name="fechaIngreso1" disabled="disabled" />
+                                <input class="form-control" id="fechaIngresoAdmi" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoVialidad.FechaIngresoAdministracion"/>
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
-                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDias" disabled="disabled" />
+                                <input class="form-control" id="cantidadDiasAdmi" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoVialidad.CantidadDiasAdministracion"/>
                             </div>
 
                         </div>
@@ -448,11 +449,11 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso Transporte: </label>
-                                <input id="fechaIngresoTrans" class="form-control" type="datetime" name="fechaIngresoTrans" disabled="disabled" />
+                                <input id="fechaIngresoTrans" class="form-control" type="datetime" name="fechaIngresoTrans" disabled="disabled" value="@Model.DepartamentoVialidad.FechaIngreso"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
-                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" />
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoVialidad.OficioIngreso"/>
                             </div>
                         </div>
 
@@ -460,11 +461,11 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Cita: </label>
-                                <input id="fechaCita" class="form-control" type="datetime" name="fechaCita" disabled="disabled" />
+                                <input id="fechaCita" class="form-control" type="datetime" name="fechaCita" disabled="disabled" value="@Model.DepartamentoVialidad.FechaCita"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as Para Cita: </label>
-                                <input id="diasCita" class="form-control" type="number" min="0" name="diasCita" disabled="disabled" />
+                                <input id="diasCita" class="form-control" type="number" min="0" name="diasCita" disabled="disabled" value="@Model.DepartamentoVialidad.DiasParaCita"/>
                             </div>
                         </div>
 
@@ -472,32 +473,34 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control"type="datetime" name="fechaSalida" disabled="disabled" />
+                                <input id="fechaSalida" class="form-control"type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoVialidad.FechaSalida"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as en Tr&aacute;mite: </label>
-                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" />
+                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" value="@Model.DepartamentoVialidad.CantidadDiasTotalesTramite"/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Respuesta: </label>
-                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" />
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoVialidad.OficioRespuesta"/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Estado: </label>
                                 <select id="selectEstado" name="selectEstado" disabled="disabled">
-                                    <option value="value1">Positivo</option>
-                                    <option value="value2" selected>Negativo</option>
+                                    @foreach (var listaEstados in Model.DepartamentoVialidad.EstadoLista)
+                                    {
+                                        <option value="@listaEstados">@listaEstados</option>
+                                    }
                                 </select>
                             </div>
                         </div>
 
                         <div style=" float: left; ">
                             <br><br><br>
-                            <button type="button" class="btn btn-success" id="btnAceptar3" name="btnAceptar3" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
-                            <button type="button" class="btn btn-danger" id="btnCancelar3" name="btnCancelar3" style=" visibility:hidden"><i class="far fa-window-close"></i> Cancelar</button>
+                            <button type="submit" class="btn btn-success" id="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancelar" style=" visibility:hidden" onclick="location.reload()"><i class="far fa-window-close"></i> Cancelar</button>
                         </div>
                     </fieldset>
                 </form>
@@ -716,18 +719,6 @@
 
         });
     });
-    /*$(function () {
-        $("#btnCancelar").click(function () {
-
-            $("#PruebasGH").find('input, select').prop("disabled", true);
-            $("#PruebasGH").find('button').css("visibility", "hidden");
-
-            $('#btnEditar').show();
-            alert("click");
-
-        });
-    });*/
-
 
     $(function () {
         $("#btnEditar2").click(function () {
@@ -740,18 +731,6 @@
 
         });
     });
-    $(function () {
-        $("#btnCancelar2").click(function () {
-
-            $("#InvestigacionAnte").find('input, select').prop("disabled", true);
-            $("#InvestigacionAnte").find('button').css("visibility", "hidden");
-
-            $('#btnEditar2').show();
-            alert("click");
-
-        });
-    });
-
 
     $(function () {
         $("#btnEditar3").click(function () {
@@ -764,18 +743,6 @@
 
         });
     });
-    $(function () {
-        $("#btnCancelar3").click(function () {
-
-            $("#Vialidad").find('input, select').prop("disabled", true);
-            $("#Vialidad").find('button').css("visibility", "hidden");
-
-            $('#btnEditar3').show();
-            alert("click");
-
-        });
-    });
-
 
     $(function () {
         $("#btnEditar4").click(function () {
@@ -788,18 +755,6 @@
 
         });
     });
-    $(function () {
-        $("#btnCancelar4").click(function () {
-
-            $("#PruebasMedica").find('input, select').prop("disabled", true);
-            $("#PruebasMedica").find('button').css("visibility", "hidden");
-
-            $('#btnEditar4').show();
-            alert("click");
-
-        });
-    });
-
 
     $(function () {
         $("#btnEditar5").click(function () {
@@ -808,17 +763,6 @@
             $("#Toxicologia").find('input, button, select').css("visibility", "visible");
 
             $('#btnEditar5').hide();
-            alert("click");
-
-        });
-    });
-    $(function () {
-        $("#btnCancelar5").click(function () {
-
-            $("#Toxicologia").find('input, select').prop("disabled", true);
-            $("#Toxicologia").find('button').css("visibility", "hidden");
-
-            $('#btnEditar5').show();
             alert("click");
 
         });

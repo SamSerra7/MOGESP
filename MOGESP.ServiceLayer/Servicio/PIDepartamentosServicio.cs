@@ -18,5 +18,11 @@ namespace MOGESP.ServiceLayer.Servicio
             return primerIngresoDepartamentosDatos.getPrimerIngresoDepartamentos(nombrePI,cedulaPI);
         }
 
+        public void actualizarPruebasGH(DepartamentoPruebasGH departamentoPruebasGH, string cedulaPI)
+        {
+            if ( (departamentoPruebasGH == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarPruebasGH");
+            primerIngresoDepartamentosDatos.actualizarPruebasGH(departamentoPruebasGH, cedulaPI);
+        }
+
     }
 }
