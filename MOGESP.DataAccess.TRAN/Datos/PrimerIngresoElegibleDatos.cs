@@ -34,8 +34,8 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
 			SqlConnection sqlConnection = conexion.conexion();
 
-			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarPrimerosIngresosPorCondicion", sqlConnection);
-
+			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarPrimerosIngresosPorCondicion @condicion", sqlConnection);
+			sqlCommand.Parameters.AddWithValue("@condicion", condicionPuesto);
 			SqlDataReader reader;
 			sqlConnection.Open();
 			reader = sqlCommand.ExecuteReader();

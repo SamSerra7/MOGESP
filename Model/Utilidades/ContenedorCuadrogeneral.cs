@@ -107,6 +107,10 @@ namespace MOGESP.Entities.Utilidades
             }
         }
 
+        public ContenedorCuadrogeneral()
+        {
+        }
+
         public ContenedorCuadrogeneral(List<CuadroGeneral> listaCuadroGeneral, int cantidadPruebasGH, int cantidadAntecedentes, int cantidadVialidad, int cantidadToxicologia, int cantidadPruebasMedicas, int cantidadPositivosEnEspera, int cantidadNegativos, int cantidadPendientes, int cantidadNombrados)
         {
             ListaCuadroGeneral = listaCuadroGeneral;

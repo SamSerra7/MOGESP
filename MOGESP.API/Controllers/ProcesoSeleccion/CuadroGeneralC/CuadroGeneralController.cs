@@ -36,6 +36,13 @@ namespace MOGESP.API.Controllers.ProcesoSeleccion.CuadroGeneralC
             ContenedorCuadrogeneral cuadroGeneral = cuadroGeneralServicio.traeCuadroGeneral(idConvocatoria, idFlujo);
             return cuadroGeneral;
         }
+        [HttpPost("api/cuadroGeneral/listaPIFiltrado/{idConvocatoria}/{idFlujo}/{filtroEstado}/{filtroPuesto}")]
+        public ContenedorCuadrogeneral GetCuadroGeneral(string idConvocatoria, int idFlujo, int filtroEstado, int filtroPuesto)
+        {
+
+            ContenedorCuadrogeneral cuadroGeneral = cuadroGeneralServicio.traeCuadroGeneralFiltrado(idConvocatoria, idFlujo, filtroEstado, filtroPuesto);
+            return cuadroGeneral;
+        }
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)
