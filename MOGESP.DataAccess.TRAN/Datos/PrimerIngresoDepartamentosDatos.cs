@@ -299,6 +299,46 @@ namespace MOGESP.DataAccess.TRAN.Datos
             actualizarPruebasGH.Dispose();
         }
 
+        public void actualizarAntecedentes(DepartamentoAntecedentes departamentoAntecedentes, string cedulaPI)
+        {
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand actualizarAntecedentes = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
+                                            @numeroDeCedula,
+											@TF_FechaIngresoAdministracion,
+											@TN_CantidadDiasAdm,
+											@TF_FechaIngresoTransportes,
+											@TC_OficioIngreso,
+											@TN_DiasALaFecha,
+                                            @TF_FechaFechaResultado,
+                                            @TN_ZonaDeTrabajo,
+											@TF_FechaSalida,
+											@TN_CantidadDiasTotalesTramite,
+											@TC_OficioRespuesta,
+											@TN_EstadoResultHojaEnvioGH", sqlConnection);
+
+
+            actualizarAntecedentes.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoAntecedentes.FechaIngresoAdministracion);
+            actualizarAntecedentes.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoAntecedentes.CantidadDiasAdministracion);
+            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngresoTransportes", departamentoAntecedentes.FechaIngreso);
+            actualizarAntecedentes.Parameters.AddWithValue("@TC_OficioIngreso", departamentoAntecedentes.OficioIngreso);
+            actualizarAntecedentes.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoAntecedentes.DiasAlaFecha);
+            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaFechaResultado", departamentoAntecedentes.FechaResultado);
+            actualizarAntecedentes.Parameters.AddWithValue("@TN_ZonaDeTrabajo", departamentoAntecedentes.ZonaTrabajo);
+            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaSalida", departamentoAntecedentes.FechaSalida);
+            actualizarAntecedentes.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoAntecedentes.CantidadDiasTotalesTramite);
+            actualizarAntecedentes.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoAntecedentes.OficioRespuesta);
+            actualizarAntecedentes.Parameters.AddWithValue("@TN_EstadoResultHojaEnvioGH", departamentoAntecedentes.EstadoResultHojaEnvioGH);
+
+            sqlConnection.Open();
+            actualizarAntecedentes.ExecuteReader();
+
+            sqlConnection.Close();
+            actualizarAntecedentes.Dispose();
+        }
+
     }
 
 
