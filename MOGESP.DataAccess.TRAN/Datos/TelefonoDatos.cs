@@ -85,5 +85,37 @@ namespace MOGESP.DataAccess.TRAN.Datos
             modificarTel.ExecuteReader();
             sqlConnection.Close();
         }
-    }
+
+
+		/// <summary>
+		/// Autor: Jesus Torres
+		/// 17/11/19
+		/// Este método retorna una lista con todos los teléfonos de un Funcionario
+		/// </summary>
+		/// <returns>List<int></returns>
+		public List<String> CosultarTelefonosPorFuncionario(string cedula)
+		{
+
+			List<String> telefonos = new List<String>();
+
+			SqlConnection sqlConnection = conexion.conexion();
+
+			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarTelefonosPorFuncionario @Cedula ", sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@Cedula", cedula);
+			SqlDataReader reader;
+			sqlConnection.Open();
+			reader = sqlCommand.ExecuteReader();
+
+			while (reader.Read())
+			{
+				telefonos.Add(reader["TC_Telefono"].ToString());
+			}
+
+			sqlConnection.Close();
+			return telefonos;
+		}
+
+
+	}
 }

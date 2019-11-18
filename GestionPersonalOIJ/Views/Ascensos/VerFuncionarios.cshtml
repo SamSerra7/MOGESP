@@ -1,172 +1,159 @@
 ﻿@using MOGESP.Entities.Utilidades;
 @model PaginadorGenerico<MOGESP.Entities.Dominio.Funcionario>
 
+
 @{
-    ViewData["Title"] = "VerFuncionarios";
+	ViewData["Title"] = "Primeros Ingresos";
 }
 
 <!--Encabezado-->
-<div>
-    <center>
-        <h2>Agregar Concurso</h2>
-    </center>
-
-    <br />
-    <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-        <hr />
-    </div>
-    <br />
-    <br />
+<div class="col-md-12 col-xs-12 col-sm-12">
+	<center>
+		<h2>Funcionarios</h2>
+	</center>
 </div>
 
-
-
-<div class="row container" style="border: 3px solid #152327;">
-
-    <form method="get" action=@Url.Action("VerFuncionarios", "Ascensos" )>
-
-
-        <center><h4>Funcionario</h4></center>
-        <label>C&eacute;dula/Nombre</label>
-        <div class="row">
-            <div class="col-md-4">
-                @Html.TextBox("buscar", null, new
-                {
-                    @placeholder = "Filtrar",
-                   @class = "form-control",
-                   @AutoPostBack = "true"
-               })
-            </div>
-            <div class="col-md-3 ">
-                <button class="btn glyphicon glyphicon-search" type="submit"></button>
-            </div>
-        </div>
-
-    </form>
-
-    <br />
-
-    <div class="row">
-        <!--Tabla Persona Ascenso-->
-        <div class="table-responsive col-md-4 col-md-offset-4" style="text-align: center; overflow-y: auto;">
-            <table id="tablaDatosPersonales" class="table table-responsive">
-                <thead style="align-content: center;">
-                    <tr>
-                        <th class="centrarTitulos ">C&eacute;dula</th>
-                        <th class="centrarTitulos ">Nombre Apellidos</th>
-                        <th class="centrarTitulos "></th>
-                    </tr>
-                </thead>
-
-
-                @foreach (var funcionario in Model.Resultado)
-                {
-                    <tr>
-                        <td> @funcionario.Cedula</td>
-                        <td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
-                        <td>
-                            @Html.ActionLink("", "VerFuncionarios", new { buscar = "" },
-                                                     new { @class = "btn glyphicon glyphicon-search", @title = "Ver Funcionario" })
-                        </td>
-
-                    </tr>
-                }
-            </table>
-        </div>
-    </div>
-
-    <div class="col-md-12 col-xs-12 col-sm-12">
-        @*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
-        @if (@Model.Resultado.Count() > 0)
-        {
-            <span>
-                <strong>@Model.TotalRegistros</strong> registros encontrados
-            </span>
-            <span>&nbsp;|&nbsp;</span>
-            <span>
-                Página <strong>@(Model.PaginaActual)</strong> de
-                <strong>@Model.TotalPaginas</strong>
-            </span>
-            <span>&nbsp;|&nbsp;</span>
-        }
-        else
-        {
-            <span>No hay resultados para esta búsqueda</span>
-            <span>&nbsp;|&nbsp;</span>
-        }
-
-
-        @*botones de paginación*@
-        <center>
-            @if (Model.PaginaActual > 1)
-            {
-                @Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
-                                new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
-                <span></span>
-                @Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = Model.PaginaActual - 1 },
-                                new { @class = "btn btn-sm btn-default" })
-            }
-            else
-            {
-                @Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
-                                new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
-                <span></span>
-                @Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = 1 },
-                                new { @class = "btn btn-sm btn-default disabled" })
-            }
-            <span></span>
-            @if (Model.PaginaActual < Model.TotalPaginas)
-            {
-                @Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.PaginaActual + 1 },
-                                new { @class = "btn btn-sm btn-default" })
-                <span></span>
-                @Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
-                                new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
-            }
-            else
-            {
-                @Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.TotalPaginas - 1 },
-                                new { @class = "btn btn-sm btn-default disabled" })
-                <span></span>
-                @Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
-                                new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
-            }
-        </center>
-
-        <br />
-    </div>
-
-
-</div>
 <br />
 <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-    <hr />
+	<hr />
 </div>
 <br />
 
 
-<div class="row container" style="border: 3px solid #152327;">
-    <h4>Concurso</h4>
-    <div class="col-md-3">
-        <label>Nombre Puesto</label>
-        @Html.TextBox("buscar", null, new
-        {
-    @class = "form-control",
-    @AutoPostBack = "true"
-    })
-        <label>Fecha</label>
-        <input type="date" class="form-control" id="start" name="trip-start">
-        <br />
-    </div>
+@*CÓDIGO PARA EL FILTRO DE BÚSQUEDA*@
+<div class="text-right form-inline">
+	<form method="get" action=@Url.Action("verFuncionarios", "Ascensos" )>
+		<div class="form-group">
+			@Html.TextBox("buscar", null, new { @placeholder = "Filtrar",
+			   @class = "form-control",
+			   @AutoPostBack = "true"
+		   })
+		</div>
+		<button class="btn glyphicon glyphicon-search" type="submit"></button>
+	</form>
+</div>
+<br />
+<!--Tabla verPrimeros Ingresos-->
+<div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+	<table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+		<thead style="align-content: center;">
+			<tr style=" background-color: #222;" class="btn-primary">
+				<th class="border-top-left"></th>
+				<th class="centrarTitulos">C&eacute;dula</th>
+				<th class="centrarTitulos">Nombre Apellidos</th>
+				<th class="centrarTitulos">Sexo</th>
+				<th class="centrarTitulos">Correos</th>
+				<th class="centrarTitulos">Tel&eacute;fonos</th>
+				<th class="centrarTitulos border-top-right">Direcci&oacute;n</th>
 
-    <div class="col-md-3 col-md-offset-10">
-        <div class="row">
-            @Html.ActionLink("Cancelar", "AgregarConcurso", new { buscar = "" },
-                                                                    new { @class = "btn btn-secondary" })
-            @Html.ActionLink("Aceptar", "AgregarConcurso", new { buscar = "" },
-                                                    new { @class = "btn btn-success" })
-        </div>
-        <br />
-    </div>
+			</tr>
+		</thead>
+
+		<tr style="background:#f1f1f1">
+
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+
+		@foreach (var funcionario in Model.Resultado)
+			{
+		<tr>
+			<td>
+				@Html.ActionLink("", "verPrimerIngresoEspecifico", new { buscar = "" },
+							new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
+
+			</td>
+			<td>@funcionario.Cedula</td>
+			<td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
+			<td> @funcionario.Sexo</td>
+			<td>
+				@foreach (var correo in funcionario.Correos)
+				{
+					<p>@correo</p>
+				}
+			</td>
+			<td>
+				@foreach (var telefono in funcionario.Telefonos)
+				{
+					<p>@telefono</p>
+				}
+			</td>
+			<td> @funcionario.Direccion</td>
+		</tr>
+		}
+
+	</table>
+</div>
+
+		<div class="col-md-12 col-xs-12 col-sm-12">
+			@*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
+	@if (@Model.Resultado.Count() > 0)
+	{
+		<span>
+			<strong>@Model.TotalRegistros</strong> registros encontrados
+		</span>
+		<span>&nbsp;|&nbsp;</span>
+		<span>
+			Página <strong>@(Model.PaginaActual)</strong> de
+			<strong>@Model.TotalPaginas</strong>
+		</span>
+		<span>&nbsp;|&nbsp;</span>
+	}
+	else
+	{
+		<span>No hay resultados para esta búsqueda</span>
+		<span>&nbsp;|&nbsp;</span>
+	}
+
+
+	@*botones de paginación*@
+	<center>
+		@if (Model.PaginaActual > 1)
+		{
+			@Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
+			<span></span>
+			@Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = Model.PaginaActual - 1 },
+							new { @class = "btn btn-sm btn-default" })
+		}
+		else
+		{
+			@Html.ActionLink("", "VerFuncionarios", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
+			<span></span>
+			@Html.ActionLink("Anterior", "VerFuncionarios", new { pagina = 1 },
+							new { @class = "btn btn-sm btn-default disabled" })
+		}
+		<span></span>
+		@if (Model.PaginaActual < Model.TotalPaginas)
+		{
+			@Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.PaginaActual + 1 },
+							new { @class = "btn btn-sm btn-default" })
+			<span></span>
+			@Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
+							new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
+		}
+		else
+		{
+			@Html.ActionLink("Siguiente", "VerFuncionarios", new { pagina = Model.TotalPaginas - 1 },
+							new { @class = "btn btn-sm btn-default disabled" })
+			<span></span>
+			@Html.ActionLink("", "VerFuncionarios", new { pagina = Model.TotalPaginas },
+							new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
+		}
+	</center>
+
+	</div>
+
+<div class="col-md-offset-11 col-xs-offset-11 col-sm-offset-11">
+	<a class="btn btn-success plus" asp-controller="ProcesoSeleccion" asp-action="InsertarPrimerosIngresos"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
 
 </div>
+
+

@@ -79,7 +79,7 @@
 
                             <li><a class="dropdown-item" asp-controller="ProcesoSeleccion" asp-action="CuadroGeneral">Cuadro General</a></li>
 
-                            <li><a class="dropdown-item" href="2">Ascensos</a></li>
+                            <li><a class="dropdown-item" asp-controller="Ascensos" asp-action="VerFuncionarios">Ascensos</a></li>
 
                             <li class="nav-item dropdown" id="dropdownPrimerosIngresos">
                                 <a class="dropdown-toggle dropright" id="navbarDropdownPrimerosIngresos" data-toggle="dropdown">
@@ -131,7 +131,7 @@
 
                         <!-- Coloca debajo del menu Control de Flujo-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="1">Base de elegibles</a></li>
+                            <li><a class="dropdown-item" asp-controller="BaseElegibles" asp-action="verBaseElegibles">Base de elegibles</a></li>
                             <li><a class="dropdown-item" href="2">Flujos de selecci&oacute;n</a></li>
                             <li><a class="dropdown-item" href="3">Registros judiciales</a></li>
                         </ul>

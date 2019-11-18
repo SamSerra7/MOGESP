@@ -87,5 +87,35 @@ namespace MOGESP.DataAccess.TRAN.Datos
             modificarCorreo.ExecuteReader();
             sqlConnection.Close();
         }
-    }
+
+		/// <summary>
+		/// Autor: Jesus Torres
+		/// 17/11/19
+		/// Este método retorna una lista con todos los correos de un funcionario
+		/// </summary>
+		/// <returns>List<string></returns>
+		public List<string> CosultarCorreosPorFuncionario(string cedulaFuncionario)
+		{
+
+			List<string> correosFuncionarios = new List<string>();
+
+			SqlConnection sqlConnection = conexion.conexion();
+
+			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarCorreosPorFuncionarios @Cedula ", sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@Cedula", cedulaFuncionario);
+			SqlDataReader reader;
+			sqlConnection.Open();
+			reader = sqlCommand.ExecuteReader();
+
+			while (reader.Read())
+			{
+				correosFuncionarios.Add(reader["TC_Correo"].ToString());
+			}
+
+			sqlConnection.Close();
+
+			return correosFuncionarios;
+		}
+	}
 }

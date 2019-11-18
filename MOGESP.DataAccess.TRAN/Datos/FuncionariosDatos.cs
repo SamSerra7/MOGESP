@@ -46,8 +46,12 @@ namespace MOGESP.DataAccess.TRAN.Datos
                 funcionario.Nombre = reader["TC_Nombre"].ToString();
                 funcionario.PrimerApellido = reader["TC_PrimerApellido"].ToString();
                 funcionario.SegundoApellido = reader["TC_SegundoApellido"].ToString();
+				funcionario.Sexo = Convert.ToChar(reader["TC_Sexo"].ToString());
+				funcionario.Direccion = reader["TC_Direccion"].ToString();
+				funcionario.Correos = correoDatos.CosultarCorreosPorFuncionario(funcionario.Cedula);
+				funcionario.Telefonos = telefonoDatos.CosultarTelefonosPorFuncionario(funcionario.Cedula);
 
-                funcionarios.Add(funcionario);
+				funcionarios.Add(funcionario);
             }
 
             sqlConnection.Close();

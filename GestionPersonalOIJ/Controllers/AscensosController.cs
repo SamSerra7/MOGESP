@@ -13,9 +13,10 @@ namespace MOGESP.UserInterface.Controllers
     public class AscensosController : Controller
     {
         readonly FuncionarioServicio funcioniarioServicio = new FuncionarioServicio();
-        private readonly int registrosPorPagina = 4;
+        private readonly int registrosPorPagina = 10;
         private IEnumerable<Funcionario> funcionarios;
         private PaginadorGenerico<Funcionario> paginador;
+		private List<Funcionario> funcionariosLista;
 
 
 		public IActionResult AgregarConcurso()
@@ -27,45 +28,48 @@ namespace MOGESP.UserInterface.Controllers
         public ActionResult VerFuncionarios(int pagina = 1, String buscar = "")
         {
 
-            funcionarios = funcioniarioServicio.ListarFuncionarios();
-            int totalRegistros = 0;
+			funcionarios = funcioniarioServicio.ListarFuncionarios();
+			int totalRegistros = 0;
 
-            // FILTRO DE BÚSQUEDA
-            // Filtramos el resultado por el 'texto de búqueda'
-            if (!string.IsNullOrEmpty(buscar))
-            {
-                foreach (var item in buscar.Split(new char[] { ' ' },
-                         StringSplitOptions.RemoveEmptyEntries))
-                {
-                    funcionarios = funcionarios.Where(x => x.Cedula.Contains(item) ||
-                                                      x.Nombre.Contains(item))
-                                                      .ToList();
-                }
-            }
+			// FILTRO DE BÚSQUEDA
+			// Filtramos el resultado por el 'texto de búqueda'
+			if (!string.IsNullOrEmpty(buscar))
+			{
+				foreach (var item in buscar.Split(new char[] { ' ' },
+						 StringSplitOptions.RemoveEmptyEntries))
+				{
+					funcionarios = funcionarios.Where(x => x.Cedula.ToUpper().Contains(item) ||
+													  x.Nombre.ToUpper().Contains(item.ToUpper()) ||
+													  x.PrimerApellido.ToUpper().Contains(item.ToUpper()) ||
+													  x.SegundoApellido.ToUpper().Contains(item.ToUpper())
+													  ).ToList();
+				}
+			}
 
-            // Obtenemos la 'página de registros' de la tabla 
-            funcionarios = funcionarios.OrderBy(x => x.Cedula)
-                                                 .Skip((pagina - 1) * registrosPorPagina)
-                                                 .Take(registrosPorPagina)
-                                                 .ToList();
-            // Número total de registros de la tabla		
-            totalRegistros = funcionarios.Count();
+			// Obtenemos la 'página de registros' de la tabla 
+			funcionariosLista = funcionarios.OrderBy(x => x.Nombre)
+												 .Skip((pagina - 1) * registrosPorPagina)
+												 .Take(registrosPorPagina)
+												 .ToList();
+			// Número total de registros de la tabla		
+			totalRegistros = funcionarios.Count();
 
 
-            // Número total de páginas de la tabla 
-            var _TotalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
-            // Instanciamos la 'Clase de paginación' y asignamos los nuevos valores
-            paginador = new PaginadorGenerico<Funcionario>()
-            {
-                RegistrosPorPagina = registrosPorPagina,
-                TotalRegistros = totalRegistros,
-                TotalPaginas = _TotalPaginas,
-                PaginaActual = pagina,
-                Resultado = funcionarios
-            };
-            // Enviamos a la Vista la 'Clase de paginación'
-            return View(paginador);
-        }
+			// Número total de páginas de la tabla 
+			var _TotalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
+			// Instanciamos la 'Clase de paginación' y asignamos los nuevos valores
+			paginador = new PaginadorGenerico<Funcionario>()
+			{
+				RegistrosPorPagina = registrosPorPagina,
+				TotalRegistros = totalRegistros,
+				TotalPaginas = _TotalPaginas,
+				PaginaActual = pagina,
+				Resultado = funcionariosLista
+			};
+			//Enviamos a la Vista la 'Clase de paginación'
+			return View(paginador);
+
+		}
 
 		//Controller Funcionario y Participaconen Puestos
 		public IActionResult FuncionarioYParticipacionEnPuestos()

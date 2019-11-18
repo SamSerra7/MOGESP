@@ -69,7 +69,7 @@ namespace GestionPersonalOIJ.Controllers
             }
 
             // Obtenemos la 'página de registros' de la tabla 
-            primerosIngresosLista = primerosIngresos.OrderBy(x => x.Cedula)
+            primerosIngresosLista = primerosIngresos.OrderBy(x => x.Nombre)
                                                  .Skip((pagina - 1) * registrosPorPagina)
                                                  .Take(registrosPorPagina)
                                                  .ToList();

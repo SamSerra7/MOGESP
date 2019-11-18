@@ -23,7 +23,7 @@ namespace MOGESP.ServiceLayer.Servicio
         /// <returns>IEnumerable<Funcionario></returns>
         public IEnumerable<Funcionario> ListarFuncionarios()
         {
-            return funcionarioDatos.ListarFuncionarios() ?? throw new Exception("No hay registros de primer ingreso");
+            return funcionarioDatos.ListarFuncionarios() ?? throw new Exception("No hay registros de funcionarios");
         }
 
     }
