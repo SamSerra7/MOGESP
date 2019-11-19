@@ -9,7 +9,11 @@
 <hr />
 
 <div align="center">
-    Esconder: <a class="toggle-vis" data-column="0">Primer Ingreso</a> - <a class="toggle-vis" data-column="1">Psicologo(a)</a> - <a class="toggle-vis" data-column="2">Office</a> - <a class="toggle-vis" data-column="3">Age</a> - <a class="toggle-vis" data-column="4">Start date</a> - <a class="toggle-vis" data-column="5">Salary</a>
+    Esconder:   <a class="toggle-vis" data-column="0">Primer Ingreso</a> - 
+                <a class="toggle-vis" data-column="1">Psicologo(a)</a> - 
+                <a class="toggle-vis" data-column="2">Fecha Cita</a> - 
+                <a class="toggle-vis" data-column="3">Correo</a> - 
+                <a class="toggle-vis" data-column="4">Asistencia</a>
 </div>
 
 <table id="citas" class="display table table-responsive">
@@ -54,7 +58,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#citas').DataTable({
+            var table = $('#citas').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     'excelHtml5',
@@ -62,20 +66,21 @@
                 ],
                 info: false
             } );
+        
+
+
+
+            $('a').on( 'click', function (e) {
+                e.preventDefault();
+ 
+                // Get the column API object
+                var column = table.column( $(this).attr('data-column') );
+ 
+                // Toggle the visibility
+                column.visible( ! column.visible() );
+            });
+
         });
-
-
-
-        $('a').on( 'click', function (e) {
-            e.preventDefault();
- 
-            // Get the column API object
-            var column = table.column( $(this).attr('data-column') );
- 
-            // Toggle the visibility
-            column.visible( ! column.visible() );
-        } );
-
     </script>
 }
 
