@@ -8,7 +8,7 @@
 <center><h2>Hoja de Citas</h2></center>
 <hr />
 
-<div>
+<div align="center">
     Esconder: <a class="toggle-vis" data-column="0">Primer Ingreso</a> - <a class="toggle-vis" data-column="1">Psicologo(a)</a> - <a class="toggle-vis" data-column="2">Office</a> - <a class="toggle-vis" data-column="3">Age</a> - <a class="toggle-vis" data-column="4">Start date</a> - <a class="toggle-vis" data-column="5">Salary</a>
 </div>
 
@@ -37,6 +37,9 @@
 </table>
 
 
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+
+
 @section Scripts{
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -54,17 +57,16 @@
             $('#citas').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    'copyHtml5',
                     'excelHtml5',
-                    'csvHtml5',
                     'pdfHtml5'
-                ]
+                ],
+                info: false
             } );
         });
 
 
 
-        $('a.toggle-vis').on( 'click', function (e) {
+        $('a').on( 'click', function (e) {
             e.preventDefault();
  
             // Get the column API object
@@ -74,24 +76,6 @@
             column.visible( ! column.visible() );
         } );
 
-            @* 
-                
-            {
-                "ajax": {
-                    "url": "ControlFlujos/GetVerHojaCitas",
-                    "type": "GET",
-                    "datatype":"json"
-                },
-                "columns": [
-                    { "data": "Primer Ingreso" },
-                    { "data": "Psicologo(a)" },
-                    { "data": "Fecha Cita" },
-                    { "data": "Correo" },
-                    { "data": "Asistencia"}
-                ]
-            }
-               
-              *@
     </script>
 }
 
