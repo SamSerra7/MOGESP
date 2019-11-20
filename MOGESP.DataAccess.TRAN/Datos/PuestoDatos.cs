@@ -19,7 +19,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 		/// <summary>
 		/// Jesús Torres
 		/// 24/oct/2019
-		/// Efecto: Este método retorna una lista con todos los Puestos
+		/// Efecto: Este método retorna una lista con todos los Puestos de una persona y su condicion
 		/// Requiere: La cedula a consultar y la condicion de los puestos que se desean consultar
 		/// Modifica: 
 		/// <returns>IEnumerable<PrimerIngresoElegibles></returns>
@@ -115,6 +115,42 @@ namespace MOGESP.DataAccess.TRAN.Datos
 			eliminarPuesto.ExecuteReader();
 			sqlConnection.Close();
 
+		}
+
+
+		/// <summary>
+		/// Jesús Torres
+		/// 24/oct/2019
+		/// Efecto: Este método retorna una lista con todos los Puestos
+		/// Requiere: 
+		/// Modifica: 
+		/// <returns>IEnumerable<PrimerIngresoElegibles></returns>
+		/// </summary>
+		public IEnumerable<Puesto> ListarPuestos()
+		{
+
+			List<Puesto> puestos = new List<Puesto>();
+
+			SqlConnection sqlConnection = conexion.conexion();
+
+			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarPuestos", sqlConnection);
+			SqlDataReader reader;
+			sqlConnection.Open();
+			reader = sqlCommand.ExecuteReader();
+
+			Puesto puesto;
+
+			while (reader.Read())
+			{
+				puesto = new Puesto();
+				puesto.Nombre = reader["TC_NombreClasePuesto"].ToString();
+				puesto.IdPuesto = Convert.ToInt32(reader["TN_IdPuesto"].ToString());
+				puestos.Add(puesto);
+			}
+
+			sqlConnection.Close();
+
+			return puestos;
 		}
 
 	}

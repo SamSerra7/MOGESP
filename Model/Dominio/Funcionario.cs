@@ -18,6 +18,7 @@ namespace MOGESP.Entities.Dominio
 
         }
 
+		public List<Concurso> concursos { get; set; }
 
-    }
+	}
 }
