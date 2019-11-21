@@ -65,7 +65,13 @@ namespace MOGESP.UserInterface.Controllers
 
             return Json(ds);
         }
-        
 
+
+        public ActionResult CitasPorFlujoPI()
+        {
+            return View();
+        }
+
+        
     }
 }
