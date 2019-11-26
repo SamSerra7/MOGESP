@@ -135,8 +135,12 @@ namespace MOGESP.UserInterface.Controllers
 
 
 		//Controller Funcionario y Participaconen Puestos
-		public IActionResult FuncionarioYParticipacionEnPuestos()
+		public IActionResult FuncionarioYParticipacionEnPuestos(String cedula = "")
 		{
+			Funcionario funcionario = funcioniarioServicio.obtenerFuncionarioPorCedula(cedula);
+			ViewData["funcionario"] = funcionario;
+			IEnumerable<Concurso> concursos = concursoServicio.ListarConcursosPorFuncionario(cedula);
+			ViewData["concursos"] = concursos;
 			return View();
 		}
 

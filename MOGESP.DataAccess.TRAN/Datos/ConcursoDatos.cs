@@ -41,8 +41,10 @@ namespace MOGESP.DataAccess.TRAN.Datos
 				concurso = new Concurso();
 
 				concurso.NombreConcurso = reader["TC_NombreConcurso"].ToString();
-				concurso.FechaConcurso = Convert.ToDateTime(reader["TF_FechaIngresoConcurso"]);
-				concurso.Puesto.Nombre = reader["NombrePuesto"].ToString();
+				concurso.FechaConcurso = Convert.ToDateTime(reader["TF_FechaIngresoConcurso"]).Date;
+				Puesto puesto = new Puesto();
+				puesto.Nombre = reader["NombrePuesto"].ToString();
+				concurso.Puesto = puesto;
 				concursos.Add(concurso);
 			}
 
@@ -101,7 +103,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 				concurso = new Concurso();
 
 				concurso.NombreConcurso = reader["TC_NombreConcurso"].ToString();
-				concurso.FechaConcurso = Convert.ToDateTime(reader["TF_FechaIngresoConcurso"]);
+				concurso.FechaConcurso = Convert.ToDateTime(reader["TF_FechaIngresoConcurso"]).Date;
 				Puesto puesto = new Puesto();
 				puesto.Nombre = reader["TC_NombreClasePuesto"].ToString();
 				puesto.IdPuesto = Convert.ToInt32(reader["TN_IdPuesto"]);

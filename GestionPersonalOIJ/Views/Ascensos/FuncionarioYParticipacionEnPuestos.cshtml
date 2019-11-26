@@ -1,6 +1,8 @@
-﻿
+﻿@model MOGESP.Entities.Dominio.Funcionario
 @{
 	ViewData["Title"] = "Funcionario y Participacion en Puestos";
+	var funcionario = (MOGESP.Entities.Dominio.Funcionario)ViewData["funcionario"];
+	var concursos = (IEnumerable<MOGESP.Entities.Dominio.Concurso>)ViewData["concursos"];
 }
 
 
@@ -29,19 +31,25 @@
 			<label>N&uacute;mero de C&eacute;dula</label>
 		</div>
 		<div class="col-md-2 col-md-offset-1">
-			<label>3333</label>
+			<p>@funcionario.Cedula</p>
 		</div>
 		<div class="col-md-2 col-md-offset-1">
 			<label>Nombre</label>
 		</div>
 		<div class="col-md-2 col-md-offset-1">
-			<label>Juan</label>
+			<p>@funcionario.Nombre @funcionario.SegundoApellido @funcionario.PrimerApellido</p>
 		</div>
 		<div class="col-md-2 col-md-offset-1">
 			<label>Direcci&oacute;n</label>
 		</div>
 		<div class="col-md-2 col-md-offset-1">
-			<label>150 metros</label>
+			<p>@funcionario.Direccion</p>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<label>Sexo</label>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<p>@funcionario.Sexo</p>
 		</div>
 	</div>
 	<br />
@@ -50,24 +58,29 @@
 			<label>Telefonos</label>
 		</div>
 		<div class="col-md-2 col-md-offset-1">
-			<label>8888-8888</label>
-			<label>8888-8888</label>
-			<label>8888-8888</label>
-			<label>8888-8888</label>
+			@if (funcionario.Telefonos != null)
+			{
+				@foreach (var telefono in funcionario.Telefonos)
+				{
+					<p>@telefono</p>
+				}
+			}
 		</div>
 		<div class="col-md-2 col-md-offset-1">
 			<label>Correos</label>
 		</div>
 		<div class="col-md-2 col-md-offset-1">
-			<label>elCorreo@correo.com</label>
-			<label>elCorreo@correo.com</label>
-			<label>elCorreo@correo.com</label>
-			<label>elCorreo@correo.com</label>
+			@if (funcionario.Correos != null)
+			{
+				@foreach (var correo in funcionario.Correos)
+				{
+					<p>@correo</p>
+				}
+			}
 		</div>
 	</div>
 </div>
 
-<br />
 
 <div class="row">
 	<h4>Participacion de Concursos</h4>
@@ -76,99 +89,24 @@
 		<table id="tablaDatosPersonales" class="table table-responsive">
 			<thead style="align-content: center;">
 				<tr>
+					<th class="centrarTitulos ">Concurso</th>
 					<th class="centrarTitulos ">Puesto</th>
-					<th class="centrarTitulos ">Resultado Obtenido</th>
 					<th class="centrarTitulos ">Fecha</th>
-					<th class="centrarTitulos "></th>
 				</tr>
 			</thead>
+			@foreach (var concurso in concursos)
+			{
+				<tr>
+					<td> @concurso.NombreConcurso</td>
+					<td> @concurso.Puesto.Nombre</td>
+					<td>
+						@concurso.FechaConcurso
+					</td>
+				</tr>
+			}
 
-			<tr>
-
-				<td> Jefe</td>
-				<td> Positivo</td>
-				<td>
-					15/06/2017
-				</td>
-				<td>
-					@Html.ActionLink("", "FuncionarioYParticipacionEnPuestos", new { editar = "" },
-											new { @class = "btn glyphicon glyphicon-pencil", @title = "Editar" })
-				</td>
-
-			</tr>
 		</table>
 	</div>
 
 </div>
 
-<div class="row container" id="AgregaConcurso" style="border: 3px solid #152327;">
-	<h4>Agregar Concurso</h4>
-	<div class="col-md-3 col-md-offset-2">
-		<label>Nombre Puesto</label>
-		@Html.TextBox("buscar", null, new {
-	@class = "form-control",
-	@AutoPostBack = "true",
-	@disabled = "disabled",
-	@name = "NombrePuestos"
-	})
-		<br />
-	</div>
-
-	<div class="col-md-3 col-md-offset-2">
-		<label>Resultado Obtenido</label>
-		@Html.TextBox("resultado", null, new {
-	@class = "form-control",
-	@AutoPostBack = "true",
-	@disabled = "disabled",
-	@name = "Resultado"
-	})
-		<br />
-	</div>
-
-	<div class="col-md-3 col-md-offset-2">
-		<label>Fecha</label>
-		@Html.TextBox("resultado", null, new {
-	   @class = "form-control",
-	   @AutoPostBack = "true",
-	   @type = "date",
-	   @name = "fechaCita",
-	   @disabled = "disabled",
-	   @style = "visibility:hidden"
-   })
-		@*<input id="fechaCita" class="form-control" type="date" name="fechaCita" disabled="disabled" />*@
-		<br />
-	</div>
-
-	<div class="col-md-3 col-md-offset-10">
-		<div class="row">
-			@Html.ActionLink("Cancelar", "AgregarConcurso", new { buscar = "" },
-																	new { @class = "btn btn-secondary" })
-			@Html.ActionLink("Aceptar", "AgregarConcurso", new { buscar = "" },
-													new { @class = "btn btn-success" })
-		</div>
-		<br />
-	</div>
-
-
-</div>
-
-<div class="btn-block">
-	<button id="btnEditar" name="btnEditar"><i class="fas fa-edit"></i> Editar</button>
-</div>
-
-
-<script type="text/javascript">
-
-
-	$(function () {
-		$("#btnEditar").click(function () {
-			alert("click");
-
-			$("#AgregaConcurso").find('input, button, select').prop("disabled", false);
-			$("#AgregaConcurso").find('input, button, select').css("visibility", "visible");
-			$('#btnEditar').hide();
-
-		});
-	});
-
-</script>

@@ -59,6 +59,45 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return funcionarios;
         }
 
+		/// <summary>
+		/// Autor: Jesus Torres
+		/// 19/11/19
+		/// Este método retorna un funcionario de acuerdo a su cedula
+		/// </summary>
+		/// <returns>List<Funcionario></returns>
+		public Funcionario obtenerFuncionarioPorCedula(string cedula)
+		{
+			
 
-    }
+			SqlConnection sqlConnection = conexion.conexion();
+
+			SqlCommand sqlCommand = new SqlCommand(@"PA_ConsultarFuncionarioPorCedula @TC_NumeroCedula", sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@TC_NumeroCedula", cedula); 
+			SqlDataReader reader;
+			sqlConnection.Open();
+			reader = sqlCommand.ExecuteReader();
+
+			Funcionario funcionario = new Funcionario();
+
+			while (reader.Read())
+			{
+				
+
+				funcionario.Cedula = reader["TC_NumeroCedula"].ToString();
+				funcionario.Nombre = reader["TC_Nombre"].ToString();
+				funcionario.PrimerApellido = reader["TC_PrimerApellido"].ToString();
+				funcionario.SegundoApellido = reader["TC_SegundoApellido"].ToString();
+				funcionario.Sexo = Convert.ToChar(reader["TC_Sexo"].ToString());
+				funcionario.Direccion = reader["TC_Direccion"].ToString();
+				funcionario.Correos = correoDatos.CosultarCorreosPorFuncionario(funcionario.Cedula);
+				funcionario.Telefonos = telefonoDatos.CosultarTelefonosPorFuncionario(funcionario.Cedula);
+	
+			}
+
+			sqlConnection.Close();
+
+			return funcionario;
+		}
+	}
 }

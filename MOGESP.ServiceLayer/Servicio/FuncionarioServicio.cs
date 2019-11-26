@@ -25,6 +25,15 @@ namespace MOGESP.ServiceLayer.Servicio
         {
             return funcionarioDatos.ListarFuncionarios() ?? throw new Exception("No hay registros de funcionarios");
         }
-
-    }
+		/// <summary>
+		/// 19/11/2019
+		/// Jesus Torres
+		/// Método que retorna un funcionario de acuerdocon su cedula ingresada
+		/// </summary>
+		/// <returns>IEnumerable<Funcionario></returns>
+		public Funcionario obtenerFuncionarioPorCedula(string cedula)
+		{
+			return funcionarioDatos.obtenerFuncionarioPorCedula(cedula);
+		}
+	}
 }
