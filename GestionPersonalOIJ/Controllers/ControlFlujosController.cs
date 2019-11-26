@@ -23,7 +23,7 @@ namespace MOGESP.UserInterface.Controllers
         private TestOtrosServicio testOtrosServicio = new TestOtrosServicio();
         private TestVisomotorServicio testVisomotorServicio = new TestVisomotorServicio();
         private HojaCitasPiServicio hojaCitasPiServicio = new HojaCitasPiServicio();
-
+        private CuadroGeneralServicio cuadroGeneralServicio = new CuadroGeneralServicio();
 
         public ActionResult ModificarResultadosPsicologos()
         {
@@ -65,7 +65,47 @@ namespace MOGESP.UserInterface.Controllers
 
             return Json(ds);
         }
+
         
+        public ActionResult CitasPorFlujoPI()
+        {
+            ViewBag.NumeroConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
+            ViewBag.NumFlujo = flujosPorConvocatoria;
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public RedirectToActionResult AgregarNumFlujo(IFormCollection formCollection)
+        {
+
+            numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
+
+            flujosPorConvocatoria = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(numeroConvocatoria);
+
+
+            return RedirectToActionPermanent("InsertarPrimerosIngresos");
+        }
+
+
+
+
+        [HttpPost]
+        public RedirectToActionResult ProgramarCitasPorFlujoPI()
+        {
+
+
+            /*
+             * 
+             * TODO: Terminar el data
+             * 
+             */
+
+
+
+            return RedirectToAction("VerHojaCitas");
+        }
 
     }
 }
