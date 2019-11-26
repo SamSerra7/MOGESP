@@ -306,7 +306,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             SqlCommand actualizarAntecedentes = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
                                             @numeroDeCedula,
-											@TF_FechaIngresoAdministracion,
+											@TF_FechaIngreso,
 											@TN_CantidadDiasAdm,
 											@TF_FechaIngresoTransportes,
 											@TC_OficioIngreso,
@@ -322,7 +322,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
             actualizarAntecedentes.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
             actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoAntecedentes.FechaIngresoAdministracion);
             actualizarAntecedentes.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoAntecedentes.CantidadDiasAdministracion);
-            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngresoTransportes", departamentoAntecedentes.FechaIngreso);
+            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngreso", departamentoAntecedentes.FechaIngreso);
             actualizarAntecedentes.Parameters.AddWithValue("@TC_OficioIngreso", departamentoAntecedentes.OficioIngreso);
             actualizarAntecedentes.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoAntecedentes.DiasAlaFecha);
             actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaFechaResultado", departamentoAntecedentes.FechaResultado);
@@ -337,6 +337,125 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             sqlConnection.Close();
             actualizarAntecedentes.Dispose();
+
+        }
+
+        public void actualizarVialidad(DepartamentoVialidad departamentoVialidad, string cedulaPI)
+        {
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand actualizarVialidad = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
+                                            @numeroDeCedula,
+											@TF_FechaIngresoAdministracion,
+											@TN_CantidadDiasAdm,
+											@TF_FechaIngresoTransportes,
+											@TC_OficioIngreso,
+											@TF_FechaFechaCita,
+                                            @TN_DiasParaCita,
+											@TF_FechaSalida,
+											@TN_CantidadDiasTotalesTramite,
+											@TC_OficioRespuesta,
+											@TN_EstadoResultHojaEnvioGH", sqlConnection);
+
+            actualizarVialidad.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoVialidad.FechaIngresoAdministracion);
+            actualizarVialidad.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoVialidad.CantidadDiasAdministracion);
+            actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoTransportes", departamentoVialidad.FechaIngreso);
+            actualizarVialidad.Parameters.AddWithValue("@TC_OficioIngreso", departamentoVialidad.OficioIngreso);
+            actualizarVialidad.Parameters.AddWithValue("@TF_FechaFechaCita", departamentoVialidad.FechaCita);
+            actualizarVialidad.Parameters.AddWithValue("@TN_DiasParaCita", departamentoVialidad.DiasParaCita);
+            actualizarVialidad.Parameters.AddWithValue("@TF_FechaSalida", departamentoVialidad.FechaSalida);
+            actualizarVialidad.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoVialidad.CantidadDiasTotalesTramite);
+            actualizarVialidad.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoVialidad.OficioRespuesta);
+            actualizarVialidad.Parameters.AddWithValue("@TN_EstadoResultHojaEnvioGH", departamentoVialidad.EstadoResultHojaEnvioGH);
+
+            sqlConnection.Open();
+            actualizarVialidad.ExecuteReader();
+
+            sqlConnection.Close();
+            actualizarVialidad.Dispose();
+
+        }
+
+        public void actualizarPruebasMedicas(DepartamentoPruebasMedicas departamentoPruebasMedicas, string cedulaPI)
+        {
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand actualizarPruebasMedicas = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
+                                            @numeroDeCedula,
+											@TF_FechaIngresoAdministracion,
+											@TN_CantidadDiasAdm,
+											@TF_FechaIngreso,
+											@TC_OficioIngreso,
+                                            @TF_FechaEnvioAPMdeGH,
+											@TF_FechaResultadoOCitaPM,
+											@TF_FechaSalida,
+                                            @TN_DiasALaFecha,
+											@TN_CantidadDiasTotalesTramite,
+											@TC_OficioRespuesta", sqlConnection);
+
+            actualizarPruebasMedicas.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoPruebasMedicas.FechaIngresoAdministracion);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoPruebasMedicas.CantidadDiasAdministracion);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngreso", departamentoPruebasMedicas.FechaIngreso);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TC_OficioIngreso", departamentoPruebasMedicas.OficioIngreso);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaEnvioAPMdeGH", departamentoPruebasMedicas.FechaEnvioAPMdeGH);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaResultadoOCitaPM", departamentoPruebasMedicas.FechaResultadoOCitaPM);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoPruebasMedicas.DiasAlaFecha);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaSalida", departamentoPruebasMedicas.FechaSalida);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoPruebasMedicas.CantidadDiasTotalesTramite);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoPruebasMedicas.OficioRespuesta);
+
+            sqlConnection.Open();
+            actualizarPruebasMedicas.ExecuteReader();
+
+            sqlConnection.Close();
+            actualizarPruebasMedicas.Dispose();
+
+        }
+
+        public void actualizarToxicologia(DepartamentoToxicologia departamentoToxicologia, string cedulaPI)
+        {
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand actualizarToxicologia = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
+                                            @numeroDeCedula,
+											@TF_FechaIngresoAdministracion,
+											@TN_CantidadDiasAdm,
+											@TF_FechaIngreso,
+											@TC_OficioIngreso,
+                                            @TF_FechaCita,
+                                            @TN_DiasParaCita,
+											@TF_FechaSalida,
+                                            @TN_DiasALaFecha,
+											@TN_CantidadDiasTotalesTramite,
+											@TC_OficioRespuesta,
+											@TF_FechaEstado,
+                                            @TN_FechaEstadoCantDias", sqlConnection);
+
+            actualizarToxicologia.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoToxicologia.FechaIngresoAdministracion);
+            actualizarToxicologia.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoToxicologia.CantidadDiasAdministracion);
+            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngreso", departamentoToxicologia.FechaIngreso);
+            actualizarToxicologia.Parameters.AddWithValue("@TC_OficioIngreso", departamentoToxicologia.OficioIngreso);
+            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaCita", departamentoToxicologia.FechaCita);
+            actualizarToxicologia.Parameters.AddWithValue("@TN_DiasParaCita", departamentoToxicologia.DiasParaCita);
+            actualizarToxicologia.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoToxicologia.DiasAlaFecha);
+            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaSalida", departamentoToxicologia.FechaSalida);
+            actualizarToxicologia.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoToxicologia.CantidadDiasTotalesTramite);
+            actualizarToxicologia.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoToxicologia.OficioRespuesta);
+            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaEstado", departamentoToxicologia.FechaEstado);
+            actualizarToxicologia.Parameters.AddWithValue("@TN_FechaEstadoCantDias", departamentoToxicologia.FechaEstadoCantDias);
+
+            sqlConnection.Open();
+            actualizarToxicologia.ExecuteReader();
+
+            sqlConnection.Close();
+            actualizarToxicologia.Dispose();
+
         }
 
     }

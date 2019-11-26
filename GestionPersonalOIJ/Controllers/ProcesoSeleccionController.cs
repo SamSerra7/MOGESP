@@ -231,9 +231,19 @@ namespace GestionPersonalOIJ.Controllers
 
 
 
+        [HttpPost]
+        public RedirectToActionResult actualizarPruebasGH(Object departamentoPruebasGH, string cedula)
+        {
+            
+            departamentoPruebasGH.ToString();
+
+            return RedirectToAction("verPrimerIngresoEspecifico");
+
+        }
 
 
-		[HttpPost]
+
+        [HttpPost]
         public RedirectToActionResult InsertarTodosPrimerosIngresos()
         {
 

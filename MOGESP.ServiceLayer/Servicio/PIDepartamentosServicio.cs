@@ -30,5 +30,23 @@ namespace MOGESP.ServiceLayer.Servicio
             primerIngresoDepartamentosDatos.actualizarAntecedentes(departamentoAntecedentes, cedulaPI);
         }
 
+        public void actualizarVialidad(DepartamentoVialidad departamentoVialidad, string cedulaPI)
+        {
+            if ((departamentoVialidad == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarVialidad");
+            primerIngresoDepartamentosDatos.actualizarVialidad(departamentoVialidad, cedulaPI);
+        }
+
+        public void actualizarPruebasMedicas(DepartamentoPruebasMedicas departamentoPMedicas, string cedulaPI)
+        {
+            if ((departamentoPMedicas == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarPruebasMedicas");
+            primerIngresoDepartamentosDatos.actualizarPruebasMedicas(departamentoPMedicas, cedulaPI);
+        }
+
+        public void actualizarToxicologia(DepartamentoToxicologia departamentoToxicologia, string cedulaPI)
+        {
+            if ((departamentoToxicologia == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarToxicologia");
+            primerIngresoDepartamentosDatos.actualizarToxicologia(departamentoToxicologia, cedulaPI);
+        }
+
     }
 }
