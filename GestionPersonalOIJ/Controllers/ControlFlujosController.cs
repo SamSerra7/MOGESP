@@ -25,6 +25,17 @@ namespace MOGESP.UserInterface.Controllers
         private HojaCitasPiServicio hojaCitasPiServicio = new HojaCitasPiServicio();
         private CuadroGeneralServicio cuadroGeneralServicio = new CuadroGeneralServicio();
 
+
+
+        private static List<int> flujosPorConvocatoria = new List<int>();
+
+
+        private static int numeroFlujo = 1;
+        private static string numeroConvocatoria = "OIJ-";
+
+
+
+
         public ActionResult ModificarResultadosPsicologos()
         {
 
@@ -69,6 +80,13 @@ namespace MOGESP.UserInterface.Controllers
         
         /*public ActionResult CitasPorFlujoPI()
         {
+
+
+
+            ViewData["numeroConvocatoria"] = numeroConvocatoria;
+            ViewData["numFlujo"] = numeroFlujo;
+
+
             ViewBag.NumeroConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
             ViewBag.NumFlujo = flujosPorConvocatoria;
 
@@ -80,6 +98,7 @@ namespace MOGESP.UserInterface.Controllers
         public RedirectToActionResult AgregarNumFlujo(IFormCollection formCollection)
         {
 
+
             numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
 
             flujosPorConvocatoria = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(numeroConvocatoria);
@@ -87,7 +106,6 @@ namespace MOGESP.UserInterface.Controllers
 
             return RedirectToActionPermanent("InsertarPrimerosIngresos");
         }*/
-
 
 
 

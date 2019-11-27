@@ -11,15 +11,83 @@
 <h2 style="margin-left: auto; margin-right: auto;">Programar Citas</h2>
 
 
-<div style="margin-left: auto; margin-right: auto;" class="container">
+<div style="margin-left: auto; margin-right: auto; border: groove;" class="container">
+
+    @using (Html.BeginForm("AgregarNumFlujo", "ControlFlujos", FormMethod.Post, new { Id = "agregarNF" }))
+    {
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2"><label>Número de Convocatoria</label></div>
+            <div class="col-sm-3">
+                <select id="selNumConv" class="form-control" required>
+                    @if (ViewBag.NConvocatoria != null)
+                    {
+                        @foreach (var nc in ViewBag.NConvocatoria)
+                        {
+                            <option value="@nc" onclick="pasarNC()">@nc</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <br />
+    }
+
 
     @using (Html.BeginForm("ProgramarCitasPorFlujoPI", "ControlFlujos", FormMethod.Post, new { Id = "programarCitasPI" }))
     {
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2"><label>Número de Flujo</label></div>
+            <div class="col-sm-3">
+                <select id="selNumFlujo" class="form-control" required>
+                    @if (ViewBag.NFlujo != null)
+                    {
+                        @foreach (var nc in ViewBag.NFlujo)
+                        {
+                            <option value="@nc">@nc</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+
+        <hr />
+
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2"><label>Elija el rango de fechas</label></div>
+            <div class="col-sm-3"><input type="datetime" id="fechaInicioCitas"  required/></div>
+            <div class="col-sm-3"><input type="datetime" id="fechaFinalCitas" required/></div>
+        </div>
 
 
 
 
 
+        <center>
+            <button type="submit" id="btnProgramaCita" class="btn-lg btn-primary" onclick="return confirm(" ¿Desea realizar las citas en ese rango de fechas?")">
+                Programar citas
+            </button>
+        </center>
+
+        <br /><br />
     }
 
 </div>
+
+
+
+
+<script type="text/javascript">
+    function pasarNC() {
+        var post = document.getElementById('agregarNF');
+        post.submit();
+    }
+
+
+</script>
