@@ -29,6 +29,7 @@ namespace MOGESP.UserInterface.Controllers
 
         private static List<int> flujosPorConvocatoria = new List<int>();
 
+
         private static int numeroFlujo = 1;
         private static string numeroConvocatoria = "OIJ-";
 
@@ -81,6 +82,7 @@ namespace MOGESP.UserInterface.Controllers
         {
 
 
+
             ViewData["numeroConvocatoria"] = numeroConvocatoria;
             ViewData["numFlujo"] = numeroFlujo;
 
@@ -104,7 +106,6 @@ namespace MOGESP.UserInterface.Controllers
 
             return RedirectToActionPermanent("InsertarPrimerosIngresos");
         }
-
 
 
 
