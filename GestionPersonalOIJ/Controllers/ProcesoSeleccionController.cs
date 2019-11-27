@@ -93,8 +93,6 @@ namespace GestionPersonalOIJ.Controllers
 
         }
 
-
-
         public IActionResult InsertarPrimerosIngresos()
         {
 
@@ -130,9 +128,6 @@ namespace GestionPersonalOIJ.Controllers
 
             return RedirectToActionPermanent("InsertarPrimerosIngresos");
         }
-
-
-
 
 
         [HttpPost]
@@ -221,26 +216,46 @@ namespace GestionPersonalOIJ.Controllers
 			return RedirectToAction("InsertarPrimerosIngresos");
 		}
 
-        public ActionResult verPrimerIngresoEspecifico(string nombrePI, string primerApellidoPI, string segundoApellidoPI, string cedulaPI)
+        public ActionResult verPrimerIngresoEspecifico(string cedulaPrimerIngreso)
         {
             PrimerIngresoDepartamentos primerIngresoDepartamentos = new PrimerIngresoDepartamentos();
-            primerIngresoDepartamentos = pIDepartamentosServicio.getPrimerIngresoDepartamentos(nombrePI, primerApellidoPI, segundoApellidoPI, cedulaPI);
+            primerIngresoDepartamentos = pIDepartamentosServicio.getPrimerIngresoDepartamentos(cedulaPrimerIngreso);
             return View(primerIngresoDepartamentos);
 
         }
 
 
-
         [HttpPost]
-        public RedirectToActionResult actualizarPruebasGH(Object departamentoPruebasGH, string cedula)
+        public RedirectToActionResult actualizarPruebasGH(IFormCollection formCollection)
         {
-            
-            departamentoPruebasGH.ToString();
+            DepartamentoPruebasGH departamentoPruebasGH = new DepartamentoPruebasGH();
 
-            return RedirectToAction("verPrimerIngresoEspecifico");
+            
+
+            string cedula = (formCollection["cedula"]).ToString();
+            departamentoPruebasGH.FechaIngresoAdministracion = Convert.ToDateTime(formCollection["fechaIngresoAdmi"]);
+            departamentoPruebasGH.CantidadDiasAdministracion = Convert.ToInt32(formCollection["cantidadDiasAdmi"]);
+            departamentoPruebasGH.NumConcurso = formCollection["numConcurso"].ToString();
+            departamentoPruebasGH.Ubicacion = formCollection["ubicacion"].ToString();
+            departamentoPruebasGH.FechaIngreso = Convert.ToDateTime(formCollection["fechaIngreso"]);
+            departamentoPruebasGH.OficioIngreso = formCollection["oficioIngreso"].ToString();
+            departamentoPruebasGH.DiasAlaFecha = Convert.ToInt32(formCollection["diasAFecha"]);
+            departamentoPruebasGH.FechaTrasladoPsicologosAdmin = Convert.ToDateTime(formCollection["fechaTrasladoPsicologia"]);
+            departamentoPruebasGH.Oficio = formCollection["oficio"].ToString();
+            departamentoPruebasGH.FechaLimiteSegunPlazo = Convert.ToDateTime(formCollection["fechaLimite"]);
+            departamentoPruebasGH.CantidadDiasPsicologiaAdmin = Convert.ToInt32(formCollection["diasPsicologiaAdmi"]);
+            departamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo = Convert.ToInt32(formCollection["diasAFechaSegundoPlazo"]);
+            departamentoPruebasGH.DiasTramiteGHDespuesDevuelto = Convert.ToInt32(formCollection["diasTramiteGHDespuesDevuelto"]);
+            departamentoPruebasGH.FechaSalida = Convert.ToDateTime(formCollection["fechaSalida"]);
+            departamentoPruebasGH.CantidadDiasTotalesTramite = Convert.ToInt32(formCollection["diasTotalesTramite"]);
+            departamentoPruebasGH.OficioRespuesta = formCollection["oficioRespuesta"].ToString();
+            departamentoPruebasGH.EstadoResultHojaEnvioGH = formCollection["selectEstado"].ToString();
+
+            pIDepartamentosServicio.actualizarPruebasGH(departamentoPruebasGH, cedula);
+
+            return RedirectToAction("verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = cedula });
 
         }
-
 
 
         [HttpPost]

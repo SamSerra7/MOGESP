@@ -67,16 +67,16 @@ namespace MOGESP.UserInterface.Controllers
         }
 
         
-        public ActionResult CitasPorFlujoPI()
+        /*public ActionResult CitasPorFlujoPI()
         {
             ViewBag.NumeroConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
             ViewBag.NumFlujo = flujosPorConvocatoria;
 
             return View();
-        }
+        }*/
 
 
-        [HttpPost]
+        /*[HttpPost]
         public RedirectToActionResult AgregarNumFlujo(IFormCollection formCollection)
         {
 
@@ -86,7 +86,7 @@ namespace MOGESP.UserInterface.Controllers
 
 
             return RedirectToActionPermanent("InsertarPrimerosIngresos");
-        }
+        }*/
 
 
 

@@ -12,12 +12,10 @@ namespace MOGESP.Entities.Dominio
             
         }
 
-        public PrimerIngresoDepartamentos(string numeroCedula, string nombrePI, string primerApellido, string segundoApellido, DepartamentoPruebasGH departamentoPruebasGH, DepartamentoAntecedentes departamentoAntecedentes, DepartamentoPruebasMedicas departamentoPruebasMedicas, DepartamentoVialidad departamentoVialidad, DepartamentoToxicologia departamentoToxicologia)
+        public PrimerIngresoDepartamentos(string numeroCedula, string nombreCompleto, DepartamentoPruebasGH departamentoPruebasGH, DepartamentoAntecedentes departamentoAntecedentes, DepartamentoPruebasMedicas departamentoPruebasMedicas, DepartamentoVialidad departamentoVialidad, DepartamentoToxicologia departamentoToxicologia)
         {
             NumeroCedula = numeroCedula ?? throw new ArgumentNullException(nameof(numeroCedula));
-            NombrePI = nombrePI ?? throw new ArgumentNullException(nameof(nombrePI));
-            PrimerApellido = primerApellido ?? throw new ArgumentNullException(nameof(primerApellido));
-            SegundoApellido = segundoApellido ?? throw new ArgumentNullException(nameof(segundoApellido));
+            Nombre = nombreCompleto ?? throw new ArgumentNullException(nameof(nombreCompleto));
             DepartamentoPruebasGH = departamentoPruebasGH ?? throw new ArgumentNullException(nameof(departamentoPruebasGH));
             DepartamentoAntecedentes = departamentoAntecedentes ?? throw new ArgumentNullException(nameof(departamentoAntecedentes));
             DepartamentoPruebasMedicas = departamentoPruebasMedicas ?? throw new ArgumentNullException(nameof(departamentoPruebasMedicas));
@@ -34,38 +32,16 @@ namespace MOGESP.Entities.Dominio
             get { return numeroCedula; }
             set
             {
-                if (value == null || value.Trim().Equals("")) throw new Exception("El campo de numeroCedula es requerido");
-                numeroCedula = value;
+                numeroCedula = value ?? throw new Exception("El campo de NumeroCedula es requerido");
             }
         }
-        private string nombrePI;
-        public string NombrePI
+        private string nombreCompleto;
+        public string Nombre
         {
-            get { return nombrePI; }
+            get { return nombreCompleto; }
             set
             {
-                if (value == null || value.Trim().Equals("")) throw new Exception("El campo de nombrePI es requerido");
-                nombrePI = value;
-            }
-        }
-        private string primerApellido;
-        public string PrimerApellido
-        {
-            get { return primerApellido; }
-            set
-            {
-                if (value == null || value.Trim().Equals("")) throw new Exception("El campo de primerApellido es requerido");
-                primerApellido = value;
-            }
-        }
-        private string segundoApellido;
-        public string SegundoApellido
-        {
-            get { return segundoApellido; }
-            set
-            {
-                if (value == null || value.Trim().Equals("")) throw new Exception("El campo de segundoApellido es requerido");
-                segundoApellido = value;
+                nombreCompleto = value ?? throw new Exception("El campo de nombre es requerido");
             }
         }
 

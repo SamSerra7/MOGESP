@@ -154,7 +154,7 @@
             </div>
         <div class="col-md-6">
             <label>Nombre: </label>
-            <input class="form-control" id="nombreInfo" type="text" name="nombreInfo" disabled="disabled" value="@Model.NombrePI @Model.PrimerApellido @Model.SegundoApellido"/>
+            <input class="form-control" id="nombreInfo" type="text" name="nombreInfo" disabled="disabled" value="@Model.Nombre"/>
         </div>
             
     </div>
@@ -171,10 +171,12 @@
 
             <div class="CajaFormulario" id="PruebasGH">
 
-                <form id="FormModificar">
+                <form id="FormModificar" action="actualizarPruebasGH" method="post">
 
                     <fieldset>
                         <legend>Pruebas Gesti&oacute;n Humana</legend>
+
+                        <input class="form-control" id="cedula" type="text" name="cedula" style=" visibility:hidden" value="@Model.NumeroCedula" />
 
                         <h4>Administraci&oacute;n</h4>
 
@@ -183,25 +185,25 @@
 
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngreso" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngresoAdministracion"/>
+                                <input class="form-control" id="fechaIngresoAdmi" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngresoAdministracion" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
-                                <input class="form-control" id="cantidadDias" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasAdministracion"/>
+                                <input class="form-control" id="cantidadDiasAdmi" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasAdministracion" />
                             </div>
 
                         </div>
                         <br><br><br>
-                        <hr/> 
-                       
+                        <hr />
+
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label>N&deg;. Concurso: </label>
-                                <input class="form-control" id="NumConcurso" type="text" name="numConcurso" disabled="disabled" value="@Model.DepartamentoPruebasGH.NumConcurso"/>
+                                <input class="form-control" id="numConcurso" type="text" name="numConcurso" disabled="disabled" value="@Model.DepartamentoPruebasGH.NumConcurso" />
                             </div>
                             <div class="col-md-6">
                                 <label>Ubicaci&oacute;n: </label>
-                                <input class="form-control" id="ubicacion" type="text" name="ubicacion" disabled="disabled" value="@Model.DepartamentoPruebasGH.Ubicacion"/>
+                                <input class="form-control" id="ubicacion" type="text" name="ubicacion" disabled="disabled" value="@Model.DepartamentoPruebasGH.Ubicacion" />
                             </div>
                         </div>
 
@@ -210,58 +212,58 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso2" class="form-control"type="datetime" name="fechaIngreso" disabled="disabled"  value="@Model.DepartamentoPruebasGH.FechaIngreso"/>
+                                <input id="fechaIngreso" class="form-control" type="datetime" name="fechaIngreso" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngreso" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
-                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoPruebasGH.OficioIngreso"/>
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoPruebasGH.OficioIngreso" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as a la fecha: </label>
-                                <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasAlaFecha"/>
+                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasAlaFecha" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Traslado Psicologo Administraci&oacute;n: </label>
-                                <input id="fechaTrasladoPsicologia" class="form-control" type="datetime" name="fechaTrasladoPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaTrasladoPsicologosAdmin"/>
+                                <input id="fechaTrasladoPsicologia" class="form-control" type="datetime" name="fechaTrasladoPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaTrasladoPsicologosAdmin" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Oficio: </label>
-                                <input id="oficio" class="form-control" type="text" name="oficio" disabled="disabled" value="@Model.DepartamentoPruebasGH.Oficio"/>
+                                <input id="oficio" class="form-control" type="text" name="oficio" disabled="disabled" value="@Model.DepartamentoPruebasGH.Oficio" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Devoluci&oacute;n a GH. por parte de Administraci&oacute;n: </label>
-                                <input id="fechaDevulucionAdmi" class="form-control" type="datetime" name="fechaDevulucionAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaDevolucionGHDeAdmin"/>
+                                <input id="fechaDevulucionAdmi" class="form-control" type="datetime" name="fechaDevulucionAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaDevolucionGHDeAdmin" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Cantidad de D&iacute;as en Psicolog&iacute;a - Administraci&oacute;n: </label>
-                                <input id="diasPsicologiaAdmi" class="form-control" type="number" min="0" name="diasPsicologiaAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasPsicologiaAdmin"/>
+                                <input id="diasPsicologiaAdmi" class="form-control" type="number" min="0" name="diasPsicologiaAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasPsicologiaAdmin" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha L&iacute;mite s&eacute;gun plazo establecido: </label>
-                                <input id="fechaLimite" class="form-control" type="datetime" name="fechaLimite" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaLimiteSegunPlazo"/>
+                                <input id="fechaLimite" class="form-control" type="datetime" name="fechaLimite" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaLimiteSegunPlazo" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as a la Fecha de L&iacute;mite s&eacute;gun plazo establecido: </label>
-                                <input id="diasAFechaSegundoPlazo" class="form-control" type="number" min="0" name="diasAFechaSegundoPlazo" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo"/>
+                                <input id="diasAFechaSegundoPlazo" class="form-control" type="number" min="0" name="diasAFechaSegundoPlazo" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Cantidad de D&iacute;as en tr&aacute;mite en GH, despu&eacute;s de devuelto: </label>
-                                <input id="fechaPsicologia" class="form-control" type="number" min="0" name="cantidadFechaPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasTramiteGHDespuesDevuelto"/>
+                                <input id="diasTramiteGHDespuesDevuelto" class="form-control" type="number" min="0" name="diasTramiteGHDespuesDevuelto" disabled="disabled" value="@Model.DepartamentoPruebasGH.DiasTramiteGHDespuesDevuelto" />
                             </div>
                         </div>
 
@@ -269,30 +271,30 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaSalida"/>
+                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaSalida" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as totales en tr&aacute;mite: </label>
-                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasTotalesTramite"/>
+                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" value="@Model.DepartamentoPruebasGH.CantidadDiasTotalesTramite" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Respuesta: </label>
-                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoPruebasGH.OficioRespuesta"/>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoPruebasGH.OficioRespuesta" />
                             </div>
                             <div class="col-md-6 mb-3">
 
                                 <label>Estado: </label>
-                                
+
                                 <select id="selectEstado" name="selectEstado" disabled="disabled">
                                     @foreach (var listaEstados in Model.DepartamentoPruebasGH.EstadoLista)
                                     {
                                         <option value="@listaEstados">@listaEstados</option>
                                     }
                                 </select>
-                                
+
                             </div>
                         </div>
 
@@ -723,7 +725,7 @@
         $("#btnEditarGH").click(function () {
 
             $("#PruebasGH").find('input, button, select').prop("disabled", false);
-            $("#PruebasGH").find('input, button, select').css("visibility", "visible");
+            $("#PruebasGH").find('button').css("visibility", "visible");
 
             $('#btnEditarGH').hide();
 
@@ -734,7 +736,7 @@
         $("#btnEditarInveAnte").click(function () {
 
             $("#InvestigacionAnte").find('input, button, select').prop("disabled", false);
-            $("#InvestigacionAnte").find('input, button, select').css("visibility", "visible");
+            $("#InvestigacionAnte").find('button').css("visibility", "visible");
 
             $('#btnEditarInveAnte').hide();
 
@@ -745,7 +747,7 @@
         $("#btnEditarVialidad").click(function () {
 
             $("#Vialidad").find('input, button, select').prop("disabled", false);
-            $("#Vialidad").find('input, button, select').css("visibility", "visible");
+            $("#Vialidad").find('button').css("visibility", "visible");
 
             $('#btnEditarVialidad').hide();
 
@@ -756,7 +758,7 @@
         $("#btnEditarPMedica").click(function () {
 
             $("#PruebasMedica").find('input, button, select').prop("disabled", false);
-            $("#PruebasMedica").find('input, button, select').css("visibility", "visible");
+            $("#PruebasMedica").find('button').css("visibility", "visible");
 
             $('#btnEditarPMedica').hide();
 
@@ -767,7 +769,7 @@
         $("#btnEditarToxicologia").click(function () {
 
             $("#Toxicologia").find('input, button, select').prop("disabled", false);
-            $("#Toxicologia").find('input, button, select').css("visibility", "visible");
+            $("#Toxicologia").find('button').css("visibility", "visible");
 
             $('#btnEditarToxicologia').hide();
 
