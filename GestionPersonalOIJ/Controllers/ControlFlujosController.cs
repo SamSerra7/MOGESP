@@ -30,9 +30,9 @@ namespace MOGESP.UserInterface.Controllers
         private static List<int> flujosPorConvocatoria = new List<int>();
 
 
+
         private static int numeroFlujo = 1;
         private static string numeroConvocatoria = "OIJ-";
-
 
 
 
@@ -78,17 +78,16 @@ namespace MOGESP.UserInterface.Controllers
         }
 
         
-        public ActionResult CitasPorFlujoPI()
+        public ActionResult CitasPorFlujoPI(IFormCollection formCollection)
         {
 
 
-
             ViewData["numeroConvocatoria"] = numeroConvocatoria;
-            ViewData["numFlujo"] = numeroFlujo;
 
+            ViewBag.NConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
 
-            ViewBag.NumeroConvocatoria = cuadroGeneralServicio.traerNumerosConvocatoria();
-            ViewBag.NumFlujo = flujosPorConvocatoria;
+            ViewBag.NFlujo = flujosPorConvocatoria;
+            
 
             return View();
         }
@@ -99,12 +98,12 @@ namespace MOGESP.UserInterface.Controllers
         {
 
 
-            numeroConvocatoria = formCollection["numeroConvocatoria"].ToString();
+            numeroConvocatoria = formCollection["selNumConv"];
 
             flujosPorConvocatoria = cuadroGeneralServicio.traerNumerosDeFlujoPorConvocatoria(numeroConvocatoria);
 
 
-            return RedirectToActionPermanent("InsertarPrimerosIngresos");
+            return RedirectToActionPermanent("CitasPorFlujoPI");
         }
 
 
