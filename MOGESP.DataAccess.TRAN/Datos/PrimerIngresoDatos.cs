@@ -17,6 +17,46 @@ namespace MOGESP.DataAccess.TRAN.Datos
         private CorreoDatos correoDatos = new CorreoDatos();
         private TelefonoDatos telefonoDatos = new TelefonoDatos();
 
+
+
+        private List<string> getListaEstado()
+        {
+            List<string> listaEstados = new List<string>();
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"SELECT TC_Nombre FROM dbo.TMOGESP_ResultHojaEnvioGH", sqlConnection);
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                listaEstados.Add(reader["TC_Nombre"].ToString() ?? " ");
+            }
+
+            sqlConnection.Close();
+
+
+            return listaEstados;
+        }
+
+        private List<string> ordenarListaEstado(List<string> listaEstado, string estado)
+        {
+            for (int aux = 0; aux < listaEstado.Count; aux++)
+            {
+
+                if (listaEstado[aux].Equals(estado))
+                {
+                    listaEstado[aux] = listaEstado[0];
+                    listaEstado[0] = estado;
+                }
+
+            }
+
+            return listaEstado;
+        }
+
         /// <summary>
         /// Autores: Samuel y Valeria
         /// 9/10/19
@@ -71,7 +111,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarPrimerIngreso", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarPrimerIngreso @numeroDeCedula", sqlConnection);
             sqlCommand.Parameters.AddWithValue("@numeroDeCedula", numeroCedula);
 
             SqlDataReader reader;
@@ -91,7 +131,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
                 primerIngreso.NumeroConvocatoria = reader["TC_NumeroConvocatoria"].ToString();
                 primerIngreso.NumeroFlujo = Convert.ToInt32(reader["TN_NumeroFlujo"].ToString());
                 primerIngreso.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"].ToString());
-                primerIngreso.IdCondicion = Convert.ToInt32(reader["Condicion"].ToString());
+                primerIngreso.IdCondicion = reader["Condicion"].ToString();
 
                 primerIngreso.Correos = correoDatos.CosultarCorreosPorPrimerIngreso(primerIngreso.Cedula);
                 primerIngreso.Telefonos = telefonoDatos.CosultarTelefonosPorPrimerIngreso(primerIngreso.Cedula);
@@ -100,6 +140,8 @@ namespace MOGESP.DataAccess.TRAN.Datos
             }
 
             sqlConnection.Close();
+
+            primerIngreso.ListaCondiciones = ordenarListaEstado(getListaEstado(), primerIngreso.IdCondicion);
 
             return primerIngreso;
         }

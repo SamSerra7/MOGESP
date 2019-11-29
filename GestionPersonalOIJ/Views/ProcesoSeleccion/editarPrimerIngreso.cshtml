@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MOGESP.Entities.Dominio.PrimerIngreso
+
+@{
     ViewData["Title"] = "Editar Primer Ingreso";
 }
 
@@ -90,7 +92,6 @@
             button:hover {
                 background: #de803d;
             }
-
     </style>
 
 </head>
@@ -103,88 +104,88 @@
 
     <br><br><br>
 
-            <div class="CajaFormulario" id="EditarPI">
+    <div class="CajaFormulario" id="EditarPI">
 
-                <form id="FormModificar" action="" method="post">
+        <form id="FormModificar" action="" method="post">
 
-                    <fieldset>
+            <fieldset>
 
-                        <div class="form-row">
+                <div class="form-row">
 
-                            <div class="col-md-6">
-                                <label>C&eacute;dula: </label>
-                                <input class="form-control" id="cedulaInfo" type="text" name="cedulaInfo" disabled="disabled" value="" />
-                            </div>
-                            <div class="col-md-6">
-                                <label>Nombre: </label>
-                                <input class="form-control" id="nombreInfo" type="text" name="nombreInfo" value="" required />
-                            </div>
+                    <div class="col-md-6">
+                        <label>C&eacute;dula: </label>
+                        <input class="form-control" id="cedulaInfo" type="text" name="cedulaInfo" disabled="disabled" value="@Model.Cedula" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Nombre: </label>
+                        <input class="form-control" id="nombreInfo" type="text" name="nombreInfo" value="@Model.Nombre" required />
+                    </div>
 
-                        </div>
+                </div>
 
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <label>Primer Apellido: </label>
-                                <input class="form-control" id="primerApellido" type="text" name="primerApellido" value="" required />
-                            </div>
-                            <div class="col-md-6">
-                                <label>Segundo Apellido: </label>
-                                <input class="form-control" id="segundoApellido" type="text" name="segundoApellido" value="" required />
-                            </div>
-                        </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label>Primer Apellido: </label>
+                        <input class="form-control" id="primerApellido" type="text" name="primerApellido" value="@Model.PrimerApellido" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Segundo Apellido: </label>
+                        <input class="form-control" id="segundoApellido" type="text" name="segundoApellido" value="@Model.SegundoApellido" required />
+                    </div>
+                </div>
 
-                        <br><br><br>
-                        <hr />
+                <br><br><br>
+                <hr />
 
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <label>Sexo: </label>
-                                <input class="form-control" id="sexo" type="text" name="sexo" disabled="disabled" value="" />
-                            </div>
-                            <div class="col-md-6">
-                                <label>Direcci&oacute;n: </label><br>
-                                <textarea name="direccion" id="direccion" rows="5" cols="50" required></textarea>
-                            </div>
-                        </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label>Sexo: </label>
+                        <input class="form-control" id="sexo" type="text" name="sexo" disabled="disabled" value="@Model.Sexo" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Direcci&oacute;n: </label><br>
+                        <textarea name="direccion" id="direccion" rows="5" cols="50" value="@Model.Direccion" required></textarea>
+                    </div>
+                </div>
 
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label>N&uacute;mero Convocatoria: </label>
-                                <input id="numConvocatoria" class="form-control" type="number" min="0" name="numConvocatoria" disabled="disabled" value="" />
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label>N&uacute;mero Flujo: </label>
-                                <input id="numFlujo" class="form-control" type="number" min="0" name="numFlujo" value="" required />
-                            </div>
-                        </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>N&uacute;mero Convocatoria: </label>
+                        <input id="numConvocatoria" class="form-control" type="number" min="0" name="numConvocatoria" disabled="disabled" value="@Model.NumeroConvocatoria" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>N&uacute;mero Flujo: </label>
+                        <input id="numFlujo" class="form-control" type="number" min="0" name="numFlujo" value="@Model.NumeroFlujo" required />
+                    </div>
+                </div>
 
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
 
-                                <label>Condici&oacute;n: </label>
+                        <label>Condici&oacute;n: </label>
 
-                                <select id="condicion" name="condicion">
+                        <select id="condicion" name="condicion">
 
-                                    <option value=""></option>
+                            <option value=""></option>
 
-                                </select>
+                        </select>
 
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <i class="fas fa-calendar-alt"></i>
-                                <label>Fecha Ingreso: </label>
-                                <input id="fechaIngreso" class="form-control" type="datetime-local" min="1999-12-31T00:00" disabled="disabled" name="fechaIngreso" value="" />
-                            </div>
-                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <i class="fas fa-calendar-alt"></i>
+                        <label>Fecha Ingreso: </label>
+                        <input id="fechaIngreso" class="form-control" type="text" disabled="disabled" name="fechaIngreso" value="@Model.FechaIngreso" />
+                    </div>
+                </div>
 
-                        <div style=" float: right; ">
-                            <br><br><br>
-                            <button type="submit" class="btn btn-success" id="btnAceptar" name="btnAceptar" ><i class="far fa-check-circle"></i> Aceptar</button>
-                            <button type="button" class="btn btn-danger" id="btnCancelar" name="btnCancelar" onclick="location.reload()"><i class="far fa-window-close"></i> Cancelar</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
+                <div style=" float: right; ">
+                    <br><br><br>
+                    <button type="submit" class="btn btn-success" id="btnAceptar" name="btnAceptar"><i class="far fa-check-circle"></i> Aceptar</button>
+                    <button type="button" class="btn btn-danger" id="btnCancelar" name="btnCancelar" onclick="location.reload()"><i class="far fa-window-close"></i> Cancelar</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 
 
 </body>

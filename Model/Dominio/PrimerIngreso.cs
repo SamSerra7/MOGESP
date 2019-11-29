@@ -33,8 +33,8 @@ namespace MOGESP.Entities.Dominio
                 numeroConvocatoria = value; }
         }
 
-        private int idCondicion;
-        public int IdCondicion { get; set; }
+        private string idCondicion;
+        public string IdCondicion { get; set; }
 
         private DateTime fechaIngreso;
 
@@ -42,6 +42,8 @@ namespace MOGESP.Entities.Dominio
 
         public int NumeroFlujo { get; set; }
 
+        private List<String> listaCondiciones;
+        public List<String> ListaCondiciones { get; set; }
 
         public List<EvaluacionPuesto> EvaluacionesPuestos { get; set; }
         

@@ -26,9 +26,9 @@ namespace MOGESP.ServiceLayer.Servicio
             return primerIngresoDatos.getAllPrimerosIngresos() ?? throw new Exception("No hay registros de primer ingreso");
         }
 
-        public PrimerIngreso getPrimerIngreso()
+        public PrimerIngreso getPrimerIngreso( string cedula)
         {
-            return primerIngresoDatos.getPrimerIngreso() ?? throw new Exception("No hay registros de primer ingreso");
+            return primerIngresoDatos.getPrimerIngreso(cedula) ?? throw new Exception("No hay registros de primer ingreso");
         }
 
         public void insertarPrimerIngreso(PrimerIngreso PI)
