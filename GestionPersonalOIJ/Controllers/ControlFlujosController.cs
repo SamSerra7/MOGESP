@@ -78,7 +78,7 @@ namespace MOGESP.UserInterface.Controllers
         }
 
         
-        public ActionResult CitasPorFlujoPI(IFormCollection formCollection)
+        public ActionResult CitasPorFlujoPI()
         {
 
 
@@ -112,8 +112,8 @@ namespace MOGESP.UserInterface.Controllers
         public RedirectToActionResult ProgramarCitasPorFlujoPI(IFormCollection formCollection)
         {
             string fecha;
-            DateTime dateInicio = Convert.ToDateTime(formCollection["FechaInicioCita"]);
-            DateTime dateFinal = Convert.ToDateTime(formCollection["FechaFinalCita"]);
+            DateTime dateInicio = Convert.ToDateTime(formCollection["fechaInicioCitas"]);
+            DateTime dateFinal = Convert.ToDateTime(formCollection["fechaFinalCitas"]);
 
             IEnumerable<PrimerIngresoElegible> elegibles = baseElegiblesServicio.getAllPrimerosIngresosElegibles(3);//3 pues los puestos son positivos
             int cantElegibles = 0;
@@ -123,10 +123,13 @@ namespace MOGESP.UserInterface.Controllers
             {
 
                 fecha = dateInicio.DayOfWeek.ToString();
-                dateInicio = Convert.ToDateTime(fecha);
+
+                
 
                 if (!fecha.ToUpper().Equals("SATURDAY") || !fecha.ToUpper().Equals("SUNDAY"))
                 {
+                    fecha = dateInicio.ToShortDateString();
+                    dateInicio = Convert.ToDateTime(fecha);
 
                     if (elegibles.ElementAt(cantElegibles) != null)
                     {
@@ -239,9 +242,11 @@ namespace MOGESP.UserInterface.Controllers
                         
                     }
 
-                    //aumenta la fecha
-                    dateInicio.AddDays(1);
+                    
                 }
+
+                //aumenta la fecha
+                dateInicio.AddDays(1);
             } 
 
 
