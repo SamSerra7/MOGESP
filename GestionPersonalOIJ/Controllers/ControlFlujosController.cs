@@ -131,7 +131,7 @@ namespace MOGESP.UserInterface.Controllers
                     fecha = dateInicio.ToShortDateString();
                     dateInicio = Convert.ToDateTime(fecha);
 
-                    if (elegibles.ElementAt(cantElegibles) != null)
+                    if (cantElegibles < elegibles.Count())
                     {
 
                         for (int horasAtencion = 1; horasAtencion <= 3; horasAtencion++)
@@ -143,7 +143,7 @@ namespace MOGESP.UserInterface.Controllers
                                 dateInicio.AddHours(7).AddMinutes(30);
 
                                 //ANA
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count() )
                                 {
                                     hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula,"Ana",dateInicio,1,"Delio");
                                     cantElegibles++;
@@ -152,7 +152,7 @@ namespace MOGESP.UserInterface.Controllers
 
 
                                 //KAROL
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count())
                                 {
                                     hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Karol", dateInicio, 1, "Delio");
                                     cantElegibles++;
@@ -161,9 +161,9 @@ namespace MOGESP.UserInterface.Controllers
 
 
                                 //MINOR
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count())
                                 {
-                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles-1).Cedula, "Ana", dateInicio, 1, "Delio");
                                     cantElegibles++;
                                 }
                                 else { break; }
@@ -177,7 +177,7 @@ namespace MOGESP.UserInterface.Controllers
                                 dateInicio.AddHours(10).AddMinutes(30);
 
                                 //ANA
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count())
                                 {
                                     hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
                                     cantElegibles++;
@@ -186,7 +186,7 @@ namespace MOGESP.UserInterface.Controllers
 
 
                                 //KAROL
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count())
                                 {
                                     hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Karol", dateInicio, 1, "Delio");
                                     cantElegibles++;
@@ -195,7 +195,7 @@ namespace MOGESP.UserInterface.Controllers
 
 
                                 //MINOR
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count())
                                 {
                                     hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
                                     cantElegibles++;
@@ -211,7 +211,7 @@ namespace MOGESP.UserInterface.Controllers
                                 dateInicio.AddHours(13).AddMinutes(30);
 
                                 //ANA
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count())
                                 {
                                     hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
                                     cantElegibles++;
@@ -220,7 +220,7 @@ namespace MOGESP.UserInterface.Controllers
 
 
                                 //KAROL
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count())
                                 {
                                     hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Karol", dateInicio, 1, "Delio");
                                     cantElegibles++;
@@ -229,7 +229,7 @@ namespace MOGESP.UserInterface.Controllers
 
 
                                 //MINOR
-                                if (elegibles.ElementAt(cantElegibles) != null)
+                                if (cantElegibles < elegibles.Count())
                                 {
                                     hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
                                     cantElegibles++;
@@ -246,7 +246,7 @@ namespace MOGESP.UserInterface.Controllers
                 }
 
                 //aumenta la fecha
-                dateInicio.AddDays(1);
+                dateInicio = dateInicio.AddDays(1);
             } 
 
 
