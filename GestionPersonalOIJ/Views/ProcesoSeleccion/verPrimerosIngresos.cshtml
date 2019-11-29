@@ -68,34 +68,39 @@
 
 		@foreach (var primerIngreso in Model.Resultado)
 		{
-			<tr>
-				<td>
-					@Html.ActionLink("", "verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = primerIngreso.Cedula },
-								new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
+        <tr>
+            
+            
+            <td>
+                @Html.ActionLink("", "verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = primerIngreso.Cedula },
+                            new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
+                @Html.ActionLink("", "editarPrimerIngreso", new { cedulaPrimerIngreso = primerIngreso.Cedula },
+                            new { @class = "glyphicon glyphicon-pencil", @title = "Editar" })
 
-				</td>
-				<td> @primerIngreso.Cedula</td>
-				<td> @primerIngreso.Nombre @primerIngreso.PrimerApellido @primerIngreso.SegundoApellido</td>
-				<td> @primerIngreso.Sexo</td>
-				<td> @primerIngreso.Direccion</td>
 
-				<td>
-					@foreach (var correo in primerIngreso.Correos)
-					{
-						<p>@correo</p>
-					}
-				</td>
+            </td>
+            <td> @primerIngreso.Cedula</td>
+            <td> @primerIngreso.Nombre @primerIngreso.PrimerApellido @primerIngreso.SegundoApellido</td>
+            <td> @primerIngreso.Sexo</td>
+            <td> @primerIngreso.Direccion</td>
 
-				<td>
-					@foreach (var telefono in primerIngreso.Telefonos)
-					{
-						<p>@telefono</p>
-					}
-				</td>
+            <td>
+                @foreach (var correo in primerIngreso.Correos)
+                {
+                    <p>@correo</p>
+                }
+            </td>
 
-				<td> @primerIngreso.NumeroConvocatoria</td>
-				<td> @primerIngreso.NumeroFlujo</td>
-			</tr>
+            <td>
+                @foreach (var telefono in primerIngreso.Telefonos)
+                {
+                    <p>@telefono</p>
+                }
+            </td>
+
+            <td> @primerIngreso.NumeroConvocatoria</td>
+            <td> @primerIngreso.NumeroFlujo</td>
+        </tr>
 		}
 
 	</table>
