@@ -25,8 +25,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand sqlCommand = new SqlCommand(@"SELECT [TN_IdPrimerIngreso] , [TC_NombrePsicologo] , [TF_FechaCita] , [TN_IdCorreoCita] , [TN_IdAsistencia]
-                                                        FROM [MOGESP].[dbo].[TMOGESP_HojaCitasPI]", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand(@"exec PA_SeleccionaHojaCitasPI 'aa', 0", sqlConnection);
 
             SqlDataAdapter sda = new SqlDataAdapter(sqlCommand);
 
