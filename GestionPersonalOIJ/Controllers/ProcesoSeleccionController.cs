@@ -224,6 +224,11 @@ namespace GestionPersonalOIJ.Controllers
 
         }
 
+        public ActionResult editarPrimerIngreso()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public RedirectToActionResult actualizarPruebasGH(IFormCollection formCollection)

@@ -33,6 +33,12 @@ namespace MOGESP.Entities.Dominio
                 numeroConvocatoria = value; }
         }
 
+        private int idCondicion;
+        public int IdCondicion { get; set; }
+
+        private DateTime fechaIngreso;
+
+        public DateTime FechaIngreso { get; set; }
 
         public int NumeroFlujo { get; set; }
 
