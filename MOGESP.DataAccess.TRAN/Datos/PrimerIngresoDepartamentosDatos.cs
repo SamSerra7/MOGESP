@@ -387,13 +387,25 @@ namespace MOGESP.DataAccess.TRAN.Datos
 											@TN_EstadoResultHojaEnvioGH", sqlConnection);
 
             actualizarVialidad.Parameters.AddWithValue("@numeroDeCedula", cedula);
-            actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoVialidad.FechaIngresoAdministracion);
+            if (departamentoVialidad.FechaIngresoAdministracion != default)
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoVialidad.FechaIngresoAdministracion);
+            else
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", "NULL");
             actualizarVialidad.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoVialidad.CantidadDiasAdministracion);
-            actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoTransportes", departamentoVialidad.FechaIngreso);
+            if (departamentoVialidad.FechaIngreso != default)
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoTransportes", departamentoVialidad.FechaIngreso);
+            else
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoTransportes", "NULL");
             actualizarVialidad.Parameters.AddWithValue("@TC_OficioIngreso", departamentoVialidad.OficioIngreso);
-            actualizarVialidad.Parameters.AddWithValue("@TF_FechaFechaCita", departamentoVialidad.FechaCita);
+            if (departamentoVialidad.FechaCita != default)
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaFechaCita", departamentoVialidad.FechaCita);
+            else
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaFechaCita", "NULL");
             actualizarVialidad.Parameters.AddWithValue("@TN_DiasParaCita", departamentoVialidad.DiasParaCita);
-            actualizarVialidad.Parameters.AddWithValue("@TF_FechaSalida", departamentoVialidad.FechaSalida);
+            if (departamentoVialidad.FechaSalida != default)
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaSalida", departamentoVialidad.FechaSalida);
+            else
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaSalida", "NULL");
             actualizarVialidad.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoVialidad.CantidadDiasTotalesTramite);
             actualizarVialidad.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoVialidad.OficioRespuesta);
             actualizarVialidad.Parameters.AddWithValue("@TN_EstadoResultHojaEnvioGH", departamentoVialidad.EstadoResultHojaEnvioGH);
