@@ -101,7 +101,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
                 departamentoPruebasGH.FechaIngreso = (reader["TF_FechaIngreso"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaIngreso"]) : DateTime.Parse("12-31-1999");
                 departamentoPruebasGH.Oficio = reader["TC_Oficio"].ToString() ?? " ";
                 departamentoPruebasGH.DiasAlaFecha = (reader["TN_DiasALaFecha"] != DBNull.Value) ? Convert.ToInt32(reader["TN_DiasALaFecha"]) : 0;
-                departamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo = (reader["TN_DiasALaFechaDeFechaLimiteSegunPlazo"] != DBNull.Value) ? Convert.ToInt32(reader["TN_DiasALaFechaDeFechaLimiteSegunPlazo"]) : 0;
+                departamentoPruebasGH.OficioIngreso = reader["TC_OficioIngreso"].ToString() ?? " ";
                 departamentoPruebasGH.FechaTrasladoPsicologosAdmin = (reader["TF_FechaTrasladoPsicologosAdm"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaTrasladoPsicologosAdm"]) : DateTime.Parse("12-31-1999");
                 departamentoPruebasGH.FechaDevolucionGHDeAdmin = (reader["TF_FechaDevolucionGHDeAdm"] != DBNull.Value) ? Convert.ToDateTime(reader["TF_FechaDevolucionGHDeAdm"]) : DateTime.Parse("12-31-1999");
                 departamentoPruebasGH.CantidadDiasPsicologiaAdmin = (reader["TN_CantidadDiasPsicologiaAdm"] != DBNull.Value) ? Convert.ToInt32(reader["TN_CantidadDiasPsicologiaAdm"]) : 0; 
@@ -295,25 +295,49 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             
             actualizarPruebasGH.Parameters.AddWithValue("@numeroDeCedula", cedula);
-            actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoPruebasGH.FechaIngresoAdministracion);
+
+            if (departamentoPruebasGH.FechaIngresoAdministracion.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoPruebasGH.FechaIngresoAdministracion);
+            else
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", DBNull.Value);
 
             actualizarPruebasGH.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoPruebasGH.CantidadDiasAdministracion);
             actualizarPruebasGH.Parameters.AddWithValue("@TC_Ubicacion", departamentoPruebasGH.Ubicacion);
-            actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaIngreso", departamentoPruebasGH.FechaIngreso);
+
+            if (departamentoPruebasGH.FechaIngreso.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaIngreso", departamentoPruebasGH.FechaIngreso);
+            else
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaIngreso", DBNull.Value);
 
             actualizarPruebasGH.Parameters.AddWithValue("@TC_OficioIngreso", departamentoPruebasGH.OficioIngreso);
             actualizarPruebasGH.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoPruebasGH.DiasAlaFecha);
-            actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaTrasladoPsicologosAdm", departamentoPruebasGH.FechaTrasladoPsicologosAdmin);
+
+            if (departamentoPruebasGH.FechaTrasladoPsicologosAdmin.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaTrasladoPsicologosAdm", departamentoPruebasGH.FechaTrasladoPsicologosAdmin);
+            else
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaTrasladoPsicologosAdm", DBNull.Value);
 
             actualizarPruebasGH.Parameters.AddWithValue("@TC_Oficio", departamentoPruebasGH.Oficio);
-            actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaDevolucionGHDeAdm", departamentoPruebasGH.FechaDevolucionGHDeAdmin);
+
+            if (departamentoPruebasGH.FechaDevolucionGHDeAdmin.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaDevolucionGHDeAdm", departamentoPruebasGH.FechaDevolucionGHDeAdmin);
+            else
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaDevolucionGHDeAdm", DBNull.Value);
 
             actualizarPruebasGH.Parameters.AddWithValue("@TN_CantidadDiasPsicologiaAdm", departamentoPruebasGH.CantidadDiasPsicologiaAdmin);
-            actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaLimiteSegunPlazo", departamentoPruebasGH.FechaLimiteSegunPlazo);
+
+            if (departamentoPruebasGH.FechaLimiteSegunPlazo.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaLimiteSegunPlazo", departamentoPruebasGH.FechaLimiteSegunPlazo);
+            else
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaLimiteSegunPlazo", DBNull.Value);
 
             actualizarPruebasGH.Parameters.AddWithValue("@TN_DiasALaFechaDeFechaLimiteSegunPlazo", departamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo);
             actualizarPruebasGH.Parameters.AddWithValue("@TN_DiasTramiteGHDespuesDevuelto", departamentoPruebasGH.DiasTramiteGHDespuesDevuelto);
-            actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaSalida", departamentoPruebasGH.FechaSalida);
+
+            if (departamentoPruebasGH.FechaSalida.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaSalida", departamentoPruebasGH.FechaSalida);
+            else
+                actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaSalida", DBNull.Value);
 
             actualizarPruebasGH.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoPruebasGH.CantidadDiasTotalesTramite);
             actualizarPruebasGH.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoPruebasGH.OficioRespuesta);
@@ -347,14 +371,34 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
 
             actualizarAntecedentes.Parameters.AddWithValue("@numeroDeCedula", cedula);
-            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoAntecedentes.FechaIngresoAdministracion);
+
+            if (departamentoAntecedentes.FechaIngresoAdministracion.Date != DateTime.Parse("12-31-1999"))
+                actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoAntecedentes.FechaIngresoAdministracion);
+            else
+                actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", DBNull.Value);
+
             actualizarAntecedentes.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoAntecedentes.CantidadDiasAdministracion);
-            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngreso", departamentoAntecedentes.FechaIngreso);
+
+            if (departamentoAntecedentes.FechaIngreso.Date != DateTime.Parse("12-31-1999"))
+                actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngreso", departamentoAntecedentes.FechaIngreso);
+            else
+                actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngreso", DBNull.Value);
+
             actualizarAntecedentes.Parameters.AddWithValue("@TC_OficioIngreso", departamentoAntecedentes.OficioIngreso);
-            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaFechaResultado", departamentoAntecedentes.FechaResultado);
+
+            if (departamentoAntecedentes.FechaResultado.Date != DateTime.Parse("12-31-1999"))
+                actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaFechaResultado", departamentoAntecedentes.FechaResultado);
+            else
+                actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaFechaResultado", DBNull.Value);
+
             actualizarAntecedentes.Parameters.AddWithValue("@TN_ZonaDeTrabajo", departamentoAntecedentes.ZonaTrabajo);
             actualizarAntecedentes.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoAntecedentes.DiasAlaFecha);
-            actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaSalida", departamentoAntecedentes.FechaSalida);
+
+            if (departamentoAntecedentes.FechaSalida.Date != DateTime.Parse("12-31-1999"))
+                actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaSalida", departamentoAntecedentes.FechaSalida);
+            else
+                actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaSalida", DBNull.Value);
+
             actualizarAntecedentes.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoAntecedentes.CantidadDiasTotalesTramite);
             actualizarAntecedentes.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoAntecedentes.OficioRespuesta);
             actualizarAntecedentes.Parameters.AddWithValue("@TN_EstadoResultHojaEnvioGH", departamentoAntecedentes.EstadoResultHojaEnvioGH);
@@ -389,22 +433,22 @@ namespace MOGESP.DataAccess.TRAN.Datos
             if (departamentoVialidad.FechaIngresoAdministracion.Date != DateTime.Parse("12-31-1999"))
                 actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoVialidad.FechaIngresoAdministracion);
             else
-                actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", "NULL");
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", DBNull.Value);
             actualizarVialidad.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoVialidad.CantidadDiasAdministracion);
             if (departamentoVialidad.FechaIngreso.Date != DateTime.Parse("12-31-1999"))
                 actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoTransportes", departamentoVialidad.FechaIngreso);
             else
-                actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoTransportes", "NULL");
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoTransportes", DBNull.Value);
             actualizarVialidad.Parameters.AddWithValue("@TC_OficioIngreso", departamentoVialidad.OficioIngreso);
             if (departamentoVialidad.FechaCita.Date != DateTime.Parse("12-31-1999"))
                 actualizarVialidad.Parameters.AddWithValue("@TF_FechaFechaCita", departamentoVialidad.FechaCita);
             else
-                actualizarVialidad.Parameters.AddWithValue("@TF_FechaFechaCita", "NULL");
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaFechaCita", DBNull.Value);
             actualizarVialidad.Parameters.AddWithValue("@TN_DiasParaCita", departamentoVialidad.DiasParaCita);
             if (departamentoVialidad.FechaSalida.Date != DateTime.Parse("12-31-1999"))
                 actualizarVialidad.Parameters.AddWithValue("@TF_FechaSalida", departamentoVialidad.FechaSalida);
             else
-                actualizarVialidad.Parameters.AddWithValue("@TF_FechaSalida", "NULL");
+                actualizarVialidad.Parameters.AddWithValue("@TF_FechaSalida", DBNull.Value);
             actualizarVialidad.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoVialidad.CantidadDiasTotalesTramite);
             actualizarVialidad.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoVialidad.OficioRespuesta);
             actualizarVialidad.Parameters.AddWithValue("@TN_EstadoResultHojaEnvioGH", departamentoVialidad.EstadoResultHojaEnvioGH);
@@ -436,14 +480,38 @@ namespace MOGESP.DataAccess.TRAN.Datos
 											@TC_OficioRespuesta", sqlConnection);
 
             actualizarPruebasMedicas.Parameters.AddWithValue("@numeroDeCedula", cedula);
-            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoPruebasMedicas.FechaIngresoAdministracion);
+
+            if (departamentoPruebasMedicas.FechaIngresoAdministracion.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoPruebasMedicas.FechaIngresoAdministracion);
+            else
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", DBNull.Value);
+
             actualizarPruebasMedicas.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoPruebasMedicas.CantidadDiasAdministracion);
-            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngreso", departamentoPruebasMedicas.FechaIngreso);
-            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaEnvioAPMdeGH", departamentoPruebasMedicas.FechaEnvioAPMdeGH);
+
+            if (departamentoPruebasMedicas.FechaIngreso.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngreso", departamentoPruebasMedicas.FechaIngreso);
+            else
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngreso", DBNull.Value);
+
+            if (departamentoPruebasMedicas.FechaEnvioAPMdeGH.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaEnvioAPMdeGH", departamentoPruebasMedicas.FechaEnvioAPMdeGH);
+            else
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaEnvioAPMdeGH", DBNull.Value);
+
             actualizarPruebasMedicas.Parameters.AddWithValue("@TC_OficioIngreso", departamentoPruebasMedicas.OficioIngreso);
-            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaResultadoOCitaPM", departamentoPruebasMedicas.FechaResultadoOCitaPM);
+
+            if (departamentoPruebasMedicas.FechaResultadoOCitaPM.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaResultadoOCitaPM", departamentoPruebasMedicas.FechaResultadoOCitaPM);
+            else
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaResultadoOCitaPM", DBNull.Value);
+
             actualizarPruebasMedicas.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoPruebasMedicas.DiasAlaFecha);
-            actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaSalida", departamentoPruebasMedicas.FechaSalida);
+
+            if (departamentoPruebasMedicas.FechaSalida.Date != DateTime.Parse("12-31-1999"))
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaSalida", departamentoPruebasMedicas.FechaSalida);
+            else
+                actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaSalida", DBNull.Value);
+
             actualizarPruebasMedicas.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoPruebasMedicas.CantidadDiasTotalesTramite);
             actualizarPruebasMedicas.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoPruebasMedicas.OficioRespuesta);
 
@@ -476,17 +544,42 @@ namespace MOGESP.DataAccess.TRAN.Datos
                                             @TN_FechaEstadoCantDias", sqlConnection);
 
             actualizarToxicologia.Parameters.AddWithValue("@numeroDeCedula", cedula);
-            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoToxicologia.FechaIngresoAdministracion);
+
+            if (departamentoToxicologia.FechaIngresoAdministracion.Date != DateTime.Parse("12-31-1999"))
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoToxicologia.FechaIngresoAdministracion);
+            else
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", DBNull.Value);
+
             actualizarToxicologia.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoToxicologia.CantidadDiasAdministracion);
-            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngreso", departamentoToxicologia.FechaIngreso);
+
+            if (departamentoToxicologia.FechaIngreso.Date != DateTime.Parse("12-31-1999"))
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngreso", departamentoToxicologia.FechaIngreso);
+            else
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngreso", DBNull.Value);
+
             actualizarToxicologia.Parameters.AddWithValue("@TC_OficioIngreso", departamentoToxicologia.OficioIngreso);
-            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaCita", departamentoToxicologia.FechaCita);
+
+            if (departamentoToxicologia.FechaCita.Date != DateTime.Parse("12-31-1999"))
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaCita", departamentoToxicologia.FechaCita);
+            else
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaCita", DBNull.Value);
+
             actualizarToxicologia.Parameters.AddWithValue("@TN_DiasParaCita", departamentoToxicologia.DiasParaCita);
             actualizarToxicologia.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoToxicologia.DiasAlaFecha);
-            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaSalida", departamentoToxicologia.FechaSalida);
+
+            if (departamentoToxicologia.FechaSalida.Date != DateTime.Parse("12-31-1999"))
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaSalida", departamentoToxicologia.FechaSalida);
+            else
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaSalida", DBNull.Value);
+
             actualizarToxicologia.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoToxicologia.CantidadDiasTotalesTramite);
             actualizarToxicologia.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoToxicologia.OficioRespuesta);
-            actualizarToxicologia.Parameters.AddWithValue("@TF_FechaEstado", departamentoToxicologia.FechaEstado);
+
+            if (departamentoToxicologia.FechaEstado.Date != DateTime.Parse("12-31-1999"))
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaEstado", departamentoToxicologia.FechaEstado);
+            else
+                actualizarToxicologia.Parameters.AddWithValue("@TF_FechaEstado", DBNull.Value);
+
             actualizarToxicologia.Parameters.AddWithValue("@TN_FechaEstadoCantDias", departamentoToxicologia.FechaEstadoCantDias);
 
             sqlConnection.Open();
