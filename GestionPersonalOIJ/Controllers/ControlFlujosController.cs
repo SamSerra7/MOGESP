@@ -112,11 +112,11 @@ namespace MOGESP.UserInterface.Controllers
         public RedirectToActionResult ProgramarCitasPorFlujoPI(IFormCollection formCollection)
         {
             string fecha;
-            DateTime dateInicio = Convert.ToDateTime(formCollection["fechaInicioCitas"]);
-            DateTime dateFinal = Convert.ToDateTime(formCollection["fechaFinalCitas"]);
+            DateTime dateInicio = Convert.ToDateTime(formCollection["fechaInicioCitas"].ToString() + " 00:00:00");
+            DateTime dateFinal = Convert.ToDateTime(formCollection["fechaFinalCitas"].ToString() + " 00:00:00");
 
             IEnumerable<PrimerIngresoElegible> elegibles = baseElegiblesServicio.getAllPrimerosIngresosElegibles(3);//3 pues los puestos son positivos
-            int cantElegibles = 0;
+            int cantElegibles = 0; 
 
 
             while (dateInicio.Date != dateFinal.Date)
