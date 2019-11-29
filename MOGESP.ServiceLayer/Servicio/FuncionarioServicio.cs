@@ -35,5 +35,14 @@ namespace MOGESP.ServiceLayer.Servicio
 		{
 			return funcionarioDatos.obtenerFuncionarioPorCedula(cedula);
 		}
+		/// <summary>
+		/// 26/11/2019
+		/// Jesus Torres
+		/// Método que retorna lista de funcionarios que participan en un concurso determinado
+		/// </summary>
+		public IEnumerable<Funcionario> obtenerFuncionarioPorIdConcursoParticipante(int idConcurso)
+		{
+			return funcionarioDatos.obtenerFuncionarioPorIdConcursoParticipante(idConcurso);
+		}
 	}
 }

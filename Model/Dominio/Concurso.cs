@@ -11,6 +11,8 @@ namespace MOGESP.Entities.Dominio
 		{
 		}
 
+
+
 		private int idconcurso;
 		public int idConcurso
 		{
@@ -20,7 +22,7 @@ namespace MOGESP.Entities.Dominio
 			}
 			set
 			{
-				if (value > 0) throw new Exception("El id del concurso debe ser positivo");
+				if (value < 0) throw new Exception("El id del concurso debe ser positivo");
 				idconcurso = value;
 			}
 		}

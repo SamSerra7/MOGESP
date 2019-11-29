@@ -59,6 +59,41 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return funcionarios;
         }
 
+		public IEnumerable<Funcionario> obtenerFuncionarioPorIdConcursoParticipante(int idConcurso)
+		{
+			List<Funcionario> funcionarios = new List<Funcionario>();
+
+			SqlConnection sqlConnection = conexion.conexion();
+
+			SqlCommand sqlCommand = new SqlCommand(@"exec PA_ConsultarFuncionariosPorConcursoEnParticipacion @idConcurso", sqlConnection);
+			sqlCommand.Parameters.AddWithValue("@idConcurso", idConcurso);
+			SqlDataReader reader;
+			sqlConnection.Open();
+			reader = sqlCommand.ExecuteReader();
+
+			Funcionario funcionario;
+
+			while (reader.Read())
+			{
+				funcionario = new Funcionario();
+
+				funcionario.Cedula = reader["TC_NumeroCedula"].ToString();
+				funcionario.Nombre = reader["TC_Nombre"].ToString();
+				funcionario.PrimerApellido = reader["TC_PrimerApellido"].ToString();
+				funcionario.SegundoApellido = reader["TC_SegundoApellido"].ToString();
+				funcionario.Sexo = Convert.ToChar(reader["TC_Sexo"].ToString());
+				funcionario.Direccion = reader["TC_Direccion"].ToString();
+				funcionario.Correos = correoDatos.CosultarCorreosPorFuncionario(funcionario.Cedula);
+				funcionario.Telefonos = telefonoDatos.CosultarTelefonosPorFuncionario(funcionario.Cedula);
+
+				funcionarios.Add(funcionario);
+			}
+
+			sqlConnection.Close();
+
+			return funcionarios;
+		}
+
 		/// <summary>
 		/// Autor: Jesus Torres
 		/// 19/11/19

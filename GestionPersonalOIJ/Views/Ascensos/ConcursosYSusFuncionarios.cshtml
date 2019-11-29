@@ -1,0 +1,220 @@
+﻿@using MOGESP.Entities.Utilidades;
+@*@model PaginadorGenerico<MOGESP.Entities.Dominio.Funcionario>*@
+@{
+	ViewData["Title"] = "ConcursosYSusFuncionarios";
+	var concurso = (MOGESP.Entities.Dominio.Concurso)ViewData["concurso"];
+	var funcionariosElegidos = (List<MOGESP.Entities.Dominio.Funcionario>)ViewData["funcionariosElegidos"];
+	var funcionariosTodos = (PaginadorGenerico<MOGESP.Entities.Dominio.Funcionario>)ViewData["funcionariosTodos"];
+}
+
+<!--Encabezado-->
+<div>
+	<center>
+		<h2>Concursos y sus Participantes</h2>
+	</center>
+	<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+		<hr />
+	</div>
+	<br />
+</div>
+
+<br />
+
+<div class="row">
+	<h4>Datos del Concurso</h4>
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<label>Nombre Concurso</label>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<p>@concurso.NombreConcurso</p>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<label>Puesto a Optar</label>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<p>@concurso.Puesto.Nombre</p>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<label>Fecha Creacion</label>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<p>@concurso.FechaConcurso</p>
+		</div>
+	</div>
+</div>
+
+<br />
+
+<div class="row container" style="border: 3px solid #152327;">
+	<h4>Funcionarios Participantes</h4>
+	<!--Tabla funcionarios participates-->
+	@if (funcionariosElegidos.Count < 1)
+	{
+		<div class="col-md-4 col-md-offset-4">
+			<p>El concurso no tiene funcionarios participando</p>
+		</div>
+	}
+	else
+	{
+		<div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+			<table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+				<thead style="align-content: center;">
+					<tr style=" background-color: #222;" class="btn-primary">
+						<th></th>
+						<th class="centrarTitulos">C&eacute;dula</th>
+						<th class="centrarTitulos">Nombre Apellidos</th>
+						<th class="centrarTitulos">Sexo</th>
+						<th class="centrarTitulos">Direcci&oacute;n</th>
+
+					</tr>
+				</thead>
+
+				<tr style="background:#f1f1f1">
+
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+
+				</tr>
+
+
+				@foreach (var funcionario in funcionariosElegidos)
+				{
+					<tr>
+						<td>
+							@Html.ActionLink("", "FuncionarioYParticipacionEnPuestos", new { cedula = @funcionario.Cedula },
+									 new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
+
+						</td>
+						<td>@funcionario.Cedula</td>
+						<td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
+						<td> @funcionario.Sexo</td>
+						<td> @funcionario.Direccion</td>
+					</tr>
+				}
+
+			</table>
+		</div>
+	}
+</div>
+
+<br />
+
+
+<div class="row container" style="border: 3px solid #152327;">
+	<h4>Agregar un nuevo funcionario</h4>
+
+	<div class="table-responsive col-md-12 col-xs-12 col-sm-12" style="text-align: center; overflow-y: auto;">
+		<table id="tablaPrimerosIngresos" class="table table-bordered table-responsive table-hover">
+			<thead style="align-content: center;">
+				<tr style=" background-color: #222;" class="btn-primary">
+					<th></th>
+					<th class="centrarTitulos">C&eacute;dula</th>
+					<th class="centrarTitulos">Nombre Apellidos</th>
+					<th class="centrarTitulos">Sexo</th>
+					<th class="centrarTitulos">Direcci&oacute;n</th>
+
+				</tr>
+			</thead>
+
+			<tr style="background:#f1f1f1">
+
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+
+			</tr>
+
+
+			@foreach (var funcionario in funcionariosTodos.Resultado)
+			{
+				<tr>
+					<td>
+						@Html.ActionLink("", "InsertarRelacionConcursoFuncionario", new { cedula = funcionario.Cedula },
+						 new { @class = "btn btn-sm glyphicon glyphicon-share-alt" })
+					</td>
+					<td>@funcionario.Cedula</td>
+					<td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
+					<td> @funcionario.Sexo</td>
+					<td> @funcionario.Direccion</td>
+				</tr>
+			}
+
+		</table>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-xs-12 col-sm-12">
+			@*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
+			@if (funcionariosTodos.Resultado.Count() > 0)
+			{
+				<span>
+					<strong>@funcionariosTodos.TotalRegistros</strong> registros encontrados
+				</span>
+				<span>&nbsp;|&nbsp;</span>
+				<span>
+					Página <strong>@(funcionariosTodos.PaginaActual)</strong> de
+					<strong>@funcionariosTodos.TotalPaginas</strong>
+				</span>
+				<span>&nbsp;|&nbsp;</span>
+			}
+			else
+			{
+				<span>No hay resultados para esta búsqueda</span>
+				<span>&nbsp;|&nbsp;</span>
+			}
+
+
+			@*botones de paginación*@
+			<center>
+				@if (funcionariosTodos.PaginaActual > 1)
+				{
+					@Html.ActionLink("", "ConcursosySusFuncionarios", new { idConcurso = @concurso.idConcurso, pagina = 1 },
+						 new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-left" })
+					<span></span>
+					@Html.ActionLink("Anterior", "ConcursosySusFuncionarios", new { idConcurso = @concurso.idConcurso, pagina = funcionariosTodos.PaginaActual - 1 },
+						 new { @class = "btn btn-sm btn-default" })
+				}
+				else
+				{
+					@Html.ActionLink("", "ConcursosySusFuncionarios", new { idConcurso = @concurso.idConcurso, pagina = 1 },
+						 new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-left" })
+					<span></span>
+					@Html.ActionLink("Anterior", "ConcursosySusFuncionarios", new { idConcurso = @concurso.idConcurso, pagina = 1 },
+						 new { @class = "btn btn-sm btn-default disabled" })
+				}
+				<span></span>
+				@if (funcionariosTodos.PaginaActual < funcionariosTodos.TotalPaginas)
+				{
+					@Html.ActionLink("Siguiente", "ConcursosySusFuncionarios", new { idConcurso = @concurso.idConcurso, pagina = funcionariosTodos.PaginaActual + 1 },
+						 new { @class = "btn btn-sm btn-default" })
+					<span></span>
+					@Html.ActionLink("", "ConcursosySusFuncionarios", new { idConcurso = @concurso.idConcurso, pagina = funcionariosTodos.TotalPaginas },
+						 new { @class = "btn btn-sm btn-primary glyphicon glyphicon-menu-right" })
+				}
+				else
+				{
+					@Html.ActionLink("Siguiente", "ConcursosySusFuncionarios", new { idConcurso = @concurso.idConcurso, pagina = funcionariosTodos.TotalPaginas - 1 },
+						 new { @class = "btn btn-sm btn-default disabled" })
+					<span></span>
+					@Html.ActionLink("", "ConcursosySusFuncionarios", new { idConcurso = @concurso.idConcurso, pagina = funcionariosTodos.TotalPaginas },
+						 new { @class = "btn btn-sm btn-default disabled glyphicon glyphicon-menu-right" })
+				}
+			</center>
+
+		</div>
+	</div>
+	<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+		<br />
+	</div>
+	
+</div>
+
+		
+
+	</div>
