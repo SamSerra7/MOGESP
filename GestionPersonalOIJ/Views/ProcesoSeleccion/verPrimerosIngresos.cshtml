@@ -70,8 +70,7 @@
 		{
 			<tr>
 				<td>
-					@Html.ActionLink("", "verPrimerIngresoEspecifico", new { nombrePI = primerIngreso.Nombre, primerApellidoPI = @primerIngreso.PrimerApellido,
-					segundoApellidoPI = @primerIngreso.SegundoApellido, cedulaPI = primerIngreso.Cedula },
+					@Html.ActionLink("", "verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = primerIngreso.Cedula },
 								new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
 
 				</td>

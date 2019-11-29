@@ -13,39 +13,39 @@ namespace MOGESP.ServiceLayer.Servicio
     {
         readonly PrimerIngresoDepartamentosDatos primerIngresoDepartamentosDatos = new PrimerIngresoDepartamentosDatos();
 
-        public PrimerIngresoDepartamentos getPrimerIngresoDepartamentos(string nombrePI, string primerApellidoPI, string segundoApellidoPI, string cedulaPI)
+        public PrimerIngresoDepartamentos getPrimerIngresoDepartamentos(string cedulaPrimerIngreso)
         {
-            return primerIngresoDepartamentosDatos.getPrimerIngresoDepartamentos(nombrePI, primerApellidoPI, segundoApellidoPI, cedulaPI);
+            return primerIngresoDepartamentosDatos.getPrimerIngresoDepartamentos(cedulaPrimerIngreso);
         }
 
-        public void actualizarPruebasGH(DepartamentoPruebasGH departamentoPruebasGH, string cedulaPI)
+        public void actualizarPruebasGH(DepartamentoPruebasGH departamentoPruebasGH, string cedula)
         {
-            if ( (departamentoPruebasGH == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarPruebasGH");
-            primerIngresoDepartamentosDatos.actualizarPruebasGH(departamentoPruebasGH, cedulaPI);
+            if ( (departamentoPruebasGH == null) || (cedula == null)) throw new Exception("No puede ingresar datos nulos actualizarPruebasGH");
+            primerIngresoDepartamentosDatos.actualizarPruebasGH(departamentoPruebasGH, cedula);
         }
 
-        public void actualizarAntecedentes(DepartamentoAntecedentes departamentoAntecedentes, string cedulaPI)
+        public void actualizarAntecedentes(DepartamentoAntecedentes departamentoAntecedentes, string cedula)
         {
-            if ((departamentoAntecedentes == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarAntecedentes");
-            primerIngresoDepartamentosDatos.actualizarAntecedentes(departamentoAntecedentes, cedulaPI);
+            if ((departamentoAntecedentes == null) || (cedula == null)) throw new Exception("No puede ingresar datos nulos actualizarAntecedentes");
+            primerIngresoDepartamentosDatos.actualizarAntecedentes(departamentoAntecedentes, cedula);
         }
 
-        public void actualizarVialidad(DepartamentoVialidad departamentoVialidad, string cedulaPI)
+        public void actualizarVialidad(DepartamentoVialidad departamentoVialidad, string cedula)
         {
-            if ((departamentoVialidad == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarVialidad");
-            primerIngresoDepartamentosDatos.actualizarVialidad(departamentoVialidad, cedulaPI);
+            if ((departamentoVialidad == null) || (cedula == null)) throw new Exception("No puede ingresar datos nulos actualizarVialidad");
+            primerIngresoDepartamentosDatos.actualizarVialidad(departamentoVialidad, cedula);
         }
 
-        public void actualizarPruebasMedicas(DepartamentoPruebasMedicas departamentoPMedicas, string cedulaPI)
+        public void actualizarPruebasMedicas(DepartamentoPruebasMedicas departamentoPMedicas, string cedula)
         {
-            if ((departamentoPMedicas == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarPruebasMedicas");
-            primerIngresoDepartamentosDatos.actualizarPruebasMedicas(departamentoPMedicas, cedulaPI);
+            if ((departamentoPMedicas == null) || (cedula == null)) throw new Exception("No puede ingresar datos nulos actualizarPruebasMedicas");
+            primerIngresoDepartamentosDatos.actualizarPruebasMedicas(departamentoPMedicas, cedula);
         }
 
-        public void actualizarToxicologia(DepartamentoToxicologia departamentoToxicologia, string cedulaPI)
+        public void actualizarToxicologia(DepartamentoToxicologia departamentoToxicologia, string cedula)
         {
-            if ((departamentoToxicologia == null) || (cedulaPI == null)) throw new Exception("No puede ingresar datos nulos actualizarToxicologia");
-            primerIngresoDepartamentosDatos.actualizarToxicologia(departamentoToxicologia, cedulaPI);
+            if ((departamentoToxicologia == null) || (cedula == null)) throw new Exception("No puede ingresar datos nulos actualizarToxicologia");
+            primerIngresoDepartamentosDatos.actualizarToxicologia(departamentoToxicologia, cedula);
         }
 
     }

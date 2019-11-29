@@ -39,6 +39,30 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return listaEstados;
         }
 
+        private string getNombrePrimerIngreso(string cedula)
+        {
+            string nombreCompleto = "";
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"SELECT TC_Nombre, TC_PrimerApellido, TC_SegundoApellido FROM dbo.TMOGESP_PrimerIngreso WHERE (TC_NumeroCedula = @numeroDeCedula)", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                nombreCompleto = reader["TC_Nombre"].ToString() ?? " ";
+                nombreCompleto += " " + reader["TC_PrimerApellido"].ToString() ?? " ";
+                nombreCompleto += " " + reader["TC_SegundoApellido"].ToString() ?? " ";
+            }
+
+            sqlConnection.Close();
+
+
+            return nombreCompleto;
+        }
+
         /*Ordena de manera que el primero es el estado que tiene la persona*/
         private List<string> ordenarListaEstado(List<string> listaEstado, string estado)
         {
@@ -56,13 +80,13 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return listaEstado;
         }
 
-        private DepartamentoPruebasGH getDepartamentoPruebasGH(string cedulaPI)
+        private DepartamentoPruebasGH getDepartamentoPruebasGH(string cedula)
         {
             departamentoPruebasGH = new DepartamentoPruebasGH();
             SqlConnection sqlConnection = conexion.conexion();
 
             SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_PruebasGH @numeroDeCedula ", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
@@ -99,13 +123,13 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return departamentoPruebasGH;
         }
 
-        private DepartamentoAntecedentes getDepartamentoAntecedentes(string cedulaPI)
+        private DepartamentoAntecedentes getDepartamentoAntecedentes(string cedula)
         {
             departamentoAntecedentes = new DepartamentoAntecedentes();
             SqlConnection sqlConnection = conexion.conexion();
 
             SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_Antecedentes @numeroDeCedula ", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
@@ -132,13 +156,13 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return departamentoAntecedentes;
         }
 
-        private DepartamentoVialidad getDepartamentoVialidad(string cedulaPI)
+        private DepartamentoVialidad getDepartamentoVialidad(string cedula)
         {
             departamentoVialidad = new DepartamentoVialidad();
             SqlConnection sqlConnection = conexion.conexion();
 
             SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_Vialidad @numeroDeCedula ", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
@@ -165,13 +189,13 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return departamentoVialidad;
         }
 
-        private DepartamentoPruebasMedicas getDepartamentoPruebasMedicas(string cedulaPI)
+        private DepartamentoPruebasMedicas getDepartamentoPruebasMedicas(string cedula)
         {
             departamentoPruebasMedicas = new DepartamentoPruebasMedicas();
             SqlConnection sqlConnection = conexion.conexion();
 
             SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_PruebasMedicas @numeroDeCedula ", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
@@ -196,13 +220,13 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return departamentoPruebasMedicas;
         }
 
-        private DepartamentoToxicologia getDepartamentoToxicologia(string cedulaPI)
+        private DepartamentoToxicologia getDepartamentoToxicologia(string cedula)
         {
             departamentoToxicologia = new DepartamentoToxicologia();
             SqlConnection sqlConnection = conexion.conexion();
 
             SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_Seleccionar_TMOGESP_Toxicologia @numeroDeCedula ", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", cedula);
             SqlDataReader reader;
             sqlConnection.Open();
             reader = sqlCommand.ExecuteReader();
@@ -229,25 +253,23 @@ namespace MOGESP.DataAccess.TRAN.Datos
             return departamentoToxicologia;
         }
 
-        public PrimerIngresoDepartamentos getPrimerIngresoDepartamentos(string nombrePI = "", string primerApellidoPI = "", string segundoApellidoPI = "", string cedulaPI = "")
+        public PrimerIngresoDepartamentos getPrimerIngresoDepartamentos(string cedulaPrimerIngreso = "")
         {
 
             PrimerIngresoDepartamentos primerIngresoDepartamentos = new PrimerIngresoDepartamentos();
 
-            primerIngresoDepartamentos.NumeroCedula = cedulaPI;
-            primerIngresoDepartamentos.NombrePI = nombrePI;
-            primerIngresoDepartamentos.PrimerApellido = primerApellidoPI;
-            primerIngresoDepartamentos.SegundoApellido = segundoApellidoPI;
-            primerIngresoDepartamentos.DepartamentoAntecedentes = getDepartamentoAntecedentes(cedulaPI);
-            primerIngresoDepartamentos.DepartamentoPruebasGH = getDepartamentoPruebasGH(cedulaPI);
-            primerIngresoDepartamentos.DepartamentoPruebasMedicas = getDepartamentoPruebasMedicas(cedulaPI);
-            primerIngresoDepartamentos.DepartamentoToxicologia = getDepartamentoToxicologia(cedulaPI);
-            primerIngresoDepartamentos.DepartamentoVialidad = getDepartamentoVialidad(cedulaPI);
+            primerIngresoDepartamentos.NumeroCedula = cedulaPrimerIngreso;
+            primerIngresoDepartamentos.Nombre = getNombrePrimerIngreso(cedulaPrimerIngreso);
+            primerIngresoDepartamentos.DepartamentoAntecedentes = getDepartamentoAntecedentes(cedulaPrimerIngreso);
+            primerIngresoDepartamentos.DepartamentoPruebasGH = getDepartamentoPruebasGH(cedulaPrimerIngreso);
+            primerIngresoDepartamentos.DepartamentoPruebasMedicas = getDepartamentoPruebasMedicas(cedulaPrimerIngreso);
+            primerIngresoDepartamentos.DepartamentoToxicologia = getDepartamentoToxicologia(cedulaPrimerIngreso);
+            primerIngresoDepartamentos.DepartamentoVialidad = getDepartamentoVialidad(cedulaPrimerIngreso);
 
             return primerIngresoDepartamentos;
         }
 
-        public void actualizarPruebasGH(DepartamentoPruebasGH departamentoPruebasGH, string cedulaPI)
+        public void actualizarPruebasGH(DepartamentoPruebasGH departamentoPruebasGH, string cedula)
         {
 
             SqlConnection sqlConnection = conexion.conexion();
@@ -272,22 +294,28 @@ namespace MOGESP.DataAccess.TRAN.Datos
 											@TC_OficioRespuesta,
 											@TN_EstadoResultHojaEnvioGH", sqlConnection);
 
-
-            actualizarPruebasGH.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            
+            actualizarPruebasGH.Parameters.AddWithValue("@numeroDeCedula", cedula);
             actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoPruebasGH.FechaIngresoAdministracion);
+
             actualizarPruebasGH.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoPruebasGH.CantidadDiasAdministracion);
             actualizarPruebasGH.Parameters.AddWithValue("@TC_Ubicacion", departamentoPruebasGH.Ubicacion);
             actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaIngreso", departamentoPruebasGH.FechaIngreso);
+
             actualizarPruebasGH.Parameters.AddWithValue("@TC_OficioIngreso", departamentoPruebasGH.OficioIngreso);
             actualizarPruebasGH.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoPruebasGH.DiasAlaFecha);
             actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaTrasladoPsicologosAdm", departamentoPruebasGH.FechaTrasladoPsicologosAdmin);
+
             actualizarPruebasGH.Parameters.AddWithValue("@TC_Oficio", departamentoPruebasGH.Oficio);
             actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaDevolucionGHDeAdm", departamentoPruebasGH.FechaDevolucionGHDeAdmin);
+
             actualizarPruebasGH.Parameters.AddWithValue("@TN_CantidadDiasPsicologiaAdm", departamentoPruebasGH.CantidadDiasPsicologiaAdmin);
             actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaLimiteSegunPlazo", departamentoPruebasGH.FechaLimiteSegunPlazo);
+
             actualizarPruebasGH.Parameters.AddWithValue("@TN_DiasALaFechaDeFechaLimiteSegunPlazo", departamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo);
             actualizarPruebasGH.Parameters.AddWithValue("@TN_DiasTramiteGHDespuesDevuelto", departamentoPruebasGH.DiasTramiteGHDespuesDevuelto);
             actualizarPruebasGH.Parameters.AddWithValue("@TF_FechaSalida", departamentoPruebasGH.FechaSalida);
+
             actualizarPruebasGH.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoPruebasGH.CantidadDiasTotalesTramite);
             actualizarPruebasGH.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoPruebasGH.OficioRespuesta);
             actualizarPruebasGH.Parameters.AddWithValue("@TN_EstadoResultHojaEnvioGH", departamentoPruebasGH.EstadoResultHojaEnvioGH);
@@ -299,34 +327,34 @@ namespace MOGESP.DataAccess.TRAN.Datos
             actualizarPruebasGH.Dispose();
         }
 
-        public void actualizarAntecedentes(DepartamentoAntecedentes departamentoAntecedentes, string cedulaPI)
+        public void actualizarAntecedentes(DepartamentoAntecedentes departamentoAntecedentes, string cedula)
         {
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand actualizarAntecedentes = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
+            SqlCommand actualizarAntecedentes = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_Antecedentes
                                             @numeroDeCedula,
-											@TF_FechaIngreso,
+											@TF_FechaIngresoAdministracion,
 											@TN_CantidadDiasAdm,
-											@TF_FechaIngresoTransportes,
+                                            @TF_FechaIngreso,
 											@TC_OficioIngreso,
-											@TN_DiasALaFecha,
-                                            @TF_FechaFechaResultado,
+											@TF_FechaFechaResultado,
                                             @TN_ZonaDeTrabajo,
+                                            @TN_DiasALaFecha,
 											@TF_FechaSalida,
 											@TN_CantidadDiasTotalesTramite,
 											@TC_OficioRespuesta,
 											@TN_EstadoResultHojaEnvioGH", sqlConnection);
 
 
-            actualizarAntecedentes.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            actualizarAntecedentes.Parameters.AddWithValue("@numeroDeCedula", cedula);
             actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoAntecedentes.FechaIngresoAdministracion);
             actualizarAntecedentes.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoAntecedentes.CantidadDiasAdministracion);
             actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaIngreso", departamentoAntecedentes.FechaIngreso);
             actualizarAntecedentes.Parameters.AddWithValue("@TC_OficioIngreso", departamentoAntecedentes.OficioIngreso);
-            actualizarAntecedentes.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoAntecedentes.DiasAlaFecha);
             actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaFechaResultado", departamentoAntecedentes.FechaResultado);
             actualizarAntecedentes.Parameters.AddWithValue("@TN_ZonaDeTrabajo", departamentoAntecedentes.ZonaTrabajo);
+            actualizarAntecedentes.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoAntecedentes.DiasAlaFecha);
             actualizarAntecedentes.Parameters.AddWithValue("@TF_FechaSalida", departamentoAntecedentes.FechaSalida);
             actualizarAntecedentes.Parameters.AddWithValue("@TN_CantidadDiasTotalesTramite", departamentoAntecedentes.CantidadDiasTotalesTramite);
             actualizarAntecedentes.Parameters.AddWithValue("@TC_OficioRespuesta", departamentoAntecedentes.OficioRespuesta);
@@ -340,12 +368,12 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
         }
 
-        public void actualizarVialidad(DepartamentoVialidad departamentoVialidad, string cedulaPI)
+        public void actualizarVialidad(DepartamentoVialidad departamentoVialidad, string cedula)
         {
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand actualizarVialidad = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
+            SqlCommand actualizarVialidad = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_Vialidad 
                                             @numeroDeCedula,
 											@TF_FechaIngresoAdministracion,
 											@TN_CantidadDiasAdm,
@@ -358,7 +386,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
 											@TC_OficioRespuesta,
 											@TN_EstadoResultHojaEnvioGH", sqlConnection);
 
-            actualizarVialidad.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            actualizarVialidad.Parameters.AddWithValue("@numeroDeCedula", cedula);
             actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoVialidad.FechaIngresoAdministracion);
             actualizarVialidad.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoVialidad.CantidadDiasAdministracion);
             actualizarVialidad.Parameters.AddWithValue("@TF_FechaIngresoTransportes", departamentoVialidad.FechaIngreso);
@@ -378,30 +406,30 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
         }
 
-        public void actualizarPruebasMedicas(DepartamentoPruebasMedicas departamentoPruebasMedicas, string cedulaPI)
+        public void actualizarPruebasMedicas(DepartamentoPruebasMedicas departamentoPruebasMedicas, string cedula)
         {
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand actualizarPruebasMedicas = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
+            SqlCommand actualizarPruebasMedicas = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasMedicas
                                             @numeroDeCedula,
 											@TF_FechaIngresoAdministracion,
 											@TN_CantidadDiasAdm,
 											@TF_FechaIngreso,
-											@TC_OficioIngreso,
                                             @TF_FechaEnvioAPMdeGH,
+											@TC_OficioIngreso,
 											@TF_FechaResultadoOCitaPM,
-											@TF_FechaSalida,
                                             @TN_DiasALaFecha,
+											@TF_FechaSalida,
 											@TN_CantidadDiasTotalesTramite,
 											@TC_OficioRespuesta", sqlConnection);
 
-            actualizarPruebasMedicas.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@numeroDeCedula", cedula);
             actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoPruebasMedicas.FechaIngresoAdministracion);
             actualizarPruebasMedicas.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoPruebasMedicas.CantidadDiasAdministracion);
             actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaIngreso", departamentoPruebasMedicas.FechaIngreso);
-            actualizarPruebasMedicas.Parameters.AddWithValue("@TC_OficioIngreso", departamentoPruebasMedicas.OficioIngreso);
             actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaEnvioAPMdeGH", departamentoPruebasMedicas.FechaEnvioAPMdeGH);
+            actualizarPruebasMedicas.Parameters.AddWithValue("@TC_OficioIngreso", departamentoPruebasMedicas.OficioIngreso);
             actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaResultadoOCitaPM", departamentoPruebasMedicas.FechaResultadoOCitaPM);
             actualizarPruebasMedicas.Parameters.AddWithValue("@TN_DiasALaFecha", departamentoPruebasMedicas.DiasAlaFecha);
             actualizarPruebasMedicas.Parameters.AddWithValue("@TF_FechaSalida", departamentoPruebasMedicas.FechaSalida);
@@ -416,12 +444,12 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
         }
 
-        public void actualizarToxicologia(DepartamentoToxicologia departamentoToxicologia, string cedulaPI)
+        public void actualizarToxicologia(DepartamentoToxicologia departamentoToxicologia, string cedula)
         {
 
             SqlConnection sqlConnection = conexion.conexion();
 
-            SqlCommand actualizarToxicologia = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PruebasGH 
+            SqlCommand actualizarToxicologia = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_Toxicologia 
                                             @numeroDeCedula,
 											@TF_FechaIngresoAdministracion,
 											@TN_CantidadDiasAdm,
@@ -429,14 +457,14 @@ namespace MOGESP.DataAccess.TRAN.Datos
 											@TC_OficioIngreso,
                                             @TF_FechaCita,
                                             @TN_DiasParaCita,
-											@TF_FechaSalida,
                                             @TN_DiasALaFecha,
+											@TF_FechaSalida,
 											@TN_CantidadDiasTotalesTramite,
 											@TC_OficioRespuesta,
 											@TF_FechaEstado,
                                             @TN_FechaEstadoCantDias", sqlConnection);
 
-            actualizarToxicologia.Parameters.AddWithValue("@numeroDeCedula", cedulaPI);
+            actualizarToxicologia.Parameters.AddWithValue("@numeroDeCedula", cedula);
             actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngresoAdministracion", departamentoToxicologia.FechaIngresoAdministracion);
             actualizarToxicologia.Parameters.AddWithValue("@TN_CantidadDiasAdm", departamentoToxicologia.CantidadDiasAdministracion);
             actualizarToxicologia.Parameters.AddWithValue("@TF_FechaIngreso", departamentoToxicologia.FechaIngreso);
@@ -457,6 +485,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
             actualizarToxicologia.Dispose();
 
         }
+
 
     }
 
