@@ -99,10 +99,10 @@
 
     <h2 align="center">Primer Ingreso</h2>
     <br>
-    <h4><i class="far fa-address-card"></i>Editar Informaci&oacute;n Primer Ingreso</h4>
+    <h4><i class="far fa-address-card"></i>   Editar Informaci&oacute;n Primer Ingreso</h4>
 
 
-    <br><br><br>
+    <br>
 
     <div class="CajaFormulario" id="EditarPI">
 
@@ -151,7 +151,7 @@
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label>N&uacute;mero Convocatoria: </label>
-                        <input id="numConvocatoria" class="form-control" type="number" min="0" name="numConvocatoria" disabled="disabled" value="@Model.NumeroConvocatoria" />
+                        <input id="numConvocatoria" class="form-control" type="text" name="numConvocatoria" disabled="disabled" value="@Model.NumeroConvocatoria" />
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>N&uacute;mero Flujo: </label>
@@ -166,11 +166,15 @@
 
                         <select id="condicion" name="condicion">
 
-                            <option value=""></option>
+                            @foreach (var listaEstados in Model.ListaCondiciones)
+                            {
+                                <option value="@listaEstados">@listaEstados</option>
+                            }
 
                         </select>
 
                     </div>
+
                     <div class="col-md-6 mb-3">
                         <i class="fas fa-calendar-alt"></i>
                         <label>Fecha Ingreso: </label>
