@@ -245,6 +245,7 @@ namespace GestionPersonalOIJ.Controllers
             departamentoPruebasGH.FechaLimiteSegunPlazo = Convert.ToDateTime(formCollection["fechaLimite"]);
             departamentoPruebasGH.CantidadDiasPsicologiaAdmin = Convert.ToInt32(formCollection["diasPsicologiaAdmi"]);
             departamentoPruebasGH.DiasALaFechaDeFechaLimiteSegunPlazo = Convert.ToInt32(formCollection["diasAFechaSegundoPlazo"]);
+            departamentoPruebasGH.FechaDevolucionGHDeAdmin = Convert.ToDateTime(formCollection["fechaDevulucionAdmi"]);
             departamentoPruebasGH.DiasTramiteGHDespuesDevuelto = Convert.ToInt32(formCollection["diasTramiteGHDespuesDevuelto"]);
             departamentoPruebasGH.FechaSalida = Convert.ToDateTime(formCollection["fechaSalida"]);
             departamentoPruebasGH.CantidadDiasTotalesTramite = Convert.ToInt32(formCollection["diasTotalesTramite"]);
@@ -252,6 +253,113 @@ namespace GestionPersonalOIJ.Controllers
             departamentoPruebasGH.EstadoResultHojaEnvioGH = formCollection["selectEstado"].ToString();
 
             pIDepartamentosServicio.actualizarPruebasGH(departamentoPruebasGH, cedula);
+
+            return RedirectToAction("verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = cedula });
+
+        }
+
+
+        [HttpPost]
+        public RedirectToActionResult actualizarAntecedentes (IFormCollection formCollection)
+        {
+            DepartamentoAntecedentes departamentoAntecedentes = new DepartamentoAntecedentes();
+
+
+
+            string cedula = (formCollection["cedula"]).ToString();
+            departamentoAntecedentes.FechaIngresoAdministracion = Convert.ToDateTime(formCollection["fechaIngresoAdmi"]);
+            departamentoAntecedentes.CantidadDiasAdministracion = Convert.ToInt32(formCollection["cantidadDiasAdmi"]);
+            departamentoAntecedentes.FechaIngreso = Convert.ToDateTime(formCollection["fechaIngreso"]);
+            departamentoAntecedentes.OficioIngreso = formCollection["oficioIngreso"].ToString();
+            departamentoAntecedentes.FechaResultado = Convert.ToDateTime(formCollection["fechaResultado"]);
+            departamentoAntecedentes.ZonaTrabajo = Convert.ToInt32(formCollection["zonaTrabajo"]);
+            departamentoAntecedentes.DiasAlaFecha = Convert.ToInt32(formCollection["diasAFecha"]);            
+            departamentoAntecedentes.FechaSalida = Convert.ToDateTime(formCollection["fechaSalida"]);
+            departamentoAntecedentes.CantidadDiasTotalesTramite = Convert.ToInt32(formCollection["diasTotalesTramite"]);
+            departamentoAntecedentes.OficioRespuesta = formCollection["oficioRespuesta"].ToString();
+            departamentoAntecedentes.EstadoResultHojaEnvioGH = formCollection["selectEstado"].ToString();
+
+            pIDepartamentosServicio.actualizarAntecedentes(departamentoAntecedentes, cedula);
+
+            return RedirectToAction("verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = cedula });
+
+        }
+
+
+        [HttpPost]
+        public RedirectToActionResult actualizarVialidad(IFormCollection formCollection)
+        {
+            DepartamentoVialidad departamentoVialidad = new DepartamentoVialidad();
+
+
+
+            string cedula = (formCollection["cedula"]).ToString();
+            departamentoVialidad.FechaIngresoAdministracion = Convert.ToDateTime(formCollection["fechaIngresoAdmi"]);
+            departamentoVialidad.CantidadDiasAdministracion = Convert.ToInt32(formCollection["cantidadDiasAdmi"]);
+            departamentoVialidad.FechaIngreso = Convert.ToDateTime(formCollection["fechaIngresoTrans"]);
+            departamentoVialidad.OficioIngreso = formCollection["oficioIngreso"].ToString();
+            departamentoVialidad.FechaCita = Convert.ToDateTime(formCollection["fechaCita"]);
+            departamentoVialidad.DiasParaCita = Convert.ToInt32(formCollection["diasCita"]);
+            departamentoVialidad.FechaSalida = Convert.ToDateTime(formCollection["fechaSalida"]);
+            departamentoVialidad.CantidadDiasTotalesTramite = Convert.ToInt32(formCollection["diasTotalesTramite"]);
+            departamentoVialidad.OficioRespuesta = formCollection["oficioRespuesta"].ToString();
+            departamentoVialidad.EstadoResultHojaEnvioGH = formCollection["selectEstado"].ToString();
+
+            pIDepartamentosServicio.actualizarVialidad(departamentoVialidad, cedula);
+
+            return RedirectToAction("verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = cedula });
+
+        }
+
+
+        [HttpPost]
+        public RedirectToActionResult actualizarPruebasMedicas(IFormCollection formCollection)
+        {
+            DepartamentoPruebasMedicas departamentoPruebasMedicas = new DepartamentoPruebasMedicas();
+
+
+
+            string cedula = (formCollection["cedula"]).ToString();
+            departamentoPruebasMedicas.FechaIngresoAdministracion = Convert.ToDateTime(formCollection["fechaIngresoAdmi"]);
+            departamentoPruebasMedicas.CantidadDiasAdministracion = Convert.ToInt32(formCollection["cantidadDiasAdmi"]);
+            departamentoPruebasMedicas.FechaIngreso = Convert.ToDateTime(formCollection["fechaIngreso"]);
+            departamentoPruebasMedicas.FechaEnvioAPMdeGH = Convert.ToDateTime(formCollection["fechaEnvioPM"]);
+            departamentoPruebasMedicas.OficioIngreso = formCollection["oficioIngreso"].ToString();
+            departamentoPruebasMedicas.FechaResultadoOCitaPM = Convert.ToDateTime(formCollection["fechaCitaPM"]);
+            departamentoPruebasMedicas.DiasAlaFecha = Convert.ToInt32(formCollection["diasAFecha"]);
+            departamentoPruebasMedicas.FechaSalida = Convert.ToDateTime(formCollection["fechaSalida"]);
+            departamentoPruebasMedicas.CantidadDiasTotalesTramite = Convert.ToInt32(formCollection["diasTotalesTramite"]);
+            departamentoPruebasMedicas.OficioRespuesta = formCollection["oficioRespuesta"].ToString();
+
+            pIDepartamentosServicio.actualizarPruebasMedicas(departamentoPruebasMedicas, cedula);
+
+            return RedirectToAction("verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = cedula });
+
+        }
+
+
+        [HttpPost]
+        public RedirectToActionResult actualizarToxicologia(IFormCollection formCollection)
+        {
+            DepartamentoToxicologia departamentoToxicologia = new DepartamentoToxicologia();
+
+
+
+            string cedula = (formCollection["cedula"]).ToString();
+            departamentoToxicologia.FechaIngresoAdministracion = Convert.ToDateTime(formCollection["fechaIngresoAdmi"]);
+            departamentoToxicologia.CantidadDiasAdministracion = Convert.ToInt32(formCollection["cantidadDiasAdmi"]);
+            departamentoToxicologia.FechaIngreso = Convert.ToDateTime(formCollection["fechaIngreso"]);
+            departamentoToxicologia.OficioIngreso = formCollection["oficioIngreso"].ToString();
+            departamentoToxicologia.FechaCita = Convert.ToDateTime(formCollection["fechaCita"]);
+            departamentoToxicologia.DiasParaCita = Convert.ToInt32(formCollection["diasCita"]);
+            departamentoToxicologia.DiasAlaFecha = Convert.ToInt32(formCollection["diasAFecha"]);
+            departamentoToxicologia.FechaSalida = Convert.ToDateTime(formCollection["fechaSalida"]);
+            departamentoToxicologia.CantidadDiasTotalesTramite = Convert.ToInt32(formCollection["diasTotalesTramite"]);
+            departamentoToxicologia.OficioRespuesta = formCollection["oficioRespuesta"].ToString();
+            departamentoToxicologia.FechaEstado = Convert.ToDateTime(formCollection["fechaEstado"]);
+            departamentoToxicologia.FechaEstadoCantDias = Convert.ToInt32(formCollection["fechaEstadoCantDias"]);
+
+            pIDepartamentosServicio.actualizarToxicologia(departamentoToxicologia, cedula);
 
             return RedirectToAction("verPrimerIngresoEspecifico", new { cedulaPrimerIngreso = cedula });
 

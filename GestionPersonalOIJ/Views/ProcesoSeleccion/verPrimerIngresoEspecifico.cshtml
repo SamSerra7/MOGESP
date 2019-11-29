@@ -185,7 +185,7 @@
 
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngresoAdmi" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngresoAdministracion" />
+                                <input class="form-control" id="fechaIngresoAdmi" type="datetime-local" name="fechaIngresoAdmi" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngresoAdministracion.ToString("yyyy-MM-ddThh:mm")">
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
@@ -199,7 +199,7 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label>N&deg;. Concurso: </label>
-                                <input class="form-control" id="numConcurso" type="text" name="numConcurso" disabled="disabled" value="@Model.DepartamentoPruebasGH.NumConcurso" />
+                                <h5>@Model.DepartamentoPruebasGH.NumConcurso</h5>
                             </div>
                             <div class="col-md-6">
                                 <label>Ubicaci&oacute;n: </label>
@@ -212,7 +212,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso" class="form-control" type="datetime" name="fechaIngreso" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngreso" />
+                                <input id="fechaIngreso" class="form-control" type="datetime-local" min = "1999-12-31T00:00" name="fechaIngreso" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaIngreso.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
@@ -228,7 +228,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Traslado Psicologo Administraci&oacute;n: </label>
-                                <input id="fechaTrasladoPsicologia" class="form-control" type="datetime" name="fechaTrasladoPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaTrasladoPsicologosAdmin" />
+                                <input id="fechaTrasladoPsicologia" class="form-control" type="datetime-local" min = "1999-12-31T00:00" name="fechaTrasladoPsicologia" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaTrasladoPsicologosAdmin.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                         </div>
 
@@ -240,7 +240,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Devoluci&oacute;n a GH. por parte de Administraci&oacute;n: </label>
-                                <input id="fechaDevulucionAdmi" class="form-control" type="datetime" name="fechaDevulucionAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaDevolucionGHDeAdmin" />
+                                <input id="fechaDevulucionAdmi" class="form-control" type="datetime-local" min = "1999-12-31T00:00" name="fechaDevulucionAdmi" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaDevolucionGHDeAdmin.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                         </div>
 
@@ -252,7 +252,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha L&iacute;mite s&eacute;gun plazo establecido: </label>
-                                <input id="fechaLimite" class="form-control" type="datetime" name="fechaLimite" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaLimiteSegunPlazo" />
+                                <input id="fechaLimite" class="form-control" type="datetime-local" name="fechaLimite" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaLimiteSegunPlazo.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                         </div>
 
@@ -271,7 +271,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaSalida" />
+                                <input id="fechaSalida" class="form-control" type="datetime-local" name="fechaSalida" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoPruebasGH.FechaSalida.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as totales en tr&aacute;mite: </label>
@@ -320,10 +320,12 @@
         <div class="tab">
             <div class="CajaFormulario" id="InvestigacionAnte">
 
-                <form id="FormModificar">
+                <form id="FormModificar" action="actualizarAntecedentes" method="post">
 
                     <fieldset>
                         <legend>Investigaci&oacute;n de Antecedentes</legend>
+
+                        <input class="form-control" id="cedula" type="text" name="cedula" style=" visibility:hidden" value="@Model.NumeroCedula" />
 
                         <h4>Administraci&oacute;n</h4>
 
@@ -331,26 +333,26 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngresoAdmi" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaIngresoAdministracion" />
+                                <input class="form-control" id="fechaIngresoAdmi" type="datetime-local" name="fechaIngresoAdmi" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaIngresoAdministracion.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
-                                <input class="form-control" id="cantidadDiasAdmi" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoAntecedentes.CantidadDiasAdministracion"/>
+                                <input class="form-control" id="cantidadDiasAdmi" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoAntecedentes.CantidadDiasAdministracion" />
                             </div>
 
                         </div>
                         <br><br><br>
-                        <hr/>
+                        <hr />
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso2" class="form-control" type="datetime" name="fechaIngreso2" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaIngreso"/>
+                                <input id="fechaIngreso" class="form-control" type="datetime-local" name="fechaIngreso" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaIngreso.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
-                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoAntecedentes.OficioIngreso"/>
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoAntecedentes.OficioIngreso" />
                             </div>
                         </div>
 
@@ -358,34 +360,34 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Resultado: </label>
-                                <input id="fechaResultado" class="form-control" type="datetime" name="fechaResultado" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaResultado"/>
+                                <input id="fechaResultado" class="form-control" type="datetime-local" name="fechaResultado" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaResultado.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Zona de Trabajo: </label>
-                                <input id="zonaTrabajo" class="form-control" type="text" name="zonaTrabajo" disabled="disabled" value="@Model.DepartamentoAntecedentes.ZonaTrabajo"/>
+                                <input id="zonaTrabajo" class="form-control" type="number"  min="0" name="zonaTrabajo" disabled="disabled" value="@Model.DepartamentoAntecedentes.ZonaTrabajo" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as a la fecha: </label>
-                                <input id="DiasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoAntecedentes.DiasAlaFecha"/>
+                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoAntecedentes.DiasAlaFecha" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaSalida"/>
+                                <input id="fechaSalida" class="form-control" type="datetime-local" name="fechaSalida" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoAntecedentes.FechaSalida.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as en Tr&aacute;mite: </label>
-                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" value="@Model.DepartamentoAntecedentes.CantidadDiasTotalesTramite"/>
+                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" value="@Model.DepartamentoAntecedentes.CantidadDiasTotalesTramite" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Respuesta: </label>
-                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoAntecedentes.OficioRespuesta"/>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoAntecedentes.OficioRespuesta" />
                             </div>
                         </div>
 
@@ -424,10 +426,12 @@
         <div class="tab">
             <div class="CajaFormulario" id="Vialidad">
 
-                <form id="FormModificar">
+                <form id="FormModificar" action="actualizarVialidad" method="post">
 
                     <fieldset>
                         <legend>Vialidad</legend>
+
+                        <input class="form-control" id="cedula" type="text" name="cedula" style=" visibility:hidden" value="@Model.NumeroCedula" />
 
                         <h4>Administraci&oacute;n</h4>
 
@@ -435,27 +439,27 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngresoAdmi" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoVialidad.FechaIngresoAdministracion"/>
+                                <input class="form-control" id="fechaIngresoAdmi" type="datetime-local" name="fechaIngresoAdmi" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoVialidad.FechaIngresoAdministracion.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
-                                <input class="form-control" id="cantidadDiasAdmi" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoVialidad.CantidadDiasAdministracion"/>
+                                <input class="form-control" id="cantidadDiasAdmi" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoVialidad.CantidadDiasAdministracion" />
                             </div>
 
                         </div>
                         <br><br><br>
-                        <hr/>
+                        <hr />
 
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso Transporte: </label>
-                                <input id="fechaIngresoTrans" class="form-control" type="datetime" name="fechaIngresoTrans" disabled="disabled" value="@Model.DepartamentoVialidad.FechaIngreso"/>
+                                <input id="fechaIngresoTrans" class="form-control" type="datetime-local" name="fechaIngresoTrans" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoVialidad.FechaIngreso.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio de Ingreso: </label>
-                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoVialidad.OficioIngreso"/>
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoVialidad.OficioIngreso" />
                             </div>
                         </div>
 
@@ -463,11 +467,11 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Cita: </label>
-                                <input id="fechaCita" class="form-control" type="datetime" name="fechaCita" disabled="disabled" value="@Model.DepartamentoVialidad.FechaCita"/>
+                                <input id="fechaCita" class="form-control" type="datetime-local" name="fechaCita" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoVialidad.FechaCita.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as Para Cita: </label>
-                                <input id="diasCita" class="form-control" type="number" min="0" name="diasCita" disabled="disabled" value="@Model.DepartamentoVialidad.DiasParaCita"/>
+                                <input id="diasCita" class="form-control" type="number" min="0" name="diasCita" disabled="disabled" value="@Model.DepartamentoVialidad.DiasParaCita" />
                             </div>
                         </div>
 
@@ -475,18 +479,18 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control"type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoVialidad.FechaSalida"/>
+                                <input id="fechaSalida" class="form-control" type="datetime-local" name="fechaSalida" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoVialidad.FechaSalida.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as en Tr&aacute;mite: </label>
-                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" value="@Model.DepartamentoVialidad.CantidadDiasTotalesTramite"/>
+                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" value="@Model.DepartamentoVialidad.CantidadDiasTotalesTramite" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Respuesta: </label>
-                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoVialidad.OficioRespuesta"/>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoVialidad.OficioRespuesta" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Estado: </label>
@@ -521,10 +525,12 @@
         <div class="tab">
             <div class="CajaFormulario" id="PruebasMedica">
 
-                <form id="FormModificar">
+                <form id="FormModificar" action="actualizarPruebasMedicas" method="post">
 
                     <fieldset>
                         <legend>Pruebas M&eacute;dicas</legend>
+
+                        <input class="form-control" id="cedula" type="text" name="cedula" style=" visibility:hidden" value="@Model.NumeroCedula" />
 
                         <h4>Administraci&oacute;n</h4>
 
@@ -532,69 +538,69 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngresoAdmi" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaIngresoAdministracion"/>
+                                <input class="form-control" id="fechaIngresoAdmi" type="datetime-local" name="fechaIngresoAdmi" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaIngresoAdministracion.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
-                                <input class="form-control" id="cantidadDiasAdmi" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.CantidadDiasAdministracion"/>
+                                <input class="form-control" id="cantidadDiasAdmi" type="number" min="0" name="cantidadDiasAdmi" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.CantidadDiasAdministracion" />
                             </div>
 
                         </div>
                         <br><br><br>
-                        <hr/> 
+                        <hr />
 
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input id="fechaIngreso" class="form-control" type="datetime" name="fechaIngreso" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaIngreso"/>
+                                <input id="fechaIngreso" class="form-control" type="datetime-local" name="fechaIngreso" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaIngreso.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Env&iacute;o a PM por GH: </label>
-                                <input id="fechaEnvioPM" class="form-control" type="datetime" name="fechaEnvioPM" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaEnvioAPMdeGH"/>
+                                <input id="fechaEnvioPM" class="form-control" type="datetime-local" name="fechaEnvioPM" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaEnvioAPMdeGH.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Ingreso: </label>
-                                <input id="diasCita" class="form-control" type="text" name="diasCita" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.OficioIngreso"/>
+                                <input id="oficioIngreso" class="form-control" type="text" name="oficioIngreso" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.OficioIngreso" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Cita PM / Resultado: </label>
-                                <input id="fechaCitaPM" class="form-control" type="datetime" name="fechaCitaPM" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaResultadoOCitaPM"/>
+                                <input id="fechaCitaPM" class="form-control" type="datetime-local" name="fechaCitaPM" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaResultadoOCitaPM.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as a la Fecha: </label>
-                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.DiasAlaFecha"/>
+                                <input id="diasAFecha" class="form-control" type="number" min="0" name="diasAFecha" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.DiasAlaFecha" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaSalida"/>
+                                <input id="fechaSalida" class="form-control" type="datetime-local" name="fechaSalida" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.FechaSalida.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as en Tr&aacute;mite: </label>
-                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.CantidadDiasTotalesTramite"/>
+                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.CantidadDiasTotalesTramite" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Respuesta: </label>
-                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.OficioRespuesta"/>
+                                <input id="oficioRespuesta" class="form-control" type="text" name="oficioRespuesta" disabled="disabled" value="@Model.DepartamentoPruebasMedicas.OficioRespuesta" />
                             </div>
                         </div>
 
                         <div style=" float: right; ">
                             <br><br><br>
-                            <button type="button" class="btn btn-success" id="btnAceptar" name="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="submit" class="btn btn-success" id="btnAceptar" name="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
                             <button type="button" class="btn btn-danger" id="btnCancelar" name="btnCancelar" style=" visibility:hidden" onclick="location.reload()"><i class="far fa-window-close"></i> Cancelar</button>
                         </div>
                     </fieldset>
@@ -614,10 +620,12 @@
         <div class="tab">
             <div class="CajaFormulario" id="Toxicologia">
 
-                <form id="FormModificar">
+                <form id="FormModificar" action="actualizarToxicologia" method="post">
 
                     <fieldset>
                         <legend>Departamento de Toxicolog&iacute;a</legend>
+
+                        <input class="form-control" id="cedula" type="text" name="cedula" style=" visibility:hidden" value="@Model.NumeroCedula" />
 
                         <h4>Administraci&oacute;n</h4>
 
@@ -625,7 +633,7 @@
                             <div class="col-md-6">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Ingreso: </label>
-                                <input class="form-control" id="fechaIngresoAdmi" type="datetime" name="fechaIngresoAdmi" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaIngresoAdministracion" />
+                                <input class="form-control" id="fechaIngresoAdmi" type="datetime-local" name="fechaIngresoAdmi" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaIngresoAdministracion.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6">
                                 <label>Cantidad de D&iacute;as: </label>
@@ -640,7 +648,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Ingreso: </label>
-                                <input id="fechaIngreso" class="form-control" type="datetime" name="fechaIngreso" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaIngreso" />
+                                <input id="fechaIngreso" class="form-control" type="datetime-local" name="fechaIngreso" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaIngreso.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Ingreso: </label>
@@ -652,7 +660,7 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha Cita: </label>
-                                <input id="fechaCita" class="form-control" type="datetime" name="fechaCita" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaCita" />
+                                <input id="fechaCita" class="form-control" type="datetime-local" name="fechaCita" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaCita.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as Para Cita: </label>
@@ -668,14 +676,14 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Salida: </label>
-                                <input id="fechaSalida" class="form-control" type="datetime" name="fechaSalida" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaSalida" />
+                                <input id="fechaSalida" class="form-control" type="datetime-local" name="fechaSalida" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaSalida.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>D&iacute;as en Tr&aacute;mite: </label>
-                                <input id="diasTramite" class="form-control" type="number" min="0" name="diasTramite" disabled="disabled" value="@Model.DepartamentoToxicologia.CantidadDiasTotalesTramite" />
+                                <input id="diasTotalesTramite" class="form-control" type="number" min="0" name="diasTotalesTramite" disabled="disabled" value="@Model.DepartamentoToxicologia.CantidadDiasTotalesTramite" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Oficio Respuesta: </label>
@@ -687,17 +695,17 @@
                             <div class="col-md-6 mb-3">
                                 <i class="fas fa-calendar-alt"></i>
                                 <label>Fecha de Estado: </label>
-                                <input id="fechaEstado" class="form-control" type="datetime" name="fechaEstado" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaEstado" />
+                                <input id="fechaEstado" class="form-control" type="datetime-local" name="fechaEstado" min = "1999-12-31T00:00" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaEstado.ToString("yyyy-MM-ddThh:mm")" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Cantidad de D&iacute;as - Fecha Estado: </label>
-                                <input id="cantidadDias" class="form-control" type="number" min="0" name="cantidadDias" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaEstadoCantDias" />
+                                <input id="fechaEstadoCantDias" class="form-control" type="number" min="0" name="fechaEstadoCantDias" disabled="disabled" value="@Model.DepartamentoToxicologia.FechaEstadoCantDias" />
                             </div>
                         </div>
 
                         <div style=" float: right; ">
                             <br><br><br>
-                            <button type="button" class="btn btn-success" id="btnAceptar" name="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
+                            <button type="submit" class="btn btn-success" id="btnAceptar" name="btnAceptar" style=" visibility:hidden"><i class="far fa-check-circle"></i> Aceptar</button>
                             <button type="button" class="btn btn-danger" id="btnCancelar" name="btnCancelar" style=" visibility:hidden" onclick="location.reload()"><i class="far fa-window-close"></i> Cancelar</button>
                         </div>
                     </fieldset>

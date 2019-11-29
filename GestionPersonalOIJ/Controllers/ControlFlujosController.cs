@@ -24,7 +24,7 @@ namespace MOGESP.UserInterface.Controllers
         private TestVisomotorServicio testVisomotorServicio = new TestVisomotorServicio();
         private HojaCitasPiServicio hojaCitasPiServicio = new HojaCitasPiServicio();
         private CuadroGeneralServicio cuadroGeneralServicio = new CuadroGeneralServicio();
-
+        private PrimerIngresoElegiblesServicio baseElegiblesServicio = new PrimerIngresoElegiblesServicio();
 
 
         private static List<int> flujosPorConvocatoria = new List<int>();
@@ -78,7 +78,7 @@ namespace MOGESP.UserInterface.Controllers
         }
 
         
-        public ActionResult CitasPorFlujoPI(IFormCollection formCollection)
+        public ActionResult CitasPorFlujoPI()
         {
 
 
@@ -109,15 +109,146 @@ namespace MOGESP.UserInterface.Controllers
 
 
         [HttpPost]
-        public RedirectToActionResult ProgramarCitasPorFlujoPI()
+        public RedirectToActionResult ProgramarCitasPorFlujoPI(IFormCollection formCollection)
         {
+            string fecha;
+            DateTime dateInicio = Convert.ToDateTime(formCollection["fechaInicioCitas"]);
+            DateTime dateFinal = Convert.ToDateTime(formCollection["fechaFinalCitas"]);
+
+            IEnumerable<PrimerIngresoElegible> elegibles = baseElegiblesServicio.getAllPrimerosIngresosElegibles(3);//3 pues los puestos son positivos
+            int cantElegibles = 0;
 
 
-            /*
-             * 
-             * TODO: Terminar el data
-             * 
-             */
+            while (dateInicio.Date != dateFinal.Date)
+            {
+
+                fecha = dateInicio.DayOfWeek.ToString();
+
+                
+
+                if (!fecha.ToUpper().Equals("SATURDAY") || !fecha.ToUpper().Equals("SUNDAY"))
+                {
+                    fecha = dateInicio.ToShortDateString();
+                    dateInicio = Convert.ToDateTime(fecha);
+
+                    if (elegibles.ElementAt(cantElegibles) != null)
+                    {
+
+                        for (int horasAtencion = 1; horasAtencion <= 3; horasAtencion++)
+                        {
+
+                            //7:30am
+                            if (horasAtencion == 1){
+
+                                dateInicio.AddHours(7).AddMinutes(30);
+
+                                //ANA
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula,"Ana",dateInicio,1,"Delio");
+                                    cantElegibles++;
+                                }
+                                else{ break;}
+
+
+                                //KAROL
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Karol", dateInicio, 1, "Delio");
+                                    cantElegibles++;
+                                }
+                                else { break; }
+
+
+                                //MINOR
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
+                                    cantElegibles++;
+                                }
+                                else { break; }
+                            }
+                            
+
+                            //10:30am
+                            if (horasAtencion == 2)
+                            {
+
+                                dateInicio.AddHours(10).AddMinutes(30);
+
+                                //ANA
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
+                                    cantElegibles++;
+                                }
+                                else { break; }
+
+
+                                //KAROL
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Karol", dateInicio, 1, "Delio");
+                                    cantElegibles++;
+                                }
+                                else { break; }
+
+
+                                //MINOR
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
+                                    cantElegibles++;
+                                }
+                                else { break; }
+                            }
+
+                            
+                            
+                            //1:30pm
+                            if (horasAtencion == 3){
+
+                                dateInicio.AddHours(13).AddMinutes(30);
+
+                                //ANA
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
+                                    cantElegibles++;
+                                }
+                                else { break; }
+
+
+                                //KAROL
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Karol", dateInicio, 1, "Delio");
+                                    cantElegibles++;
+                                }
+                                else { break; }
+
+
+                                //MINOR
+                                if (elegibles.ElementAt(cantElegibles) != null)
+                                {
+                                    hojaCitasPiServicio.InsertarCitaPI(elegibles.ElementAt(cantElegibles).Cedula, "Ana", dateInicio, 1, "Delio");
+                                    cantElegibles++;
+                                }
+                                else { break; }
+                            }
+
+                        }
+
+                        
+                    }
+
+                    
+                }
+
+                //aumenta la fecha
+                dateInicio.AddDays(1);
+            } 
+
 
 
 

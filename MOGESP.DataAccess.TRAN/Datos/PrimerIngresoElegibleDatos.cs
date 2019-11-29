@@ -64,5 +64,44 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
 			return primerosIngresosElegibles;
 		}
+
+		public IEnumerable<PrimerIngresoElegible> ConsultarPrimerosIngresosPorConvYFlujo(string numeroConvocatoria, int numeroFlujo, int condicionPuesto)
+		{
+			List<PrimerIngresoElegible> primerosIngresosElegibles = new List<PrimerIngresoElegible>();
+
+			SqlConnection sqlConnection = conexion.conexion();
+
+			SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultaBaseElegiblesPor_N_Flujo_N_Convocatoria @numeroConvocatoria, @numeroFlujo, @condicion", sqlConnection);
+			sqlCommand.Parameters.AddWithValue("@condicion", condicionPuesto);
+			sqlCommand.Parameters.AddWithValue("@numeroConvocatoria", numeroConvocatoria);
+			sqlCommand.Parameters.AddWithValue("@numeroFlujo", numeroFlujo);
+			SqlDataReader reader;
+			sqlConnection.Open();
+			reader = sqlCommand.ExecuteReader();
+
+			PrimerIngresoElegible primerIngresoElegible;
+
+			while (reader.Read())
+			{
+				primerIngresoElegible = new PrimerIngresoElegible();
+
+				primerIngresoElegible.Cedula = reader["TC_NumeroCedula"].ToString();
+				primerIngresoElegible.Nombre = reader["TC_Nombre"].ToString();
+				primerIngresoElegible.PrimerApellido = reader["TC_PrimerApellido"].ToString();
+				primerIngresoElegible.SegundoApellido = reader["TC_SegundoApellido"].ToString();
+				primerIngresoElegible.Sexo = Convert.ToChar(reader["TC_Sexo"].ToString());
+				primerIngresoElegible.Direccion = reader["TC_Direccion"].ToString();
+				primerIngresoElegible.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"].ToString());
+				primerIngresoElegible.NumeroConvocatoria = reader["TC_NumeroConvocatoria"].ToString();
+				primerIngresoElegible.NumeroFlujo = Convert.ToInt32(reader["TN_NumeroFlujo"]);
+
+				primerosIngresosElegibles.Add(primerIngresoElegible);
+			}
+
+			sqlConnection.Close();
+
+			return primerosIngresosElegibles;
+		}
+
 	}
 }

@@ -62,37 +62,37 @@
 
 
 		@foreach (var funcionario in Model.Resultado)
-			{
-		<tr>
-			<td>
-				@Html.ActionLink("", "verPrimerIngresoEspecifico", new { buscar = "" },
-							new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
+		{
+			<tr>
+				<td>
+					@Html.ActionLink("", "FuncionarioYParticipacionEnPuestos", new { cedula = funcionario.Cedula},
+									new { @class = "btn glyphicon glyphicon-hand-up", @title = "Seleccionar" })
 
-			</td>
-			<td>@funcionario.Cedula</td>
-			<td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
-			<td> @funcionario.Sexo</td>
-			<td>
-				@foreach (var correo in funcionario.Correos)
-				{
-					<p>@correo</p>
-				}
-			</td>
-			<td>
-				@foreach (var telefono in funcionario.Telefonos)
-				{
-					<p>@telefono</p>
-				}
-			</td>
-			<td> @funcionario.Direccion</td>
-		</tr>
+				</td>
+				<td>@funcionario.Cedula</td>
+				<td> @funcionario.Nombre @funcionario.PrimerApellido @funcionario.SegundoApellido</td>
+				<td> @funcionario.Sexo</td>
+				<td>
+					@foreach (var correo in funcionario.Correos)
+					{
+						<p>@correo</p>
+					}
+				</td>
+				<td>
+					@foreach (var telefono in funcionario.Telefonos)
+					{
+						<p>@telefono</p>
+					}
+				</td>
+				<td> @funcionario.Direccion</td>
+			</tr>
 		}
 
 	</table>
 </div>
 
-		<div class="col-md-12 col-xs-12 col-sm-12">
-			@*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
+<div class="col-md-12 col-xs-12 col-sm-12">
+	@*CÓDIGO PARA EL PAGINADOR DE REGISTROS*@
 	@if (@Model.Resultado.Count() > 0)
 	{
 		<span>
@@ -149,11 +149,13 @@
 		}
 	</center>
 
-	</div>
-
-<div class="col-md-offset-11 col-xs-offset-11 col-sm-offset-11">
-	<a class="btn btn-success plus" asp-controller="ProcesoSeleccion" asp-action="InsertarPrimerosIngresos"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
-
 </div>
+
+
+<br />
+<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+	<hr />
+</div>
+<br />
 
 

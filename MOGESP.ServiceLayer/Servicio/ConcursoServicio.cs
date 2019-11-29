@@ -42,5 +42,15 @@ namespace MOGESP.ServiceLayer.Servicio
 		{
 			concursoDatos.insertarConcurso(concurso);
 		}
+
+		public Concurso ObtieneConcursoPorId(int idConcurso)
+		{
+			return concursoDatos.ObtieneConcursoPorId(idConcurso);
+		}
+
+		public void InsertarFuncionarioAConcursar(string cedula, int IDConcurso)
+		{
+			concursoDatos.InsertarFuncionarioAConcursar(cedula, IDConcurso);
+		}
 	}
 }

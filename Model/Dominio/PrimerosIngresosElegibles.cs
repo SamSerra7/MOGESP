@@ -11,7 +11,7 @@ namespace MOGESP.Entities.Dominio
 	/// Efecto: Clase que conformará todos la base de primeros ingresos que han sifo elegibles 
 	/// durante el procesos de seleccion
 	/// </summary>
-	public class PrimerIngresoElegible : Persona
+	public class PrimerIngresoElegible : PrimerIngreso
 	{
 		private DateTime fechaIngreso;
 		public DateTime FechaIngreso
@@ -26,6 +26,7 @@ namespace MOGESP.Entities.Dominio
 				fechaIngreso = value;
 			}
 		}
+
 
 		public IEnumerable<Puesto> PuestosElegibles { get; set; }
 
