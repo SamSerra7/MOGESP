@@ -140,7 +140,13 @@
                         <!-- Coloca debajo del menu Control de Flujo-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" asp-controller="BaseElegibles" asp-action="verBaseElegibles">Base de elegibles</a></li>
-                            <li><a class="dropdown-item" href="2">Flujos de selecci&oacute;n</a></li>
+                            <li>
+                                <a class="dropdown-item" href="2">Flujos de selecci&oacute;n</a>
+                                <ul class="dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="ControlFlujos" asp-action="VerHojaCitas">Hoja Citas</a></li>
+                                    <li><a class="dropdown-item" asp-controller="ControlFlujos" asp-action="CitasPorFlujoPI">Programar Citas</a></li>
+                                </ul>
+                            </li>
                             <li><a class="dropdown-item" href="3">Registros judiciales</a></li>
                         </ul>
                     </li>
