@@ -112,11 +112,13 @@
 
             <fieldset>
 
+                <input class="form-control" id="cedulaInfo" type="text" name="cedulaInfo" style=" visibility:hidden" value="@Model.Cedula" />
+
                 <div class="form-row">
 
                     <div class="col-md-6">
                         <label>C&eacute;dula: </label>
-                        <input class="form-control" id="cedulaInfo" type="text" name="cedulaInfo" disabled="disabled" value="@Model.Cedula" />
+                        <input class="form-control" id="cedula" type="text" name="cedula" value="@Model.Cedula" disabled />
                     </div>
                     <div class="col-md-6">
                         <label>Nombre: </label>
@@ -146,7 +148,7 @@
                     </div>
                     <div class="col-md-6">
                         <label>Direcci&oacute;n: </label><br>
-                        <textarea name="direccion" id="direccion" rows="5" cols="50" value="@Model.Direccion" required></textarea>
+                        <textarea name="direccion" id="direccion" rows="5" cols="50" value="@Model.Direccion" required>@Model.Direccion</textarea>
                     </div>
                 </div>
 

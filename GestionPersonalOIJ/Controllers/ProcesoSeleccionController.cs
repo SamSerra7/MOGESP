@@ -235,16 +235,7 @@ namespace GestionPersonalOIJ.Controllers
         public RedirectToActionResult actualizarPrimerIngreso(IFormCollection formCollection)
         {
             PrimerIngreso primerIngreso = new PrimerIngreso();
-
-            /*@TC_NumeroConvocatoria,
-                                                            @TN_NumeroFlujo,
-                                                            @TC_NumeroCedula,
-                                                            @TC_Nombre,
-                                                            @TC_PrimerApellido,
-                                                            @TC_SegundoApellido,
-                                                            @TC_Direccion,
-                                                            @nombreCondicion"*/
-                                                            
+     
             primerIngreso.NumeroFlujo = Convert.ToInt32(formCollection["numFlujo"]);
             primerIngreso.Cedula = formCollection["cedulaInfo"].ToString();
             primerIngreso.Nombre = formCollection["nombreInfo"].ToString();
