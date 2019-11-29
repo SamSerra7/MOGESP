@@ -224,9 +224,11 @@ namespace GestionPersonalOIJ.Controllers
 
         }
 
-        public ActionResult editarPrimerIngreso()
+        public ActionResult editarPrimerIngreso(string cedulaPrimerIngreso)
         {
-            return View();
+            PrimerIngreso primerIngreso = new PrimerIngreso();
+            primerIngreso = primerIngresoServicio.getPrimerIngreso();
+            return View(primerIngreso);
         }
 
 
