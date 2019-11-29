@@ -64,7 +64,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
         }
 
 
-        public PrimerIngreso getPrimerIngreso()
+        public PrimerIngreso getPrimerIngreso(string numeroCedula)
         {
 
             PrimerIngreso primerIngreso = new PrimerIngreso();
@@ -72,6 +72,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
             SqlConnection sqlConnection = conexion.conexion();
 
             SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarPrimerIngreso", sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@numeroDeCedula", numeroCedula);
 
             SqlDataReader reader;
             sqlConnection.Open();
@@ -90,7 +91,7 @@ namespace MOGESP.DataAccess.TRAN.Datos
                 primerIngreso.NumeroConvocatoria = reader["TC_NumeroConvocatoria"].ToString();
                 primerIngreso.NumeroFlujo = Convert.ToInt32(reader["TN_NumeroFlujo"].ToString());
                 primerIngreso.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"].ToString());
-                primerIngreso.IdCondicion = Convert.ToInt32(reader["TN_IdCondicion"].ToString());
+                primerIngreso.IdCondicion = Convert.ToInt32(reader["Condicion"].ToString());
 
                 primerIngreso.Correos = correoDatos.CosultarCorreosPorPrimerIngreso(primerIngreso.Cedula);
                 primerIngreso.Telefonos = telefonoDatos.CosultarTelefonosPorPrimerIngreso(primerIngreso.Cedula);
