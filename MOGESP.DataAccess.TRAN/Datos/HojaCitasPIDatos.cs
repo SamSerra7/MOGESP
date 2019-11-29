@@ -34,5 +34,32 @@ namespace MOGESP.DataAccess.TRAN.Datos
         }
 
 
+
+        /// <summary>
+        /// Autores: Samuel 
+        /// 28/11/19
+        /// Este método ingresa una cita para un primer ingreso.
+        /// </summary>
+        public void InsertarCitaPI(string cedula,string nombrePsi,DateTime fechaCita,int idAsist,string nombreEncargadoAdm)
+        {
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand insertarCitaPI = new SqlCommand(@"EXEC PA_InsertarCitaPI @Cedula, @NombrePsicologo, @FechaCita, @IdAsistencia, @NombreEncargadoAdm", sqlConnection);
+
+
+            insertarCitaPI.Parameters.AddWithValue("@Cedula", cedula);
+            insertarCitaPI.Parameters.AddWithValue("@NombrePsicologo", nombrePsi);
+            insertarCitaPI.Parameters.AddWithValue("@FechaCita", fechaCita);
+            insertarCitaPI.Parameters.AddWithValue("@IdAsistencia", idAsist);
+            insertarCitaPI.Parameters.AddWithValue("@NombreEncargadoAdm", nombreEncargadoAdm);
+
+            sqlConnection.Open();
+            insertarCitaPI.ExecuteReader();
+
+            sqlConnection.Close();
+            insertarCitaPI.Dispose();
+        }
+
     }
 }
