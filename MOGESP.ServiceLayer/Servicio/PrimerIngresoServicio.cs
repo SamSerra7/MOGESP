@@ -30,6 +30,10 @@ namespace MOGESP.ServiceLayer.Servicio
         {
             return primerIngresoDatos.getPrimerIngreso(cedula) ?? throw new Exception("No hay registros de primer ingreso");
         }
+        public void updatePrimerIngreso(PrimerIngreso primerIngreso)
+        {
+            primerIngresoDatos.updatePrimerIngreso(primerIngreso);
+        }
 
         public void insertarPrimerIngreso(PrimerIngreso PI)
         {

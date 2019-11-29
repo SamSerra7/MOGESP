@@ -145,7 +145,36 @@ namespace MOGESP.DataAccess.TRAN.Datos
 
             return primerIngreso;
         }
+        public void updatePrimerIngreso(PrimerIngreso primerIngreso)
+        {
 
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ActualizaTMOGESP_PrimerIngreso
+                                                            @TN_NumeroFlujo,
+                                                            @TC_NumeroCedula,
+                                                            @TC_Nombre,
+                                                            @TC_PrimerApellido,
+                                                            @TC_SegundoApellido,
+                                                            @TC_Direccion,
+                                                            @nombreCondicion", sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@TN_NumeroFlujo", primerIngreso.NumeroFlujo);
+            sqlCommand.Parameters.AddWithValue("@TC_NumeroCedula", primerIngreso.Cedula);
+            sqlCommand.Parameters.AddWithValue("@TC_Nombre", primerIngreso.Nombre);
+            sqlCommand.Parameters.AddWithValue("@TC_PrimerApellido", primerIngreso.PrimerApellido);
+            sqlCommand.Parameters.AddWithValue("@TC_SegundoApellido", primerIngreso.SegundoApellido);
+            sqlCommand.Parameters.AddWithValue("@TC_Direccion", primerIngreso.Direccion);
+            sqlCommand.Parameters.AddWithValue("@nombreCondicion", primerIngreso.IdCondicion);
+
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteReader();
+            
+
+            sqlConnection.Close();
+            sqlCommand.Dispose();
+        }
 
         /// <summary>
         /// Autores: Samuel 
