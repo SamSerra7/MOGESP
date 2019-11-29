@@ -64,6 +64,45 @@ namespace MOGESP.DataAccess.TRAN.Datos
         }
 
 
+        public PrimerIngreso getPrimerIngreso()
+        {
+
+            PrimerIngreso primerIngreso = new PrimerIngreso();
+
+            SqlConnection sqlConnection = conexion.conexion();
+
+            SqlCommand sqlCommand = new SqlCommand(@"EXEC PA_ConsultarPrimerIngreso", sqlConnection);
+
+            SqlDataReader reader;
+            sqlConnection.Open();
+            reader = sqlCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+
+                primerIngreso.Cedula = reader["TC_NumeroCedula"].ToString();
+                primerIngreso.Nombre = reader["TC_Nombre"].ToString();
+                primerIngreso.PrimerApellido = reader["TC_PrimerApellido"].ToString();
+                primerIngreso.SegundoApellido = reader["TC_SegundoApellido"].ToString();
+                primerIngreso.Sexo = Convert.ToChar(reader["TC_Sexo"].ToString());
+                primerIngreso.Direccion = reader["TC_Direccion"].ToString();
+                primerIngreso.NumeroConvocatoria = reader["TC_NumeroConvocatoria"].ToString();
+                primerIngreso.NumeroFlujo = Convert.ToInt32(reader["TN_NumeroFlujo"].ToString());
+                primerIngreso.FechaIngreso = Convert.ToDateTime(reader["TF_FechaIngreso"].ToString());
+                primerIngreso.IdCondicion = Convert.ToInt32(reader["TN_IdCondicion"].ToString());
+
+                primerIngreso.Correos = correoDatos.CosultarCorreosPorPrimerIngreso(primerIngreso.Cedula);
+                primerIngreso.Telefonos = telefonoDatos.CosultarTelefonosPorPrimerIngreso(primerIngreso.Cedula);
+
+                
+            }
+
+            sqlConnection.Close();
+
+            return primerIngreso;
+        }
+
 
         /// <summary>
         /// Autores: Samuel 
